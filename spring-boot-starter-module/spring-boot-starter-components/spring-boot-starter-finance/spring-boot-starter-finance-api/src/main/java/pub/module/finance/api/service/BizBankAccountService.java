@@ -1,0 +1,63 @@
+package pub.module.finance.api.service;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import pub.module.finance.curd.entity.FcAccount;
+import pub.module.finance.curd.entity.FcAccountLog;
+
+/**
+ * 金融账户管理
+ *
+ * @author tg
+ * @version V1.0
+ * @since 2025-09-30
+ */
+public interface BizBankAccountService {
+
+    @Data
+    @Schema(description = "绑定银行卡发送短信")
+    class BindCardSmsDTO {
+        @Schema(description = "产品编码")
+        private String fcProductCode;
+        @Schema(description = "银行编码")
+        private String fcBankCode;
+        @Schema(description = "银行名称")
+        private String fcBankName;
+        @Schema(description = "银行LOGO")
+        private String fcBankLogo;
+        @Schema(description = "银行卡号")
+        private String fcBankCardNo;
+        @Schema(description = "银行卡绑定手机号")
+        private String fcBankCardPhone;
+        @Schema(description = "姓名")
+        private String fcAcSysUserRealName;
+        @Schema(description = "身份证号")
+        private String fcAcIdCardNo;
+        @Schema(description = "用户名")
+        private String fcAcSysUserCode;
+
+    }
+
+    /**
+     * 绑定银行卡类账户
+     */
+    FcAccount bindBankCardSms(BindCardSmsDTO bindCardSmsDTO);
+
+    @Data
+    @Schema(description = "绑定银行卡")
+    class BindBankCardSureDTO {
+        @Schema(description = "账户编码（四要素绑卡确认时候用）")
+        private String fcAcCode;
+        @Schema(description = "用户名")
+        private String fcAcSysUserCode;
+        @Schema(description = "验证码1")
+        private String fcBankCardAuthCode1;
+        @Schema(description = "验证码2")
+        private String fcBankCardAuthCode2;
+    }
+
+    FcAccount bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO);
+
+
+
+}

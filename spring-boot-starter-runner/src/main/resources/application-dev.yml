@@ -1,0 +1,31 @@
+# ============ dev 环境差异化配置 ============
+server:
+  port: 9999
+  servlet:
+    context-path:
+
+spring:
+  datasource:
+    url: jdbc:mysql://v.com:3306/tg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: xaw6CB251EbDQ22n
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      database: 9
+      host: v.com
+      port: 6379
+      password: 123456
+      timeout: 30000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+springdoc:
+  swagger-ui:
+    enabled: true # 启用 Swagger UI（默认 true，不可设为 false）
+  api-docs:
+    enabled: true # 启用 API 文档生成（默认 true，不可设为 false，否则无法访问 /v3/api-docs/**）
+  # 其他配置保持不变

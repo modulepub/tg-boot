@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=E:\workspace\tg-boot\spring-boot-starter-apps\spring-boot-starter-tools\spring-boot-starter-sms\spring-boot-starter-sms-biz\src\main\java\lib\mos-sdk-6.5.4.jar -DgroupId=com.xuanwu -DartifactId=mos-sdk -Dversion=1.0.0 -Dpackaging=jar
