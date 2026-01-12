@@ -22,9 +22,9 @@
 - 特别鸣谢 Hu tool 作者提供的工具类库，weixin-java-tools 作者提供微信开发工具类库。
 
 # 仓库地址及演示环境
-- Gitee仓库：https://gitee.com/makunet/TG-boot
-- Github仓库：https://github.com/makunet/TG-boot
-- 演示环境：https://demo.TG.net
+- Gitee仓库：https://gitee.com/pub_module/tg-boot.git
+- 文档地址：https://docs.module.pub
+- 演示环境：https://tg-boot.module.pub
 
 # 树图风格 (Tree Graph简称TG)
 
