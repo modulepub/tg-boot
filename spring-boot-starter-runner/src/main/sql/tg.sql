@@ -11,117 +11,11 @@
  Target Server Version : 80036 (8.0.36)
  File Encoding         : 65001
 
- Date: 05/01/2026 01:34:48
+ Date: 12/01/2026 23:35:29
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for ba_app
--- ----------------------------
-DROP TABLE IF EXISTS `ba_app`;
-CREATE TABLE `ba_app`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `create_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
-  `update_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
-  `sys_org_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `ba_app_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '应用编码',
-  `ba_app_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '应用名称',
-  `deleted` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标识',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ba_app
--- ----------------------------
-INSERT INTO `ba_app` VALUES ('1977913079004213250', 'admin', '2025-10-14 09:43:21', NULL, '2025-10-14 09:43:21', 'A01', 'FINANCE', '测试金融', '0', 0, NULL, '0');
-
--- ----------------------------
--- Table structure for ba_app_basic
--- ----------------------------
-DROP TABLE IF EXISTS `ba_app_basic`;
-CREATE TABLE `ba_app_basic`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `create_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
-  `update_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
-  `sys_org_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP',
-  `os_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '设备名称',
-  `dwell_time` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '停留时间',
-  `page` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '监控点（页面）',
-  `area` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地域',
-  `old_user` int NULL DEFAULT NULL COMMENT '0新客 1老客',
-  `deleted` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标识',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ba_app_basic
--- ----------------------------
-
--- ----------------------------
--- Table structure for ba_app_page
--- ----------------------------
-DROP TABLE IF EXISTS `ba_app_page`;
-CREATE TABLE `ba_app_page`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `create_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
-  `update_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
-  `sys_org_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `page_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '锚点名',
-  `page_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '锚点编码',
-  `deleted` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标识',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `code`(`page_code` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ba_app_page
--- ----------------------------
-INSERT INTO `ba_app_page` VALUES ('1977913184415461378', 'admin', '2025-10-14 09:43:46', NULL, '2025-10-14 09:43:46', 'A01', 'H5', 'JCDH5001', '0', 0, NULL, '0');
-INSERT INTO `ba_app_page` VALUES ('1978012482698842113', 'admin', '2025-10-14 16:18:20', NULL, '2025-10-14 16:18:20', 'A01', '金融产品页', 'finance', '0', 0, NULL, '0');
-INSERT INTO `ba_app_page` VALUES ('1978053213501181953', 'admin', '2025-10-14 19:00:11', NULL, '2025-10-14 19:00:11', 'A01', '接口撞库次数', 'zKcs', '0', 0, NULL, '0');
-
--- ----------------------------
--- Table structure for ba_app_source
--- ----------------------------
-DROP TABLE IF EXISTS `ba_app_source`;
-CREATE TABLE `ba_app_source`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `create_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
-  `update_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
-  `sys_org_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `source_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '渠道名称',
-  `source_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '渠道编码',
-  `deleted` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标识',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of ba_app_source
--- ----------------------------
-INSERT INTO `ba_app_source` VALUES ('1977913236693266433', 'admin', '2025-10-14 09:43:58', NULL, '2025-10-14 09:43:58', 'A01', '金彩贷', 'JCD', '0', 0, NULL, '0');
 
 -- ----------------------------
 -- Table structure for cms_channel
@@ -149,7 +43,7 @@ CREATE TABLE `cms_channel`  (
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `code`(`cc_code` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = 'CMS-栏目' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of cms_channel
@@ -199,7 +93,7 @@ CREATE TABLE `cms_document`  (
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = 'CMS-文档' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of cms_document
@@ -226,7 +120,7 @@ CREATE TABLE `dict`  (
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_sd_dict_code`(`dict_code` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '字典' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dict
@@ -361,7 +255,7 @@ CREATE TABLE `dict_item`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_sditem_role_dict_id`(`dict_code` ASC) USING BTREE,
   INDEX `idx_sditem_dict_val`(`dict_code` ASC, `dict_item_value` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '字典值' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dict_item
@@ -743,38 +637,6 @@ INSERT INTO `dict_item` VALUES ('fcec03570f68a175e1964808dc3f1c91', 'online_grap
 INSERT INTO `dict_item` VALUES ('fe50b23ae5e68434def76f67cef35d2d', 'bpm_status', NULL, '已作废', '4', 'green', '已作废', 'admin', '2021-09-09 16:33:43', 'admin', '2019-05-09 16:34:40', '0', 0, NULL, '0');
 
 -- ----------------------------
--- Table structure for dt_cus_engagement
--- ----------------------------
-DROP TABLE IF EXISTS `dt_cus_engagement`;
-CREATE TABLE `dt_cus_engagement`  (
-  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `create_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
-  `update_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
-  `sys_org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
-  `dt_ce_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '签约编码',
-  `dt_ce_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '签约名称',
-  `dt_mk_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '红娘编码',
-  `dt_cus_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户编码',
-  `ct_template_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '合同模板编码',
-  `ct_template_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '合同模板名称',
-  `
-
-ct_template_file` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '合同模板文件\r\n',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '签约合作(客户红娘正式合同)' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of dt_cus_engagement
--- ----------------------------
-INSERT INTO `dt_cus_engagement` VALUES ('1946880680086888450', NULL, '2025-07-20 18:31:40', NULL, '2025-07-20 18:41:02', NULL, '0', 'PREDIX20250720183139933119086', NULL, 'PREDIX20250720171219489217241', 'PREDIX20250615142403333735581', NULL, NULL, NULL, 0, NULL, '0');
-
--- ----------------------------
 -- Table structure for dt_cus_matchmaker
 -- ----------------------------
 DROP TABLE IF EXISTS `dt_cus_matchmaker`;
@@ -786,21 +648,21 @@ CREATE TABLE `dt_cus_matchmaker`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属部门',
   `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
-  `dt_cm_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '签约编码',
-  `dt_cm_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '合同名称',
-  `dt_cm_cus_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '红娘编码',
-  `dt_cm_mt_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户编码',
-  `ct_cm_passed_status_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否通过',
+  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
+  `cm_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '签约编码',
+  `cm_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '合同名称',
+  `cm_cus_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '红娘编码',
+  `cm_mt_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户编码',
+  `cm_passed_status_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否通过',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '我的红娘' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dt_cus_matchmaker
 -- ----------------------------
-INSERT INTO `dt_cus_matchmaker` VALUES ('1946880680086888450', NULL, '2025-07-20 18:31:40', NULL, '2025-07-20 18:41:02', NULL, '0', NULL, NULL, '1714471285016895490', '1714471285016895490', NULL, 0, NULL, '0');
+INSERT INTO `dt_cus_matchmaker` VALUES ('1946880680086888450', NULL, '2025-07-20 18:31:40', NULL, '2025-07-20 18:41:02', NULL, '0', '0', 0, NULL, NULL, NULL, 'ceshi', 'RF3mIVZHwm', NULL);
 
 -- ----------------------------
 -- Table structure for dt_intention
@@ -813,43 +675,43 @@ CREATE TABLE `dt_intention`  (
   `update_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
-  `dt_intention_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '编码',
-  `dt_intention_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `dt_intention_max_age` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最大年龄',
-  `dt_intention_min_age` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最小年龄',
-  `dt_intention_have_house_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否有房',
-  `dt_intention_have_car_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否有车',
-  `dt_intention_min_annual_income` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最低年收入（元）',
-  `dt_intention_min_degree_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最低学历',
-  `dt_intention_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户',
-  `dt_intention_country_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '国家',
-  `dt_intention_city_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '城市',
-  `dt_intention_started_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '服务开始状态',
-  `dt_intention_queue_location` int NULL DEFAULT NULL COMMENT '队列位置',
-  `dt_intention_matches_target_num` int NULL DEFAULT NULL COMMENT '匹配目标数量',
-  `dt_intention_matched_num` int NULL DEFAULT NULL COMMENT '匹配完成数量',
-  `dt_intention_job_start_time` datetime NULL DEFAULT NULL COMMENT '任务开始时间',
-  `dt_intention_job_next_run_time` datetime NULL DEFAULT NULL COMMENT '任务下次执行时间',
-  `dt_intention_srv_completed_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '服务是否完成',
-  `dt_intention_matching_rule_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '匹配规则',
-  `dt_intention_sex_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '性别',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
+  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
+  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
+  `intention_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `intention_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `intention_max_age` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最大年龄',
+  `intention_min_age` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最小年龄',
+  `intention_have_house_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否有房',
+  `intention_have_car_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否有车',
+  `intention_min_annual_income` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最低年收入（元）',
+  `intention_min_degree_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '最低学历',
+  `intention_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户',
+  `intention_country_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '国家',
+  `intention_city_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '城市',
+  `intention_started_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '服务开始状态',
+  `intention_queue_location` int NULL DEFAULT NULL COMMENT '队列位置',
+  `intention_matches_target_num` int NULL DEFAULT NULL COMMENT '匹配目标数量',
+  `intention_matched_num` int NULL DEFAULT NULL COMMENT '匹配完成数量',
+  `intention_job_start_time` datetime NULL DEFAULT NULL COMMENT '任务开始时间',
+  `intention_job_next_run_time` datetime NULL DEFAULT NULL COMMENT '任务下次执行时间',
+  `intention_srv_completed_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '服务是否完成',
+  `intention_matching_rule_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '匹配规则',
+  `intention_sex_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '性别',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '交友意向' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dt_intention
 -- ----------------------------
-INSERT INTO `dt_intention` VALUES ('1956796373721804802', NULL, '2025-08-17 03:13:06', NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250618005233759950041', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '2', 0, NULL, '0');
-INSERT INTO `dt_intention` VALUES ('1957718382886531073', NULL, '2025-08-19 16:16:50', NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250819161628743974479', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1', 0, NULL, '0');
-INSERT INTO `dt_intention` VALUES ('1958204598497124353', NULL, '2025-08-21 00:28:53', NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250819161628743974479', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1', 0, NULL, '0');
-INSERT INTO `dt_intention` VALUES ('1958205927114219521', NULL, '2025-08-21 00:34:09', NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250819161628743974479', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1', 0, NULL, '0');
-INSERT INTO `dt_intention` VALUES ('1992970087631462402', 'y94q4maskI', '2025-11-24 22:54:31', NULL, '2025-11-24 22:54:31', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U20251112103045786003750', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1', 0, NULL, '0');
-INSERT INTO `dt_intention` VALUES ('1999915332097142786', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', '1999915332071108608', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U20251112103045786003750', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, '1', '1', '1', 0, NULL, '0');
-INSERT INTO `dt_intention` VALUES ('1999915334194294785', 'y94q4maskI', '2025-12-14 02:52:27', NULL, '2025-12-14 02:52:27', NULL, '0', '1999915334218592256', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U20251112103045786003750', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1', 0, NULL, '0');
+INSERT INTO `dt_intention` VALUES ('1956796373721804802', NULL, '2025-08-17 03:13:06', NULL, NULL, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250618005233759950041', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '2');
+INSERT INTO `dt_intention` VALUES ('1957718382886531073', NULL, '2025-08-19 16:16:50', NULL, NULL, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250819161628743974479', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1');
+INSERT INTO `dt_intention` VALUES ('1958204598497124353', NULL, '2025-08-21 00:28:53', NULL, NULL, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250819161628743974479', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1');
+INSERT INTO `dt_intention` VALUES ('1958205927114219521', NULL, '2025-08-21 00:34:09', NULL, NULL, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PREDIX20250819161628743974479', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1');
+INSERT INTO `dt_intention` VALUES ('1992970087631462402', 'y94q4maskI', '2025-11-24 22:54:31', NULL, '2025-11-24 22:54:31', NULL, NULL, 0, '0', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U20251112103045786003750', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1');
+INSERT INTO `dt_intention` VALUES ('1999915332097142786', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, NULL, 0, '0', '0', '1999915332071108608', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U20251112103045786003750', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, '1', '1', '1');
+INSERT INTO `dt_intention` VALUES ('1999915334194294785', 'y94q4maskI', '2025-12-14 02:52:27', NULL, '2025-12-14 02:52:27', NULL, NULL, 0, '0', '0', '1999915334218592256', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'U20251112103045786003750', NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, '1', '1');
 
 -- ----------------------------
 -- Table structure for dt_like
@@ -863,22 +725,22 @@ CREATE TABLE `dt_like`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属部门',
   `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
-  `dt_like_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '编码',
-  `dt_like_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `dt_like_own_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '己方用户编码',
-  `dt_like_other_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '对方用户编码',
-  `dt_like_degree_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '喜好程度',
+  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
+  `like_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `like_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `like_own_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '己方用户编码',
+  `like_other_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '对方用户编码',
+  `like_degree_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '喜好程度',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '喜欢' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dt_like
 -- ----------------------------
-INSERT INTO `dt_like` VALUES ('1946880680086888450', NULL, '2025-07-20 18:31:40', NULL, '2025-07-20 18:41:02', NULL, '0', 'PREDIX20250720183139933119086', NULL, 'PREDIX20250720171219489217241', 'PREDIX20250615142403333735581', '1', 0, NULL, '0');
-INSERT INTO `dt_like` VALUES ('1997185433615745025', 'y94q4maskI', '2025-12-06 14:04:48', 'y94q4maskI', '2025-12-15 00:49:30', NULL, '0', '1997185433594036224', NULL, 'U20251112103045786003750', '1714471285016895490', '1', 0, NULL, '0');
+INSERT INTO `dt_like` VALUES ('1946880680086888450', NULL, '2025-07-20 18:31:40', NULL, '2025-07-20 18:41:02', NULL, '0', '0', 0, NULL, 'PREDIX20250720183139933119086', NULL, 'PREDIX20250720171219489217241', 'PREDIX20250615142403333735581', '1');
+INSERT INTO `dt_like` VALUES ('1997185433615745025', 'y94q4maskI', '2025-12-06 14:04:48', 'y94q4maskI', '2025-12-15 00:49:30', NULL, '0', '0', 0, NULL, '1997185433594036224', NULL, 'U20251112103045786003750', '1714471285016895490', '1');
 
 -- ----------------------------
 -- Table structure for dt_match
@@ -892,25 +754,25 @@ CREATE TABLE `dt_match`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属部门',
   `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
-  `dt_mt_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '匹配申请编码',
-  `dt_mt_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '匹配申请名称',
-  `dt_mt_mk_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '红娘用户编码',
-  `dt_mt_pursuing_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '追求者',
-  `dt_mt_pursued_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '被追求者',
-  `dt_mt_passed_status_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否通过',
-  `dt_mt_process_code` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '恋爱进程（1联系人、2面基、3牵手）',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
+  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
+  `mt_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '匹配申请编码',
+  `mt_name` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '匹配申请名称',
+  `mt_mk_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '红娘用户编码',
+  `mt_pursuing_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '追求者',
+  `mt_pursued_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '被追求者',
+  `mt_passed_status_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否通过',
+  `mt_process_code` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '恋爱进程（1联系人、2面基、3牵手）',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '匹配申请（牵线）' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dt_match
 -- ----------------------------
-INSERT INTO `dt_match` VALUES ('1999890520704286721', 'y94q4maskI', '2025-12-14 01:13:51', NULL, '2025-12-14 01:13:51', NULL, '0', '1999890520682577920', NULL, '1970690583752175617', 'U20251112103045786003750', '1714471285016895490', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_match` VALUES ('1999891181869203457', 'y94q4maskI', '2025-12-14 01:16:29', NULL, '2025-12-14 01:16:29', NULL, '0', '1999891181914603520', NULL, '1714471285016895490', 'U20251112103045786003750', '1714471285016895490', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_match` VALUES ('1999892324036911105', 'y94q4maskI', '2025-12-14 01:21:01', NULL, '2025-12-14 01:21:01', NULL, '0', '1999892324019396608', NULL, '1970691147554713602', 'U20251112103045786003750', '1714471285016895490', NULL, NULL, 0, NULL, '0');
+INSERT INTO `dt_match` VALUES ('1999890520704286721', 'y94q4maskI', '2025-12-14 01:13:51', NULL, '2025-12-14 01:13:51', NULL, '0', NULL, 0, '0', '1999890520682577920', NULL, '1970690583752175617', 'U20251112103045786003750', '1714471285016895490', NULL, NULL);
+INSERT INTO `dt_match` VALUES ('1999891181869203457', 'y94q4maskI', '2025-12-14 01:16:29', NULL, '2025-12-14 01:16:29', NULL, '0', NULL, 0, '0', '1999891181914603520', NULL, '1714471285016895490', 'U20251112103045786003750', '1714471285016895490', NULL, NULL);
+INSERT INTO `dt_match` VALUES ('1999892324036911105', 'y94q4maskI', '2025-12-14 01:21:01', NULL, '2025-12-14 01:21:01', NULL, '0', NULL, 0, '0', '1999892324019396608', NULL, '1970691147554713602', 'U20251112103045786003750', '1714471285016895490', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for dt_recommended
@@ -923,57 +785,57 @@ CREATE TABLE `dt_recommended`  (
   `update_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
-  `dt_rc_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户编码',
-  `dt_rc_to_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '被推荐的客户',
-  `dt_rc_time` datetime NULL DEFAULT NULL COMMENT '推荐时间',
-  `dt_intention_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '意向 ID',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '机构编码',
+  `rc_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户编码',
+  `rc_to_sys_user_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '被推荐的客户',
+  `rc_time` datetime NULL DEFAULT NULL COMMENT '推荐时间',
+  `intention_code` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '意向 ID',
+  `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
+  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
+  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '删除标识',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '推荐' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dt_recommended
 -- ----------------------------
-INSERT INTO `dt_recommended` VALUES ('1935010554864054273', NULL, '2025-06-18 00:24:02', NULL, NULL, NULL, '0', 'PREDIX20250615142940133485296', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1935476089762349057', NULL, '2025-06-19 07:13:54', NULL, NULL, NULL, '0', 'PREDIX20250618005233759950041', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1940977909997858817', NULL, '2025-07-04 11:36:10', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1944400053729607681', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250615142403333735581', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1944400053729607682', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250615142940133485296', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1944400053729607683', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250618005233759950041', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1944400053729607684', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250702000843067825169', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946779871835758594', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250615142403333735581', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946779871852535809', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250615142940133485296', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946779871860924418', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250618005233759950041', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946779871877701634', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250702000843067825169', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946779871890284546', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946859542015266817', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250615142403333735581', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946859542015266818', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250615142940133485296', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946859542015266819', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250618005233759950041', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946859542015266820', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250702000843067825169', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946859542078181377', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946860728831332353', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250615142403333735581', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946860728831332354', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250615142940133485296', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946860728898441218', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250618005233759950041', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946860728898441219', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250702000843067825169', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1946860728898441220', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1957718385486999553', NULL, '2025-08-19 16:16:50', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250615142403333735581', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1957718386334248962', NULL, '2025-08-19 16:16:51', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250615142940133485296', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1957718387651260417', NULL, '2025-08-19 16:16:51', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250618005233759950041', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1957718389358342146', NULL, '2025-08-19 16:16:51', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250702000843067825169', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1957718391078006786', NULL, '2025-08-19 16:16:52', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445953', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1714471285016895490', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445954', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970690583752175617', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445955', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970691147554713602', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445956', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970692882398445570', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445957', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970694836117843969', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445958', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970694998936526849', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332168445959', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970695121577975810', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332235554817', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970695881690836993', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332235554818', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', 'U20250925151943080199401', NULL, NULL, 0, NULL, '0');
-INSERT INTO `dt_recommended` VALUES ('1999915332235554819', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', 'U20250925151948288526684', NULL, NULL, 0, NULL, '0');
+INSERT INTO `dt_recommended` VALUES ('1935010554864054273', NULL, '2025-06-18 00:24:02', NULL, NULL, NULL, '0', 'PREDIX20250615142940133485296', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1935476089762349057', NULL, '2025-06-19 07:13:54', NULL, NULL, NULL, '0', 'PREDIX20250618005233759950041', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1940977909997858817', NULL, '2025-07-04 11:36:10', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1944400053729607681', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250615142403333735581', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1944400053729607682', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250615142940133485296', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1944400053729607683', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250618005233759950041', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1944400053729607684', NULL, '2025-07-13 22:14:33', NULL, NULL, NULL, '0', 'PREDIX20250702000843067825169', 'PREDIX20250702000843067825169', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946779871835758594', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250615142403333735581', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946779871852535809', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250615142940133485296', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946779871860924418', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250618005233759950041', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946779871877701634', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'PREDIX20250702000843067825169', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946779871890284546', NULL, '2025-07-20 11:51:06', NULL, NULL, NULL, '0', 'PREDIX20250720114824206639968', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946859542015266817', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250615142403333735581', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946859542015266818', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250615142940133485296', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946859542015266819', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250618005233759950041', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946859542015266820', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'PREDIX20250702000843067825169', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946859542078181377', NULL, '2025-07-20 17:07:40', NULL, NULL, NULL, '0', 'PREDIX20250720170729631461951', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946860728831332353', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250615142403333735581', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946860728831332354', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250615142940133485296', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946860728898441218', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250618005233759950041', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946860728898441219', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'PREDIX20250702000843067825169', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1946860728898441220', NULL, '2025-07-20 17:12:23', NULL, NULL, NULL, '0', 'PREDIX20250720171219489217241', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1957718385486999553', NULL, '2025-08-19 16:16:50', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250615142403333735581', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1957718386334248962', NULL, '2025-08-19 16:16:51', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250615142940133485296', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1957718387651260417', NULL, '2025-08-19 16:16:51', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250618005233759950041', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1957718389358342146', NULL, '2025-08-19 16:16:51', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'PREDIX20250702000843067825169', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1957718391078006786', NULL, '2025-08-19 16:16:52', NULL, NULL, NULL, '0', 'PREDIX20250819161628743974479', 'e9ca23d68d884d4ebb19d07889727dae', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445953', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1714471285016895490', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445954', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970690583752175617', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445955', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970691147554713602', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445956', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970692882398445570', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445957', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970694836117843969', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445958', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970694998936526849', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332168445959', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970695121577975810', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332235554817', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', '1970695881690836993', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332235554818', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', 'U20250925151943080199401', NULL, NULL, NULL, 0, '0');
+INSERT INTO `dt_recommended` VALUES ('1999915332235554819', 'y94q4maskI', '2025-12-14 02:52:26', NULL, '2025-12-14 02:52:26', NULL, '0', 'U20251112103045786003750', 'U20250925151948288526684', NULL, NULL, NULL, 0, '0');
 
 -- ----------------------------
 -- Table structure for fc_account
@@ -2038,11 +1900,12 @@ CREATE TABLE `gen_table`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table
 -- ----------------------------
+INSERT INTO `gen_table` VALUES (57, 'log', '日志表', '', '', 'Log', 'crud', 'pub.module.log.curd', 'log', 'log', '日志表', 'tg', 1, '0', '/', '{\n    \"parentMenuId\": \"\",\n    \"treeName\": \"\",\n    \"treeParentCode\": \"\",\n    \"parentMenuName\": \"\",\n    \"treeCode\": \"\"\n}', 'admin', '2026-01-12 01:40:52', '', '2026-01-12 01:41:02', '', 0, NULL, '0');
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -2075,11 +1938,26 @@ CREATE TABLE `gen_table_column`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 722 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 934 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table_column
 -- ----------------------------
+INSERT INTO `gen_table_column` VALUES (919, 57, 'log_code', '日志编码', 'varchar(64)', 'String', 'logCode', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 1, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (920, 57, 'log_name', '日志名称', 'varchar(100)', 'String', 'logName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (921, 57, 'log_method_name', '方法名', 'varchar(255)', 'String', 'logMethodName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (922, 57, 'log_content', '日志内容', 'varchar(5000)', 'String', 'logContent', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'summernote', '', 4, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (923, 57, 'log_description', '日志描述', 'varchar(200)', 'String', 'logDescription', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (924, 57, 'log_transaction_code', '事务编码', 'varchar(100)', 'String', 'logTransactionCode', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (925, 57, 'log_user_name', '用户名', 'varchar(255)', 'String', 'logUserName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 7, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (926, 57, 'id', 'ID', 'varchar(32)', 'String', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 8, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (927, 57, 'create_by', '创建人', 'varchar(32)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 9, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (928, 57, 'create_time', '创建日期', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 10, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (929, 57, 'update_by', '更新人', 'varchar(32)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (930, 57, 'update_time', '更新日期', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (931, 57, 'deleted', '删除标识', 'varchar(10)', 'String', 'deleted', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 13, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (932, 57, 'version', '版本', 'varchar(10)', 'String', 'version', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 14, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (933, 57, 'seq_no', '序号', 'int', 'Long', 'seqNo', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 15, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
 
 -- ----------------------------
 -- Table structure for im_csr
@@ -2106,7 +1984,7 @@ CREATE TABLE `im_csr`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_im_csr_code`(`im_csr_code` ASC) USING BTREE,
   UNIQUE INDEX `uniq_sys_user_code`(`sys_user_code` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '即时通讯-客服' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of im_csr
@@ -2137,7 +2015,7 @@ CREATE TABLE `im_group`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '即时通讯-群组' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of im_group
@@ -2662,7 +2540,7 @@ CREATE TABLE `im_group_member`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '即时通讯-群组成员' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of im_group_member
@@ -3723,51 +3601,11 @@ CREATE TABLE `im_notice_recipient`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告-接收人' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of im_notice_recipient
 -- ----------------------------
-
--- ----------------------------
--- Table structure for im_sys_notice
--- ----------------------------
-DROP TABLE IF EXISTS `im_sys_notice`;
-CREATE TABLE `im_sys_notice`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `create_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
-  `update_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
-  `sys_org_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `im_sys_notice_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知编码',
-  `im_sys_notice_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知标题',
-  `im_sys_notice_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '通知文本',
-  `im_sys_template_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '模板id',
-  `im_sys_template_params` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '模板参数',
-  `im_sys_notice_publish_state_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否发布（1发布,0未发布）',
-  `im_sys_notice_img` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知图片',
-  `im_sys_notice_url` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '跳转链接',
-  `im_sys_send_code` tinyint NULL DEFAULT NULL COMMENT '发送对象(1角色，2用户)',
-  `im_sys_sms_code` tinyint NULL DEFAULT 0 COMMENT '是否短信通知（1是。0否）',
-  `im_sys_send_user_codes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '发送用户codes',
-  `im_sys_send_role_ids` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '发送角色ids',
-  `deleted` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标识',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
-  `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of im_sys_notice
--- ----------------------------
-INSERT INTO `im_sys_notice` VALUES ('1974724959808823297', 'admin', '2025-10-05 14:34:54', 'admin', '2025-10-11 17:46:45', 'A01', 'ISN20251005143453691697162', 'ces', '顶顶顶111', NULL, NULL, '1', '/temp/20251005152039361/企业微信截图_20251004170202.png', 'http://baidu/com', NULL, 0, NULL, NULL, '0', 0, NULL, '0');
-INSERT INTO `im_sys_notice` VALUES ('1974744644264693762', 'admin', '2025-10-05 15:53:07', 'admin', '2025-10-27 17:34:56', 'A01', 'ISN20251005155306844524572', 'ces', '222', NULL, NULL, '1', '/temp/20251005155304205/th.jpg', 'http://baidu/com', NULL, 0, NULL, NULL, '0', 0, NULL, '0');
-INSERT INTO `im_sys_notice` VALUES ('1974748313802543106', 'admin', '2025-10-05 16:07:42', 'admin', '2025-10-05 16:09:52', 'A01', 'ISN20251005160741716147888', '11', '111', NULL, NULL, '1', '/temp/20251005160740796/企业微信截图_20251004170202.png', NULL, NULL, 0, NULL, NULL, '0', 0, NULL, '0');
-INSERT INTO `im_sys_notice` VALUES ('1974750607580299265', 'admin', '2025-10-05 16:16:49', 'admin', '2025-10-27 17:34:50', 'A01', 'ISN20251005161648593344506', 'ces', 'ce', NULL, NULL, '1', '/temp/20251005161641946/企业微信截图_20251004170202.png', 'http://baidu/com', NULL, 0, NULL, NULL, '0', 0, NULL, '0');
-INSERT INTO `im_sys_notice` VALUES ('1982625360131121153', 'admin', '2025-10-27 09:48:16', 'admin', '2025-10-27 17:33:08', 'A01', 'ISN20251027094815904488862', NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL, 0, NULL, NULL, '0', 0, NULL, '0');
-INSERT INTO `im_sys_notice` VALUES ('1983712851559038977', 'admin', '2025-10-30 09:49:34', 'admin', '2025-11-10 15:16:12', 'A01', 'ISN20251030094934021167355', '测试发送标题', '测试文本', NULL, NULL, '1', NULL, 'https://www.baidu.com/', 2, 1, NULL, NULL, '0', 0, NULL, '0');
 
 -- ----------------------------
 -- Table structure for im_template
@@ -3789,13 +3627,41 @@ CREATE TABLE `im_template`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '即时通讯-消息模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of im_template
 -- ----------------------------
 INSERT INTO `im_template` VALUES ('1982626310258552833', 'admin', '2025-10-27 09:52:02', NULL, '2025-10-27 09:52:02', 'A01', 'smsSystemNotice', '系统通知短信提醒', 'sms', '您好，您有一个{{title}}的系统通知!', '0', 0, NULL, '0');
 INSERT INTO `im_template` VALUES ('1985581026357653506', 'admin', '2025-11-04 13:33:02', NULL, '2025-11-04 13:33:02', 'A01', 'loginSms', '短信模板', 'sms', '您的验证码为{code}，请在有效时间内提交验证码完成验证。', '0', 0, NULL, '0');
+
+-- ----------------------------
+-- Table structure for log
+-- ----------------------------
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE `log`  (
+  `log_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '日志编码',
+  `log_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '日志名称',
+  `log_method_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '方法名',
+  `log_content` varchar(5000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '日志内容',
+  `log_description` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '日志描述',
+  `log_transaction_code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '事务编码',
+  `log_user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户名',
+  `id` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT 'ID',
+  `create_by` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
+  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '删除标识',
+  `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
+  `seq_no` int NULL DEFAULT NULL COMMENT '序号',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '日志表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of log
+-- ----------------------------
+INSERT INTO `log` VALUES ('A01A03', 'admin', 'admin', NULL, 'A01A03', NULL, NULL, '4f1765520d6346f9bd9c79e2479e5b12', 'admin', '2019-02-20 17:15:34', 'admin', '2019-02-26 16:36:18', '0', NULL, 1);
 
 -- ----------------------------
 -- Table structure for sys_organization
@@ -3853,51 +3719,32 @@ CREATE TABLE `sys_permission`  (
   `per_type_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '类型   0：菜单   1：按钮   2：接口',
   `per_open_style_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '打开方式   0：内部   1：外部',
   `per_icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '菜单图标',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `per_code`(`per_code` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单管理' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO `sys_permission` VALUES ('0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '0', '后台菜单', NULL, NULL, '0', '0', 'icon-setting');
-INSERT INTO `sys_permission` VALUES ('1', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0', '1', '系统设置', NULL, NULL, '0', '0', 'icon-setting');
-INSERT INTO `sys_permission` VALUES ('10', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '7', '10', '修改', '', 'sys:dict:update,sys:dict:info', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('11', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '7', '11', '删除', '', 'sys:dict:delete', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('18', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', '18', '机构管理', 'sys/org/index', '', '0', '0', 'icon-cluster');
-INSERT INTO `sys_permission` VALUES ('19', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '18', '19', '查询', '', 'sys:org:list', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('2', 5, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', '2', '菜单管理', 'sys/menu/index', NULL, '0', '0', 'icon-menu');
-INSERT INTO `sys_permission` VALUES ('20', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '18', '20', '新增', '', 'sys:org:save', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('21', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '18', '21', '修改', '', 'sys:org:update,sys:org:info', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('22', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '18', '22', '删除', '', 'sys:org:delete', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('23', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', '23', '角色管理', 'sys/role/index', '', '0', '0', 'icon-team');
-INSERT INTO `sys_permission` VALUES ('24', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '23', '24', '查询', '', 'sys:role:page', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('25', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '23', '25', '新增', '', 'sys:role:save,sys:role:menu,sys:org:list', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('26', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '23', '26', '修改', '', 'sys:role:update,sys:role:info,sys:role:menu,sys:org:list,sys:user:page', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('27', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '23', '27', '删除', '', 'sys:role:delete', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('28', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', '28', '用户管理', 'sys/user/index', '', '0', '0', 'icon-user');
-INSERT INTO `sys_permission` VALUES ('29', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '28', '29', '查询', '', 'sys:user:page', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('3', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '3', '查看', '', 'sys:menu:list', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('30', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '28', '30', '新增', '', 'sys:user:save,sys:role:list', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('31', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '28', '31', '修改', '', 'sys:user:update,sys:user:info,sys:role:list', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('32', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '28', '32', '删除', '', 'sys:user:delete', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('35', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '64', '35', '登录日志', 'sys/log/login', 'sys:log:login', '0', '0', 'icon-solution');
-INSERT INTO `sys_permission` VALUES ('36', 5, NULL, NULL, NULL, NULL, NULL, NULL, 0, '28', '36', '导入', '', 'sys:user:import', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('37', 6, NULL, NULL, NULL, NULL, NULL, NULL, 0, '28', '37', '导出', '', 'sys:user:export', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('4', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '4', '新增', '', 'sys:menu:save', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('40', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '64', '40', '操作日志', 'sys/log/operate', 'sys:operate:all', '0', '0', 'icon-file-text');
-INSERT INTO `sys_permission` VALUES ('45', 5, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0', '45', '基础工具', '', '', '0', '0', 'icon-wrench-fill');
-INSERT INTO `sys_permission` VALUES ('46', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '45', '46', '短信发送', 'sys/tool/sms/index', 'sys:sms:log', '0', '0', 'icon-message');
-INSERT INTO `sys_permission` VALUES ('5', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '5', '修改', '', 'sys:menu:update,sys:menu:info', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('6', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '6', '删除', '', 'sys:menu:delete', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('64', 10, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0', '64', '系统监控', '', '', '0', '0', 'icon-Report');
-INSERT INTO `sys_permission` VALUES ('67', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '64', '67', '在线用户', 'monitor/user/index', 'monitor:user:all', '0', '0', 'icon-user');
-INSERT INTO `sys_permission` VALUES ('7', 4, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', '7', '数据字典', 'sys/dict/index', '', '0', '0', 'icon-insertrowabove');
-INSERT INTO `sys_permission` VALUES ('8', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '7', '8', '查询', '', 'sys:dict:page', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('9', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '7', '9', '新增', '', 'sys:dict:save', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('93bb319ae4d411f099ce00155d01120b', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '3', '查看', '', 'sys:menu:list', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('93bc0deee4d411f099ce00155d01120b', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '4', '新增', '', 'sys:menu:save', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('93bcf6fde4d411f099ce00155d01120b', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '5', '修改', '', 'sys:menu:update,sys:menu:info', '1', '0', '');
-INSERT INTO `sys_permission` VALUES ('93bda56ee4d411f099ce00155d01120b', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2', '6', '删除', '', 'sys:menu:delete', '1', '0', '');
+INSERT INTO `sys_permission` VALUES ('0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'root', 'manage', '后台菜单', NULL, NULL, '0', '0', 'icon-setting');
+INSERT INTO `sys_permission` VALUES ('1', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'manage', 'setting', '系统设置', NULL, NULL, '0', '0', 'icon-setting');
+INSERT INTO `sys_permission` VALUES ('18', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'orgManage', '机构管理', 'sys/org/index', '', '0', '0', 'icon-cluster');
+INSERT INTO `sys_permission` VALUES ('2', 5, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'permission', '菜单管理', 'sys/menu/index', NULL, '0', '0', 'icon-menu');
+INSERT INTO `sys_permission` VALUES ('2010205518450155522', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 'root', '根', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010210498645184513', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'root', '菜单', '111', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010211492732981249', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'orgManage', 'qwd', '11', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010214199342497794', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'orgManage', 'wef', 'werf', '1', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010214334625579010', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'wef', '234', '234', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010217692484644865', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'permission', '123234', '123123123123', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010218870035447810', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'setting', '123', '123', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010219024750739457', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'permission', 'qwe', 'qwe', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('23', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'role', '角色管理', 'sys/role/index', '', '0', '0', 'icon-team');
+INSERT INTO `sys_permission` VALUES ('28', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'userManage', '用户管理', 'sys/user/index', '', '0', '0', 'icon-user');
+INSERT INTO `sys_permission` VALUES ('35', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'setting', 'loginLog', '登录日志', 'sys/log/login', 'sys:log:login', '0', '0', 'icon-solution');
+INSERT INTO `sys_permission` VALUES ('40', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'opLog', '系统日志', 'sys/log/operate', 'sys:operate:all', '0', '0', 'icon-file-text');
+INSERT INTO `sys_permission` VALUES ('46', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'setting', 'sms', '短信发送', 'sys/tool/sms/index', 'sys:sms:log', '0', '0', 'icon-message');
+INSERT INTO `sys_permission` VALUES ('67', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'online', '在线用户', 'monitor/user/index', 'monitor:user:all', '0', '0', 'icon-user');
+INSERT INTO `sys_permission` VALUES ('7', 4, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'dict', '数据字典', 'sys/dict/index', '', '0', '0', 'icon-insertrowabove');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -3950,1363 +3797,66 @@ CREATE TABLE `sys_role_permission`  (
 -- ----------------------------
 -- Records of sys_role_permission
 -- ----------------------------
-INSERT INTO `sys_role_permission` VALUES ('00b0748f04d3ea52c8cfa179c1c9d384', '0', 0, NULL, NULL, NULL, NULL, NULL, '0', 'admin', '00b0748f04d3ea52c8cfa179c1c9d384', '00b0748f04d3ea52c8cfa179c1c9d384');
-INSERT INTO `sys_role_permission` VALUES ('115a6673ae6c0816d3f60de221520274', '0', 0, NULL, NULL, NULL, NULL, NULL, '1', 'admin', '115a6673ae6c0816d3f60de221520274', '115a6673ae6c0816d3f60de221520274');
-INSERT INTO `sys_role_permission` VALUES ('1209423580355481602', '0', 0, NULL, NULL, NULL, NULL, NULL, '10', 'admin', '1209423580355481602', '1209423580355481602');
-INSERT INTO `sys_role_permission` VALUES ('1580861542625955842', '0', 0, NULL, NULL, NULL, NULL, NULL, '11', 'admin', '1580861542625955842', '1580861542625955842');
-INSERT INTO `sys_role_permission` VALUES ('1592114400605859842', '0', 0, NULL, NULL, NULL, NULL, NULL, '12', 'admin', '1592114400605859842', '1592114400605859842');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473537', '0', 0, NULL, NULL, NULL, NULL, NULL, '13', 'admin', '1593153006353473537', '1593153006353473537');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473538', '0', 0, NULL, NULL, NULL, NULL, NULL, '14', 'admin', '1593153006353473538', '1593153006353473538');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473539', '0', 0, NULL, NULL, NULL, NULL, NULL, '15', 'admin', '1593153006353473539', '1593153006353473539');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473540', '0', 0, NULL, NULL, NULL, NULL, NULL, '16', 'admin', '1593153006353473540', '1593153006353473540');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473541', '0', 0, NULL, NULL, NULL, NULL, NULL, '17', 'admin', '1593153006353473541', '1593153006353473541');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473542', '0', 0, NULL, NULL, NULL, NULL, NULL, '18', 'admin', '1593153006353473542', '1593153006353473542');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473543', '0', 0, NULL, NULL, NULL, NULL, NULL, '19', 'admin', '1593153006353473543', '1593153006353473543');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473544', '0', 0, NULL, NULL, NULL, NULL, NULL, '2', 'admin', '1593153006353473544', '1593153006353473544');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473545', '0', 0, NULL, NULL, NULL, NULL, NULL, '20', 'admin', '1593153006353473545', '1593153006353473545');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473546', '0', 0, NULL, NULL, NULL, NULL, NULL, '21', 'admin', '1593153006353473546', '1593153006353473546');
-INSERT INTO `sys_role_permission` VALUES ('1593153006353473547', '0', 0, NULL, NULL, NULL, NULL, NULL, '22', 'admin', '1593153006353473547', '1593153006353473547');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388100', '0', 0, NULL, NULL, NULL, NULL, NULL, '23', 'admin', '1593153006416388100', '1593153006416388100');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388101', '0', 0, NULL, NULL, NULL, NULL, NULL, '24', 'admin', '1593153006416388101', '1593153006416388101');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388102', '0', 0, NULL, NULL, NULL, NULL, NULL, '25', 'admin', '1593153006416388102', '1593153006416388102');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388103', '0', 0, NULL, NULL, NULL, NULL, NULL, '26', 'admin', '1593153006416388103', '1593153006416388103');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388104', '0', 0, NULL, NULL, NULL, NULL, NULL, '27', 'admin', '1593153006416388104', '1593153006416388104');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388105', '0', 0, NULL, NULL, NULL, NULL, NULL, '28', 'admin', '1593153006416388105', '1593153006416388105');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388106', '0', 0, NULL, NULL, NULL, NULL, NULL, '29', 'admin', '1593153006416388106', '1593153006416388106');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388107', '0', 0, NULL, NULL, NULL, NULL, NULL, '3', 'admin', '1593153006416388107', '1593153006416388107');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388108', '0', 0, NULL, NULL, NULL, NULL, NULL, '30', 'admin', '1593153006416388108', '1593153006416388108');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388109', '0', 0, NULL, NULL, NULL, NULL, NULL, '31', 'admin', '1593153006416388109', '1593153006416388109');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388110', '0', 0, NULL, NULL, NULL, NULL, NULL, '32', 'admin', '1593153006416388110', '1593153006416388110');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388111', '0', 0, NULL, NULL, NULL, NULL, NULL, '33', 'admin', '1593153006416388111', '1593153006416388111');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388112', '0', 0, NULL, NULL, NULL, NULL, NULL, '34', 'admin', '1593153006416388112', '1593153006416388112');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388113', '0', 0, NULL, NULL, NULL, NULL, NULL, '35', 'admin', '1593153006416388113', '1593153006416388113');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388114', '0', 0, NULL, NULL, NULL, NULL, NULL, '36', 'admin', '1593153006416388114', '1593153006416388114');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388115', '0', 0, NULL, NULL, NULL, NULL, NULL, '37', 'admin', '1593153006416388115', '1593153006416388115');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388116', '0', 0, NULL, NULL, NULL, NULL, NULL, '38', 'admin', '1593153006416388116', '1593153006416388116');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388117', '0', 0, NULL, NULL, NULL, NULL, NULL, '39', 'admin', '1593153006416388117', '1593153006416388117');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388118', '0', 0, NULL, NULL, NULL, NULL, NULL, '4', 'admin', '1593153006416388118', '1593153006416388118');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388119', '0', 0, NULL, NULL, NULL, NULL, NULL, '40', 'admin', '1593153006416388119', '1593153006416388119');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388120', '0', 0, NULL, NULL, NULL, NULL, NULL, '41', 'admin', '1593153006416388120', '1593153006416388120');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388121', '0', 0, NULL, NULL, NULL, NULL, NULL, '42', 'admin', '1593153006416388121', '1593153006416388121');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388122', '0', 0, NULL, NULL, NULL, NULL, NULL, '43', 'admin', '1593153006416388122', '1593153006416388122');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388123', '0', 0, NULL, NULL, NULL, NULL, NULL, '44', 'admin', '1593153006416388123', '1593153006416388123');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388124', '0', 0, NULL, NULL, NULL, NULL, NULL, '45', 'admin', '1593153006416388124', '1593153006416388124');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388125', '0', 0, NULL, NULL, NULL, NULL, NULL, '46', 'admin', '1593153006416388125', '1593153006416388125');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388126', '0', 0, NULL, NULL, NULL, NULL, NULL, '47', 'admin', '1593153006416388126', '1593153006416388126');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388127', '0', 0, NULL, NULL, NULL, NULL, NULL, '48', 'admin', '1593153006416388127', '1593153006416388127');
-INSERT INTO `sys_role_permission` VALUES ('1593153006416388128', '0', 0, NULL, NULL, NULL, NULL, NULL, '49', 'admin', '1593153006416388128', '1593153006416388128');
-INSERT INTO `sys_role_permission` VALUES ('1693199779486212099', '0', 0, NULL, NULL, NULL, NULL, NULL, '5', 'admin', '1693199779486212099', '1693199779486212099');
-INSERT INTO `sys_role_permission` VALUES ('1693199779490406401', '0', 0, NULL, NULL, NULL, NULL, NULL, '50', 'admin', '1693199779490406401', '1693199779490406401');
-INSERT INTO `sys_role_permission` VALUES ('1693199779490406402', '0', 0, NULL, NULL, NULL, NULL, NULL, '51', 'admin', '1693199779490406402', '1693199779490406402');
-INSERT INTO `sys_role_permission` VALUES ('1693199779490406403', '0', 0, NULL, NULL, NULL, NULL, NULL, '52', 'admin', '1693199779490406403', '1693199779490406403');
-INSERT INTO `sys_role_permission` VALUES ('1693199779490406404', '0', 0, NULL, NULL, NULL, NULL, NULL, '53', 'admin', '1693199779490406404', '1693199779490406404');
-INSERT INTO `sys_role_permission` VALUES ('1693199779498795010', '0', 0, NULL, NULL, NULL, NULL, NULL, '54', 'admin', '1693199779498795010', '1693199779498795010');
-INSERT INTO `sys_role_permission` VALUES ('1693199779502989320', '0', 0, NULL, NULL, NULL, NULL, NULL, '55', 'admin', '1693199779502989320', '1693199779502989320');
-INSERT INTO `sys_role_permission` VALUES ('1693199779519766533', '0', 0, NULL, NULL, NULL, NULL, NULL, '56', 'admin', '1693199779519766533', '1693199779519766533');
-INSERT INTO `sys_role_permission` VALUES ('1693199779519766535', '0', 0, NULL, NULL, NULL, NULL, NULL, '57', 'admin', '1693199779519766535', '1693199779519766535');
-INSERT INTO `sys_role_permission` VALUES ('1693199779519766536', '0', 0, NULL, NULL, NULL, NULL, NULL, '58', 'admin', '1693199779519766536', '1693199779519766536');
-INSERT INTO `sys_role_permission` VALUES ('1693199779528155142', '0', 0, NULL, NULL, NULL, NULL, NULL, '59', 'admin', '1693199779528155142', '1693199779528155142');
-INSERT INTO `sys_role_permission` VALUES ('1693199779549126660', '0', 0, NULL, NULL, NULL, NULL, NULL, '6', 'admin', '1693199779549126660', '1693199779549126660');
-INSERT INTO `sys_role_permission` VALUES ('1693199779549126661', '0', 0, NULL, NULL, NULL, NULL, NULL, '60', 'admin', '1693199779549126661', '1693199779549126661');
-INSERT INTO `sys_role_permission` VALUES ('1693199779549126662', '0', 0, NULL, NULL, NULL, NULL, NULL, '61', 'admin', '1693199779549126662', '1693199779549126662');
-INSERT INTO `sys_role_permission` VALUES ('1693199779549126663', '0', 0, NULL, NULL, NULL, NULL, NULL, '62', 'admin', '1693199779549126663', '1693199779549126663');
-INSERT INTO `sys_role_permission` VALUES ('1693199779549126664', '0', 0, NULL, NULL, NULL, NULL, NULL, '63', 'admin', '1693199779549126664', '1693199779549126664');
-INSERT INTO `sys_role_permission` VALUES ('1693199779570098187', '0', 0, NULL, NULL, NULL, NULL, NULL, '64', 'admin', '1693199779570098187', '1693199779570098187');
-INSERT INTO `sys_role_permission` VALUES ('1693199779591069706', '0', 0, NULL, NULL, NULL, NULL, NULL, '65', 'admin', '1693199779591069706', '1693199779591069706');
-INSERT INTO `sys_role_permission` VALUES ('1693199779595264005', '0', 0, NULL, NULL, NULL, NULL, NULL, '66', 'admin', '1693199779595264005', '1693199779595264005');
-INSERT INTO `sys_role_permission` VALUES ('1693199779612041221', '0', 0, NULL, NULL, NULL, NULL, NULL, '67', 'admin', '1693199779612041221', '1693199779612041221');
-INSERT INTO `sys_role_permission` VALUES ('1693199779616235521', '0', 0, NULL, NULL, NULL, NULL, NULL, '68', 'admin', '1693199779616235521', '1693199779616235521');
-INSERT INTO `sys_role_permission` VALUES ('1765276566625693698', '0', 0, NULL, NULL, NULL, NULL, NULL, '69', 'admin', '1765276566625693698', '1765276566625693698');
-INSERT INTO `sys_role_permission` VALUES ('1765276566634082305', '0', 0, NULL, NULL, NULL, NULL, NULL, '7', 'admin', '1765276566634082305', '1765276566634082305');
-INSERT INTO `sys_role_permission` VALUES ('17ead5b7d97ed365398ab20009a69ea3', '0', 0, NULL, NULL, NULL, NULL, NULL, '70', 'admin', '17ead5b7d97ed365398ab20009a69ea3', '17ead5b7d97ed365398ab20009a69ea3');
-INSERT INTO `sys_role_permission` VALUES ('1833408100246892546', '0', 0, NULL, NULL, NULL, NULL, NULL, '71', 'admin', '1833408100246892546', '1833408100246892546');
-INSERT INTO `sys_role_permission` VALUES ('1833408100246892547', '0', 0, NULL, NULL, NULL, NULL, NULL, '72', 'admin', '1833408100246892547', '1833408100246892547');
-INSERT INTO `sys_role_permission` VALUES ('1833408100255281153', '0', 0, NULL, NULL, NULL, NULL, NULL, '73', 'admin', '1833408100255281153', '1833408100255281153');
-INSERT INTO `sys_role_permission` VALUES ('1833408100255281154', '0', 0, NULL, NULL, NULL, NULL, NULL, '74', 'admin', '1833408100255281154', '1833408100255281154');
-INSERT INTO `sys_role_permission` VALUES ('1833408100255281155', '0', 0, NULL, NULL, NULL, NULL, NULL, '8', 'admin', '1833408100255281155', '1833408100255281155');
-INSERT INTO `sys_role_permission` VALUES ('1833408100255281156', '0', 0, NULL, NULL, NULL, NULL, NULL, '9', 'admin', '1833408100255281156', '1833408100255281156');
-INSERT INTO `sys_role_permission` VALUES ('1833408100255281157', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1833408100255281157', '1833408100255281157');
-INSERT INTO `sys_role_permission` VALUES ('1892117657990971393', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1892117657990971393', '1892117657990971393');
-INSERT INTO `sys_role_permission` VALUES ('1892117657990971394', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1892117657990971394', '1892117657990971394');
-INSERT INTO `sys_role_permission` VALUES ('1892117657990971395', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1892117657990971395', '1892117657990971395');
-INSERT INTO `sys_role_permission` VALUES ('1970664719828185089', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1970664719828185089', '1970664719828185089');
-INSERT INTO `sys_role_permission` VALUES ('1970665979679666184', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1970665979679666184', '1970665979679666184');
-INSERT INTO `sys_role_permission` VALUES ('1970665979679666185', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1970665979679666185', '1970665979679666185');
-INSERT INTO `sys_role_permission` VALUES ('1970665979679666186', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1970665979679666186', '1970665979679666186');
-INSERT INTO `sys_role_permission` VALUES ('1970665979679666187', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1970665979679666187', '1970665979679666187');
-INSERT INTO `sys_role_permission` VALUES ('1971083106324594695', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971083106324594695', '1971083106324594695');
-INSERT INTO `sys_role_permission` VALUES ('1971083106332983303', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971083106332983303', '1971083106332983303');
-INSERT INTO `sys_role_permission` VALUES ('1971083411476987906', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971083411476987906', '1971083411476987906');
-INSERT INTO `sys_role_permission` VALUES ('1971485297115926530', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297115926530', '1971485297115926530');
-INSERT INTO `sys_role_permission` VALUES ('1971485297128509442', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297128509442', '1971485297128509442');
-INSERT INTO `sys_role_permission` VALUES ('1971485297128509443', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297128509443', '1971485297128509443');
-INSERT INTO `sys_role_permission` VALUES ('1971485297128509444', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297128509444', '1971485297128509444');
-INSERT INTO `sys_role_permission` VALUES ('1971485297128509445', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297128509445', '1971485297128509445');
-INSERT INTO `sys_role_permission` VALUES ('1971485297136898050', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297136898050', '1971485297136898050');
-INSERT INTO `sys_role_permission` VALUES ('1971485297136898051', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1971485297136898051', '1971485297136898051');
-INSERT INTO `sys_role_permission` VALUES ('1972810300312178695', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300312178695', '1972810300312178695');
-INSERT INTO `sys_role_permission` VALUES ('1972810300320567297', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300320567297', '1972810300320567297');
-INSERT INTO `sys_role_permission` VALUES ('1972810300320567298', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300320567298', '1972810300320567298');
-INSERT INTO `sys_role_permission` VALUES ('1972810300324761601', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300324761601', '1972810300324761601');
-INSERT INTO `sys_role_permission` VALUES ('1972810300324761602', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300324761602', '1972810300324761602');
-INSERT INTO `sys_role_permission` VALUES ('1972810300328955905', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300328955905', '1972810300328955905');
-INSERT INTO `sys_role_permission` VALUES ('1972810300328955906', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300328955906', '1972810300328955906');
-INSERT INTO `sys_role_permission` VALUES ('1972810300328955907', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300328955907', '1972810300328955907');
-INSERT INTO `sys_role_permission` VALUES ('1972810300328955908', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300328955908', '1972810300328955908');
-INSERT INTO `sys_role_permission` VALUES ('1972810300328955909', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300328955909', '1972810300328955909');
-INSERT INTO `sys_role_permission` VALUES ('1972810300337344514', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300337344514', '1972810300337344514');
-INSERT INTO `sys_role_permission` VALUES ('1972810300337344515', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300337344515', '1972810300337344515');
-INSERT INTO `sys_role_permission` VALUES ('1972810300341538817', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300341538817', '1972810300341538817');
-INSERT INTO `sys_role_permission` VALUES ('1972810300341538818', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300341538818', '1972810300341538818');
-INSERT INTO `sys_role_permission` VALUES ('1972810300341538819', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300341538819', '1972810300341538819');
-INSERT INTO `sys_role_permission` VALUES ('1972810300345733121', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300345733121', '1972810300345733121');
-INSERT INTO `sys_role_permission` VALUES ('1972810300345733122', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300345733122', '1972810300345733122');
-INSERT INTO `sys_role_permission` VALUES ('1972810300349927425', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300349927425', '1972810300349927425');
-INSERT INTO `sys_role_permission` VALUES ('1972810300349927426', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300349927426', '1972810300349927426');
-INSERT INTO `sys_role_permission` VALUES ('1972810300349927427', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300349927427', '1972810300349927427');
-INSERT INTO `sys_role_permission` VALUES ('1972810300354121729', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300354121729', '1972810300354121729');
-INSERT INTO `sys_role_permission` VALUES ('1972810300358316033', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300358316033', '1972810300358316033');
-INSERT INTO `sys_role_permission` VALUES ('1972810300358316034', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300358316034', '1972810300358316034');
-INSERT INTO `sys_role_permission` VALUES ('1972810300358316035', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300358316035', '1972810300358316035');
-INSERT INTO `sys_role_permission` VALUES ('1972810300358316036', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300358316036', '1972810300358316036');
-INSERT INTO `sys_role_permission` VALUES ('1972810300366704641', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300366704641', '1972810300366704641');
-INSERT INTO `sys_role_permission` VALUES ('1972810300366704642', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300366704642', '1972810300366704642');
-INSERT INTO `sys_role_permission` VALUES ('1972810300366704643', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300366704643', '1972810300366704643');
-INSERT INTO `sys_role_permission` VALUES ('1972810300366704644', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300366704644', '1972810300366704644');
-INSERT INTO `sys_role_permission` VALUES ('1972810300375093250', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300375093250', '1972810300375093250');
-INSERT INTO `sys_role_permission` VALUES ('1972810300375093251', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300375093251', '1972810300375093251');
-INSERT INTO `sys_role_permission` VALUES ('1972810300379287554', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300379287554', '1972810300379287554');
-INSERT INTO `sys_role_permission` VALUES ('1972810300379287555', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300379287555', '1972810300379287555');
-INSERT INTO `sys_role_permission` VALUES ('1972810300379287556', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300379287556', '1972810300379287556');
-INSERT INTO `sys_role_permission` VALUES ('1972810300379287557', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300379287557', '1972810300379287557');
-INSERT INTO `sys_role_permission` VALUES ('1972810300379287558', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300379287558', '1972810300379287558');
-INSERT INTO `sys_role_permission` VALUES ('1972810300387676162', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300387676162', '1972810300387676162');
-INSERT INTO `sys_role_permission` VALUES ('1972810300387676163', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300387676163', '1972810300387676163');
-INSERT INTO `sys_role_permission` VALUES ('1972810300391870466', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300391870466', '1972810300391870466');
-INSERT INTO `sys_role_permission` VALUES ('1972810300391870467', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300391870467', '1972810300391870467');
-INSERT INTO `sys_role_permission` VALUES ('1972810300391870468', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300391870468', '1972810300391870468');
-INSERT INTO `sys_role_permission` VALUES ('1972810300396064769', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300396064769', '1972810300396064769');
-INSERT INTO `sys_role_permission` VALUES ('1972810300400259074', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300400259074', '1972810300400259074');
-INSERT INTO `sys_role_permission` VALUES ('1972810300400259075', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300400259075', '1972810300400259075');
-INSERT INTO `sys_role_permission` VALUES ('1972810300408647682', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300408647682', '1972810300408647682');
-INSERT INTO `sys_role_permission` VALUES ('1972810300408647683', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300408647683', '1972810300408647683');
-INSERT INTO `sys_role_permission` VALUES ('1972810300408647684', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300408647684', '1972810300408647684');
-INSERT INTO `sys_role_permission` VALUES ('1972810300408647685', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300408647685', '1972810300408647685');
-INSERT INTO `sys_role_permission` VALUES ('1972810300408647686', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300408647686', '1972810300408647686');
-INSERT INTO `sys_role_permission` VALUES ('1972810300417036289', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300417036289', '1972810300417036289');
-INSERT INTO `sys_role_permission` VALUES ('1972810300417036290', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300417036290', '1972810300417036290');
-INSERT INTO `sys_role_permission` VALUES ('1972810300421230593', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300421230593', '1972810300421230593');
-INSERT INTO `sys_role_permission` VALUES ('1972810300421230594', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300421230594', '1972810300421230594');
-INSERT INTO `sys_role_permission` VALUES ('1972810300425424898', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300425424898', '1972810300425424898');
-INSERT INTO `sys_role_permission` VALUES ('1972810300429619201', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300429619201', '1972810300429619201');
-INSERT INTO `sys_role_permission` VALUES ('1972810300429619202', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300429619202', '1972810300429619202');
-INSERT INTO `sys_role_permission` VALUES ('1972810300429619203', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300429619203', '1972810300429619203');
-INSERT INTO `sys_role_permission` VALUES ('1972810300438007810', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300438007810', '1972810300438007810');
-INSERT INTO `sys_role_permission` VALUES ('1972810300438007811', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300438007811', '1972810300438007811');
-INSERT INTO `sys_role_permission` VALUES ('1972810300438007812', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300438007812', '1972810300438007812');
-INSERT INTO `sys_role_permission` VALUES ('1972810300438007813', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300438007813', '1972810300438007813');
-INSERT INTO `sys_role_permission` VALUES ('1972810300438007814', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300438007814', '1972810300438007814');
-INSERT INTO `sys_role_permission` VALUES ('1972810300446396417', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300446396417', '1972810300446396417');
-INSERT INTO `sys_role_permission` VALUES ('1972810300446396418', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300446396418', '1972810300446396418');
-INSERT INTO `sys_role_permission` VALUES ('1972810300446396419', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300446396419', '1972810300446396419');
-INSERT INTO `sys_role_permission` VALUES ('1972810300446396420', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300446396420', '1972810300446396420');
-INSERT INTO `sys_role_permission` VALUES ('1972810300454785026', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300454785026', '1972810300454785026');
-INSERT INTO `sys_role_permission` VALUES ('1972810300454785027', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300454785027', '1972810300454785027');
-INSERT INTO `sys_role_permission` VALUES ('1972810300454785028', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300454785028', '1972810300454785028');
-INSERT INTO `sys_role_permission` VALUES ('1972810300463173633', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300463173633', '1972810300463173633');
-INSERT INTO `sys_role_permission` VALUES ('1972810300463173634', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300463173634', '1972810300463173634');
-INSERT INTO `sys_role_permission` VALUES ('1972810300471562241', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300471562241', '1972810300471562241');
-INSERT INTO `sys_role_permission` VALUES ('1972810300471562242', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300471562242', '1972810300471562242');
-INSERT INTO `sys_role_permission` VALUES ('1972810300475756545', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300475756545', '1972810300475756545');
-INSERT INTO `sys_role_permission` VALUES ('1972810300475756546', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300475756546', '1972810300475756546');
-INSERT INTO `sys_role_permission` VALUES ('1972810300475756547', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300475756547', '1972810300475756547');
-INSERT INTO `sys_role_permission` VALUES ('1972810300484145153', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300484145153', '1972810300484145153');
-INSERT INTO `sys_role_permission` VALUES ('1972810300484145154', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300484145154', '1972810300484145154');
-INSERT INTO `sys_role_permission` VALUES ('1972810300492533761', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300492533761', '1972810300492533761');
-INSERT INTO `sys_role_permission` VALUES ('1972810300492533762', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300492533762', '1972810300492533762');
-INSERT INTO `sys_role_permission` VALUES ('1972810300492533763', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300492533763', '1972810300492533763');
-INSERT INTO `sys_role_permission` VALUES ('1972810300492533764', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300492533764', '1972810300492533764');
-INSERT INTO `sys_role_permission` VALUES ('1972810300500922369', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300500922369', '1972810300500922369');
-INSERT INTO `sys_role_permission` VALUES ('1972810300509310978', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300509310978', '1972810300509310978');
-INSERT INTO `sys_role_permission` VALUES ('1972810300509310979', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300509310979', '1972810300509310979');
-INSERT INTO `sys_role_permission` VALUES ('1972810300517699586', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300517699586', '1972810300517699586');
-INSERT INTO `sys_role_permission` VALUES ('1972810300521893890', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300521893890', '1972810300521893890');
-INSERT INTO `sys_role_permission` VALUES ('1972810300521893891', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300521893891', '1972810300521893891');
-INSERT INTO `sys_role_permission` VALUES ('1972810300526088193', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300526088193', '1972810300526088193');
-INSERT INTO `sys_role_permission` VALUES ('1972810300526088194', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300526088194', '1972810300526088194');
-INSERT INTO `sys_role_permission` VALUES ('1972810300526088195', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300526088195', '1972810300526088195');
-INSERT INTO `sys_role_permission` VALUES ('1972810300534476802', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300534476802', '1972810300534476802');
-INSERT INTO `sys_role_permission` VALUES ('1972810300534476803', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300534476803', '1972810300534476803');
-INSERT INTO `sys_role_permission` VALUES ('1972810300534476804', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300534476804', '1972810300534476804');
-INSERT INTO `sys_role_permission` VALUES ('1972810300534476805', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300534476805', '1972810300534476805');
-INSERT INTO `sys_role_permission` VALUES ('1972810300534476806', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300534476806', '1972810300534476806');
-INSERT INTO `sys_role_permission` VALUES ('1972810300547059714', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300547059714', '1972810300547059714');
-INSERT INTO `sys_role_permission` VALUES ('1972810300547059715', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972810300547059715', '1972810300547059715');
-INSERT INTO `sys_role_permission` VALUES ('1972832621395156994', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621395156994', '1972832621395156994');
-INSERT INTO `sys_role_permission` VALUES ('1972832621399351298', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621399351298', '1972832621399351298');
-INSERT INTO `sys_role_permission` VALUES ('1972832621399351299', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621399351299', '1972832621399351299');
-INSERT INTO `sys_role_permission` VALUES ('1972832621416128514', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621416128514', '1972832621416128514');
-INSERT INTO `sys_role_permission` VALUES ('1972832621416128515', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621416128515', '1972832621416128515');
-INSERT INTO `sys_role_permission` VALUES ('1972832621416128516', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621416128516', '1972832621416128516');
-INSERT INTO `sys_role_permission` VALUES ('1972832621420322817', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621420322817', '1972832621420322817');
-INSERT INTO `sys_role_permission` VALUES ('1972832621420322818', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621420322818', '1972832621420322818');
-INSERT INTO `sys_role_permission` VALUES ('1972832621424517121', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621424517121', '1972832621424517121');
-INSERT INTO `sys_role_permission` VALUES ('1972832621428711426', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621428711426', '1972832621428711426');
-INSERT INTO `sys_role_permission` VALUES ('1972832621428711427', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621428711427', '1972832621428711427');
-INSERT INTO `sys_role_permission` VALUES ('1972832621428711428', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621428711428', '1972832621428711428');
-INSERT INTO `sys_role_permission` VALUES ('1972832621432905729', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621432905729', '1972832621432905729');
-INSERT INTO `sys_role_permission` VALUES ('1972832621432905730', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621432905730', '1972832621432905730');
-INSERT INTO `sys_role_permission` VALUES ('1972832621437100034', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972832621437100034', '1972832621437100034');
-INSERT INTO `sys_role_permission` VALUES ('1972857219288416258', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219288416258', '1972857219288416258');
-INSERT INTO `sys_role_permission` VALUES ('1972857219288416259', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219288416259', '1972857219288416259');
-INSERT INTO `sys_role_permission` VALUES ('1972857219296804866', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219296804866', '1972857219296804866');
-INSERT INTO `sys_role_permission` VALUES ('1972857219296804867', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219296804867', '1972857219296804867');
-INSERT INTO `sys_role_permission` VALUES ('1972857219305193474', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219305193474', '1972857219305193474');
-INSERT INTO `sys_role_permission` VALUES ('1972857219309387777', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219309387777', '1972857219309387777');
-INSERT INTO `sys_role_permission` VALUES ('1972857219309387778', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219309387778', '1972857219309387778');
-INSERT INTO `sys_role_permission` VALUES ('1972857219317776385', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219317776385', '1972857219317776385');
-INSERT INTO `sys_role_permission` VALUES ('1972857219317776386', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219317776386', '1972857219317776386');
-INSERT INTO `sys_role_permission` VALUES ('1972857219321970690', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219321970690', '1972857219321970690');
-INSERT INTO `sys_role_permission` VALUES ('1972857219326164993', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219326164993', '1972857219326164993');
-INSERT INTO `sys_role_permission` VALUES ('1972857219326164994', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219326164994', '1972857219326164994');
-INSERT INTO `sys_role_permission` VALUES ('1972857219330359298', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219330359298', '1972857219330359298');
-INSERT INTO `sys_role_permission` VALUES ('1972857219330359299', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1972857219330359299', '1972857219330359299');
-INSERT INTO `sys_role_permission` VALUES ('1973632745188245506', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745188245506', '1973632745188245506');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828418', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828418', '1973632745200828418');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828419', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828419', '1973632745200828419');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828420', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828420', '1973632745200828420');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828421', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828421', '1973632745200828421');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828422', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828422', '1973632745200828422');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828423', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828423', '1973632745200828423');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828424', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828424', '1973632745200828424');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828425', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828425', '1973632745200828425');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828426', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828426', '1973632745200828426');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828427', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828427', '1973632745200828427');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828428', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828428', '1973632745200828428');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828429', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828429', '1973632745200828429');
-INSERT INTO `sys_role_permission` VALUES ('1973632745200828430', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973632745200828430', '1973632745200828430');
-INSERT INTO `sys_role_permission` VALUES ('1973721131240620033', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973721131240620033', '1973721131240620033');
-INSERT INTO `sys_role_permission` VALUES ('1973916426897338370', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973916426897338370', '1973916426897338370');
-INSERT INTO `sys_role_permission` VALUES ('1973916426905726977', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973916426905726977', '1973916426905726977');
-INSERT INTO `sys_role_permission` VALUES ('1973916426905726978', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973916426905726978', '1973916426905726978');
-INSERT INTO `sys_role_permission` VALUES ('1973916426905726979', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973916426905726979', '1973916426905726979');
-INSERT INTO `sys_role_permission` VALUES ('1973943328634781698', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973943328634781698', '1973943328634781698');
-INSERT INTO `sys_role_permission` VALUES ('1973946800943874049', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1973946800943874049', '1973946800943874049');
-INSERT INTO `sys_role_permission` VALUES ('1974008358038282241', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358038282241', '1974008358038282241');
-INSERT INTO `sys_role_permission` VALUES ('1974008358059253761', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358059253761', '1974008358059253761');
-INSERT INTO `sys_role_permission` VALUES ('1974008358059253762', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358059253762', '1974008358059253762');
-INSERT INTO `sys_role_permission` VALUES ('1974008358067642370', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358067642370', '1974008358067642370');
-INSERT INTO `sys_role_permission` VALUES ('1974008358067642371', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358067642371', '1974008358067642371');
-INSERT INTO `sys_role_permission` VALUES ('1974008358067642372', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358067642372', '1974008358067642372');
-INSERT INTO `sys_role_permission` VALUES ('1974008358067642373', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974008358067642373', '1974008358067642373');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283650', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283650', '1974658072752283650');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283651', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283651', '1974658072752283651');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283652', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283652', '1974658072752283652');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283653', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283653', '1974658072752283653');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283654', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283654', '1974658072752283654');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283655', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283655', '1974658072752283655');
-INSERT INTO `sys_role_permission` VALUES ('1974658072752283656', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974658072752283656', '1974658072752283656');
-INSERT INTO `sys_role_permission` VALUES ('1974664449839198209', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449839198209', '1974664449839198209');
-INSERT INTO `sys_role_permission` VALUES ('1974664449851781121', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449851781121', '1974664449851781121');
-INSERT INTO `sys_role_permission` VALUES ('1974664449855975425', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449855975425', '1974664449855975425');
-INSERT INTO `sys_role_permission` VALUES ('1974664449855975426', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449855975426', '1974664449855975426');
-INSERT INTO `sys_role_permission` VALUES ('1974664449855975427', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449855975427', '1974664449855975427');
-INSERT INTO `sys_role_permission` VALUES ('1974664449855975428', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449855975428', '1974664449855975428');
-INSERT INTO `sys_role_permission` VALUES ('1974664449855975429', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1974664449855975429', '1974664449855975429');
-INSERT INTO `sys_role_permission` VALUES ('1976839915145285633', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915145285633', '1976839915145285633');
-INSERT INTO `sys_role_permission` VALUES ('1976839915170451457', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915170451457', '1976839915170451457');
-INSERT INTO `sys_role_permission` VALUES ('1976839915170451458', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915170451458', '1976839915170451458');
-INSERT INTO `sys_role_permission` VALUES ('1976839915170451459', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915170451459', '1976839915170451459');
-INSERT INTO `sys_role_permission` VALUES ('1976839915170451460', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915170451460', '1976839915170451460');
-INSERT INTO `sys_role_permission` VALUES ('1976839915178840065', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915178840065', '1976839915178840065');
-INSERT INTO `sys_role_permission` VALUES ('1976839915178840066', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976839915178840066', '1976839915178840066');
-INSERT INTO `sys_role_permission` VALUES ('1976913972196904962', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976913972196904962', '1976913972196904962');
-INSERT INTO `sys_role_permission` VALUES ('1976950387282673666', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976950387282673666', '1976950387282673666');
-INSERT INTO `sys_role_permission` VALUES ('1976950387286867970', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976950387286867970', '1976950387286867970');
-INSERT INTO `sys_role_permission` VALUES ('1976950387286867971', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1976950387286867971', '1976950387286867971');
-INSERT INTO `sys_role_permission` VALUES ('1977906382370066433', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1977906382370066433', '1977906382370066433');
-INSERT INTO `sys_role_permission` VALUES ('1979032786623528961', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1979032786623528961', '1979032786623528961');
-INSERT INTO `sys_role_permission` VALUES ('1981158148992380929', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148992380929', '1981158148992380929');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575233', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575233', '1981158148996575233');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575234', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575234', '1981158148996575234');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575235', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575235', '1981158148996575235');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575236', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575236', '1981158148996575236');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575237', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575237', '1981158148996575237');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575238', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575238', '1981158148996575238');
-INSERT INTO `sys_role_permission` VALUES ('1981158148996575239', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158148996575239', '1981158148996575239');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769537', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769537', '1981158149000769537');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769538', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769538', '1981158149000769538');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769539', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769539', '1981158149000769539');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769540', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769540', '1981158149000769540');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769541', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769541', '1981158149000769541');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769542', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769542', '1981158149000769542');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769543', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769543', '1981158149000769543');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769544', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769544', '1981158149000769544');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769545', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769545', '1981158149000769545');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769546', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769546', '1981158149000769546');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769547', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769547', '1981158149000769547');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769548', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769548', '1981158149000769548');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769549', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769549', '1981158149000769549');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769550', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769550', '1981158149000769550');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769551', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769551', '1981158149000769551');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769552', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769552', '1981158149000769552');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769553', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769553', '1981158149000769553');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769554', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769554', '1981158149000769554');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769555', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769555', '1981158149000769555');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769556', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769556', '1981158149000769556');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769557', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769557', '1981158149000769557');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769558', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769558', '1981158149000769558');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769559', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769559', '1981158149000769559');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769560', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769560', '1981158149000769560');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769561', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769561', '1981158149000769561');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769562', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769562', '1981158149000769562');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769563', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769563', '1981158149000769563');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769564', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769564', '1981158149000769564');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769565', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769565', '1981158149000769565');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769566', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769566', '1981158149000769566');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769567', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769567', '1981158149000769567');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769568', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769568', '1981158149000769568');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769569', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769569', '1981158149000769569');
-INSERT INTO `sys_role_permission` VALUES ('1981158149000769570', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149000769570', '1981158149000769570');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963841', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963841', '1981158149004963841');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963842', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963842', '1981158149004963842');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963843', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963843', '1981158149004963843');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963844', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963844', '1981158149004963844');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963845', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963845', '1981158149004963845');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963846', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963846', '1981158149004963846');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963847', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963847', '1981158149004963847');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963848', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963848', '1981158149004963848');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963849', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963849', '1981158149004963849');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963850', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963850', '1981158149004963850');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963851', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963851', '1981158149004963851');
-INSERT INTO `sys_role_permission` VALUES ('1981158149004963852', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158149004963852', '1981158149004963852');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087106', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087106', '1981158316215087106');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087107', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087107', '1981158316215087107');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087108', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087108', '1981158316215087108');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087109', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087109', '1981158316215087109');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087110', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087110', '1981158316215087110');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087111', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087111', '1981158316215087111');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087112', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087112', '1981158316215087112');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087113', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087113', '1981158316215087113');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087114', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087114', '1981158316215087114');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087115', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087115', '1981158316215087115');
-INSERT INTO `sys_role_permission` VALUES ('1981158316215087116', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316215087116', '1981158316215087116');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281409', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281409', '1981158316219281409');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281410', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281410', '1981158316219281410');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281411', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281411', '1981158316219281411');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281412', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281412', '1981158316219281412');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281413', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281413', '1981158316219281413');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281414', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281414', '1981158316219281414');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281415', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281415', '1981158316219281415');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281416', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281416', '1981158316219281416');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281417', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281417', '1981158316219281417');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281418', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281418', '1981158316219281418');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281419', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281419', '1981158316219281419');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281420', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281420', '1981158316219281420');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281421', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281421', '1981158316219281421');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281422', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281422', '1981158316219281422');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281423', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281423', '1981158316219281423');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281424', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281424', '1981158316219281424');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281425', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281425', '1981158316219281425');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281426', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281426', '1981158316219281426');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281427', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281427', '1981158316219281427');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281428', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281428', '1981158316219281428');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281429', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281429', '1981158316219281429');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281430', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281430', '1981158316219281430');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281431', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281431', '1981158316219281431');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281432', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281432', '1981158316219281432');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281433', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281433', '1981158316219281433');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281434', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281434', '1981158316219281434');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281435', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281435', '1981158316219281435');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281436', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281436', '1981158316219281436');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281437', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281437', '1981158316219281437');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281438', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281438', '1981158316219281438');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281439', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281439', '1981158316219281439');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281440', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281440', '1981158316219281440');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281441', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281441', '1981158316219281441');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281442', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281442', '1981158316219281442');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281443', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281443', '1981158316219281443');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281444', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281444', '1981158316219281444');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281445', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281445', '1981158316219281445');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281446', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281446', '1981158316219281446');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281447', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281447', '1981158316219281447');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281448', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281448', '1981158316219281448');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281449', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281449', '1981158316219281449');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281450', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281450', '1981158316219281450');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281451', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281451', '1981158316219281451');
-INSERT INTO `sys_role_permission` VALUES ('1981158316219281452', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316219281452', '1981158316219281452');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475714', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475714', '1981158316223475714');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475715', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475715', '1981158316223475715');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475716', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475716', '1981158316223475716');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475717', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475717', '1981158316223475717');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475718', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475718', '1981158316223475718');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475719', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475719', '1981158316223475719');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475720', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475720', '1981158316223475720');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475721', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475721', '1981158316223475721');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475722', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475722', '1981158316223475722');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475723', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475723', '1981158316223475723');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475724', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475724', '1981158316223475724');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475725', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475725', '1981158316223475725');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475726', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475726', '1981158316223475726');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475727', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475727', '1981158316223475727');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475728', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475728', '1981158316223475728');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475729', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475729', '1981158316223475729');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475730', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475730', '1981158316223475730');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475731', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475731', '1981158316223475731');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475732', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475732', '1981158316223475732');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475733', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475733', '1981158316223475733');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475734', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475734', '1981158316223475734');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475735', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475735', '1981158316223475735');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475736', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475736', '1981158316223475736');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475737', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475737', '1981158316223475737');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475738', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475738', '1981158316223475738');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475739', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475739', '1981158316223475739');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475740', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475740', '1981158316223475740');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475741', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475741', '1981158316223475741');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475742', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475742', '1981158316223475742');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475743', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475743', '1981158316223475743');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475744', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475744', '1981158316223475744');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475745', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475745', '1981158316223475745');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475746', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475746', '1981158316223475746');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475747', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475747', '1981158316223475747');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475748', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475748', '1981158316223475748');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475749', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475749', '1981158316223475749');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475750', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475750', '1981158316223475750');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475751', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475751', '1981158316223475751');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475752', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475752', '1981158316223475752');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475753', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475753', '1981158316223475753');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475754', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475754', '1981158316223475754');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475755', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475755', '1981158316223475755');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475756', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475756', '1981158316223475756');
-INSERT INTO `sys_role_permission` VALUES ('1981158316223475757', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316223475757', '1981158316223475757');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670017', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670017', '1981158316227670017');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670018', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670018', '1981158316227670018');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670019', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670019', '1981158316227670019');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670020', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670020', '1981158316227670020');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670021', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670021', '1981158316227670021');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670022', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670022', '1981158316227670022');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670023', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670023', '1981158316227670023');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670024', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670024', '1981158316227670024');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670025', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670025', '1981158316227670025');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670026', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670026', '1981158316227670026');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670027', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670027', '1981158316227670027');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670028', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670028', '1981158316227670028');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670029', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670029', '1981158316227670029');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670030', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670030', '1981158316227670030');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670031', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670031', '1981158316227670031');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670032', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670032', '1981158316227670032');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670033', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670033', '1981158316227670033');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670034', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670034', '1981158316227670034');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670035', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670035', '1981158316227670035');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670036', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670036', '1981158316227670036');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670037', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670037', '1981158316227670037');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670038', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670038', '1981158316227670038');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670039', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670039', '1981158316227670039');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670040', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670040', '1981158316227670040');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670041', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670041', '1981158316227670041');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670042', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670042', '1981158316227670042');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670043', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670043', '1981158316227670043');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670044', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670044', '1981158316227670044');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670045', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670045', '1981158316227670045');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670046', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670046', '1981158316227670046');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670047', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670047', '1981158316227670047');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670048', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670048', '1981158316227670048');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670049', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670049', '1981158316227670049');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670050', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670050', '1981158316227670050');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670051', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670051', '1981158316227670051');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670052', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670052', '1981158316227670052');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670053', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670053', '1981158316227670053');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670054', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670054', '1981158316227670054');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670055', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670055', '1981158316227670055');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670056', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670056', '1981158316227670056');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670057', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670057', '1981158316227670057');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670058', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670058', '1981158316227670058');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670059', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670059', '1981158316227670059');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670060', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670060', '1981158316227670060');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670061', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670061', '1981158316227670061');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670062', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670062', '1981158316227670062');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670063', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670063', '1981158316227670063');
-INSERT INTO `sys_role_permission` VALUES ('1981158316227670064', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316227670064', '1981158316227670064');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864322', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864322', '1981158316231864322');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864323', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864323', '1981158316231864323');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864324', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864324', '1981158316231864324');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864325', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864325', '1981158316231864325');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864326', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864326', '1981158316231864326');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864327', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864327', '1981158316231864327');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864328', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864328', '1981158316231864328');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864329', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864329', '1981158316231864329');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864330', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864330', '1981158316231864330');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864331', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864331', '1981158316231864331');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864332', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864332', '1981158316231864332');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864333', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864333', '1981158316231864333');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864334', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864334', '1981158316231864334');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864335', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864335', '1981158316231864335');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864336', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864336', '1981158316231864336');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864337', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864337', '1981158316231864337');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864338', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864338', '1981158316231864338');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864339', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864339', '1981158316231864339');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864340', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864340', '1981158316231864340');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864341', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864341', '1981158316231864341');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864342', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864342', '1981158316231864342');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864343', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864343', '1981158316231864343');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864344', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864344', '1981158316231864344');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864345', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864345', '1981158316231864345');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864346', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864346', '1981158316231864346');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864347', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864347', '1981158316231864347');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864348', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864348', '1981158316231864348');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864349', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864349', '1981158316231864349');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864350', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864350', '1981158316231864350');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864351', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864351', '1981158316231864351');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864352', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864352', '1981158316231864352');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864353', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864353', '1981158316231864353');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864354', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864354', '1981158316231864354');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864355', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864355', '1981158316231864355');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864356', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864356', '1981158316231864356');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864357', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864357', '1981158316231864357');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864358', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864358', '1981158316231864358');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864359', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864359', '1981158316231864359');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864360', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864360', '1981158316231864360');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864361', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864361', '1981158316231864361');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864362', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864362', '1981158316231864362');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864363', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864363', '1981158316231864363');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864364', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864364', '1981158316231864364');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864365', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864365', '1981158316231864365');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864366', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864366', '1981158316231864366');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864367', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864367', '1981158316231864367');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864368', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864368', '1981158316231864368');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864369', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864369', '1981158316231864369');
-INSERT INTO `sys_role_permission` VALUES ('1981158316231864370', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316231864370', '1981158316231864370');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058626', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058626', '1981158316236058626');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058627', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058627', '1981158316236058627');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058628', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058628', '1981158316236058628');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058629', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058629', '1981158316236058629');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058630', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058630', '1981158316236058630');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058631', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058631', '1981158316236058631');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058632', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058632', '1981158316236058632');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058633', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058633', '1981158316236058633');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058634', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058634', '1981158316236058634');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058635', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058635', '1981158316236058635');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058636', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058636', '1981158316236058636');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058637', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058637', '1981158316236058637');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058638', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058638', '1981158316236058638');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058639', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058639', '1981158316236058639');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058640', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058640', '1981158316236058640');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058641', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058641', '1981158316236058641');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058642', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058642', '1981158316236058642');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058643', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058643', '1981158316236058643');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058644', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058644', '1981158316236058644');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058645', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058645', '1981158316236058645');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058646', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058646', '1981158316236058646');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058647', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058647', '1981158316236058647');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058648', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058648', '1981158316236058648');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058649', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058649', '1981158316236058649');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058650', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058650', '1981158316236058650');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058651', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058651', '1981158316236058651');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058652', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058652', '1981158316236058652');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058653', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058653', '1981158316236058653');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058654', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058654', '1981158316236058654');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058655', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058655', '1981158316236058655');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058656', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058656', '1981158316236058656');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058657', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058657', '1981158316236058657');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058658', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058658', '1981158316236058658');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058659', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058659', '1981158316236058659');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058660', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058660', '1981158316236058660');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058661', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058661', '1981158316236058661');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058662', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058662', '1981158316236058662');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058663', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058663', '1981158316236058663');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058664', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058664', '1981158316236058664');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058665', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058665', '1981158316236058665');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058666', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058666', '1981158316236058666');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058667', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058667', '1981158316236058667');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058668', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058668', '1981158316236058668');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058669', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058669', '1981158316236058669');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058670', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058670', '1981158316236058670');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058671', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058671', '1981158316236058671');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058672', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058672', '1981158316236058672');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058673', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058673', '1981158316236058673');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058674', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058674', '1981158316236058674');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058675', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058675', '1981158316236058675');
-INSERT INTO `sys_role_permission` VALUES ('1981158316236058676', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316236058676', '1981158316236058676');
-INSERT INTO `sys_role_permission` VALUES ('1981158316240252929', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316240252929', '1981158316240252929');
-INSERT INTO `sys_role_permission` VALUES ('1981158316240252930', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316240252930', '1981158316240252930');
-INSERT INTO `sys_role_permission` VALUES ('1981158316240252931', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316240252931', '1981158316240252931');
-INSERT INTO `sys_role_permission` VALUES ('1981158316240252932', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316240252932', '1981158316240252932');
-INSERT INTO `sys_role_permission` VALUES ('1981158316240252933', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981158316240252933', '1981158316240252933');
-INSERT INTO `sys_role_permission` VALUES ('1981190431174295553', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1981190431174295553', '1981190431174295553');
-INSERT INTO `sys_role_permission` VALUES ('1982624108655677441', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108655677441', '1982624108655677441');
-INSERT INTO `sys_role_permission` VALUES ('1982624108668260353', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108668260353', '1982624108668260353');
-INSERT INTO `sys_role_permission` VALUES ('1982624108668260354', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108668260354', '1982624108668260354');
-INSERT INTO `sys_role_permission` VALUES ('1982624108668260355', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108668260355', '1982624108668260355');
-INSERT INTO `sys_role_permission` VALUES ('1982624108668260356', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108668260356', '1982624108668260356');
-INSERT INTO `sys_role_permission` VALUES ('1982624108676648962', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108676648962', '1982624108676648962');
-INSERT INTO `sys_role_permission` VALUES ('1982624108676648963', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1982624108676648963', '1982624108676648963');
-INSERT INTO `sys_role_permission` VALUES ('1987802019872382977', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019872382977', '1987802019872382977');
-INSERT INTO `sys_role_permission` VALUES ('1987802019905937410', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019905937410', '1987802019905937410');
-INSERT INTO `sys_role_permission` VALUES ('1987802019910131714', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019910131714', '1987802019910131714');
-INSERT INTO `sys_role_permission` VALUES ('1987802019910131715', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019910131715', '1987802019910131715');
-INSERT INTO `sys_role_permission` VALUES ('1987802019910131716', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019910131716', '1987802019910131716');
-INSERT INTO `sys_role_permission` VALUES ('1987802019910131717', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019910131717', '1987802019910131717');
-INSERT INTO `sys_role_permission` VALUES ('1987802019918520322', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1987802019918520322', '1987802019918520322');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718530', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718530', '1989939118397718530');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718531', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718531', '1989939118397718531');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718532', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718532', '1989939118397718532');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718533', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718533', '1989939118397718533');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718534', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718534', '1989939118397718534');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718535', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718535', '1989939118397718535');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718536', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718536', '1989939118397718536');
-INSERT INTO `sys_role_permission` VALUES ('1989939118397718537', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118397718537', '1989939118397718537');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633089', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633089', '1989939118460633089');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633090', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633090', '1989939118460633090');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633091', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633091', '1989939118460633091');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633092', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633092', '1989939118460633092');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633093', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633093', '1989939118460633093');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633094', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633094', '1989939118460633094');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633095', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633095', '1989939118460633095');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633096', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633096', '1989939118460633096');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633097', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633097', '1989939118460633097');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633098', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633098', '1989939118460633098');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633099', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633099', '1989939118460633099');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633100', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633100', '1989939118460633100');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633101', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633101', '1989939118460633101');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633102', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633102', '1989939118460633102');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633103', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633103', '1989939118460633103');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633104', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633104', '1989939118460633104');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633105', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633105', '1989939118460633105');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633106', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633106', '1989939118460633106');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633107', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633107', '1989939118460633107');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633108', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633108', '1989939118460633108');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633109', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633109', '1989939118460633109');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633110', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633110', '1989939118460633110');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633111', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633111', '1989939118460633111');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633112', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633112', '1989939118460633112');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633113', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633113', '1989939118460633113');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633114', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633114', '1989939118460633114');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633115', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633115', '1989939118460633115');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633116', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633116', '1989939118460633116');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633117', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633117', '1989939118460633117');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633118', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633118', '1989939118460633118');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633119', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633119', '1989939118460633119');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633120', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633120', '1989939118460633120');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633121', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633121', '1989939118460633121');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633122', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633122', '1989939118460633122');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633123', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633123', '1989939118460633123');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633124', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633124', '1989939118460633124');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633125', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633125', '1989939118460633125');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633126', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633126', '1989939118460633126');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633127', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633127', '1989939118460633127');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633128', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633128', '1989939118460633128');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633129', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633129', '1989939118460633129');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633130', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633130', '1989939118460633130');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633131', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633131', '1989939118460633131');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633132', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633132', '1989939118460633132');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633133', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633133', '1989939118460633133');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633134', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633134', '1989939118460633134');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633135', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633135', '1989939118460633135');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633136', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633136', '1989939118460633136');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633137', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633137', '1989939118460633137');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633138', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633138', '1989939118460633138');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633139', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633139', '1989939118460633139');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633140', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633140', '1989939118460633140');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633141', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633141', '1989939118460633141');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633142', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633142', '1989939118460633142');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633143', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633143', '1989939118460633143');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633144', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633144', '1989939118460633144');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633145', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633145', '1989939118460633145');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633146', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633146', '1989939118460633146');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633147', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633147', '1989939118460633147');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633148', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633148', '1989939118460633148');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633149', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633149', '1989939118460633149');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633150', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633150', '1989939118460633150');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633151', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633151', '1989939118460633151');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633152', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633152', '1989939118460633152');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633153', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633153', '1989939118460633153');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633154', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633154', '1989939118460633154');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633155', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633155', '1989939118460633155');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633157', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633157', '1989939118460633157');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633177', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633177', '1989939118460633177');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633178', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633178', '1989939118460633178');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633179', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633179', '1989939118460633179');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633180', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633180', '1989939118460633180');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633182', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633182', '1989939118460633182');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633183', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633183', '1989939118460633183');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633184', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633184', '1989939118460633184');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633185', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633185', '1989939118460633185');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633186', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633186', '1989939118460633186');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633187', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633187', '1989939118460633187');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633188', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633188', '1989939118460633188');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633189', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633189', '1989939118460633189');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633190', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633190', '1989939118460633190');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633191', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633191', '1989939118460633191');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633192', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633192', '1989939118460633192');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633193', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633193', '1989939118460633193');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633194', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633194', '1989939118460633194');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633195', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633195', '1989939118460633195');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633196', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633196', '1989939118460633196');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633197', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633197', '1989939118460633197');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633198', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633198', '1989939118460633198');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633199', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633199', '1989939118460633199');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633200', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633200', '1989939118460633200');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633201', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633201', '1989939118460633201');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633202', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633202', '1989939118460633202');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633203', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633203', '1989939118460633203');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633204', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633204', '1989939118460633204');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633205', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633205', '1989939118460633205');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633206', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633206', '1989939118460633206');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633207', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633207', '1989939118460633207');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633208', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633208', '1989939118460633208');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633209', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633209', '1989939118460633209');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633211', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633211', '1989939118460633211');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633212', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633212', '1989939118460633212');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633213', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633213', '1989939118460633213');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633214', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633214', '1989939118460633214');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633215', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633215', '1989939118460633215');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633216', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633216', '1989939118460633216');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633217', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633217', '1989939118460633217');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633218', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633218', '1989939118460633218');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633219', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633219', '1989939118460633219');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633220', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633220', '1989939118460633220');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633221', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633221', '1989939118460633221');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633222', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633222', '1989939118460633222');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633223', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633223', '1989939118460633223');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633224', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633224', '1989939118460633224');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633225', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633225', '1989939118460633225');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633226', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633226', '1989939118460633226');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633227', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633227', '1989939118460633227');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633228', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633228', '1989939118460633228');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633229', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633229', '1989939118460633229');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633230', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633230', '1989939118460633230');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633232', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633232', '1989939118460633232');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633233', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633233', '1989939118460633233');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633234', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633234', '1989939118460633234');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633235', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633235', '1989939118460633235');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633236', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633236', '1989939118460633236');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633237', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633237', '1989939118460633237');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633238', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633238', '1989939118460633238');
-INSERT INTO `sys_role_permission` VALUES ('1989939118460633239', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118460633239', '1989939118460633239');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741954', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741954', '1989939118527741954');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741955', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741955', '1989939118527741955');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741956', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741956', '1989939118527741956');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741957', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741957', '1989939118527741957');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741958', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741958', '1989939118527741958');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741965', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741965', '1989939118527741965');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741966', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741966', '1989939118527741966');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741967', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741967', '1989939118527741967');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741968', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741968', '1989939118527741968');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741969', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741969', '1989939118527741969');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741970', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741970', '1989939118527741970');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741971', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741971', '1989939118527741971');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741972', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741972', '1989939118527741972');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741973', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741973', '1989939118527741973');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741974', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741974', '1989939118527741974');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741975', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741975', '1989939118527741975');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741976', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741976', '1989939118527741976');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741977', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741977', '1989939118527741977');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741978', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741978', '1989939118527741978');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741979', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741979', '1989939118527741979');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741980', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741980', '1989939118527741980');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741981', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741981', '1989939118527741981');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741982', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741982', '1989939118527741982');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741983', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741983', '1989939118527741983');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741984', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741984', '1989939118527741984');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741985', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741985', '1989939118527741985');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741986', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741986', '1989939118527741986');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741987', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741987', '1989939118527741987');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741988', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741988', '1989939118527741988');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741989', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741989', '1989939118527741989');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741990', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741990', '1989939118527741990');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741991', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741991', '1989939118527741991');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741992', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741992', '1989939118527741992');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741993', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741993', '1989939118527741993');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741994', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741994', '1989939118527741994');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741995', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741995', '1989939118527741995');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741996', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741996', '1989939118527741996');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741997', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741997', '1989939118527741997');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741998', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741998', '1989939118527741998');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527741999', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527741999', '1989939118527741999');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742000', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742000', '1989939118527742000');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742001', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742001', '1989939118527742001');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742002', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742002', '1989939118527742002');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742003', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742003', '1989939118527742003');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742004', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742004', '1989939118527742004');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742005', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742005', '1989939118527742005');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742006', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742006', '1989939118527742006');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742007', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742007', '1989939118527742007');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742008', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742008', '1989939118527742008');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742009', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742009', '1989939118527742009');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742010', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742010', '1989939118527742010');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742011', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742011', '1989939118527742011');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742012', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742012', '1989939118527742012');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742013', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742013', '1989939118527742013');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742014', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742014', '1989939118527742014');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742015', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742015', '1989939118527742015');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742016', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742016', '1989939118527742016');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742017', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742017', '1989939118527742017');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742018', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742018', '1989939118527742018');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742019', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742019', '1989939118527742019');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742020', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742020', '1989939118527742020');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742021', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742021', '1989939118527742021');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742022', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742022', '1989939118527742022');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742023', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742023', '1989939118527742023');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742024', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742024', '1989939118527742024');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742025', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742025', '1989939118527742025');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742026', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742026', '1989939118527742026');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742027', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742027', '1989939118527742027');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742028', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742028', '1989939118527742028');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742029', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742029', '1989939118527742029');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742030', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742030', '1989939118527742030');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742031', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742031', '1989939118527742031');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742032', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742032', '1989939118527742032');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742033', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742033', '1989939118527742033');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742034', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742034', '1989939118527742034');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742035', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742035', '1989939118527742035');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742036', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742036', '1989939118527742036');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742037', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742037', '1989939118527742037');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742038', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742038', '1989939118527742038');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742039', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742039', '1989939118527742039');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742040', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742040', '1989939118527742040');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742041', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742041', '1989939118527742041');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742042', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742042', '1989939118527742042');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742043', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742043', '1989939118527742043');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742044', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742044', '1989939118527742044');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742045', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742045', '1989939118527742045');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742046', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742046', '1989939118527742046');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742047', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742047', '1989939118527742047');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742048', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742048', '1989939118527742048');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742049', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742049', '1989939118527742049');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742050', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742050', '1989939118527742050');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742051', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742051', '1989939118527742051');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742052', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742052', '1989939118527742052');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742053', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742053', '1989939118527742053');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742054', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742054', '1989939118527742054');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742055', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742055', '1989939118527742055');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742056', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742056', '1989939118527742056');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742057', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742057', '1989939118527742057');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742058', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742058', '1989939118527742058');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742059', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742059', '1989939118527742059');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742060', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742060', '1989939118527742060');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742061', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742061', '1989939118527742061');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742062', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742062', '1989939118527742062');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742063', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742063', '1989939118527742063');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742064', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742064', '1989939118527742064');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742065', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742065', '1989939118527742065');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742066', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742066', '1989939118527742066');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742067', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742067', '1989939118527742067');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742068', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742068', '1989939118527742068');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742069', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742069', '1989939118527742069');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742070', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742070', '1989939118527742070');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742071', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742071', '1989939118527742071');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742072', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742072', '1989939118527742072');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742073', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742073', '1989939118527742073');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742074', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742074', '1989939118527742074');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742075', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742075', '1989939118527742075');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742076', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742076', '1989939118527742076');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742077', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742077', '1989939118527742077');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742078', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742078', '1989939118527742078');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742079', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742079', '1989939118527742079');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742080', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742080', '1989939118527742080');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742081', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742081', '1989939118527742081');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742082', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742082', '1989939118527742082');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742083', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742083', '1989939118527742083');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742084', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742084', '1989939118527742084');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742085', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742085', '1989939118527742085');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742086', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742086', '1989939118527742086');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742087', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742087', '1989939118527742087');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742088', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742088', '1989939118527742088');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742090', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742090', '1989939118527742090');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742091', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742091', '1989939118527742091');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742092', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742092', '1989939118527742092');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742094', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742094', '1989939118527742094');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742095', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742095', '1989939118527742095');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742096', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742096', '1989939118527742096');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742097', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742097', '1989939118527742097');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742098', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742098', '1989939118527742098');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742099', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742099', '1989939118527742099');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742100', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742100', '1989939118527742100');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742101', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742101', '1989939118527742101');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742102', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742102', '1989939118527742102');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742103', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742103', '1989939118527742103');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742104', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742104', '1989939118527742104');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742105', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742105', '1989939118527742105');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742106', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742106', '1989939118527742106');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742107', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742107', '1989939118527742107');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742108', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742108', '1989939118527742108');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742109', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742109', '1989939118527742109');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742110', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742110', '1989939118527742110');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742111', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742111', '1989939118527742111');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742112', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742112', '1989939118527742112');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742113', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742113', '1989939118527742113');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742114', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742114', '1989939118527742114');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742115', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742115', '1989939118527742115');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742116', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742116', '1989939118527742116');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742117', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742117', '1989939118527742117');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742118', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742118', '1989939118527742118');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742119', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742119', '1989939118527742119');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742120', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742120', '1989939118527742120');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742121', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742121', '1989939118527742121');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742122', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742122', '1989939118527742122');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742123', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742123', '1989939118527742123');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742124', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742124', '1989939118527742124');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742125', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742125', '1989939118527742125');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742126', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742126', '1989939118527742126');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742127', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742127', '1989939118527742127');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742128', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742128', '1989939118527742128');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742129', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742129', '1989939118527742129');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742130', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742130', '1989939118527742130');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742131', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742131', '1989939118527742131');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742132', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742132', '1989939118527742132');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742133', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742133', '1989939118527742133');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742134', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742134', '1989939118527742134');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742135', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742135', '1989939118527742135');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742136', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742136', '1989939118527742136');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742137', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742137', '1989939118527742137');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742138', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742138', '1989939118527742138');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742139', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742139', '1989939118527742139');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742140', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742140', '1989939118527742140');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742141', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742141', '1989939118527742141');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742142', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742142', '1989939118527742142');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742143', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742143', '1989939118527742143');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742144', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742144', '1989939118527742144');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742145', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742145', '1989939118527742145');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742146', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742146', '1989939118527742146');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742147', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742147', '1989939118527742147');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742148', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742148', '1989939118527742148');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742149', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742149', '1989939118527742149');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742150', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742150', '1989939118527742150');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742153', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742153', '1989939118527742153');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742155', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742155', '1989939118527742155');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742156', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742156', '1989939118527742156');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742159', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742159', '1989939118527742159');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742163', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742163', '1989939118527742163');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742165', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742165', '1989939118527742165');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742166', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742166', '1989939118527742166');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742167', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742167', '1989939118527742167');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742168', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742168', '1989939118527742168');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742169', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742169', '1989939118527742169');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742192', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742192', '1989939118527742192');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742193', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742193', '1989939118527742193');
-INSERT INTO `sys_role_permission` VALUES ('1989939118527742224', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118527742224', '1989939118527742224');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850848', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850848', '1989939118594850848');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850849', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850849', '1989939118594850849');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850850', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850850', '1989939118594850850');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850851', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850851', '1989939118594850851');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850852', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850852', '1989939118594850852');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850853', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850853', '1989939118594850853');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850854', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850854', '1989939118594850854');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850855', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850855', '1989939118594850855');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850856', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850856', '1989939118594850856');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850857', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850857', '1989939118594850857');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850858', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850858', '1989939118594850858');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850859', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850859', '1989939118594850859');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850860', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850860', '1989939118594850860');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850861', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850861', '1989939118594850861');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850862', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850862', '1989939118594850862');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850863', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850863', '1989939118594850863');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850864', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850864', '1989939118594850864');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850865', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850865', '1989939118594850865');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850866', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850866', '1989939118594850866');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850867', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850867', '1989939118594850867');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850868', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850868', '1989939118594850868');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850869', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850869', '1989939118594850869');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850870', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850870', '1989939118594850870');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850871', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850871', '1989939118594850871');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850872', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850872', '1989939118594850872');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850873', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850873', '1989939118594850873');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850874', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850874', '1989939118594850874');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850878', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850878', '1989939118594850878');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850879', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850879', '1989939118594850879');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850880', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850880', '1989939118594850880');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850881', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850881', '1989939118594850881');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850882', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850882', '1989939118594850882');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850998', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850998', '1989939118594850998');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594850999', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594850999', '1989939118594850999');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851000', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851000', '1989939118594851000');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851001', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851001', '1989939118594851001');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851002', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851002', '1989939118594851002');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851003', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851003', '1989939118594851003');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851004', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851004', '1989939118594851004');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851005', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851005', '1989939118594851005');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851006', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851006', '1989939118594851006');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851007', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851007', '1989939118594851007');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851008', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851008', '1989939118594851008');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851009', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851009', '1989939118594851009');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851010', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851010', '1989939118594851010');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851011', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851011', '1989939118594851011');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851013', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851013', '1989939118594851013');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851015', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851015', '1989939118594851015');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851016', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851016', '1989939118594851016');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851017', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851017', '1989939118594851017');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851018', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851018', '1989939118594851018');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851056', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851056', '1989939118594851056');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851057', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851057', '1989939118594851057');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851124', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851124', '1989939118594851124');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851125', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851125', '1989939118594851125');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851126', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851126', '1989939118594851126');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851127', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851127', '1989939118594851127');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851128', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851128', '1989939118594851128');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851129', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851129', '1989939118594851129');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851130', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851130', '1989939118594851130');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851131', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851131', '1989939118594851131');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851132', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851132', '1989939118594851132');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851133', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851133', '1989939118594851133');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851134', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851134', '1989939118594851134');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851135', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '1989939118594851135', '1989939118594851135');
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851136', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851138', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851139', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851152', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851192', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851193', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851194', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851195', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851196', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851197', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851198', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851199', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851200', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851201', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851202', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851203', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851204', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118594851205', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959694', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959695', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959696', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959697', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959698', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959699', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959700', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959701', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959702', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959703', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959704', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959705', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959707', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959734', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959735', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959736', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959737', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959738', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959739', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959740', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959741', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959742', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959766', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959767', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959768', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959769', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959770', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959771', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959772', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959773', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959801', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959802', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959803', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959804', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959805', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959806', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959807', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959808', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959809', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959810', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959811', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959829', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959830', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939118661959831', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852290', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852291', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852292', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852320', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852321', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852322', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939135971852323', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961153', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961154', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961155', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961156', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961157', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961176', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961177', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961178', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961179', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961180', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961181', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961182', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961184', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961185', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961186', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961187', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961188', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961190', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961191', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961192', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961193', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961194', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961195', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961196', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961197', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961198', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961199', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961200', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961201', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961202', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961203', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961205', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961206', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961207', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961208', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961209', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961210', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961211', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961212', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961213', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961214', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1989939136038961215', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226818', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226819', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226820', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226821', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226822', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226823', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226824', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226825', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226826', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226827', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226828', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226829', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226830', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226831', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226832', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226833', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226834', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226835', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226836', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456168226837', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141377', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141378', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141379', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141380', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141381', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141382', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141383', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141384', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141385', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141386', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141387', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141388', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141389', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141390', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141391', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996263456231141392', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033413324801', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102018', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102019', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102020', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102021', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102022', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102023', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102024', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102025', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102026', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102027', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102028', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102029', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102030', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102031', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102032', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102033', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102034', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102035', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102036', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102037', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102038', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102039', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102040', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102041', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102042', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102043', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102044', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102045', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102046', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102047', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102048', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102049', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102050', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996271033430102051', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449475072001', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180865', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180866', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180867', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180868', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180869', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180870', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1996273449542180871', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1ac1688ef8456f384091a03d88a89ab1', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('1fe4d408b85f19618c15bcb768f0ec22', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('248d288586c6ff3bd14381565df84163', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('27489816708b18859768dfed5945c405', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('296f9c75ca0e172ae5ce4c1022c996df', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('2c462293cbb0eab7e8ae0a3600361b5f', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('2fdaed22dfa4c8d4629e44ef81688c6a', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('300c462b7fec09e2ff32574ef8b3f0bd', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('35ac7cae648de39eb56213ca1b649713', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('3e563751942b0879c88ca4de19757b50', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('412e2de37a35b3442d68db8dd2f3c190', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('4204f91fb61911ba8ce40afa7c02369f', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('4faad8ff93cb2b5607cd3d07c1b624ee', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('57c0b3a547b815ea3ec8e509b08948b3', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('593ee05c4fe4645c7826b7d5e14f23ec', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('5fc194b709336d354640fe29fefd65a3', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588591820806', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588604403712', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588612792320', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588625375232', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588633763840', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588637958144', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('75002588650541056', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277779875336192', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780043108352', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780055691264', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780064079872', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780072468480', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780076662784', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780085051392', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780089245696', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780097634304', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780135383040', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780139577344', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780147965952', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780156354560', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780164743168', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780168937472', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780181520384', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780189908992', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780198297600', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780206686208', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780215074816', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780219269120', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780227657728', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780236046336', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780244434944', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780257017856', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780265406464', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780324126720', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780332515328', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780340903937', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780349292544', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780357681152', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780366069760', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780370264064', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780374458369', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780387041280', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780395429888', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780403818496', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780412207104', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780420595712', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780428984320', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780433178624', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780441567232', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780449955840', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780458344448', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780466733056', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780475121664', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780483510272', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780491898880', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780496093184', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780504481792', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780508676097', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780517064704', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780525453312', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780538036224', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780546424832', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780554813440', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780559007744', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780567396352', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780571590656', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780579979264', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780588367872', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780596756480', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780605145088', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780613533696', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780621922304', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780630310912', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780718391296', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780722585600', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780730974208', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780739362816', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780747751424', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780756140032', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780764528640', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780768722944', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780772917249', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780785500160', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780789694464', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780798083072', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780806471680', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780810665985', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780823248896', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780827443200', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780835831808', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780840026112', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780844220417', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277780852609024', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860062040064', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860070428672', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860078817280', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860091400192', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860099788800', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860112371712', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860120760320', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860129148928', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860141731840', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860150120448', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860158509056', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860162703360', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860171091968', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860179480576', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860187869184', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860196257792', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860204646400', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860208840704', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860213035009', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860221423616', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860225617920', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860234006528', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860242395136', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860250783744', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860254978048', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860263366656', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860271755264', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860313698304', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860322086912', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860326281216', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860334669824', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860343058432', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860347252736', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860351447041', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860359835648', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860364029952', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860368224256', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860372418560', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860376612865', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860385001472', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('77277860389195776', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('7a5d31ba48fe3fb1266bf186dc5f7ba7', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('7de42bdc0b8c5446b7d428c66a7abc12', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('7e19d90cec0dd87aaef351b9ff8f4902', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('8a60df8d8b4c9ee5fa63f48aeee3ec00', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('8ce1022dac4e558ff9694600515cf510', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('8d848ca7feec5b7ebb3ecb32b2c8857a', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('9264104cee9b10c96241d527b2d0346d', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('980171fda43adfe24840959b1d048d4d', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('9d8772c310b675ae43eacdbc6c7fa04a', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('9f8311ecccd44e079723098cf2ffe1cc', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('aefc8c22e061171806e59cd222f6b7e1', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('d37ad568e26f46ed0feca227aa9c2ffa', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('d3fe195d59811531c05d31d8436f5c8b', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('e3e922673f4289b18366bb51b6200f17', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('ecdd72fe694e6bba9c1d9fc925ee79de', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('f17ab8ad1e71341140857ef4914ef297', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_role_permission` VALUES ('fed41a4671285efb266cd404f24dd378', '0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300209984614401', '1', 0, NULL, NULL, NULL, NULL, NULL, 'manage', 'admin', '2009300209954516992', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210022363137', '1', 0, NULL, NULL, NULL, NULL, NULL, 'setting', 'admin', '2009300210025820160', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210089472002', '1', 0, NULL, NULL, NULL, NULL, NULL, '18', 'admin', '2009300210092929024', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210089472003', '1', 0, NULL, NULL, NULL, NULL, NULL, '19', 'admin', '2009300210122289152', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210152386561', '1', 0, NULL, NULL, NULL, NULL, NULL, '20', 'admin', '2009300210193592320', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210219495425', '1', 0, NULL, NULL, NULL, NULL, NULL, '21', 'admin', '2009300210222952448', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210219495426', '1', 0, NULL, NULL, NULL, NULL, NULL, '22', 'admin', '2009300210252312576', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210282409986', '1', 0, NULL, NULL, NULL, NULL, NULL, '2', 'admin', '2009300210277478400', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210282409987', '1', 0, NULL, NULL, NULL, NULL, NULL, '23', 'admin', '2009300210311032832', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210282409988', '1', 0, NULL, NULL, NULL, NULL, NULL, '28', 'admin', '2009300210332004352', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210345324546', '1', 0, NULL, NULL, NULL, NULL, NULL, '45', 'admin', '2009300210348781568', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210345324547', '1', 0, NULL, NULL, NULL, NULL, NULL, '64', 'admin', '2009300210373947392', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009300210345324548', '1', 0, NULL, NULL, NULL, NULL, NULL, '7', 'admin', '2009300210399113216', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750712766465', '0', 0, NULL, NULL, NULL, NULL, NULL, 'manage', 'custom', '2009311750703640576', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750725349378', '0', 0, NULL, NULL, NULL, NULL, NULL, 'setting', 'custom', '2009311750749777920', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750725349379', '0', 0, NULL, NULL, NULL, NULL, NULL, 'orgManage', 'custom', '2009311750774943744', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750788263937', '0', 0, NULL, NULL, NULL, NULL, NULL, 'permission', 'custom', '2009311750800109568', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750788263938', '0', 0, NULL, NULL, NULL, NULL, NULL, 'role', 'custom', '2009311750837858304', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750855372802', '0', 0, NULL, NULL, NULL, NULL, NULL, 'userManage', 'custom', '2009311750871412736', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750855372803', '0', 0, NULL, NULL, NULL, NULL, NULL, 'loginLog', 'custom', '2009311750896578560', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750918287362', '0', 0, NULL, NULL, NULL, NULL, NULL, 'opLog', 'custom', '2009311750921744384', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750918287363', '0', 0, NULL, NULL, NULL, NULL, NULL, 'sms', 'custom', '2009311750946910208', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750918287364', '0', 0, NULL, NULL, NULL, NULL, NULL, 'online', 'custom', '2009311750963687424', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311750981201921', '0', 0, NULL, NULL, NULL, NULL, NULL, 'dict', 'custom', '2009311750993047552', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778202234882', '0', 0, NULL, NULL, NULL, NULL, NULL, 'manage', 'matchmaker', '2009311778209886208', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778265149442', '0', 0, NULL, NULL, NULL, NULL, NULL, 'setting', 'matchmaker', '2009311778272800768', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778265149443', '0', 0, NULL, NULL, NULL, NULL, NULL, 'orgManage', 'matchmaker', '2009311778306355200', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778336452610', '0', 0, NULL, NULL, NULL, NULL, NULL, 'permission', 'matchmaker', '2009311778331521024', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778336452611', '0', 0, NULL, NULL, NULL, NULL, NULL, 'role', 'matchmaker', '2009311778365075456', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778399367170', '0', 0, NULL, NULL, NULL, NULL, NULL, 'userManage', 'matchmaker', '2009311778398629888', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778399367171', '0', 0, NULL, NULL, NULL, NULL, NULL, 'loginLog', 'matchmaker', '2009311778436378624', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778399367172', '0', 0, NULL, NULL, NULL, NULL, NULL, 'opLog', 'matchmaker', '2009311778461544448', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778466476033', '0', 0, NULL, NULL, NULL, NULL, NULL, 'sms', 'matchmaker', '2009311778490904576', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778466476034', '0', 0, NULL, NULL, NULL, NULL, NULL, 'online', 'matchmaker', '2009311778516070400', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2009311778529390593', '0', 0, NULL, NULL, NULL, NULL, NULL, 'dict', 'matchmaker', '2009311778541236224', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010212736792907777', '1', 0, NULL, NULL, NULL, NULL, NULL, 'manage', 'admin', '2010212736800428032', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010212736792907778', '1', 0, NULL, NULL, NULL, NULL, NULL, 'setting', 'admin', '2010212736833982464', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010212736855822338', '1', 0, NULL, NULL, NULL, NULL, NULL, 'orgManage', 'admin', '2010212736859148288', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010212736855822339', '1', 0, NULL, NULL, NULL, NULL, NULL, 'qwd', 'admin', '2010212736884314112', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024366972929', '0', 0, NULL, NULL, NULL, NULL, NULL, 'manage', 'admin', '2010213024395464704', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024429887490', '0', 0, NULL, NULL, NULL, NULL, NULL, 'setting', 'admin', '2010213024433213440', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024429887491', '0', 0, NULL, NULL, NULL, NULL, NULL, 'orgManage', 'admin', '2010213024458379264', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024496996353', '0', 0, NULL, NULL, NULL, NULL, NULL, 'qwd', 'admin', '2010213024500322304', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024496996354', '0', 0, NULL, NULL, NULL, NULL, NULL, 'opLog', 'admin', '2010213024529682432', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024496996355', '0', 0, NULL, NULL, NULL, NULL, NULL, 'userManage', 'admin', '2010213024554848256', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024559910914', '0', 0, NULL, NULL, NULL, NULL, NULL, 'role', 'admin', '2010213024584208384', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024559910915', '0', 0, NULL, NULL, NULL, NULL, NULL, 'online', 'admin', '2010213024617762816', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024627019777', '0', 0, NULL, NULL, NULL, NULL, NULL, 'dict', 'admin', '2010213024634540032', NULL);
+INSERT INTO `sys_role_permission` VALUES ('2010213024627019778', '0', 0, NULL, NULL, NULL, NULL, NULL, 'permission', 'admin', '2010213024668094464', NULL);
+INSERT INTO `sys_role_permission` VALUES ('dict', '1', 0, NULL, NULL, NULL, NULL, NULL, 'dict', 'admin', 'dict', NULL);
+INSERT INTO `sys_role_permission` VALUES ('loginLog', '1', 0, NULL, NULL, NULL, NULL, NULL, 'loginLog', 'admin', 'loginLog', NULL);
+INSERT INTO `sys_role_permission` VALUES ('manage', '1', 0, NULL, NULL, NULL, NULL, NULL, 'manage', 'admin', 'manage', NULL);
+INSERT INTO `sys_role_permission` VALUES ('online', '1', 0, NULL, NULL, NULL, NULL, NULL, 'online', 'admin', 'online', NULL);
+INSERT INTO `sys_role_permission` VALUES ('opLog', '1', 0, NULL, NULL, NULL, NULL, NULL, 'opLog', 'admin', 'opLog', NULL);
+INSERT INTO `sys_role_permission` VALUES ('orgManage', '1', 0, NULL, NULL, NULL, NULL, NULL, 'orgManage', 'admin', 'orgManage', NULL);
+INSERT INTO `sys_role_permission` VALUES ('permission', '1', 0, NULL, NULL, NULL, NULL, NULL, 'permission', 'admin', 'permission', NULL);
+INSERT INTO `sys_role_permission` VALUES ('role', '1', 0, NULL, NULL, NULL, NULL, NULL, 'role', 'admin', 'role', NULL);
+INSERT INTO `sys_role_permission` VALUES ('setting', '1', 0, NULL, NULL, NULL, NULL, NULL, 'setting', 'admin', 'setting', NULL);
+INSERT INTO `sys_role_permission` VALUES ('sms', '1', 0, NULL, NULL, NULL, NULL, NULL, 'sms', 'admin', 'sms', NULL);
+INSERT INTO `sys_role_permission` VALUES ('userManage', '1', 0, NULL, NULL, NULL, NULL, NULL, 'userManage', 'admin', 'userManage', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -5331,6 +3881,7 @@ CREATE TABLE `sys_user`  (
   `user_finance_status_code` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '是否金融用户',
   `user_pay_password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '支付密码',
   `user_sys_org_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户所属机构',
+  `user_org_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户所属机构',
   `user_sex_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '性别',
   `id` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '主键',
   `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属机构',
@@ -5349,275 +3900,13 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('ceshi', 'ceshi', '$2a$10$Xvp7xiRZlHSpcdrufsmyMeLqJr3.r1l8qWlVRYzUF9M5RivaDZGPK', '$2a$10$Xvp7xiRZlHSpcdrufsmyMe', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1714471285016895490', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('17616333737', '17616333737', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '46211962', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970690583752175617', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('17806330521', '17806330521', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '83309579', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970691147554713602', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('19001012121', '19001012121', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '86917361', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970692882398445570', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('19001012122', '19001012122', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '52306338', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970694836117843969', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('19001012144', '19001012144', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '05598484', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970694998936526849', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('19001012133', '19001012133', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '99422100', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970695121577975810', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('v66PSMci8X', 'v66PSMci8X', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00662047', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1970695881690836993', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('rKrNtahGMb', 'rKrNtahGMb', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '90501407', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971112361293025281', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('a5OqsYGi4G', 'a5OqsYGi4G', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '40796058', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971112383115988993', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('5vFzAOM4HI', '5vFzAOM4HI', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '75984693', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971129657298284545', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('N0YNWVhsP0', 'N0YNWVhsP0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '49515924', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971131633880801281', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('8s4wUaXTOd', '8s4wUaXTOd', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79333736', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971131739027808258', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('F6aSvGk1km', 'F6aSvGk1km', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '04871477', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971131900927942658', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('g4h6qqyQhZ', 'g4h6qqyQhZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70061248', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971420117870964737', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('1ZCeNmDBKY', '1ZCeNmDBKY', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '22446472', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971447736339394562', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('cZifirYvtx', 'cZifirYvtx', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '21011016', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971448077399224322', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('xoT4JmTXPa', 'xoT4JmTXPa', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '46940176', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971500243425992705', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('lO2AkEKP0W', 'lO2AkEKP0W', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '02426592', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971500285234814977', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('UJPCcpqCRA', 'UJPCcpqCRA', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '94516674', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971500368114262018', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mDYPtFhPD9', 'mDYPtFhPD9', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '67165234', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971501611700232194', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('2Yrszbpjhg', '2Yrszbpjhg', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '53199026', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971502258763984898', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('m9paAm1Y0l', 'm9paAm1Y0l', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '60378934', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971502275084021761', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('cLh5VS93uv', 'cLh5VS93uv', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '16128534', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971502398425919490', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('8FQ5IOvS0J', '8FQ5IOvS0J', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '59107209', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971502552012943362', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('2CMMS1xDIj', '2CMMS1xDIj', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '24153111', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971503457554788354', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IaH3df7Vyd', 'IaH3df7Vyd', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '01754406', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971503535321378817', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('03u1d7nBXT', '03u1d7nBXT', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '39145913', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971503627768033282', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('AnnNLvuBlN', 'AnnNLvuBlN', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '84813804', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971505511136358401', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Sl2khXYcly', 'Sl2khXYcly', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '54308023', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971506129204801538', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('HNhG5pWr9T', 'HNhG5pWr9T', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '21071282', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1971511477982531586', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('WAbRjky0uS', 'WAbRjky0uS', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '09334415', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972613164303360002', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('DT7FbmJ8iB', 'DT7FbmJ8iB', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '77135262', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972616632233598977', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('EVxZXefq38', 'EVxZXefq38', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '99385930', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972617172036329473', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('1pSDwV8exG', '1pSDwV8exG', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '35084030', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972617477838839809', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mAbS2PzOb7', 'mAbS2PzOb7', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '49425290', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972665297790803970', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('wgXixY9mSZ', 'wgXixY9mSZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '08847922', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972669195968552961', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('HUvayztUob', 'HUvayztUob', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '24820112', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972849308647530497', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('O1WCb2LCXx', 'O1WCb2LCXx', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '99096551', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972919708941262850', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('U2TZ3JH4vg', 'U2TZ3JH4vg', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '81703275', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972919963829116929', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Et204g6IhQ', 'Et204g6IhQ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '10565733', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972920312438693889', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('KUtQHzjqvb', 'KUtQHzjqvb', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '83811259', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972920727884505090', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('75aPsOyQjA', '75aPsOyQjA', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '67394675', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972921180542181378', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('5Lb0SzHLMt', '5Lb0SzHLMt', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '74452680', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1972938428010856449', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('UxL0l7Kt47', 'UxL0l7Kt47', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '49051069', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973022838383157250', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('oQbosevhYc', 'oQbosevhYc', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '98734557', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973201819342442498', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('hFSaPs1nC6', 'hFSaPs1nC6', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '78473773', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973201849608540162', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('p2gkjAcP7v', 'p2gkjAcP7v', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70517096', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973202842651955201', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('PCExUf1aX0', 'PCExUf1aX0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '86237021', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973203096256356354', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('9zCfPlgbBZ', '9zCfPlgbBZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00788868', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973203810076565505', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ipuvpOTjOQ', 'ipuvpOTjOQ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '07567745', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973204167431266305', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Frmh5aPUcm', 'Frmh5aPUcm', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '94519469', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973204179519250433', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('R5MYUmH9Kq', 'R5MYUmH9Kq', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00804982', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973204244073783298', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('dQZmglXyXG', 'dQZmglXyXG', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79033592', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973204409488744449', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('5zkrLNchQC', '5zkrLNchQC', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '76892377', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973204509732610050', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('onwZXfR92c', 'onwZXfR92c', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00383056', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973204743581835266', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('6XOfsNGWcs', '6XOfsNGWcs', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '67896708', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973205101519564801', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('fIrqNB8w06', 'fIrqNB8w06', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '80137459', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973205136105795586', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('rNoFleooXw', 'rNoFleooXw', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '71726823', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973205207467683842', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ISqIYRQvdt', 'ISqIYRQvdt', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '08710191', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973205237960273921', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('sWM5yQOa9D', 'sWM5yQOa9D', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '43387907', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973205556119203842', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('UOfErJKeHU', 'UOfErJKeHU', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '13923864', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973205877981704193', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('gLolWBPHtL', 'gLolWBPHtL', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '32680011', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973206231167266817', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('tnjHFcpU86', 'tnjHFcpU86', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '17690422', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973206253980086273', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('vSTMrLMjmR', 'vSTMrLMjmR', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '67254781', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973206289606504450', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('9aIalAwJyd', '9aIalAwJyd', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00147278', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973206486306758657', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('DuSaGJTHHr', 'DuSaGJTHHr', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '54714232', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973206591114027009', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('iUsiqqUq4g', 'iUsiqqUq4g', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '90084684', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973207649143988226', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IOqWASz2dI', 'IOqWASz2dI', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '38149338', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973210787645222913', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('glvbwhuJET', 'glvbwhuJET', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '51374376', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973212976539201537', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('kbJwZ33Xtz', 'kbJwZ33Xtz', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '44009437', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973213174183194625', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('0aBimK6fmQ', '0aBimK6fmQ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '09035875', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973213367741935618', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('MIJzksCdmY', 'MIJzksCdmY', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '55142772', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973213462629675010', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('GzW63tDsbB', 'GzW63tDsbB', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '81777345', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973213549896364034', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('cAVudQYgXH', 'cAVudQYgXH', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '71946422', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973293882431401986', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('DCzjGANrs4', 'DCzjGANrs4', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '98243868', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973303175662784513', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('rqwI59MP76', 'rqwI59MP76', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '02171549', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973303189877280770', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('xVwLXGHlFc', 'xVwLXGHlFc', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '06624013', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973303283854856194', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('wANAuPqle3', 'wANAuPqle3', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '25994519', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973303342424117249', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('dojjrYyInl', 'dojjrYyInl', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '33392354', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973303879349555201', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('RlGSIoJ3x8', 'RlGSIoJ3x8', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '42722837', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973315219762421762', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Gqv1jSOCRv', 'Gqv1jSOCRv', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '81917050', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973315306105851905', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('EBug7iMH5U', 'EBug7iMH5U', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '33232706', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973317394047160322', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('feYYKcIlTc', 'feYYKcIlTc', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '91626695', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973333275892391937', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('37W2Gh0i20', '37W2Gh0i20', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '38332153', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973335160078606338', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Z3nIKFjQUn', 'Z3nIKFjQUn', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '32249942', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973335205394382849', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('bGcwKAT458', 'bGcwKAT458', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '05615498', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973337830738882561', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('hhmlqLYVIa', 'hhmlqLYVIa', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '99341379', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973338371212300290', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mUutdBHtPE', 'mUutdBHtPE', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79310876', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973338526674542594', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ms1W76ve0c', 'ms1W76ve0c', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '73049732', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973339148848844801', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IE4naDCA12', 'IE4naDCA12', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '72575392', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973339654161813506', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('oQZA3dfG4o', 'oQZA3dfG4o', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '62780985', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973340241259438081', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('8yZAmFtdoI', '8yZAmFtdoI', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '65699693', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973553489712205825', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('82XZf2MOdn', '82XZf2MOdn', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '12034919', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973553563368378369', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('FvvsAmjTkl', 'FvvsAmjTkl', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '89733382', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973553583417151489', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ZFWDamZ6wY', 'ZFWDamZ6wY', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '62230933', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973554294079049729', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('OYW8nqNPjj', 'OYW8nqNPjj', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '75325786', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973560696025178113', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('h4Xj5YutIu', 'h4Xj5YutIu', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '43932618', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973562208026603522', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('WwqOj9XytU', 'WwqOj9XytU', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '60086336', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973563108996657154', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Lox1YB07US', 'Lox1YB07US', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '35532020', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973563779380654082', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('CTk9yNhc5K', 'CTk9yNhc5K', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '45919461', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973564180145430530', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('4a6Xlfd14i', '4a6Xlfd14i', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '31841811', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973564715473293313', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('x3bPgCyvoj', 'x3bPgCyvoj', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '63124992', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1973586452336840706', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('bZJLxQz2nl', 'bZJLxQz2nl', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70961921', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, '1', '21218cca77804d2ba1922c33e0151105', NULL, '1', '1973626101011963906', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('JGzrb27hSP', 'JGzrb27hSP', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '44262415', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974014253049286658', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('VreabGU4iW', 'VreabGU4iW', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '68006473', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974048146613125121', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mqMkNRH1h2', 'mqMkNRH1h2', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '58915596', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974290124242407426', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('RyQDs8Aw9R', 'RyQDs8Aw9R', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '10377810', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974290163790499841', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('qjZwMHZnJT', 'qjZwMHZnJT', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '40937335', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974290250583232513', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('TZrxDPy9X7', 'TZrxDPy9X7', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '10993308', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974290471459479554', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('rwYegKbVXL', 'rwYegKbVXL', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '97400241', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974290706055290881', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('LJGRu08ifx', 'LJGRu08ifx', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '19082016', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974292683443036162', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('KmuziXzNr5', 'KmuziXzNr5', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '10695144', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974293947392413697', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ZHUstRUjgq', 'ZHUstRUjgq', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '66343923', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974294310870798337', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('F8IQ8m2kNz', 'F8IQ8m2kNz', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '78229221', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974296263168237569', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('MKChlVFGrN', 'MKChlVFGrN', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '72285491', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974297949517635586', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('VR4mAEPzmJ', 'VR4mAEPzmJ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '54470983', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974299415523352577', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IVreljoYaY', 'IVreljoYaY', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '33993985', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974299794721988610', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('0aXVr5YBxJ', '0aXVr5YBxJ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '54902861', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974301273239269377', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IKjU7ewniU', 'IKjU7ewniU', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '42427611', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974301323474448385', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('HIcLVYXqQo', 'HIcLVYXqQo', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70967952', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974301821623595009', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('X10udioYSM', 'X10udioYSM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '82114493', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974302276462309377', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Yy7W2IV2F0', 'Yy7W2IV2F0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '55488820', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974302742747279362', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('NbVj7tfq7m', 'NbVj7tfq7m', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '38396320', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974302944447164418', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IjvqBh1y2p', 'IjvqBh1y2p', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '27106122', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974303872290123778', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('FGHRxNHUp0', 'FGHRxNHUp0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '66744619', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974304017564037121', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('OYkcUfxwdO', 'OYkcUfxwdO', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '69115734', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974306050245287938', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('4NCTIUCeLK', '4NCTIUCeLK', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '62730484', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974306579046359042', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('qcBGa5dZJ0', 'qcBGa5dZJ0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '38256735', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974306910178271233', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('SRquNsizOo', 'SRquNsizOo', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '07909787', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974307343072387073', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('9CyC8bUAMW', '9CyC8bUAMW', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '87185178', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974318600186482689', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('twRluJmGRi', 'twRluJmGRi', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '04981959', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974320177621745666', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('HGY2tBc1KM', 'HGY2tBc1KM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '33859297', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974321840621338626', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('tO4Yg7Npdj', 'tO4Yg7Npdj', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '63338039', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974349941342384130', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('YfqjS0JoAx', 'YfqjS0JoAx', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '15878667', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974350714457468930', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('htSMGC0fN7', 'htSMGC0fN7', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '50260941', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974350813459820545', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('sPIFcZuYjb', 'sPIFcZuYjb', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '30756358', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974361211999326210', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('EcmalagM9D', 'EcmalagM9D', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '55709257', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', '150425199010154138', '1', NULL, NULL, '1', '1974368236940406785', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('90yIKENfmG', '90yIKENfmG', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '78941285', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974368391504703490', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('lpRnWLuhNX', 'lpRnWLuhNX', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '97532653', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974369250015817730', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ycFe2svyWi', 'ycFe2svyWi', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '23175718', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974370081452699650', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('gveFFGVQsT', 'gveFFGVQsT', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '36732016', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974381721311158274', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('sKvFdrsty1', 'sKvFdrsty1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '97038837', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974385883685957633', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IUgfeS3zAv', 'IUgfeS3zAv', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '01692115', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974392693031669761', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('o1TjQtuDo5', 'o1TjQtuDo5', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '62839201', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974414690646736898', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('KvbIF1tDrZ', 'KvbIF1tDrZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '47152350', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '11', '370302199307124813', '1', NULL, NULL, '1', '1974416639328133121', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('11iFLbBnSE', '11iFLbBnSE', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '96984252', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974652912642564098', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('q2fJWxgpBZ', 'q2fJWxgpBZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '62586331', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974652915037511682', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('vSdNhlqL7B', 'vSdNhlqL7B', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '76153021', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974737975510040577', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('BvAYU6wANj', 'BvAYU6wANj', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '19039802', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974739425845854210', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('h83fBfl74E', 'h83fBfl74E', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '64258211', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1974742008165580802', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Z31HfaofyW', 'Z31HfaofyW', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '88496724', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976095821536243713', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('2Vm03t6ctk', '2Vm03t6ctk', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '80086204', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976096323883782146', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('n3780Stl3q', 'n3780Stl3q', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '77973378', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976117832910540802', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ybzq8KtrAC', 'ybzq8KtrAC', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '02658362', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976120668886904834', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('8h2r46JXFc', '8h2r46JXFc', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '76750038', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976146009261551618', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Bb5ndzjNqQ', 'Bb5ndzjNqQ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '26894515', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976187220281774081', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('PssPnkV2fK', 'PssPnkV2fK', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '20480242', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976223424595329025', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('YhOsgoOrqa', 'YhOsgoOrqa', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '20425058', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976229003787190273', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('merchant_admin', 'merchant_admin', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976259394741407745', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('测试1', '测试1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976483547272695810', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('9nSLM3HaOE', '9nSLM3HaOE', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '87797402', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976490096493322241', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('LUWTUmoluh', 'LUWTUmoluh', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '14754197', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976497800662048769', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('G1TaiQT4eM', 'G1TaiQT4eM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '44444712', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976498204313477121', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('xUGw3No6db', 'xUGw3No6db', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '29196231', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976513014862262274', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('pkdjQQ2VoM', 'pkdjQQ2VoM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '91006860', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976513221129744385', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('D6D7n6uGXY', 'D6D7n6uGXY', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '08848653', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976513459370405889', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('NfTRn4SIfg', 'NfTRn4SIfg', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '25510530', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976513970177912833', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('duWJZmyjJl', 'duWJZmyjJl', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '60005572', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976515026018459649', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('LC5Be2qneI', 'LC5Be2qneI', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '74627122', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976515686063616001', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('IoyBnbi6AW', 'IoyBnbi6AW', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '24849241', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976527163759538178', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('WUQpfqiwyv', 'WUQpfqiwyv', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '65066309', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976541761065816065', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('测试数据', '测试数据', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976544338780823553', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('测试数据1', '测试数据1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976544507911938050', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('merchant_root', 'merchant_root', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976553876510707713', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('admineest', 'admineest', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976556876968988674', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mHvGr9O8U1', 'mHvGr9O8U1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '92767753', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976581581267030017', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('CexNZckdp5', 'CexNZckdp5', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '71767221', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976596215499870209', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('48KeBo2uHQ', '48KeBo2uHQ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79429448', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976683826030563329', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('JBW7hgktj1', 'JBW7hgktj1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '36040045', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976684080268300289', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('FtpgrFPzHx', 'FtpgrFPzHx', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '86737588', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976684179627167745', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('fZ8Sd4BCmv', 'fZ8Sd4BCmv', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '77667492', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976854174281629698', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('S9b12nuKOb', 'S9b12nuKOb', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '55499627', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976855938955235330', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('F6rVZ3BM2e', 'F6rVZ3BM2e', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '45316872', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976945689528074242', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('D04SiG1fgN', 'D04SiG1fgN', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '53969641', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976947342943563777', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('PO34vLcyZm', 'PO34vLcyZm', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '75422824', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976947981404712961', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('bMMYqi2DNo', 'bMMYqi2DNo', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '21956684', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '0', NULL, NULL, '1', '1976948608138608642', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('xvZ8pv45zf', 'xvZ8pv45zf', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '40001019', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976948835138535426', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('kTnyLx39mI', 'kTnyLx39mI', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '96886304', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976949145504448513', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('fX3WOURysB', 'fX3WOURysB', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '23461867', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976949349511200770', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Zhc0sJMcbY', 'Zhc0sJMcbY', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '50577498', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976951149861666818', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('iVJWrSexId', 'iVJWrSexId', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '12132532', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976951668583804930', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('7qNXZ6oygL', '7qNXZ6oygL', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '50526193', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976952174320398338', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('NZX8Nszl6x', 'NZX8Nszl6x', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '98459024', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1976952318763839489', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('suMld212sk', 'suMld212sk', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '06250000', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977305921831800834', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('SGg98ZyRk4', 'SGg98ZyRk4', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '43669710', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977306448490090498', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('7qfvDvJiUe', '7qfvDvJiUe', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '42743612', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977332361403031554', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('iTplELDITJ', 'iTplELDITJ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '08428302', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977332903156113410', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('fTvEPhjAET', 'fTvEPhjAET', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '37544372', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977336927154593794', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('adminaaa', 'adminaaa', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977562189981007873', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('admineest13', 'admineest13', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977572602764312578', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('yubpfCZv3v', 'yubpfCZv3v', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '58726547', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1977905599015780354', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Za2jhTOu1T', 'Za2jhTOu1T', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '50301540', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, '371102199406142514', '1', NULL, NULL, '1', '1977943341497556994', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('wxy4P5EqVg', 'wxy4P5EqVg', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '92358513', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1977968445560442882', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mqzyNEAzOn', 'mqzyNEAzOn', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '29237710', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1978308532361994241', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('227IlFXjBf', '227IlFXjBf', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '59884719', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1978343664057831426', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('XfJ1BdWSEA', 'XfJ1BdWSEA', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79087304', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1978705048754970625', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('yJxKzQqnHu', 'yJxKzQqnHu', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '73191409', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', '110114199711196717', '1', NULL, NULL, '1', '1978706307377397761', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('O01dmUJEvQ', 'O01dmUJEvQ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '91646662', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1978737249109409794', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('SWUOIhBt15', 'SWUOIhBt15', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79736811', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1979015459605803010', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('0K5v7x3HDz', '0K5v7x3HDz', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '63899233', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1979053784139841537', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('ACTBVFLkF5', 'ACTBVFLkF5', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '11763454', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1979063046673207297', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('p5Y8wEHB1w', 'p5Y8wEHB1w', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '78579678', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1979066120846381057', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('U4mLK9JKAg', 'U4mLK9JKAg', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '31256522', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1979075131683504129', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('SZlj5mnpyr', 'SZlj5mnpyr', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00591351', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1979076129445625857', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('GRJKkLQXOl', 'GRJKkLQXOl', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '23566446', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1980084351677726722', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('bR4zogcKrL', 'bR4zogcKrL', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '21468373', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1980140048763297793', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Lt1n34yeVc', 'Lt1n34yeVc', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '69303359', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1980159149791379457', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('m9imoNAo8t', 'm9imoNAo8t', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '32257070', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1981193264535900161', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('jTpeKG0wZJ', 'jTpeKG0wZJ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '36067658', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1982742830854909954', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('G0sbvOOceC', 'G0sbvOOceC', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '71838571', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1982984146121555969', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('X5EJsMmuM3', 'X5EJsMmuM3', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '73736586', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1982991482580008961', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('50d7QxWBk1', '50d7QxWBk1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '68440412', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '11', NULL, '1', NULL, NULL, '1', '1983003985879896066', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('vcogw4iyn8', 'vcogw4iyn8', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '11178310', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1983059704355614721', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('KMXWsPinuT', 'KMXWsPinuT', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '38965919', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1983068309382672385', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('D7TFuRnJ0d', 'D7TFuRnJ0d', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '34103951', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1983070850832646146', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('AZWkCale2x', 'AZWkCale2x', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '99631587', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1983364902366982145', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('aJw7Bk1H3y', 'aJw7Bk1H3y', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '64466151', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1983372252184293377', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('OWWwTLsVm5', 'OWWwTLsVm5', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '09640276', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1983432250411077634', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('l2B3ObFBXK', 'l2B3ObFBXK', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '79582499', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1983746911518003201', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('LbXfwJ0KGu', 'LbXfwJ0KGu', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '40896128', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1983770452677398530', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('eGUYXSyf4G', 'eGUYXSyf4G', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '04669609', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1984088195373887490', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('K9GA2HF3xq', 'K9GA2HF3xq', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '69985351', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1984166774677958657', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('JYrtUzYOpV', 'JYrtUzYOpV', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '19062595', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1984175073715564546', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('rWRk82JDRv', 'rWRk82JDRv', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '16612336', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1984183223031103489', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('aaq268WMD0', 'aaq268WMD0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '15069743', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1984183859831242754', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('BHcNtnY9s5', 'BHcNtnY9s5', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '73323238', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1984469506747858945', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('cOH5MyqeKG', 'cOH5MyqeKG', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '25172164', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', '370302199307124811', '1', '7F7D5F9F3A660F2B09E3AAE62A15E29B', NULL, '1', '1984487707568521218', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('pob4GhVmK6', 'pob4GhVmK6', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '16328255', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1984539561485537282', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('CT1H2wAaRM', 'CT1H2wAaRM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '30738829', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1985157189401014274', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('K1IUS4w4nN', 'K1IUS4w4nN', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '16418416', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, '152104199202093839', NULL, NULL, NULL, '1', '1985162260578791425', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('Cf50AhX8eH', 'Cf50AhX8eH', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '66253305', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, '1', NULL, NULL, '1', '1985165662201278466', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('zanliguo', 'zanliguo', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1985190572348891138', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('sZ2kgbenNK', 'sZ2kgbenNK', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '98698448', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, '1', 'e10adc3949ba59abbe56e057f20f883e', NULL, '1', '1985243355642929153', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('VNfOaagoi9', 'VNfOaagoi9', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '45947749', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, '1', NULL, NULL, '1', '1985575968667906049', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('QeiwQrEQRs', 'QeiwQrEQRs', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00786995', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985583563538321409', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('8is36tKeNM', '8is36tKeNM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '31614531', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985603959943745538', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('kpBZLiNDd3', 'kpBZLiNDd3', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '08345013', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985605005097193473', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('qkoFfPy2gF', 'qkoFfPy2gF', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '71920368', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985906219915624450', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('2FE4FBlNDm', '2FE4FBlNDm', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00747117', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985911044854202369', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('3vnLxutbr8', '3vnLxutbr8', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '38380825', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985939782404902913', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('4CANeZtqHE', '4CANeZtqHE', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '06691021', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985952376020774914', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('t9JDINOhTc', 't9JDINOhTc', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '37032403', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1985993912271966209', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('hajikun', 'hajikun', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '1986251783895248898', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('5DQNEyHYCm', '5DQNEyHYCm', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '24404260', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986258332717936642', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('pOUrTMBEiM', 'pOUrTMBEiM', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '97668344', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986302555903225858', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('D6gLSGxFk1', 'D6gLSGxFk1', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '31018506', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986305101677010946', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('vqUqrvwR13', 'vqUqrvwR13', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '69057544', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986310218091327490', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('RXcshx7wMb', 'RXcshx7wMb', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '42415171', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986318006951604226', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('UplmEg5E75', 'UplmEg5E75', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '85130696', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986349586537492482', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mgFHbUD6gt', 'mgFHbUD6gt', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '69485302', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986699851501314050', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('mwL366Lr8z', 'mwL366Lr8z', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '83506965', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1986701286871834626', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('8DLPt2coER', '8DLPt2coER', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '72880053', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1987069659900133377', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('DO9tNJDUi6', 'DO9tNJDUi6', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '95712033', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', NULL, NULL, NULL, NULL, '1', '1988070020349923329', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('RF3mIVZHwm', 'RF3mIVZHwm', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '63047216', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', '371302199204122814', '1', '21218cca77804d2ba1922c33e0151105', NULL, '1', '1988194202496729090', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('y94q4maskI', 'y94q4maskI', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70960817', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '778842268', '371102199405255719', '1', NULL, NULL, '1', '1988434261116203010', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('zhangsan', 'zhangsan', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', '3d464b4ea0d2491aab8a7bde74c57e95', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('jeecg', 'jeecg', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, '1', 'a75d45a015c44384a04449ee80dc3503', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
-INSERT INTO `sys_user` VALUES ('admin', 'admin', '$2a$10$VXBQS2xjQWQi/Q8akk1cSeODzv9./yicTc.2pETwuqrUlW9cH6VYq', '$2a$10$VXBQS2xjQWQi/Q8akk1cSe', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '11', NULL, '1', NULL, NULL, '1', 'e9ca23d68d884d4ebb19d07889727dae', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('ceshi', 'ceshi', '$2a$10$Xvp7xiRZlHSpcdrufsmyMeLqJr3.r1l8qWlVRYzUF9M5RivaDZGPK', '$2a$10$Xvp7xiRZlHSpcdrufsmyMe', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1714471285016895490', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('17616333737', '17616333737', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '46211962', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1970690583752175617', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('hFSaPs1nC6', 'hFSaPs1nC6', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '78473773', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973201849608540162', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('p2gkjAcP7v', 'p2gkjAcP7v', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70517096', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973202842651955201', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('PCExUf1aX0', 'PCExUf1aX0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '86237021', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973203096256356354', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('9zCfPlgbBZ', '9zCfPlgbBZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00788868', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973203810076565505', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('admin', 'admin', '$2a$10$VXBQS2xjQWQi/Q8akk1cSeODzv9./yicTc.2pETwuqrUlW9cH6VYq', '$2a$10$VXBQS2xjQWQi/Q8akk1cSe', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '11', NULL, '1', NULL, NULL, 'A01A03', '1', 'e9ca23d68d884d4ebb19d07889727dae', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
 
 -- ----------------------------
 -- Table structure for sys_user_organization
@@ -5641,13 +3930,32 @@ CREATE TABLE `sys_user_organization`  (
 -- ----------------------------
 -- Records of sys_user_organization
 -- ----------------------------
-INSERT INTO `sys_user_organization` VALUES ('A01A03', '市场部', '4f1765520d6346f9bd9c79e2479e5b12', 'admin', '2019-02-20 17:15:34', 'admin', '2019-02-26 16:36:18', '0', NULL, 1);
-INSERT INTO `sys_user_organization` VALUES ('A02A02', '研发部', '5159cde220114246b045e574adceafe9', 'admin', '2019-02-26 16:44:38', 'admin', '2019-03-07 09:36:53', '0', NULL, 1);
-INSERT INTO `sys_user_organization` VALUES ('A01A05', '研发部', '57197590443c44f083d42ae24ef26a2c', 'admin', '2019-02-21 16:14:41', 'admin', '2019-03-27 19:05:49', '0', NULL, 1);
-INSERT INTO `sys_user_organization` VALUES ('A01A04', '财务部', '67fc001af12a4f9b8458005d3f19934a', 'admin', '2019-02-21 16:14:35', 'admin', '2019-02-25 12:49:41', '0', NULL, 1);
-INSERT INTO `sys_user_organization` VALUES ('c6d7cb4deeac411cb3384b1b31278596', '北京卓尔互动', '6d35e179cd814e3299bd588ea7daed3f', 'admin', '2019-02-26 16:36:39', 'admin', '2020-05-02 18:21:22', '0', NULL, 1);
-INSERT INTO `sys_user_organization` VALUES ('A02A01', '财务部', 'a7d7e77e06c84325a40932163adcdaa6', 'admin', '2019-02-26 16:36:47', 'admin', '2022-10-14 18:57:56', '0', NULL, 1);
-INSERT INTO `sys_user_organization` VALUES ('6d35e179cd814e3299bd588ea7daed3f', '北京国炬软件', 'c6d7cb4deeac411cb3384b1b31278596', 'admin', '2019-02-11 14:21:51', 'admin', '2020-05-02 18:21:27', '0', NULL, 1);
+INSERT INTO `sys_user_organization` VALUES ('A01A03', 'admin', '4f1765520d6346f9bd9c79e2479e5b12', 'admin', '2019-02-20 17:15:34', 'admin', '2019-02-26 16:36:18', '0', NULL, 1);
+
+-- ----------------------------
+-- Table structure for sys_user_organization_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_organization_role`;
+CREATE TABLE `sys_user_organization_role`  (
+  `org_code` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '机构编码',
+  `user_code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '用户编码',
+  `role_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色编码',
+  `user_org_role_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `id` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT 'ID',
+  `create_by` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
+  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '删除标识',
+  `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
+  `seq_no` int NULL DEFAULT NULL COMMENT '序号',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户组织机构关联表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_organization_role
+-- ----------------------------
+INSERT INTO `sys_user_organization_role` VALUES ('A01A03', 'admin', 'admin', 'A01A03', '4f1765520d6346f9bd9c79e2479e5b12', 'admin', '2019-02-20 17:15:34', 'admin', '2019-02-26 16:36:18', '0', NULL, 1);
 
 -- ----------------------------
 -- Table structure for sys_user_permission
@@ -5666,313 +3974,13 @@ CREATE TABLE `sys_user_permission`  (
   `user_permission_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限编码',
   `user_permission_subscript` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角标',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '菜单角标' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_permission
 -- ----------------------------
 INSERT INTO `sys_user_permission` VALUES ('1888422261745860609', NULL, '2025-02-09 10:58:47', NULL, '2025-02-11 00:36:36', NULL, '0', '18766271339', NULL, 'TP20250202134330900447', '1');
 INSERT INTO `sys_user_permission` VALUES ('1888422272294535170', NULL, '2025-02-09 10:58:50', NULL, NULL, NULL, '0', '18766271339', NULL, 'TP20250202135901850741', NULL);
-
--- ----------------------------
--- Table structure for sys_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role`  (
-  `user_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户编码',
-  `role_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '角色编码',
-  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属机构',
-  `user_role_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `id` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '主键id',
-  `create_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `create_time` datetime NULL DEFAULT NULL,
-  `update_time` datetime NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '删除标识',
-  `seq_no` int NULL DEFAULT 0 COMMENT '序号',
-  `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户角色表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1950457002841501699', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970687595935555586', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970690583836061697', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970691147676348418', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970692882595577858', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970694836189147138', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970694999032995841', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970695180386312193', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1970695907435474945', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974048147049332737', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974285735125450754', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974286530961707010', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974290124527620097', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974290164063129601', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974290250847473666', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974290471929241601', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974290706357280770', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974292683753414657', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974293948013170690', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974294311143428098', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974296263772217346', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974297949911900162', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974299415787593730', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974299794990424065', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974301273713225729', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974301323747078145', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974301821917196289', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974302276734939137', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974302743036686337', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974302944728182785', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974303872562753538', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974304017811501057', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974306050610192386', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974306579314794498', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974306910476066818', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974307343407931393', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974317318246805506', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974318600337477633', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974320177969872897', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974321840856219649', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974322504377872386', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974342960380624897', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974349941644374018', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974350714717515777', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974350813740838913', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974361212381007874', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974368237410168834', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974368391747973122', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974369258417008642', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974370081695969281', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974381721583788033', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974385884004724738', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974392693350436865', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974414691116498946', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974416639655288833', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974652912952942594', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974652915280781313', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974693070856683521', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974737975837196290', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974739426227535874', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1974742008496930818', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976095821863399425', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976096324311601154', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976117833334165505', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976120668916264961', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976146009563541505', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976184980502949890', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976187220302745601', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976223424654049281', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976229003820744706', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976282255296266242', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976488485586984962', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976490079175041025', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976490096526876674', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976497800926289921', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976498204590301186', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976513015298469889', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976513221515620353', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976513459697561602', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976513970492485634', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976515026475638786', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976515686101364738', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976527164577427458', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976541761506217986', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976581581728403457', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976596215801860097', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976683826085089281', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976683934658842625', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976684080285077505', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976684179643944962', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976854174373904385', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976855939345305601', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976877169868525569', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976945689968476161', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976947343430103042', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976947981664759809', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976948608184745986', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976948835167895553', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976949145529614338', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976949349532172289', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976951149878444034', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976951668869017602', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976952174580445185', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1976952319036469249', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977305921886326786', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977306448783691778', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977332361440780289', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977332903177084929', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977336927175565314', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977545109411811330', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977547470498779138', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977549812354863106', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977551500620943361', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977554362029658113', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977559560638779393', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977563344039399425', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977640936318947330', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977902792761638913', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977904417618259970', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977905201563037697', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977905599435210754', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977907481116794882', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977911413469618177', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977943341535305729', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1977968445593997313', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978021432546807810', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978056472475451394', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978057259033137154', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978308532399742977', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978343664405958657', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978350000883453954', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978422457925369858', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978663233230024706', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978705048784330754', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978706307683581954', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1978737249604337666', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979012735493271554', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979014229802315778', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979015459626774529', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979053784638963713', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979055215831957506', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979055523668705281', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979058623796232194', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979063046719344641', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979066120871546882', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979075131813527554', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979076129571454978', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979105585522376706', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979106320687398913', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979367605903671298', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979831229994745858', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979832421944639489', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1979834428453535745', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980079060907053058', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980080273430118401', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980084351694503937', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980085411922280450', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980087665760894977', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980140048792657922', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980159150122729474', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1980159465299595265', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981193264607203330', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981235674355712001', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981236734935810050', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981237386835595265', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981607065785581569', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981611101452746753', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981616307091390466', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981617395517472769', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981621200212578306', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981625076600918018', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1981635480777510913', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982614927013871618', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982637099136688130', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982642104132542465', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982642210470830081', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982649637022834689', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982682256217415681', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982688547472089090', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982690008704688130', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982742830884270081', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982984146180276226', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1982991482600980482', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983003985938616321', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983059704653410305', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983068309865017346', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983070850903949314', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983343897821032450', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983364902379565057', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983372252205264897', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983400904263299073', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983432250453020673', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983746911723524097', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1983770453050691586', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984063516185620481', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984065415139979266', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984088195390664706', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984166774715707393', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984175282168279042', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984183223068852226', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984183859927711746', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984202856287043586', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984434638353801218', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984446499337809921', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984456385048096769', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984462626893922306', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984469507075014657', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984469606387744770', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984471107000856578', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984472218830962689', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984487313254494210', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984487774182457345', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984492535884406786', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984522896056074241', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984539561632337922', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984883222450753537', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984884208766504962', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1984886879158124546', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985157189510066177', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985162260645900290', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985165662234832898', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985186500958973953', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985243356339183618', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985245573972566018', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985246501899411458', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985248887145578497', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985305588728356865', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985516209906511873', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985531413042933762', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985575969359966210', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985583563664150529', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985603959981494274', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985605005113970690', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985906219999510530', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985911044879368193', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985939782539120641', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985952376398262273', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985993912355852289', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1985999298244857857', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986247118591705089', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986248235530665985', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986258332818599937', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986268022684250113', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986271504250171393', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986272757453680642', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986302555932585986', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986305102901747713', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986310218124881922', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986318006976770049', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986349586625572865', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986352151526354945', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986699851593588737', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986701286905389057', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986719300333772801', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986722491116900353', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986727487908696065', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1986728590700269569', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1987069660747382785', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988070020433809409', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988088382383599617', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988089371215872001', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988118728248393730', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988119096399233025', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988124138355294209', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988152828573454338', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988182309027639297', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988185073266765825', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988194202744193025', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988419846996316161', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988420162416365569', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988426480246087682', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1988434262143807490', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, '1997677858964660226', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, 'b3ffd9311a1ca296c44e2409b547384f', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, 'ee45d0343ecec894b6886effc92cb0b7', NULL, NULL, NULL, NULL, '0', 0, NULL);
-INSERT INTO `sys_user_role` VALUES (NULL, NULL, NULL, NULL, 'f2922a38ba24fb53749e45a0c459adb3', NULL, NULL, NULL, NULL, '0', 0, NULL);
 
 -- ----------------------------
 -- Table structure for td_goods
@@ -6002,7 +4010,7 @@ CREATE TABLE `td_goods`  (
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of td_goods
@@ -6040,7 +4048,7 @@ CREATE TABLE `td_goods_category`  (
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品目录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of td_goods_category
@@ -6075,7 +4083,7 @@ CREATE TABLE `td_goods_template`  (
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '商品模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of td_goods_template
@@ -6113,7 +4121,7 @@ CREATE TABLE `td_order`  (
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '订单主表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of td_order
@@ -6403,7 +4411,7 @@ CREATE TABLE `td_order_goods`  (
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '订单明细' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of td_order_goods
@@ -6494,7 +4502,7 @@ CREATE TABLE `wx_config`  (
   `seq_no` int NULL DEFAULT 0 COMMENT '序号',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '微信配置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wx_config
