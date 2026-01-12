@@ -23,7 +23,6 @@
         <module>spring-boot-starter-im</module>
         <module>spring-boot-starter-ocr</module>
         <module>spring-boot-starter-finance</module>
-        <module>spring-boot-starter-ba</module>
         <module>spring-boot-starter-trade</module>
         <module>spring-boot-starter-wechat</module>
         <module>spring-boot-starter-sms</module>

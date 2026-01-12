@@ -104,10 +104,6 @@
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-dating-biz</artifactId>
         </dependency>
-        <dependency>
-            <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-ba-biz</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
