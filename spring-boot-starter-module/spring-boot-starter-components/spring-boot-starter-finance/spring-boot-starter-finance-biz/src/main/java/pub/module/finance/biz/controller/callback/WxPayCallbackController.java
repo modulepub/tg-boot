@@ -2,7 +2,6 @@ package pub.module.finance.biz.controller.callback;
 
 import com.github.binarywang.wxpay.bean.notify.SignatureHeader;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
-import com.github.binarywang.wxpay.bean.notify.WxPayNotifyV3Result;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,9 +39,7 @@ public class WxPayCallbackController {
             signatureHeader.setNonce(nonce);
             signatureHeader.setSerial(serial);
             signatureHeader.setTimeStamp(timestamp);
-            final WxPayNotifyV3Result notifyResult = wxPayService.parseOrderNotifyV3Result(jsonData, signatureHeader);
-            WxPayNotifyV3Result.DecryptNotifyResult result = notifyResult.getResult();
-            payCallbackService.callBizSystem(result.getOutTradeNo());
+            payCallbackService.callBizSystem(wxPayService.parseOrderNotifyV3Result(jsonData, signatureHeader).getResult().getOutTradeNo());
             return WxPayNotifyResponse.success("微信回调成功！");
         } catch (WxPayException e) {
             return WxPayNotifyResponse.fail("微信回调有误!");

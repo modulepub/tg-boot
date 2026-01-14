@@ -3,9 +3,9 @@
 		<el-row :gutter="20" justify="space-between">
 			<el-col :span="15">
 				<div style="display: flex; flex-direction: row">
-					<el-avatar :size="60" :src="userStore.user.avatar" />
+					<el-avatar :size="60" :src="userStore.user.userAvatar" />
 					<div style="display: flex; flex-direction: column; margin-left: 20px; line-height: 28px">
-						<h1>早安，{{ userStore.user.realName }}，祝你开心每一天!</h1>
+						<h1>早安，{{ userStore.user.userRealName }}，祝你开心每一天!</h1>
 						<div>今日晴，25℃ - 28℃！</div>
 					</div>
 				</div>
@@ -53,24 +53,6 @@
 
 	<br />
 	<br />
-	<el-card>
-		<el-tabs v-model="active">
-			<el-tab-pane label="项目列表" name="first">
-				<el-table :data="tableData" show-overflow-tooltip style="width: 100%">
-					<el-table-column prop="name" label="项目名称" width="150" />
-					<el-table-column prop="url" label="项目地址" width="310" />
-					<el-table-column prop="intro" label="项目介绍" />
-				</el-table>
-			</el-tab-pane>
-			<el-tab-pane label="我的项目" name="second">
-				<el-table :data="tableData" show-overflow-tooltip style="width: 100%">
-					<el-table-column prop="name" label="项目名称" width="150" />
-					<el-table-column prop="url" label="项目地址" width="310" />
-					<el-table-column prop="intro" label="项目介绍" />
-				</el-table>
-			</el-tab-pane>
-		</el-tabs>
-	</el-card>
 </template>
 
 <script setup lang="ts">
@@ -88,39 +70,6 @@ const outputValue = useTransition(source, {
 source.value = 888888
 
 const active = ref('first')
-
-const tableData = [
-	{
-		name: 'TG-boot',
-		url: 'https://gitee.com/makunet/TG-boot',
-		intro: '企业级低代码平台（单体版），使用门槛极低，支持国密加密、达梦数据库等，满足信创要求。'
-	},
-	{
-		name: 'TG-cloud',
-		url: 'https://gitee.com/makunet/TG-cloud',
-		intro: '企业级低代码平台（微服务版），使用门槛极低，支持国密加密、达梦数据库等，满足信创要求。'
-	},
-	{
-		name: 'tg-admin',
-		url: 'https://gitee.com/makunet/tg-admin',
-		intro: 'TG-boot和maku-cloud的前端工程，采用Vue3、TypeScript、ElementPlus、Vite等开发。'
-	},
-	{
-		name: 'TG-app',
-		url: 'https://gitee.com/makunet/TG-app',
-		intro: '微信小程序端，采用微信原生小程序开发，使用门槛极低。'
-	},
-	{
-		name: 'TG-generator',
-		url: 'https://gitee.com/makunet/TG-generator',
-		intro: '代码生成器，可根据自定义模板内容，快速生成代码。'
-	},
-	{
-		name: 'TG-form-design',
-		url: 'https://gitee.com/makunet/TG-form-design',
-		intro: '表单设计器，基于vue3、element-plus开发的表单设计器，主要用于低代码开发平台。'
-	}
-]
 
 onMounted(() => {
 	init()

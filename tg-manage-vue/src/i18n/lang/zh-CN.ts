@@ -18,7 +18,7 @@ export default {
 	app: {
 		title: 'TG 低代码开发平台',
 		description:
-			'强大的代码生成器，一键生成前后端代码，帮助Java项目解决70%的重复工作，让开发者有更多时间去开发业务，提升开发效率。还有众多零代码能力：Online表单开发、Online报表开发、Online接口开发、表单设计、流程设计等等。',
+			'强大的代码生成器，一键生成前后端代码，帮助Java项目解决70%的重复工作，让开发者有更多时间去开发业务，提升开发效率。',
 		logoText: 'TG 低代码平台',
 		miniLogoText: 'TG',
 		username: '用户名',
