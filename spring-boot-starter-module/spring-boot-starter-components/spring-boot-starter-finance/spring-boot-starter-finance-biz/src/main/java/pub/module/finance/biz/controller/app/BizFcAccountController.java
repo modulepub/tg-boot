@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import pub.module.finance.api.dto.FcAccountDTO;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
@@ -91,13 +92,11 @@ public class BizFcAccountController {
 
     @Operation(summary = "通过产品编码获取用户额度", description = "额度来源于针对于该产品的授信")
     @GetMapping(value = "/getFcAccountByProductCode")
-    public Result<FcAccount> getCreditLimitByProductCode( GetFcAccountByProductCodeVO getFcAccountByProductCodeVO) {
+    public Result<FcAccountDTO> getCreditLimitByProductCode( GetFcAccountByProductCodeVO getFcAccountByProductCodeVO) {
         String userCode = UserUtil.getCurrentSysUser().getUserCode();
         long count = fcProductService.count(new QueryWrapper<FcProduct>().lambda().eq(FcProduct::getFcProductCode, getFcAccountByProductCodeVO.getFcProductCode()));
         Assert.isTrue(count > 0, "严重告警：产品不存在");
-        FcAccount result = bizFcAccountService.getAccount(userCode, getFcAccountByProductCodeVO.getFcProductCode());
-        FcProduct fcProduct = fcProductService.getOne(new QueryWrapper<FcProduct>().lambda().eq(FcProduct::getFcProductCode, getFcAccountByProductCodeVO.getFcProductCode()));
-        result.setFcProduct(fcProduct);
+        FcAccountDTO result = bizFcAccountService.getAccount(userCode, getFcAccountByProductCodeVO.getFcProductCode());
         return Result.ok(result);
     }
 
@@ -118,11 +117,11 @@ public class BizFcAccountController {
 
     @Operation(summary = "四要素绑卡确认")
     @PostMapping(value = "/bindCard")
-    public Result<FcAccount> bindCard(@RequestBody BindBankCardSureVO bindBankCardSureVO) {
+    public Result<FcAccountDTO> bindCard(@RequestBody BindBankCardSureVO bindBankCardSureVO) {
         BizFcAccountService.BindBankCardSureDTO bindBankCardSureDTO = BeanUtil.copyProperties(bindBankCardSureVO, BizFcAccountService.BindBankCardSureDTO.class);
         UserDTO sysUser = UserUtil.getCurrentSysUser();
         bindBankCardSureDTO.setFcAcSysUserCode(sysUser.getUserCode());
-        FcAccount fcAccount = bizBankAccountService.bindBankCardSure(bindBankCardSureDTO);
+        FcAccountDTO fcAccount = bizBankAccountService.bindBankCardSure(bindBankCardSureDTO);
 
 
         return Result.ok("綁卡成功！", fcAccount);
@@ -130,10 +129,10 @@ public class BizFcAccountController {
 
     @Operation(summary = "绑卡短信")
     @PostMapping(value = "/bindCardSms")
-    public Result<FcAccount> bindCardSms(@RequestBody BizFcAccountService.BindCardSmsDTO bindCardSmsDTO) {
+    public Result<FcAccountDTO> bindCardSms(@RequestBody BizFcAccountService.BindCardSmsDTO bindCardSmsDTO) {
         UserDTO sysUser = UserUtil.getCurrentSysUser();
         bindCardSmsDTO.setFcAcSysUserCode(sysUser.getUserCode());
-        FcAccount fcAccount = bizBankAccountService.bindBankCardSms(bindCardSmsDTO);
+        FcAccountDTO fcAccount = bizBankAccountService.bindBankCardSms(bindCardSmsDTO);
         return Result.ok("绑卡短信发送成功", fcAccount);
     }
 

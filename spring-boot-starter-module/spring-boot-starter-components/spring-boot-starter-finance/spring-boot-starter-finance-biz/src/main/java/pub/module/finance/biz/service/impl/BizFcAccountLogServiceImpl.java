@@ -1,26 +1,28 @@
 package pub.module.finance.biz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import pub.module.finance.api.constants.FcAcLogOpTypeEnum;
 import pub.module.finance.api.constants.FcAcLogPayStatusCodeEnum;
+import pub.module.finance.api.dto.FcAccountLogDTO;
 import pub.module.finance.api.service.BizFcAccountLogService;
 import pub.module.finance.api.service.BizFcAccountService;
 import pub.module.finance.api.service.BizPayService;
 import pub.module.finance.curd.entity.FcAccount;
 import pub.module.finance.curd.entity.FcAccountLog;
 import pub.module.finance.curd.service.IFcAccountLogService;
-import pub.module.finance.curd.service.IFcAccountService;
 
 import jakarta.annotation.Resource;
+import pub.module.finance.curd.service.IFcAccountService;
 
 @Service
 public class BizFcAccountLogServiceImpl implements BizFcAccountLogService {
     @Resource
     IFcAccountLogService fcAccountLogService;
     @Resource
-    BizFcAccountService bizFcAccountService;
+    IFcAccountService fcAccountService;
 
 
     @Override
@@ -32,12 +34,12 @@ public class BizFcAccountLogServiceImpl implements BizFcAccountLogService {
         return countPaid>0;
     }
     @Override
-    public FcAccountLog savePaidLog(String tradeNo) {
+    public FcAccountLogDTO savePaidLog(String tradeNo) {
         FcAccountLog fcAccountLog = fcAccountLogService.getOne(new QueryWrapper<FcAccountLog>().lambda()
                 .eq(FcAccountLog::getFcAcLogTradeNo, tradeNo),false);
         fcAccountLog.setFcAcLogPayStatusCode(FcAcLogPayStatusCodeEnum.PAID.getCode());
         fcAccountLogService.updateById(fcAccountLog);
-        return fcAccountLog;
+        return BeanUtil.copyProperties(fcAccountLog, FcAccountLogDTO.class);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class BizFcAccountLogServiceImpl implements BizFcAccountLogService {
         Assert.notNull(req.getAmount(), "amount is null");
         Assert.notEmpty(req.getNotifyApi(), "notifyApi is null");
         Assert.notEmpty(req.getFcAcCode(), "fcAcCode is null");
-        FcAccount fcAccount = bizFcAccountService.getAccount(req.getFcAcCode());
+        FcAccount fcAccount = fcAccountService.getOne(new QueryWrapper<FcAccount>().lambda().eq(FcAccount::getFcAcCode, req.getFcAcCode()),false);
         Assert.notNull(fcAccount,"账户为空！");
         FcAccountLog fcAccountLog = new FcAccountLog();
         fcAccountLog.setFcAcLogPayStatusCode(FcAcLogPayStatusCodeEnum.NOT_PAY.getCode());

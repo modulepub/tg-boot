@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pub.module.finance.api.constants.*;
-import pub.module.finance.api.event.BindBankCardEvent;
+import pub.module.finance.api.dto.FcAccountDTO;
 import pub.module.finance.api.service.BizBankAccountService;
 import pub.module.finance.curd.entity.FcAccount;
 import pub.module.finance.curd.service.IFcAccountService;
@@ -37,7 +37,7 @@ public class BizKqBankAccountServiceImpl implements BizBankAccountService {
 
     @Transactional
     @Override
-    public FcAccount bindBankCardSms(BindCardSmsDTO bindCardSmsDTO) {
+    public FcAccountDTO bindBankCardSms(BindCardSmsDTO bindCardSmsDTO) {
         String userCode = bindCardSmsDTO.getFcAcSysUserCode();
         Assert.notEmpty("userCode is not null", userCode);
         FcAccount fcAccount = fcAccountService.getOne(new QueryWrapper<FcAccount>().lambda()
@@ -58,16 +58,15 @@ public class BizKqBankAccountServiceImpl implements BizBankAccountService {
             fcAccount.setFcAcPayParam(params);
             fcAccountService.save(fcAccount);
             fcAccount.setFcAcBindCardStatusCode(FcAcBindCardStatusCodeEnum.NOT.getCode());
-            applicationEventPublisher.publishEvent(new BindBankCardEvent(fcAccount));
         } else {
             throw new RuntimeException("该银行卡已绑定！");
         }
-        return fcAccount;
+        return BeanUtil.copyProperties(fcAccount, FcAccountDTO.class);
     }
 
 
     @Override
-    public FcAccount bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO) {
+    public FcAccountDTO bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO) {
         Assert.notEmpty(bindBankCardSureDTO.getFcAcSysUserCode(), "userCode is null！");
         Assert.notEmpty(bindBankCardSureDTO.getFcBankCardAuthCode1(), "验证码为空!");
         QueryWrapper<FcAccount> fcAccountQueryWrapper = new QueryWrapper<>();
@@ -91,7 +90,7 @@ public class BizKqBankAccountServiceImpl implements BizBankAccountService {
         }
         fcAccount.setFcAcBindCardStatusCode(FcAcBindCardStatusCodeEnum.YES.getCode());
         fcAccountService.updateById(fcAccount);
-        return fcAccount;
+        return BeanUtil.copyProperties(fcAccount, FcAccountDTO.class);
     }
 
 

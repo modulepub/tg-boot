@@ -1,11 +1,14 @@
 package pub.module.finance.biz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pub.module.finance.api.dto.FcAccountDTO;
+import pub.module.finance.api.dto.FcAccountLogDTO;
 import pub.module.finance.api.service.BizFcAccountService;
 import pub.module.finance.curd.entity.FcAccount;
 import pub.module.finance.curd.entity.FcAccountLog;
@@ -42,7 +45,7 @@ public class BizFcAccountServiceImpl implements BizFcAccountService {
 
     @Transactional
     @Override
-    public FcAccount getAccount(String userCode, String fcProductCode) {
+    public FcAccountDTO getAccount(String userCode, String fcProductCode) {
         QueryWrapper<FcAccount> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FcAccount::getFcAcSysUserCode, userCode);
         queryWrapper.lambda().eq(FcAccount::getFcProductCode, fcProductCode);
@@ -67,31 +70,31 @@ public class BizFcAccountServiceImpl implements BizFcAccountService {
             fcAccount.setFcAcIdCardNo(sysUser.getUserIdCardNum());
             fcAccountService.updateById(fcAccount);
         }
-        return fcAccount;
+        return BeanUtil.copyProperties(fcAccount, FcAccountDTO.class);
     }
 
     @Override
-    public FcAccount getAccount(String fcAcCode) {
+    public FcAccountDTO getAccount(String fcAcCode) {
         QueryWrapper<FcAccount> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FcAccount::getFcAcCode, fcAcCode);
         FcAccount result = fcAccountService.getOne(queryWrapper, false);
         Assert.notNull(result, "入侵预警：账户不存在，非法的账户编码");
         log.info("获取到账户：{}", result);
-        return result;
+        return BeanUtil.copyProperties(result, FcAccountDTO.class);
     }
 
     @Override
-    public FcAccount bindBankCardSms(BindCardSmsDTO bindCardSmsDTO) {
+    public FcAccountDTO bindBankCardSms(BindCardSmsDTO bindCardSmsDTO) {
         return null;
     }
 
     @Override
-    public FcAccount bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO) {
+    public FcAccountDTO bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO) {
         return null;
     }
 
     @Override
-    public void bankPay(FcAccountLog fcAccountLog) {
+    public void bankPay(FcAccountLogDTO fcAccountLog) {
 
     }
 

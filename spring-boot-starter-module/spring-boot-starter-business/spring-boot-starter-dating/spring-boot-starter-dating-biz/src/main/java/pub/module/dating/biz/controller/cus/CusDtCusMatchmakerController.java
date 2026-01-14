@@ -51,6 +51,7 @@ public class CusDtCusMatchmakerController {
             QueryWrapper<DtCusMatchmaker> queryWrapper = WebQueryUtil.buildQuery(dtCusMatchmaker);
             Page<DtCusMatchmaker> page = new Page<>(pageNo, pageSize);
             IPage<DtCusMatchmaker> pageList = dtCusMatchmakerService.page(page, queryWrapper);
+            //TODO 实际业务场景客户端不会在循环中查询用户信息，因为会造成N+1问题，这里只是为了演示，所以这里直接将用户信息放到DtCusMatchmakerRes中
             IPage<DtCusMatchmakerRes> pageRes = pageList.convert(item -> {
                 DtCusMatchmakerRes res = BeanUtil.copyProperties(item, DtCusMatchmakerRes.class);
                 UserDTO cmMt = bizSysUserService.getUserByUserCode(item.getCmMtCode());

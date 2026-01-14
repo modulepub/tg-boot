@@ -2,16 +2,14 @@ package pub.module.finance.biz.service.impl;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import org.springframework.stereotype.Service;
 import pub.module.finance.api.constants.FcAcLogNotifyStatusCodeEnum;
+import pub.module.finance.api.dto.FcAccountLogDTO;
 import pub.module.finance.api.service.BizFcAccountLogService;
 import pub.module.finance.api.service.BizPayCallbackService;
-import pub.module.finance.api.service.BizPayNotifyService;
-import pub.module.finance.curd.entity.FcAccountLog;
 
 import jakarta.annotation.Resource;
 @Service
@@ -21,7 +19,7 @@ public class BizPayCallbackServiceImpl implements BizPayCallbackService {
 
     @Override
     public void callBizSystem(String tradeNo) {
-        FcAccountLog result = bizFcAccountLogService.savePaidLog(tradeNo);
+        FcAccountLogDTO result = bizFcAccountLogService.savePaidLog(tradeNo);
         Assert.notNull(result, "严重异常！，支付流水不存在！");
         result.setFcAcLogNotifyStatusCode(FcAcLogNotifyStatusCodeEnum.FAIL.getCode());
         if (StrUtil.isNotEmpty(result.getFcAcLogNotifyApi())) {
@@ -42,14 +40,7 @@ public class BizPayCallbackServiceImpl implements BizPayCallbackService {
                     }
                 }
             } else {
-                BizPayNotifyService bizPayNotifyService = SpringUtil.getBean(result.getFcAcLogNotifyApi());
-                try {
-                    bizPayNotifyService.payCallBack(result);
-                    result.setFcAcLogNotifyStatusCode(FcAcLogNotifyStatusCodeEnum.OK.getCode());
-                } catch (Exception e) {
-                    result.setFcAcLogNotifyResult(e.getMessage());
-                    result.setFcAcLogNotifyStatusCode(FcAcLogNotifyStatusCodeEnum.FAIL.getCode());
-                }
+                throw new IllegalArgumentException("回调API格式不正确！");
             }
         }
     }

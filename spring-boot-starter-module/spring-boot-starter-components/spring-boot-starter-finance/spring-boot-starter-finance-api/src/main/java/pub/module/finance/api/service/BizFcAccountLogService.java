@@ -1,6 +1,6 @@
 package pub.module.finance.api.service;
 
-import pub.module.finance.curd.entity.FcAccountLog;
+import pub.module.finance.api.dto.FcAccountLogDTO;
 
 /**
  * 金融账户变动日志
@@ -14,7 +14,7 @@ public interface BizFcAccountLogService {
 
     void savePayReqLog(BizPayService.PrePayDTO.Req req);
 
-    FcAccountLog savePaidLog(String tradeNo);
+    FcAccountLogDTO savePaidLog(String tradeNo);
 
     String getFcProductCodeBy(String tradeNo);
 }

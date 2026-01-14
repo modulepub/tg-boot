@@ -1,8 +1,5 @@
 package pub.module.finance.curd.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import pub.module.finance.curd.entity.FcProduct;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 

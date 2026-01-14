@@ -2,8 +2,6 @@
 **/.idea
 *.iml
 rebel.xml
-docs**
-demo**
 ## backend
 **/target
 **/logs

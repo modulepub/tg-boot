@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import pub.module.finance.api.dto.FcAccountDTO;
 import pub.module.finance.api.service.BizFcAccountLogService;
 import pub.module.finance.api.service.BizFcAccountService;
 import pub.module.system.api.service.dto.UserDTO;
@@ -48,8 +49,6 @@ public class PayController {
         private JSONObject platParam;
         @Schema(description = "回调服务地址：支持http地址和api名称2种方式，回调参数为支付流水实体")
         public String notifyApi;
-        @Schema(description = "期数（信用借贷使用）")
-        public Integer period;
         @Schema(description = "支付密码")
         String password;
 
@@ -63,7 +62,7 @@ public class PayController {
         prePayDTO.setUserCode(loginUser.getUserCode());
         prePayDTO.setUserRealName(loginUser.getUserRealName());
         log.info("支付参数：prePayVO:{}", prePayVO);
-        FcAccount fcAccount = fcAccountService.getAccount(prePayDTO.getFcAcCode());
+        FcAccountDTO fcAccount = fcAccountService.getAccount(prePayDTO.getFcAcCode());
         Assert.notNull(fcAccount, "严重异常，查询不存在的账户！");
         BizPayService bizPayService = SpringUtil.getBean(fcAccount.getFcProductTypeCode(), BizPayService.class);
         return Result.ok(bizPayService.prePay(prePayDTO));

@@ -131,6 +131,7 @@ public class SignContractServiceImpl implements BizSignContractService {
     /**
      * Adds personal user and handles response; throws exception on failure
      */
+    @Override
     public PersonalIdentifyH5DTO.Res personalIdentifyH5(String appId, PersonalIdentifyH5DTO.Req req) {
         NetSignClient netSignClient = SpringUtil.getBean(NetSignClientService.class).getNetSignClient(appId);
         UserInput userInput = new UserInput();

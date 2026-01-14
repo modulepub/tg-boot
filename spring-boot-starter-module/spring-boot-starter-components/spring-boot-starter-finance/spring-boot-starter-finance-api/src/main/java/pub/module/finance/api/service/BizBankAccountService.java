@@ -2,8 +2,7 @@ package pub.module.finance.api.service;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import pub.module.finance.curd.entity.FcAccount;
-import pub.module.finance.curd.entity.FcAccountLog;
+import pub.module.finance.api.dto.FcAccountDTO;
 
 /**
  * 金融账户管理
@@ -41,7 +40,7 @@ public interface BizBankAccountService {
     /**
      * 绑定银行卡类账户
      */
-    FcAccount bindBankCardSms(BindCardSmsDTO bindCardSmsDTO);
+    FcAccountDTO bindBankCardSms(BindCardSmsDTO bindCardSmsDTO);
 
     @Data
     @Schema(description = "绑定银行卡")
@@ -56,7 +55,7 @@ public interface BizBankAccountService {
         private String fcBankCardAuthCode2;
     }
 
-    FcAccount bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO);
+    FcAccountDTO bindBankCardSure(BindBankCardSureDTO bindBankCardSureDTO);
 
 
 
