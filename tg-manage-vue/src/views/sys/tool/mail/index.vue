@@ -2,7 +2,7 @@
 	<el-card class="layout-query">
 		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 			<el-form-item prop="platform">
-				<ma-dict-select v-model="state.queryForm.platform" dict-type="mail_platform" clearable placeholder="平台类型"></ma-dict-select>
+				<tg-dict-select v-model="state.queryForm.platform" dict-type="mail_platform" clearable placeholder="平台类型"></tg-dict-select>
 			</el-form-item>
 			<el-form-item prop="mailFrom">
 				<el-input v-model="state.queryForm.mailFrom" placeholder="发件人"></el-input>
@@ -35,11 +35,11 @@
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="platformId" label="平台ID" header-align="center" align="center"></el-table-column>
-			<ma-dict-column prop="platform" label="平台类型" dict-type="mail_platform"></ma-dict-column>
+			<tg-dict-column prop="platform" label="平台类型" dict-type="mail_platform"></tg-dict-column>
 			<el-table-column prop="mailFrom" label="发件人" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="mailTos" label="接收人" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="subject" label="主题" header-align="center" align="center"></el-table-column>
-			<ma-dict-column prop="status" label="状态" dict-type="success_fail"></ma-dict-column>
+			<tg-dict-column prop="status" label="状态" dict-type="success_fail"></tg-dict-column>
 			<el-table-column prop="createTime" label="发送时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">

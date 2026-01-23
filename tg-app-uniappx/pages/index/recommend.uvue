@@ -1,727 +1,505 @@
-<!--suppress ALL -->
 <template>
-	<view>
-		<scroll-view class="slide" :style="{
-		width: winWidth + 'px',
-		height: winHeigh + 'px',
-	}">
-
-			<view>
-				<view class="slide-footer">
-					<view class="slide-footer-btn" @click="like('0')" style="width: 120rpx ;">
-						<view class="slide-footer-icon" :style="{
+	<cl-page>
+		<cl-topbar
+			fixed
+			:height="100"
+			:show-back="false"
+			safe-area-top
+			background-color="transparent"
+		>
+			<view class="flex flex-row items-center w-full flex-1 px-3">
+				<view class="" @tap="toLike">
+					<cl-icon name="heart-3-line"></cl-icon>
+				</view>
+			</view>
+		</cl-topbar>
+		<view class="tantan-slide-footer">
+			<view class="tantan-slide-footer-btn" @click="footerBtnClick('dislike')">
+				<view class="tantan-slide-footer-icon" :style="{
 					backgroundColor: '#f8ba35',
 					opacity: dislike,
 					zIndex: 1
 				}">
-							<cl-icon name="close" size="40" color="#fff" />
-						</view>
-						<view class="slide-footer-icon">
-							<cl-icon name="close" size="40" color="#666" />
-						</view>
-					</view>
-					<cl-button :custom-style="btnGetCodes" @click="sendMessage" type="primary" color="#646CDB">发消息</cl-button>
-					<view class="slide-footer-btn" @click="like('1')">
-						<view class="slide-footer-icon" :style="{
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/close_white.png">
+					</image>
+				</view>
+				<view class="tantan-slide-footer-icon">
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/close.png"></image>
+				</view>
+			</view>
+			<view class="tantan-slide-footer-btn" @click="footerBtnClick('love')">
+				<view class="tantan-slide-footer-icon" :style="{
 					backgroundColor: '#fa547c',
 					opacity: love,
 					zIndex: 1
 				}">
-							<cl-icon name="heart" size="40" color="#fff" />
-						</view>
-						<view class="slide-footer-icon">
-							<cl-icon name="heart" size="40" color="#fa547c" />
-						</view>
-					</view>
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/like_white.png">
+					</image>
 				</view>
-
+				<view class="tantan-slide-footer-icon">
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/like.png"></image>
+				</view>
 			</view>
-			<scroll-view scroll-y  class="slide-box">
-				<template v-for="(item, index) in list">
-					<view class="slide-box-item"
-						  :key="index"
-						  v-if="currentIndex + visible >= index"
-						  @click.stop="clickImage"
-						  :style="[cardTransform(item, index), {
-						'zIndex': list.length - index,
-						'opacity': currentIndex + visible - 1 >= index && currentIndex <= index ? 1 : 0,
-						'transform': 'rotate(' + ((item.x || 0) / 30 ) +  'deg) translate3d(' + (item.x || 0) + 'px,' + (item.y || 0) + 'px, '+  (currentIndex - index) * 50  +'px)'
-					}]">
-						<template>
-							<view  v-if="item.userAvatar" style="width: 100%;height: 100%;">
-								<swiper  class="swiper" :current="0" style="height: 750rpx;background-color: #f4f4f4;">
-									<swiper-item  @click="clickImg(item.userAvatar.split(','))" v-for="(itemPhoto,index) in  item.userAvatar.split(',')" :key="index">
-										<image style="width: 100%;height: 750rpx;" mode="aspectFill" :src="itemPhoto">
-										</image>
-									</swiper-item>
-								</swiper>
-								<view @click="showMore=true"   style="position: fixed;right: 20rpx;top: 20rpx;background-color: rgba(0, 0, 0, 0.5);width: 60rpx;height: 60rpx;line-height: 60rpx;border-radius: 50%;text-align: center;">
-									<text class="cuIcon-more" style="width: 60rpx;height: 60rpx;"></text>
-								</view>
-
-								<view @click="queryDtMatchApplication"  style="position: fixed;left: 20rpx;top: 20rpx;background-color: rgba(0, 0, 0, 0.5);border-radius: 20rpx;text-align: center;padding: 10rpx;display: flex;align-items: center;">
-									<text class="text-sm">印象分</text>
-									<view style="font-size: 28rpx;font-weight: 500;color: #fff;margin-left: 10rpx;">9.1</view>
-								</view>
-
-								<navigator style="position: fixed;right: 30rpx;top: 600rpx;background-color: rgba(0, 0, 0, 0.5);border-radius: 20rpx;text-align: center;padding: 15rpx;display: flex;align-items: center;">
-									<view style="font-size: 26rpx;font-weight: 500;color: #fff;"><text class="cuIcon-location"></text>相距{{item.userMutualDistance?item.userMutualDistance:'--'}}KM</view>
-								</navigator>
-								<view v-if="item.userAvatar"  class="indicator" style="position: relative; bottom: 70rpx;">
-									<view class="indicator__dot" v-for="(itemclass, indexclss) in item.userAvatar.split(',')" :key="indexclss"  :class="[indexclss === currentNum && 'indicator__dot--active']"   > </view>
+		</view>
+		<view @touchstart.capture="touchStart($event, currentIndex)"
+			@touchmove.stop.capture="touchMove($event, currentIndex)"
+			@touchend.capture="touchEnd(currentIndex)" class="tantan-slide-box">
+			<template v-for="(item, index) in list">
+				<view class="tantan-slide-box-item"
+					:key="index"
+					v-if="currentIndex + visible >= index"
+					 @click.stop="clickImage"
+					:style="[cardTransform(item, index)]">
+					 <!-- 加载图片会闪屏 双if避免 -->
+					<template v-if="currentIndex + visible >= index && currentIndex <= index">
+						<view class="tantan-slide-direction" :animation="currentIndex === index ? animationData : ''">
+							<image class="tantan-slide-img" mode="aspectFill" :src="item.image" ></image>
+							<view class="tantan-slide-box-item-bg">
+								<view class="tantan-slide-box-info">
+									<view class="title" v-if="item.title"><cl-text :size="40" :value="item.title"></cl-text><cl-text style="margin-left: 3px" color="blue" :size="24" value="♂"></cl-text><cl-text style="margin-left: 3px" :size="24" value="最近活跃在 日照市"></cl-text></view>
+									<view class="desc" v-if="item.desc" v-text="item.desc"></view>
+									<view class="tags" v-if="item.tags && item.tags.length > 0" >
+										<cl-tag v-for="(item1, index1) in item.tags" :key="index1" type="info" :plain="true">
+											{{ item1 }}
+										</cl-tag>
+									</view>
 								</view>
 							</view>
-							<view class="slide-box-item-bg">
-								<view class="slide-box-info">
-									<view style="padding: 30rpx 20rpx;display: flex;justify-content: space-between;align-items: center;">
-										<view style="display: flex;align-items: center;">
-											<image :src="item.userAvatar" mode="aspectFill" style="width: 100rpx;height: 100rpx;border-radius: 50%;"></image>
-											<view style="display: flex;align-items: center;">
-												<view style="margin: 0 40rpx;color: #333333;font-weight: 500;font-size: 36rpx;max-width: 180rpx; white-space: nowrap;overflow: hidden;text-overflow: ellipsis; ">{{item.userNickName}}</view>
-												<text v-if="item.userSexCode=='1'" style="width: 30rpx;height: 30rpx;" class="text-blue">♂</text>
-												<text v-if="item.userSexCode=='2'" style="width: 30rpx;height: 30rpx;" class="text-pink">♀</text>
-											</view>
-										</view>
-										<view v-if="item.userIdentityCode== '1'" style="border-radius:188rpx 188rpx 188rpx 188rpx;display: flex;align-items: center;width: 100rpx;justify-content: center;" :style="{background:'rgba(160,166,255,0.2)'}">
-											<text class="text-sm text-green text-bold">{{ $dict.translate("userIdentityCode",item.userIdentityCode)}}</text>
-										</view>
-									</view>
-									<view style="display: flex;font-size: 32rpx;font-weight: 600;color: #3D3D3D;margin: 20rpx 0;align-items: center;">
-										<view style="max-width: 260rpx; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.userSchoolName?item.userSchoolName:'--'}}</view>
-										<view style="width: 10rpx;height: 10rpx;background-color: #333333;border-radius: 50%;margin: 0 20rpx;"></view>
-										<view >{{item.userEducationCode?$dict.translate("userEducationCode",item.userEducationCode):'--'}}</view>
-										<view v-if="item.userEducationExamineCode=='1'" style="display: flex;align-items: center;">
-											<view style="width: 10rpx;height: 10rpx;background-color: #333333;border-radius: 50%;margin: 0 20rpx;"></view>
-											<view style="height: 48rpx;border-radius: 188rpx 188rpx 188rpx 188rpx;display: flex;align-items: center;padding: 0 10rpx;justify-content: center;background: rgba(160,166,255,0.2)">
-												<image src="@/static/icon/authentication.png" style="width: 30rpx;height: 30rpx;margin-right: 10rpx;"></image>
-												<view style="font-size: 22rpx;font-weight: 400;">{{$dict.translate("userEducationExamineCode",item.userEducationExamineCode)}}</view>
-											</view>
-										</view>
-										<view v-else style="display: flex;align-items: center;">
-											<view style="width: 10rpx;height: 10rpx;background-color: #333333;border-radius: 50%;margin: 0 20rpx;"></view>
-											<view class="text-red" style="height: 48rpx;border-radius: 188rpx 188rpx 188rpx 188rpx;display: flex;align-items: center;padding: 0 10rpx;justify-content: center;background: rgba(191,5,19,0.15);">
-												<text class="cuIcon-warn" style="width: 30rpx;height: 30rpx;margin-right: 10rpx;"></text>
-												<view style="font-size: 22rpx;font-weight: 400;">{{$dict.translate("userEducationExamineCode",item.userEducationExamineCode)}}</view>
-											</view>
-										</view>
-									</view>
-									<view style="height: 10rpx;border-bottom: 1rpx solid #eee;margin-bottom: 20rpx;"></view>
-									<view style="display: flex;justify-content: space-between;align-items: stretch;">
-										<view style="display: flex;align-items: center;">
-											<image style="width: 45rpx;height: 45rpx;" src="https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/jichu.png"></image>
-											<view style="width: 20rpx;"></view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">基础资料</view>
-										</view>
-										<!--                  <view @click="navdatailt(user._id)" style="padding: 10rpx;background-color: #F6F5FD;font-size: 24rpx;color: #333;border-radius: 20rpx;">解锁资料</view>-->
-									</view>
-									<view style="display: flex;justify-content: space-between;align-items: center;margin-top: 20rpx;">
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">年龄</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userAge?item.userAge:'--'}}</view>
-										</view>
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">身高</view>
-											<view  style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userHeight?item.userHeight+'cm':'--'}}</view>
-										</view>
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">现居城市</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userNativeAreaCode?$dict.translate("userNativeAreaCode",item.userNativeAreaCode):'--'}}</view>
-										</view>
-									</view>
-									<view style="display: flex;justify-content: space-between;align-items: center;margin-top: 20rpx;">
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">职业</view>
-											<view  style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userOccupationName?item.userOccupationName:'--'}}</view>
-										</view>
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">房产认证</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userHpcExamineCode?$dict.translate("userHpcExamineCode",item.userHpcExamineCode):'--'}}</view>
-										</view>
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">车产认证</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userVlExamineCode?$dict.translate("userVlExamineCode",item.userVlExamineCode):'--'}}</view>
-										</view>
-									</view>
-									<view style="display: flex;justify-content: space-between;align-items: center;margin-top: 20rpx;">
-
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">年收入</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userIncome?item.userIncome:'--'}}</view>
-										</view>
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">婚姻状况</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userMaritalStatusCode?$dict.translate("userMaritalStatusCode",item.userMaritalStatusCode):'--'}}</view>
-										</view>
-										<view style="display: flex;flex-direction: column;align-items: center;justify-content: space-between;height: 80rpx;width: 160rpx;">
-											<view style="font-size: 26rpx;color: #bababa;">故乡</view>
-											<view style="font-size: 28rpx;font-weight: 600;color: #333;">{{item.userBirthplaceAreaCode?$dict.translate("userBirthplaceAreaCode",item.userBirthplaceAreaCode):'--'}}</view>
-										</view>
-									</view>
-									<view style="display: flex;flex-wrap: wrap;align-items: center;">
-									</view>
-									<view style="height: 20rpx;"></view>
-								</view>
-
-								<view style="background-color: #fff;color: #333333;margin-top: 30rpx;padding: 20px 32rpx;border-radius: 40rpx;">
-									<view style="display: flex;align-items: center;margin-bottom: 20rpx;">
-										<image src="@/static/icon/xingqu.png" style="width: 30rpx;height: 30rpx;margin-right: 20rpx;"></image>
-										<view style="font-size: 28rpx;font-weight: 600;color: #333333;">兴趣爱好 </view>
-									</view>
-									<view style="height: 215rpx;border-radius: 29rpx;padding: 20rpx;">
-										<view style="font-size: 28rpx;font-weight: 600;color: #3D3D3D;">{{item.userInterests?item.userInterests:'-'}}</view>
-									</view>
-								</view>
-								<view style="background-color: #fff;color: #333333;margin-top: 30rpx;padding: 20px 32rpx;border-radius: 40rpx;">
-									<view style="display: flex;align-items: center;margin-bottom: 20rpx;">
-										<image src="@/static/icon/ganqing.png" style="width: 28rpx;height: 30rpx;margin-right: 20rpx;"></image>
-										<view style="font-size: 28rpx;font-weight: 600;color: #333333;">感情观 </view>
-									</view>
-									<view style="height: 215rpx;border-radius: 29rpx;padding: 20rpx;">
-										<view style="font-size: 28rpx;font-weight: 600;color: #3D3D3D;">{{item.userEmotionalPerspective?item.userEmotionalPerspective:'-'}}</view>
-									</view>
-								</view>
-
-								<view style="margin-top: 160rpx;"></view>
-							</view>
-
-							<view>
-								<view class="slide-box-icon slide-box-love" :style="{
-									opacity: love * 1.5,
-									transform: 'scale('+ (love + 1 > 2 ? 2 : love + 1 )  +')',
-								}">
-									<cl-icon name="heart" size="32" color="#fa547c" />
-								</view>
-								<view class="slide-box-icon slide-box-dislike"
-									  :style="{
+						</view>
+						<view v-if="index === currentIndex">
+							<view class="tantan-slide-box-icon tantan-slide-box-dislike" 
+								:style="{
 									opacity: dislike * 1.5,
 									transform: 'scale('+ (dislike + 1 > 2 ? 2 : dislike + 1 )  +')',
 								}">
-									<cl-icon name="close" size="32" color="#f8ba35" />
-								</view>
-
+								<image style="width: 30rpx;height: 30rpx;" src="../../static/dgex-tantan/close.png"></image>
 							</view>
-						</template>
-					</view>
-				</template>
-			</scroll-view>
-			<view v-if="showMore" mode="bottom" round="20rpx" bgColor="#f5f7fa" :safeAreaInsetBottom="false">
-				<view style="width: 100%;text-align: center;height: 100%;">
-					<cl-button open-type='share' :custom-style="btnGetCodesss" height="120rpx">将ta推荐给好友</cl-button>
-					<view style="opacity: 1;border: 1rpx solid #F5F6FA;"></view>
-					<view  @click="goToJubao"  style="height: 120rpx;line-height:120rpx ;background-color: #fff;color: #333333;font-weight: 500;font-size: 30rpx;">匿名举报</view>
-					<view style="opacity: 1;border: 1rpx solid #F5F6FA;"></view>
-					<view @click="showMore=false" style="height: 120rpx;line-height:120rpx ;background-color: #fff;color: #333333;font-weight: 500;font-size: 30rpx;">取消</view>
+							<view class="tantan-slide-box-icon tantan-slide-box-love" :style="{
+									opacity: love * 1.5,
+									transform: 'scale('+ (love + 1 > 2 ? 2 : love + 1 )  +')',
+								}">
+								<image style="width: 30rpx;height: 30rpx;" src="../../static/dgex-tantan/like.png"></image>
+							</view>
+						</view>
+					</template>
 				</view>
-			</view>
-
-
-
-		</scroll-view>
-	</view>
-
+			</template>
+		</view>
+		<!-- 自定义底部导航栏 -->
+		<custom-tabbar></custom-tabbar>
+	</cl-page>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted, onShow } from 'vue';
+<script setup lang="ts">
+	import { ref, computed, onMounted, watch } from 'vue';
+	import CustomTabbar from "@/components/tabbar.uvue";
 
-export default defineComponent({
-  name: "Recommend",
-  setup() {
-    const user = ref({});
-    const list = ref<any[]>([]);
-    const showHn = ref(false);
-    const showQx = ref(false);
-    const showMore = ref(false);
-    const JbForm = ref({});
-    const currentNum = ref(0);
-    const winWidth = ref(0);
-    const winHeigh = ref(0);
-    const x = ref({
-      start: 0,
-      move: 0,
-      end: 0
-    });
-    const y = ref({
-      start: 0,
-      move: 0,
-      end: 0
-    });
-    const visible = ref(3);
-    const currentIndex = ref(0);
-    const swipering = ref(false);
-    const slideing = ref(false);
-    const love = ref(0);
-    const dislike = ref(0);
-    const member = ref(0);
-    const sum = ref(5);
-    const templateId = ref<any[]>([]);
-    const lognpopshow = ref(false);
-    const btnClickType = ref(false);
-    const text = ref('');
+	const props = defineProps<{
+		list?: Array<{
+			title?: string;
+			desc?: string;
+			tags?: string[];
+			image: string;
+			x?: number;
+			y?: number;
+		}>;
+		visible?: number;
+	}>();
 
-    const btnGetCodesss = ref({
-      border: 'none',
-      width: '100%',
-      height: '120rpx',
-      color: '#333',
-      fontWeight: '500',
-      fontSize: '30rpx',
-      backgroundColor: '#fff',
-    });
+	const emit = defineEmits<{
+		(e: 'onChange', data: {
+			currentIndex: number;
+			currentItem: any;
+			type: string;
+		}): void;
+		(e: 'onClickImage', data: {
+			type: string;
+			currentIndex: number;
+			currentItem: any;
+		}): void;
+	}>();
 
-    const btnGetCodes = ref({
-      border: '1rpx solid #646CDB',
-      color: '#fff',
-      width: '308rpx',
-      lineHeight: '100rpx',
-      height: '100rpx',
-      fontSize: '32rpx',
-      fontWeight: '500',
-      borderRadius: '51rpx',
-      marginTop: '10rpx'
-    });
+	// 响应式数据
+	const winWidth = ref(0);
+	const winHeigh = ref(0);
+	const x = ref({
+		start: 0,
+		move: 0,
+		end: 0
+	});
+	const y = ref({
+		start: 0,
+		move: 0,
+		end: 0
+	});
+	const currentIndex = ref(0);
+	const swipering = ref(false);
+	const slideing = ref(false);
+	const love = ref(0);
+	const dislike = ref(0);
+	const direction = ref('');
+	const animationData = ref({});
+	const btnClickType = ref(false);
+	const animation = ref<any>(null);
 
-    const getRecommend = () => {
-      uni.$http.get('/cus/dating/recommend/list').then((res: any) => {
-        list.value = res.data.records;
-        console.log('推荐列表', list.value);
-      });
-    };
-
-    const goToJubao = () => {
-      uni.$tool.goTo(`/pages/report/report?userMkuserCode=${list.value[currentIndex.value]?.userCode}`);
-    };
-
-    const sendMessage = () => {
-      getmsg();
-      if (user.value.showstate === 0 && text.value) {
-        uni.showToast({
-          icon: 'error',
-          title: '资料被驳回，请修改！',
-        });
-        return;
-      }
-      if (user.value.showstate === 0 || user.value.showstate === 2) {
-        uni.showToast({
-          icon: 'error',
-          title: '请填写资料并等待资料审核通过！',
-        });
-        return;
-      }
-      if (user.value.state !== 1) {
-        uni.showToast({
-          icon: 'error',
-          title: '请先双重认证或等待实名审核通过！',
-        });
-        return;
-      }
-      uni.navigateTo({
-        url: '/pages/messagelist/index?item=' + JSON.stringify(list.value[currentIndex.value])
-      });
-    };
-
-    const cardTransform = (item: any, index: number) => {
-      let css: any = {};
-      if (index === currentIndex.value) {
-        if (slideing.value) {
-          css["transitionDuration"] = `${!swipering.value ? 1000 : 0}ms`;
-        } else {
-          css["transitionDuration"] = `${!swipering.value ? 300 : 0}ms`;
-        }
-      }
-      return css;
-    };
-
-    const touchStart = (e: any, index: number) => {
-      if (slideing.value) return;
-      if (typeof list.value[index].x === 'undefined' && typeof list.value[index].y === 'undefined') {
-        list.value[index].y = 0;
-        list.value[index].x = 0;
-      }
-      swipering.value = true;
-      x.value.start = e.touches[0].pageX;
-      y.value.start = e.touches[0].pageY;
-    };
-
-    const touchMove = (e: any, index: number) => {
-      if (slideing.value) return;
-      if (list.value.length === index + 1) {
-        return;
-      }
-      x.value.move = e.touches[0].pageX;
-      y.value.move = e.touches[0].pageY;
-
-      list.value[index].x = x.value.move - x.value.start;
-      list.value[index].y = y.value.move - y.value.start;
-      if (Number.parseInt(list.value[index].x) > 0) {
-        love.value = Number.parseInt(list.value[index].x) / (100 * 2);
-      } else {
-        dislike.value = Math.abs(Number.parseInt(list.value[index].x) / (100 * 2));
-      }
-    };
-
-    const chage = (e: any) => {
-      currentNum.value = e.detail.current;
-    };
-
-    const touchEnd = (index: number) => {
-      if (slideing.value) return;
-      swipering.value = false;
-      if (list.value.length === index + 1) {
-        return;
-      }
-      if (
-        list.value[index].x > 0 &&
-        list.value[index].x > winWidth.value / 2 - winWidth.value / 5
-      ) {
-        touchEndNext(index);
-      } else if (
-        list.value[index].x < 0 &&
-        list.value[index].x < -winWidth.value / 2 + winWidth.value / 5
-      ) {
-        touchEndNext(index);
-      } else {
-        list.value[index].x = 0;
-        list.value[index].y = 0;
-        slideing.value = false;
-        love.value = 0;
-        dislike.value = 0;
-      }
-    };
-
-    const touchEndNext = (index: number) => {
-      slideing.value = true;
-      list.value[index].x = list.value[index].x * 5;
-      list.value[index].y = list.value[index].y * 5;
-      touchEndDone();
-    };
-
-    const touchEndDone = () => {
-      setTimeout(() => {
-        currentIndex.value++;
-        slideing.value = false;
-        love.value = 0;
-        dislike.value = 0;
-        btnClickType.value = false;
-      }, 500);
-    };
-
-    const like = (type: string) => {
-      lognpopshow.value = true;
-      if (btnClickType.value) {
-        return;
-      }
-      if (currentIndex.value === list.value.length - 1) {
-        uni.$tool.confirm('每天赠送推荐10个嘉宾，如需更多，点击确认填写推荐意向。', true).then(() => {
-          uni.$tool.goTo('/pages/dtIntention/dtIntentionList');
-        });
-        return;
-      }
-      btnClickType.value = true;
-      let w = 0;
-      if (type === '1') {
-        w = winWidth.value * 1.5;
-        love.value = 1;
-      } else if (type === '0') {
-        w = -winWidth.value * 1.5;
-        dislike.value = 1;
-      }
-      list.value[currentIndex.value].x = w;
-      touchEndDone();
-    };
-
-    const getmsg = () => {
-      // 实现获取消息的逻辑
-    };
-
-    const clickImage = () => {
-      // 实现点击图片的逻辑
-    };
-
-    const clickImg = (images: string[]) => {
-      // 实现点击图片预览的逻辑
-      uni.previewImage({
-        urls: images
-      });
-    };
-
-    const queryDtMatchApplication = () => {
-      // 实现查询匹配应用的逻辑
-    };
-
-    onMounted(() => {
-      console.log(user.value, 'user');
-      const res = uni.getSystemInfoSync();
-      winWidth.value = res.windowWidth;
-      winHeigh.value = res.windowHeight - 42;
-      const userInfo = uni.getStorageSync('user');
-      if (userInfo) {
-        member.value = userInfo.member;
-        if (member.value === 1) {
-          sum.value = 10;
-        }
-      }
-    });
-
-    onShow(() => {
-      getRecommend();
-    });
-
-    return {
-      user,
-      list,
-      showHn,
-      showQx,
-      showMore,
-      JbForm,
-      btnGetCodesss,
-      btnGetCodes,
-      currentNum,
-      winWidth,
-      winHeigh,
-      x,
-      y,
-      visible,
-      currentIndex,
-      swipering,
-      slideing,
-      love,
-      dislike,
-      member,
-      sum,
-      templateId,
-      lognpopshow,
-      btnClickType,
-      text,
-      getRecommend,
-      goToJubao,
-      sendMessage,
-      cardTransform,
-      touchStart,
-      touchMove,
-      chage,
-      touchEnd,
-      touchEndNext,
-      touchEndDone,
-      like,
-      getmsg,
-      clickImage,
-      clickImg,
-      queryDtMatchApplication
-    };
-  }
-});
-
-<style scoped lang="scss">
-.indicator {
-	@include flex(row);
-	justify-content: center;
-	margin-bottom: 40rpx;
-	&__dot {
-		height: 4px;
-		width: 70px;
-		border-radius: 100px;
-		background-color: rgba(255, 255, 255, 0.35);
-		margin: 0 5px;
-		transition: background-color 0.3s;
-
-		&--active {
-			background-color: #ffffff;
+	// Mock数据
+	const mockList = ref([
+		{
+			title: '张三',
+			desc: '喜欢旅行和摄影，希望找到志同道合的朋友',
+			tags: ['旅行', '摄影', '音乐'],
+			image: 'https://picsum.photos/seed/travel1/1024/1024'
+		},
+		{
+			title: '李四',
+			desc: '美食爱好者，擅长烹饪各种料理',
+			tags: ['美食', '烹饪', '健身'],
+			image: 'https://picsum.photos/seed/food1/1024/1024'
+		},
+		{
+			title: '王五',
+			desc: '程序员，热爱技术和游戏',
+			tags: ['编程', '游戏', '科技'],
+			image: 'https://picsum.photos/seed/tech1/1024/1024'
+		},
+		{
+			title: '赵六',
+			desc: '设计师，专注于UI/UX设计',
+			tags: ['设计', 'UI', 'UX'],
+			image: 'https://picsum.photos/seed/design1/1024/1024'
+		},
+		{
+			title: '钱七',
+			desc: '音乐家，擅长钢琴和吉他',
+			tags: ['音乐', '钢琴', '吉他'],
+			image: 'https://picsum.photos/seed/music1/1024/1024'
 		}
+	]);
+
+	// 计算属性
+	const list = computed(() => props.list || mockList.value);
+	const visible = computed(() => props.visible || 5);
+
+	// 生命周期
+	onMounted(() => {
+		const res = uni.getSystemInfoSync();
+		winWidth.value = res.windowWidth;
+		winHeigh.value = res.windowHeight;
+	});
+
+	// 方法
+	const cardTransform = (item: any, index: number) => {
+		let css: any = {
+			'zIndex': list.value.length - index,
+			'opacity': currentIndex.value + visible.value - 1 >= index && currentIndex.value <= index ? 1 : 0,
+			'transform': 'rotate(' + ((item.x || 0) / 30) + 'deg) translate3d(' + (item.x || 0) + 'px,' + (item.y || 0) + 'px, ' + (currentIndex.value - index) * 50 + 'px)'
+		};
+		if (index === currentIndex.value) {
+			if (slideing.value) {
+				css["transitionDuration"] = `${!swipering.value ? 1000 : 0}ms`;
+			} else {
+				css["transitionDuration"] = `${!swipering.value ? 300 : 0}ms`;
+			}
+		}
+		return css;
+	};
+
+	const touchStart = (e: any, index: number) => {
+		if (slideing.value || list.value.length === currentIndex.value) {
+			return;
+		}
+		if (typeof list.value[index].x === 'undefined' && typeof list.value[index].y === 'undefined') {
+			list.value[index].y = 0;
+			list.value[index].x = 0;
+		}
+		swipering.value = true;
+		x.value.start = Number.parseInt(e.touches[0].pageX);
+		y.value.start = Number.parseInt(e.touches[0].pageY);
+	};
+
+	const touchMove = (e: any, index: number) => {
+		if (slideing.value || list.value.length === currentIndex.value) {
+			return;
+		}
+		x.value.move = Number.parseInt(e.touches[0].pageX);
+		y.value.move = Number.parseInt(e.touches[0].pageY);
+		
+		list.value[index].x = x.value.move - x.value.start;
+		list.value[index].y = y.value.move - y.value.start;
+		if (Number.parseInt(list.value[index].x) > 0) {
+			love.value = Number.parseInt(list.value[index].x) / (100 * 2);
+		} else {
+			dislike.value = Math.abs(Number.parseInt(list.value[index].x) / (100 * 2));
+		}
+	};
+
+	const touchEnd = (index: number) => {
+		if (slideing.value || list.value.length === currentIndex.value) {
+			return;
+		}
+		swipering.value = false;
+		if (
+			list.value[index].x > 0 &&
+			list.value[index].x > winWidth.value / 2 - winWidth.value / 5
+		) {
+			touchEndNext(index);
+		} else if (
+			list.value[index].x < 0 &&
+			list.value[index].x < -winWidth.value / 2 + winWidth.value / 5
+		) {
+			touchEndNext(index);
+		} else {
+			list.value[index].x = 0;
+			list.value[index].y = 0;
+			slideing.value = false;
+			love.value = 0;
+			dislike.value = 0;
+		}
+	};
+
+	const touchEndNext = (index: number) => {
+		slideing.value = true;
+		list.value[index].x = list.value[index].x * 5;
+		list.value[index].y = list.value[index].y * 5;
+		touchEndDone();
+	};
+
+	const touchEndDone = () => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				slideing.value = false;
+				emit('onChange', {
+					currentIndex: currentIndex.value,
+					currentItem: list.value[currentIndex.value],
+					type: love.value !== 0 ? 'love' : 'dislike'
+				});
+				currentIndex.value++;
+				x.value.move = 0;
+				y.value.move = 0;
+				slideing.value = false;
+				btnClickType.value = false;
+				love.value = 0;
+				dislike.value = 0;
+				resolve(undefined);
+			}, 350);
+		});
+	};
+
+	const footerBtnClick = (type: string) => {
+		if (btnClickType.value) {
+			return;
+		}
+		if (list.value.length === currentIndex.value) {
+			emit('onChange', {
+				currentIndex: currentIndex.value,
+				currentItem: null,
+				type: love.value !== 0 ? 'love' : 'dislike'
+			});
+			return;
+		}
+		btnClickType.value = true;
+		let w = 0;
+		if (type === 'love') {
+			w = winWidth.value * 1.5;
+			love.value = 1;
+		} else if (type === 'dislike') {
+			w = -winWidth.value * 1.5;
+			dislike.value = 1;
+		}
+		list.value[currentIndex.value].x = w;
+		touchEndDone();
+	};
+
+	const clickImage = (e: any) => {
+		direction.value = winWidth.value / 2 > e.detail.x ? 'left' : 'right';
+        /*#ifdef APP-PLUS || H5*/
+
+		animation.value = uni.createAnimation({
+			duration: 200,
+			timingFunction: 'ease',
+		});
+		
+		animation.value.rotateY(direction.value === 'left' ? -10 : 10).step().rotateY(direction.value === 'left' ? 5 : -5).step();
+		animationData.value = animation.value.export();
+		
+		setTimeout(function() {
+			animation.value.rotateY(0).step();
+			animationData.value = animation.value.export();
+		}.bind(this), 300);
+        /*#endif*/
+		emit('onClickImage', {
+			type: 'click',
+			currentIndex: currentIndex.value,
+			currentItem: list.value[currentIndex.value],
+		});
+		// 跳转到推荐详情页面
+		uni.navigateTo({
+			url: '/pages/recommend/recommendDetail'
+		});
+	};
+</script>
+<style>
+	.tantan-slide {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		position: relative;
 	}
-}
 
-.indicator-num {
-	padding: 2px 0;
-	background-color: rgba(0, 0, 0, 0.35);
-	border-radius: 100px;
-	width: 35px;
-	@include flex;
-	justify-content: center;
+	.tantan-slide-box {
+		position: relative;
 
-	&__text {
-		color: #FFFFFF;
-		font-size: 12px;
+		width: 95%;
+		height: 80%;
+		perspective: 2100rpx;
+		perspective-origin: 50% -30%;
+		transform-style: preserve-3d;
+		margin: auto;
 	}
-}
-</style>
-<style scoped>
-.bgimage {
-	width: 100%;
-	filter: blur(10rpx);
-}
-.bgimage::after {
-	content: "";
-	display: block;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 1;
-}
-/deep/ .u-safe-bottom{
-	display: none !important;
-}
-.slide {
-	/* width: 100%;
-	height: 100%; */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-}
 
-.slide-box {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	perspective: 2100rpx;
-	perspective-origin: 50% -30%;
-	transform-style: preserve-3d;
-	margin: auto;
-}
+	.tantan-slide-box-item {
+		transform-style: preserve-3d;
+		display: flex;
+		width: 100%;
+		height: 100%;
+		border-radius: 24rpx;
+		position: absolute;
+		opacity: 0;
+		transform: translate3d(0px, 0px, 0px) rotate(0deg);
+		transition: 300ms;
+		color: #fff;
+	}
 
-.slide-box-item {
-	transform-style: preserve-3d;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	border-radius: 24rpx;
-	position: absolute;
-	opacity: 0;
-	transform: translate3d(0px, 0px, 0px) rotate(0deg);
-	transition:transform 1s linear 0s;
-	color: #fff;
-}
+	.tantan-slide-box-item.on {
+		display: block;
+	}
 
-.slide-box-item.on {
-	display: block;
-}
+	.tantan-slide-box-item-bg {
+		height: 380rpx;
+		background-image: linear-gradient(to bottom, transparent, #000000 70%);
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+		border-bottom-right-radius: 40rpx;
+		border-bottom-left-radius: 40rpx;
+	}
 
-.slide-box-item-bg {
+	.tantan-slide-box-icon {
+		position: absolute;
+		width: 70rpx;
+		height: 70rpx;
+		top: 45rpx;
+		border-radius: 100%;
+		background-color: #fff;
+		z-index: 1;
+		opacity: 0;
+		transition: 100ms;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-	width: 690rpx;
-	margin: 0 auto;
-	/* height: 450rpx; */
-	/* background-image: linear-gradient(to bottom, transparent, #000000 70%); */
-	background-color: #f4f4f4;
-	margin-top: -90rpx !important;
-	/* position: absolute; */
-	left: 0;
-	/* margin-bottom: 120rpx !important; */
-	right: 0;
-	/* bottom: -315rpx; */
-	margin: auto;
-	z-index: 1;
+	.tantan-slide-box-love {
+		left: 50rpx;
+	}
 
-	border-radius: 40rpx 40rpx 40rpx 40rpx;
-}
+	.tantan-slide-box-dislike {
+		right: 50rpx;
+	}
 
-.slide-box-icon {
-	position: absolute ;
-	width: 70rpx;
-	height: 70rpx;
-	top: 45rpx;
-	border-radius: 100%;
-	background-color: #fff;
-	z-index: 1;
-	opacity: 0;
-	transition: 100ms;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
+	.tantan-slide-footer {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 9.7%;
+		margin: auto;
+		z-index: 9999;
+		padding: 30rpx 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
 
-.slide-box-love {
-	right: 50rpx;
-}
+	.tantan-slide-footer-btn {
+		height: 96rpx;
+		width: 180rpx;
+		margin: 0 16rpx;
+		border-radius: 50rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		transition: 100ms;
+	}
 
-.slide-box-dislike {
-	left: 50rpx;
-}
+	.tantan-slide-footer-btn:active {
+		transform: scale(0.9);
+	}
 
-.slide-footer {
-	width: 100%;
-	position: absolute;
-	left: 30rpx;
-	right: 0;
-	bottom: 4%;
-	/* 	bottom: 12%; */
-	margin: auto;
-	z-index: 999;
-	/* 	padding: 30rpx 0; */
-	display: flex;
-	justify-content: center;
-}
+	.tantan-slide-footer-icon {
+		width: 100%;
+		height: 100%;
+		border-radius: 50rpx;
+		transition: 200ms;
+		background-color: rgba(158, 158, 158, 0.3);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 
-.slide-footer-btn {
-	height: 120rpx;
-	width: 180rpx;
-	margin: 0 16rpx;
-	background:rgba(0,0,0,0);
-	border-radius: 50rpx;
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	position: relative;
-	transition: 100ms;
-}
-
-.slide-footer-btn:active {
-	transform: scale(0.9);
-}
-
-.slide-footer-icon {
-	width: 120rpx;
-	height: 120rpx;
-	border-radius: 50%;
-	transition: 200ms;
-	background-color: rgba(158, 158, 158, 0.3);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.slide-img {
-	position: relative;
-	will-change: transform;
-	width: 100%;
-	height: 100%;
-	border-radius: 40rpx;
-}
-.slide-img.on{
-	transform: scale(1);
-	width: 50rpx;
-	height: 50rpx;
-}
-.slide-box-info{
-	padding: 0 32rpx;
-	/* color: #ffffff; */
-	/* 	background-color: #fff; */
-	border-radius: 40rpx;
-	background: url('@/static/icon/back.png')no-repeat 0 0 / 100% 100%;
-}
-.slide-box-info .title{
-	font-size: 64rpx;
-	line-height: 1.2;
-	text-shadow: 0 0 10rpx rgb(0, 0, 0, 0.5);
-}
-.slide-box-info .desc{
-	font-size: 32rpx;
-	line-height: 1.2;
-	margin-top: 30rpx;
-	text-shadow: 0 0 10rpx rgb(0, 0, 0, 0.5);
-}
-.slide-box-info .tags{
-	margin-top: 24rpx;
-}
-.slide-box-info .tag{
-	height: 48rpx;
-	font-size: 24rpx;
-	padding: 0 16rpx;
-	line-height: 48rpx;
-	background-color: rgba(255, 255,255,0.3);
-	border-radius: 10rpx;
-}
+	.tantan-slide-img {
+		position: relative;
+		will-change: transform;
+		width: 100%;
+		height: 100%;
+		border-radius: 40rpx;
+	}
+	.tantan-slide-img.on{
+		transform: scale(1);
+		width: 50rpx;
+		height: 50rpx;
+	}
+	.tantan-slide-box-info{
+		padding: 0 32rpx;
+		color: #ffffff;
+	}
+	.tantan-slide-box-info .title{
+		display: inline;
+		font-size: 64rpx;
+		line-height: 1.2;
+		text-shadow: 0 0 10rpx rgb(0, 0, 0, 0.5);
+	}
+	.tantan-slide-box-info .desc{
+		font-size: 32rpx;
+		line-height: 1.2;
+		margin-top: 30rpx;
+		text-shadow: 0 0 10rpx rgb(0, 0, 0, 0.5);
+	}
+	.tantan-slide-box-info .tags{
+		margin-top: 24rpx;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: center;
+	}
+	.tantan-slide-box-info .tags .cl-tag{
+		flex: 0 0 auto;
+		margin-right: 12rpx;
+		margin-bottom: 12rpx;
+	}
+	.tantan-slide-direction{
+		width: 100%;
+		height: 100%;
+	}
 </style>

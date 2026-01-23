@@ -1,6 +1,6 @@
 <template>
 	<div v-if="appStore.sidebarOpened" class="sidebar-logo">
-		<el-avatar src="/favicon.ico"></el-avatar>
+		<img src="/logo.png" alt="logo" width="30" height="30" />
 		<span class="logo-title"> {{ $t('app.logoText') }}</span>
 	</div>
 	<div v-else class="sidebar-logo sidebar-logo-expend">
@@ -30,8 +30,9 @@ const appStore = useAppStore()
 	text-overflow: ellipsis;
 
 	.el-avatar {
-		width: 25px;
-		height: 25px;
+		width: 30px;
+		height: 30px;
+		vertical-align: middle;
 	}
 	.logo-title {
 		margin-left: 10px;

@@ -1,7 +1,7 @@
 <template>
 	<el-row :gutter="10">
 		<el-col :span="5">
-			<ma-data-tree-left
+			<tg-data-tree-left
 				:props="{ label: 'orgName', children: 'children' }"
 				url="/mgt/sysOrganization/listCompany"
 				title="机构列表"
@@ -18,7 +18,7 @@
 						<el-input v-model="state.queryForm.userPhone" placeholder="手机号"></el-input>
 					</el-form-item>
 					<el-form-item prop="gender">
-						<ma-dict-select v-model="state.queryForm.userSexCode" dict-code="userSexCode" clearable placeholder="性别"></ma-dict-select>
+						<tg-dict-select v-model="state.queryForm.userSexCode" dict-code="userSexCode" clearable placeholder="性别"></tg-dict-select>
 					</el-form-item>
 					<el-form-item>
 						<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
@@ -35,9 +35,9 @@
 						<el-button icon="Plus" type="primary" @click="addOrEditHandle()">新增</el-button>
 					</el-space>
 					<el-space>
-						<ma-upload-excel action="/sys/user/import">
+						<tg-upload-excel action="/sys/user/import">
 							<el-button plain icon="Upload">导入</el-button>
-						</ma-upload-excel>
+						</tg-upload-excel>
 					</el-space>
 					<el-space>
 						<el-button plain icon="Download" @click="downloadHandle('/sys/user/export')">导出</el-button>
@@ -58,10 +58,10 @@
 					<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 					<el-table-column prop="userRealName" label="姓名" header-align="center" align="center"></el-table-column>
 					<el-table-column prop="userName" label="用户名" header-align="center" align="center"></el-table-column>
-					<ma-dict-column prop="userSexCode" label="性别" dict-code="userSexCode"></ma-dict-column>
+					<tg-dict-column prop="userSexCode" label="性别" dict-code="userSexCode"></tg-dict-column>
 					<el-table-column prop="userPhone" label="手机号" header-align="center" align="center"></el-table-column>
 					<el-table-column prop="userOrgNames" label="所属机构" header-align="center" align="center"></el-table-column>
-					<ma-dict-column prop="userEnabledCode" label="是否启用" dict-code="userEnabledCode"></ma-dict-column>
+					<tg-dict-column prop="userEnabledCode" label="是否启用" dict-code="userEnabledCode"></tg-dict-column>
 					<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
 					<el-table-column label="操作" fixed="right" header-align="center" align="center" width="220">
 						<template #default="scope">

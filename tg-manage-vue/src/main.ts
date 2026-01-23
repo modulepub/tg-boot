@@ -12,7 +12,7 @@ import '@/icons/iconfont/iconfont'
 import 'element-plus/dist/index.css'
 import '@/styles/index.scss'
 
-import MaComponent from '@/components/index'
+import TgComponent from '@/components/index'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -26,6 +26,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 directive(app)
 app.use(i18n)
 app.use(router)
-app.use(MaComponent)
+app.use(TgComponent)
 app.use(ElementPlus)
 app.mount('#app')

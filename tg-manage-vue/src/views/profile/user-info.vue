@@ -4,7 +4,7 @@
 			<el-input v-model="dataForm.userRealName" placeholder="姓名"></el-input>
 		</el-form-item>
 		<el-form-item prop="gender" label="性别">
-			<ma-dict-radio v-model="dataForm.userSexCode" dict-code="userSexCode"></ma-dict-radio>
+			<tg-dict-radio v-model="dataForm.userSexCode" dict-code="userSexCode"></tg-dict-radio>
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="handleDataForm">{{ $t('confirm') }}</el-button>

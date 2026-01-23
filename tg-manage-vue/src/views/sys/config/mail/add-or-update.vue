@@ -2,7 +2,7 @@
 	<el-drawer v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :size="800">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
 			<el-form-item label="平台类型" prop="platform">
-				<ma-dict-select v-model="dataForm.platform" dict-type="mail_platform" placeholder="平台类型" style="width: 100%"></ma-dict-select>
+				<tg-dict-select v-model="dataForm.platform" dict-type="mail_platform" placeholder="平台类型" style="width: 100%"></tg-dict-select>
 			</el-form-item>
 			<el-form-item label="分组名称" prop="groupName">
 				<el-input v-model="dataForm.groupName" placeholder="分组名称相同的配置，会轮询发送邮件"></el-input>
@@ -33,7 +33,7 @@
 				<el-input v-model="dataForm.endpoint" placeholder="阿里云 endpoint"></el-input>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
-				<ma-dict-radio v-model="dataForm.status" dict-type="enable_disable"></ma-dict-radio>
+				<tg-dict-radio v-model="dataForm.status" dict-type="enable_disable"></tg-dict-radio>
 			</el-form-item>
 		</el-form>
 		<template #footer>

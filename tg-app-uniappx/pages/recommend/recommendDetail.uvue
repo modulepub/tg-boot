@@ -1,0 +1,497 @@
+<template>
+	<cl-page>
+		<cl-topbar
+			fixed
+			:height="100"
+			:show-back="false"
+			safe-area-top
+			background-color="transparent"
+		>
+			<view class="flex flex-row items-center w-full flex-1 px-3">
+
+			</view>
+		</cl-topbar>
+		<view class="tantan-slide-footer">
+			<view class="tantan-slide-footer-btn" @click="footerBtnClick('dislike')">
+				<view class="tantan-slide-footer-icon" :style="{
+					backgroundColor: '#f8ba35',
+					opacity: dislike,
+					zIndex: 1
+				}">
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/close_white.png">
+					</image>
+				</view>
+				<view class="tantan-slide-footer-icon">
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/close.png"></image>
+				</view>
+			</view>
+			<view class="tantan-slide-footer-btn" @click="footerBtnClick('love')">
+				<view class="tantan-slide-footer-icon" :style="{
+					backgroundColor: '#fa547c',
+					opacity: love,
+					zIndex: 1
+				}">
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/like_white.png">
+					</image>
+				</view>
+				<view class="tantan-slide-footer-icon">
+					<image style="width: 50rpx;height: 50rpx;" src="../../static/dgex-tantan/like.png"></image>
+				</view>
+			</view>
+		</view>
+		<view @touchstart.capture="touchStart($event, currentIndex)"
+			@touchmove.stop.capture="touchMove($event, currentIndex)"
+			@touchend.capture="touchEnd(currentIndex)" class="tantan-slide-box">
+			<template v-for="(item, index) in list">
+				<view class="tantan-slide-box-item"
+					:key="index"
+					v-if="currentIndex + visible >= index"
+					 @click.stop="clickImage"
+					:style="[cardTransform(item, index)]">
+					 <!-- 加载图片会闪屏 双if避免 -->
+					<template v-if="currentIndex + visible >= index && currentIndex <= index">
+						<view class="tantan-slide-direction" :animation="currentIndex === index ? animationData : ''">
+							<image class="tantan-slide-img" mode="aspectFill" :src="item.image" ></image>
+							<view class="tantan-slide-box-item-bg">
+								<view class="tantan-slide-box-info">
+									<view class="title" v-if="item.title"><cl-text :size="40" :value="item.title"></cl-text><cl-text style="margin-left: 3px" color="blue" :size="24" value="♂"></cl-text><cl-text style="margin-left: 3px" :size="24" value="最近活跃在 日照市"></cl-text></view>
+									<view class="desc" v-if="item.desc" v-text="item.desc"></view>
+									<view class="tags" v-if="item.tags && item.tags.length > 0" >
+										<cl-tag v-for="(item1, index1) in item.tags" :key="index1" type="info" :plain="true">
+											{{ item1 }}
+										</cl-tag>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view v-if="index === currentIndex">
+							<view class="tantan-slide-box-icon tantan-slide-box-dislike" 
+								:style="{
+									opacity: dislike * 1.5,
+									transform: 'scale('+ (dislike + 1 > 2 ? 2 : dislike + 1 )  +')',
+								}">
+								<image style="width: 30rpx;height: 30rpx;" src="../../static/dgex-tantan/close.png"></image>
+							</view>
+							<view class="tantan-slide-box-icon tantan-slide-box-love" :style="{
+									opacity: love * 1.5,
+									transform: 'scale('+ (love + 1 > 2 ? 2 : love + 1 )  +')',
+								}">
+								<image style="width: 30rpx;height: 30rpx;" src="../../static/dgex-tantan/like.png"></image>
+							</view>
+						</view>
+					</template>
+				</view>
+			</template>
+		</view>
+	</cl-page>
+</template>
+
+<script setup lang="ts">
+	import { ref, computed, onMounted, watch } from 'vue';
+	import CustomTabbar from "@/components/tabbar.uvue";
+
+	const props = defineProps<{
+		list?: Array<{
+			title?: string;
+			desc?: string;
+			tags?: string[];
+			image: string;
+			x?: number;
+			y?: number;
+		}>;
+		visible?: number;
+	}>();
+
+	const emit = defineEmits<{
+		(e: 'onChange', data: {
+			currentIndex: number;
+			currentItem: any;
+			type: string;
+		}): void;
+		(e: 'onClickImage', data: {
+			type: string;
+			currentIndex: number;
+			currentItem: any;
+		}): void;
+	}>();
+
+	// 响应式数据
+	const winWidth = ref(0);
+	const winHeigh = ref(0);
+	const x = ref({
+		start: 0,
+		move: 0,
+		end: 0
+	});
+	const y = ref({
+		start: 0,
+		move: 0,
+		end: 0
+	});
+	const currentIndex = ref(0);
+	const swipering = ref(false);
+	const slideing = ref(false);
+	const love = ref(0);
+	const dislike = ref(0);
+	const direction = ref('');
+	const animationData = ref({});
+	const btnClickType = ref(false);
+	const animation = ref<any>(null);
+
+	// Mock数据
+	const mockList = ref([
+		{
+			title: '张三',
+			desc: '喜欢旅行和摄影，希望找到志同道合的朋友',
+			tags: ['旅行', '摄影', '音乐'],
+			image: 'https://picsum.photos/seed/travel1/1024/1024'
+		},
+		{
+			title: '李四',
+			desc: '美食爱好者，擅长烹饪各种料理',
+			tags: ['美食', '烹饪', '健身'],
+			image: 'https://picsum.photos/seed/food1/1024/1024'
+		},
+		{
+			title: '王五',
+			desc: '程序员，热爱技术和游戏',
+			tags: ['编程', '游戏', '科技'],
+			image: 'https://picsum.photos/seed/tech1/1024/1024'
+		},
+		{
+			title: '赵六',
+			desc: '设计师，专注于UI/UX设计',
+			tags: ['设计', 'UI', 'UX'],
+			image: 'https://picsum.photos/seed/design1/1024/1024'
+		},
+		{
+			title: '钱七',
+			desc: '音乐家，擅长钢琴和吉他',
+			tags: ['音乐', '钢琴', '吉他'],
+			image: 'https://picsum.photos/seed/music1/1024/1024'
+		}
+	]);
+
+	// 计算属性
+	const list = computed(() => props.list || mockList.value);
+	const visible = computed(() => props.visible || 5);
+
+	// 生命周期
+	onMounted(() => {
+		const res = uni.getSystemInfoSync();
+		winWidth.value = res.windowWidth;
+		winHeigh.value = res.windowHeight;
+	});
+
+	// 方法
+	const cardTransform = (item: any, index: number) => {
+		let css: any = {
+			'zIndex': list.value.length - index,
+			'opacity': currentIndex.value + visible.value - 1 >= index && currentIndex.value <= index ? 1 : 0,
+			'transform': 'rotate(' + ((item.x || 0) / 30) + 'deg) translate3d(' + (item.x || 0) + 'px,' + (item.y || 0) + 'px, ' + (currentIndex.value - index) * 50 + 'px)'
+		};
+		if (index === currentIndex.value) {
+			if (slideing.value) {
+				css["transitionDuration"] = `${!swipering.value ? 1000 : 0}ms`;
+			} else {
+				css["transitionDuration"] = `${!swipering.value ? 300 : 0}ms`;
+			}
+		}
+		return css;
+	};
+
+	const touchStart = (e: any, index: number) => {
+		if (slideing.value || list.value.length === currentIndex.value) {
+			return;
+		}
+		if (typeof list.value[index].x === 'undefined' && typeof list.value[index].y === 'undefined') {
+			list.value[index].y = 0;
+			list.value[index].x = 0;
+		}
+		swipering.value = true;
+		x.value.start = Number.parseInt(e.touches[0].pageX);
+		y.value.start = Number.parseInt(e.touches[0].pageY);
+	};
+
+	const touchMove = (e: any, index: number) => {
+		if (slideing.value || list.value.length === currentIndex.value) {
+			return;
+		}
+		x.value.move = Number.parseInt(e.touches[0].pageX);
+		y.value.move = Number.parseInt(e.touches[0].pageY);
+		
+		list.value[index].x = x.value.move - x.value.start;
+		list.value[index].y = y.value.move - y.value.start;
+		if (Number.parseInt(list.value[index].x) > 0) {
+			love.value = Number.parseInt(list.value[index].x) / (100 * 2);
+		} else {
+			dislike.value = Math.abs(Number.parseInt(list.value[index].x) / (100 * 2));
+		}
+	};
+
+	const touchEnd = (index: number) => {
+		if (slideing.value || list.value.length === currentIndex.value) {
+			return;
+		}
+		swipering.value = false;
+		if (
+			list.value[index].x > 0 &&
+			list.value[index].x > winWidth.value / 2 - winWidth.value / 5
+		) {
+			touchEndNext(index);
+		} else if (
+			list.value[index].x < 0 &&
+			list.value[index].x < -winWidth.value / 2 + winWidth.value / 5
+		) {
+			touchEndNext(index);
+		} else {
+			list.value[index].x = 0;
+			list.value[index].y = 0;
+			slideing.value = false;
+			love.value = 0;
+			dislike.value = 0;
+		}
+	};
+
+	const touchEndNext = (index: number) => {
+		slideing.value = true;
+		list.value[index].x = list.value[index].x * 5;
+		list.value[index].y = list.value[index].y * 5;
+		touchEndDone();
+	};
+
+	const touchEndDone = () => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				slideing.value = false;
+				emit('onChange', {
+					currentIndex: currentIndex.value,
+					currentItem: list.value[currentIndex.value],
+					type: love.value !== 0 ? 'love' : 'dislike'
+				});
+				currentIndex.value++;
+				x.value.move = 0;
+				y.value.move = 0;
+				slideing.value = false;
+				btnClickType.value = false;
+				love.value = 0;
+				dislike.value = 0;
+				resolve(undefined);
+			}, 350);
+		});
+	};
+
+	const footerBtnClick = (type: string) => {
+		if (btnClickType.value) {
+			return;
+		}
+		if (list.value.length === currentIndex.value) {
+			emit('onChange', {
+				currentIndex: currentIndex.value,
+				currentItem: null,
+				type: love.value !== 0 ? 'love' : 'dislike'
+			});
+			return;
+		}
+		btnClickType.value = true;
+		let w = 0;
+		if (type === 'love') {
+			w = winWidth.value * 1.5;
+			love.value = 1;
+		} else if (type === 'dislike') {
+			w = -winWidth.value * 1.5;
+			dislike.value = 1;
+		}
+		list.value[currentIndex.value].x = w;
+		touchEndDone();
+	};
+
+	const clickImage = (e: any) => {
+		direction.value = winWidth.value / 2 > e.detail.x ? 'left' : 'right';
+        /*#ifdef APP-PLUS || H5*/
+
+		animation.value = uni.createAnimation({
+			duration: 200,
+			timingFunction: 'ease',
+		});
+		
+		animation.value.rotateY(direction.value === 'left' ? -10 : 10).step().rotateY(direction.value === 'left' ? 5 : -5).step();
+		animationData.value = animation.value.export();
+		
+		setTimeout(function() {
+			animation.value.rotateY(0).step();
+			animationData.value = animation.value.export();
+		}.bind(this), 300);
+        /*#endif*/
+		emit('onClickImage', {
+			type: 'click',
+			currentIndex: currentIndex.value,
+			currentItem: list.value[currentIndex.value],
+		});
+	};
+</script>
+<style>
+	.tantan-slide {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.tantan-slide-box {
+		position: relative;
+
+		width: 95%;
+		height: 80%;
+		perspective: 2100rpx;
+		perspective-origin: 50% -30%;
+		transform-style: preserve-3d;
+		margin: auto;
+	}
+
+	.tantan-slide-box-item {
+		transform-style: preserve-3d;
+		display: flex;
+		width: 100%;
+		height: 100%;
+		border-radius: 24rpx;
+		position: absolute;
+		opacity: 0;
+		transform: translate3d(0px, 0px, 0px) rotate(0deg);
+		transition: 300ms;
+		color: #fff;
+	}
+
+	.tantan-slide-box-item.on {
+		display: block;
+	}
+
+	.tantan-slide-box-item-bg {
+		height: 380rpx;
+		background-image: linear-gradient(to bottom, transparent, #000000 70%);
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+		border-bottom-right-radius: 40rpx;
+		border-bottom-left-radius: 40rpx;
+	}
+
+	.tantan-slide-box-icon {
+		position: absolute;
+		width: 70rpx;
+		height: 70rpx;
+		top: 45rpx;
+		border-radius: 100%;
+		background-color: #fff;
+		z-index: 1;
+		opacity: 0;
+		transition: 100ms;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.tantan-slide-box-love {
+		left: 50rpx;
+	}
+
+	.tantan-slide-box-dislike {
+		right: 50rpx;
+	}
+
+	.tantan-slide-footer {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 9.7%;
+		margin: auto;
+		z-index: 9999;
+		padding: 30rpx 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+
+	.tantan-slide-footer-btn {
+		height: 96rpx;
+		width: 180rpx;
+		margin: 0 16rpx;
+		border-radius: 50rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		transition: 100ms;
+	}
+
+	.tantan-slide-footer-btn:active {
+		transform: scale(0.9);
+	}
+
+	.tantan-slide-footer-icon {
+		width: 100%;
+		height: 100%;
+		border-radius: 50rpx;
+		transition: 200ms;
+		background-color: rgba(158, 158, 158, 0.3);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.tantan-slide-img {
+		position: relative;
+		will-change: transform;
+		width: 100%;
+		height: 100%;
+		border-radius: 40rpx;
+	}
+	.tantan-slide-img.on{
+		transform: scale(1);
+		width: 50rpx;
+		height: 50rpx;
+	}
+	.tantan-slide-box-info{
+		padding: 0 32rpx;
+		color: #ffffff;
+	}
+	.tantan-slide-box-info .title{
+		display: inline;
+		font-size: 64rpx;
+		line-height: 1.2;
+		text-shadow: 0 0 10rpx rgb(0, 0, 0, 0.5);
+	}
+	.tantan-slide-box-info .desc{
+		font-size: 32rpx;
+		line-height: 1.2;
+		margin-top: 30rpx;
+		text-shadow: 0 0 10rpx rgb(0, 0, 0, 0.5);
+	}
+	.tantan-slide-box-info .tags{
+		margin-top: 24rpx;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: center;
+	}
+	.tantan-slide-box-info .tags .cl-tag{
+		flex: 0 0 auto;
+		margin-right: 12rpx;
+		margin-bottom: 12rpx;
+	}
+	.tantan-slide-direction{
+		width: 100%;
+		height: 100%;
+	}
+</style>

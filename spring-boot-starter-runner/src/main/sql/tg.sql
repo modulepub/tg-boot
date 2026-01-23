@@ -11,7 +11,7 @@
  Target Server Version : 80036 (8.0.36)
  File Encoding         : 65001
 
- Date: 12/01/2026 23:35:29
+ Date: 23/01/2026 01:02:21
 */
 
 SET NAMES utf8mb4;
@@ -1900,12 +1900,12 @@ CREATE TABLE `gen_table`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table
 -- ----------------------------
-INSERT INTO `gen_table` VALUES (57, 'log', '日志表', '', '', 'Log', 'crud', 'pub.module.log.curd', 'log', 'log', '日志表', 'tg', 1, '0', '/', '{\n    \"parentMenuId\": \"\",\n    \"treeName\": \"\",\n    \"treeParentCode\": \"\",\n    \"parentMenuName\": \"\",\n    \"treeCode\": \"\"\n}', 'admin', '2026-01-12 01:40:52', '', '2026-01-12 01:41:02', '', 0, NULL, '0');
+INSERT INTO `gen_table` VALUES (60, 'log', '日志表', NULL, NULL, 'Log', 'crud', 'pub.module.log.curd', 'log', 'log', '日志表', 'tg', 0, '0', '/', NULL, 'admin', '2026-01-22 20:53:04', '', NULL, NULL, 0, NULL, '0');
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -1938,26 +1938,29 @@ CREATE TABLE `gen_table_column`  (
   `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '版本',
   `org_code` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '机构编码',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 934 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 993 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table_column
 -- ----------------------------
-INSERT INTO `gen_table_column` VALUES (919, 57, 'log_code', '日志编码', 'varchar(64)', 'String', 'logCode', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 1, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (920, 57, 'log_name', '日志名称', 'varchar(100)', 'String', 'logName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (921, 57, 'log_method_name', '方法名', 'varchar(255)', 'String', 'logMethodName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (922, 57, 'log_content', '日志内容', 'varchar(5000)', 'String', 'logContent', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'summernote', '', 4, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (923, 57, 'log_description', '日志描述', 'varchar(200)', 'String', 'logDescription', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (924, 57, 'log_transaction_code', '事务编码', 'varchar(100)', 'String', 'logTransactionCode', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (925, 57, 'log_user_name', '用户名', 'varchar(255)', 'String', 'logUserName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 7, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (926, 57, 'id', 'ID', 'varchar(32)', 'String', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 8, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (927, 57, 'create_by', '创建人', 'varchar(32)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 9, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (928, 57, 'create_time', '创建日期', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 10, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (929, 57, 'update_by', '更新人', 'varchar(32)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (930, 57, 'update_time', '更新日期', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (931, 57, 'deleted', '删除标识', 'varchar(10)', 'String', 'deleted', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 13, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (932, 57, 'version', '版本', 'varchar(10)', 'String', 'version', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 14, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
-INSERT INTO `gen_table_column` VALUES (933, 57, 'seq_no', '序号', 'int', 'Long', 'seqNo', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 15, 'admin', '2026-01-12 01:40:52', NULL, '2026-01-12 01:41:02', 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (975, 60, 'log_code', '日志编码', 'varchar(64)', 'String', 'logCode', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 1, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (976, 60, 'log_name', '日志名称', 'varchar(100)', 'String', 'logName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (977, 60, 'log_method_name', '方法名', 'varchar(255)', 'String', 'logMethodName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (978, 60, 'log_content', '日志内容', 'varchar(5000)', 'String', 'logContent', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'summernote', '', 4, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (979, 60, 'log_description', '日志描述', 'varchar(200)', 'String', 'logDescription', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (980, 60, 'log_client_ip', '客户端IP', 'varchar(255)', 'String', 'logClientIp', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (981, 60, 'log_transaction_code', '事务编码', 'varchar(100)', 'String', 'logTransactionCode', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (982, 60, 'log_user_code', '用户编码', 'varchar(255)', 'String', 'logUserCode', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (983, 60, 'log_user_name', '用户名', 'varchar(255)', 'String', 'logUserName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 9, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (984, 60, 'id', 'ID', 'varchar(32)', 'String', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 10, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (985, 60, 'create_by', '创建人', 'varchar(32)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (986, 60, 'create_time', '创建日期', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (987, 60, 'update_by', '更新人', 'varchar(32)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 13, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (988, 60, 'update_time', '更新日期', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 14, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (989, 60, 'deleted', '删除标识', 'varchar(10)', 'String', 'deleted', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 15, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (990, 60, 'version', '版本', 'varchar(10)', 'String', 'version', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 16, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (991, 60, 'seq_no', '序号', 'int', 'Long', 'seqNo', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 17, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
+INSERT INTO `gen_table_column` VALUES (992, 60, 'org_code', '所在机构', 'varchar(60)', 'String', 'orgCode', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 18, 'admin', '2026-01-22 20:53:04', '', NULL, 0, NULL, '0');
 
 -- ----------------------------
 -- Table structure for im_csr
@@ -3645,7 +3648,9 @@ CREATE TABLE `log`  (
   `log_method_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '方法名',
   `log_content` varchar(5000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   `log_description` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '日志描述',
+  `log_client_ip` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '客户端IP',
   `log_transaction_code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '事务编码',
+  `log_user_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户编码',
   `log_user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户名',
   `id` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT 'ID',
   `create_by` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人',
@@ -3655,13 +3660,17 @@ CREATE TABLE `log`  (
   `deleted` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '0' COMMENT '删除标识',
   `version` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '版本',
   `seq_no` int NULL DEFAULT NULL COMMENT '序号',
+  `org_code` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所在机构',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
-INSERT INTO `log` VALUES ('A01A03', 'admin', 'admin', NULL, 'A01A03', NULL, NULL, '4f1765520d6346f9bd9c79e2479e5b12', 'admin', '2019-02-20 17:15:34', 'admin', '2019-02-26 16:36:18', '0', NULL, 1);
+INSERT INTO `log` VALUES ('2014326210053640192', '登陆', 'record', '用户：admin', NULL, '', 'f64b54113f09486d8693b0e473fb671d', 'admin', NULL, '2014326210136657921', NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL);
+INSERT INTO `log` VALUES ('2014330828565291008', '登陆', 'record', '用户：admin', NULL, '', 'bc461ba6029c478c8034b9803d5f72d0', 'admin', NULL, '2014330828593913857', NULL, '2026-01-22 21:34:29', NULL, '2026-01-22 21:34:29', '0', NULL, NULL, NULL);
+INSERT INTO `log` VALUES ('2014331069549027328', '登陆', 'record', '用户：admin', NULL, '', '54944a3833844acb8e92647b36d061d9', 'admin', NULL, '2014331127438073857', NULL, '2026-01-22 21:35:40', NULL, '2026-01-22 21:35:40', '0', NULL, NULL, NULL);
+INSERT INTO `log` VALUES ('A01A03', 'admin', 'admin', NULL, 'A01A03', NULL, NULL, NULL, NULL, '4f1765520d6346f9bd9c79e2479e5b12', 'admin', '2019-02-20 17:15:34', 'admin', '2019-02-26 16:36:18', '1', NULL, 1, NULL);
 
 -- ----------------------------
 -- Table structure for sys_organization
@@ -3737,11 +3746,11 @@ INSERT INTO `sys_permission` VALUES ('2010214199342497794', 0, NULL, NULL, NULL,
 INSERT INTO `sys_permission` VALUES ('2010214334625579010', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'wef', '234', '234', '', '', '0', '0', '');
 INSERT INTO `sys_permission` VALUES ('2010217692484644865', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'permission', '123234', '123123123123', '', '', '0', '0', '');
 INSERT INTO `sys_permission` VALUES ('2010218870035447810', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'setting', '123', '123', '', '', '0', '0', '');
-INSERT INTO `sys_permission` VALUES ('2010219024750739457', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'permission', 'qwe', 'qwe', '', '', '0', '0', '');
+INSERT INTO `sys_permission` VALUES ('2010219024750739457', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'permission', 'qwe', 'qwe', '', '', '0', '0', '');
 INSERT INTO `sys_permission` VALUES ('23', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'role', '角色管理', 'sys/role/index', '', '0', '0', 'icon-team');
 INSERT INTO `sys_permission` VALUES ('28', 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'userManage', '用户管理', 'sys/user/index', '', '0', '0', 'icon-user');
 INSERT INTO `sys_permission` VALUES ('35', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'setting', 'loginLog', '登录日志', 'sys/log/login', 'sys:log:login', '0', '0', 'icon-solution');
-INSERT INTO `sys_permission` VALUES ('40', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'opLog', '系统日志', 'sys/log/operate', 'sys:operate:all', '0', '0', 'icon-file-text');
+INSERT INTO `sys_permission` VALUES ('40', 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'opLog', '系统日志', 'log/index', 'sys:operate:all', '0', '0', 'icon-file-text');
 INSERT INTO `sys_permission` VALUES ('46', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'setting', 'sms', '短信发送', 'sys/tool/sms/index', 'sys:sms:log', '0', '0', 'icon-message');
 INSERT INTO `sys_permission` VALUES ('67', 3, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'online', '在线用户', 'monitor/user/index', 'monitor:user:all', '0', '0', 'icon-user');
 INSERT INTO `sys_permission` VALUES ('7', 4, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'setting', 'dict', '数据字典', 'sys/dict/index', '', '0', '0', 'icon-insertrowabove');
@@ -3906,6 +3915,7 @@ INSERT INTO `sys_user` VALUES ('hFSaPs1nC6', 'hFSaPs1nC6', '$2a$10$pbl8duVoxJ6Of
 INSERT INTO `sys_user` VALUES ('p2gkjAcP7v', 'p2gkjAcP7v', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '70517096', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973202842651955201', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
 INSERT INTO `sys_user` VALUES ('PCExUf1aX0', 'PCExUf1aX0', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '86237021', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973203096256356354', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
 INSERT INTO `sys_user` VALUES ('9zCfPlgbBZ', '9zCfPlgbBZ', '$2a$10$pbl8duVoxJ6OfBhWWp7F4ewFTL2lvgeF1joNO.UXJJmp8t/sBWY7i', '1', '0', '1', NULL, NULL, '17806330521', '00788868', 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', NULL, NULL, NULL, NULL, NULL, NULL, '1', '1973203810076565505', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
+INSERT INTO `sys_user` VALUES ('2012501484578652160', 'Xi1basymnN', '$2a$10$dq3sl3jTl4FtGRr1ydoGte1Rm82tqIQh/EGZBiSJ4uVYIBbnmMd2m', '$2a$10$dq3sl3jTl4FtGRr1ydoGte', NULL, NULL, NULL, NULL, '18000000000', '62131125', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012501484636504066', NULL, NULL, NULL, NULL, 0, NULL, NULL, '0');
 INSERT INTO `sys_user` VALUES ('admin', 'admin', '$2a$10$VXBQS2xjQWQi/Q8akk1cSeODzv9./yicTc.2pETwuqrUlW9cH6VYq', '$2a$10$VXBQS2xjQWQi/Q8akk1cSe', '0', '1', NULL, NULL, '17806330521', NULL, 'https://mp-a6a84ef0-b508-435d-8a4b-c9dd12d10ee0.cdn.bspapp.com/cloudstorage/a2c75058-3aa1-4262-afbd-55e7fbb4976d.png', '测试用户', '测试用户', '11', NULL, '1', NULL, NULL, 'A01A03', '1', 'e9ca23d68d884d4ebb19d07889727dae', 'A01A05', NULL, NULL, '2025-12-27 12:22:56', 0, NULL, NULL, '0');
 
 -- ----------------------------

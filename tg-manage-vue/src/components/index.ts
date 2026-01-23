@@ -1,62 +1,62 @@
 import type { App, Plugin } from 'vue'
-import MaDictColumn from '@/components/ma-dict/ma-dict-column/index.vue'
-import MaDictRadio from '@/components/ma-dict/ma-dict-radio/index.vue'
-import MaDictTreeSelect from '@/components/ma-dict/ma-dict-tree-select/index.vue'
-import MaDictSelect from '@/components/ma-dict/ma-dict-select/index.vue'
-import MaDictCheckbox from '@/components/ma-dict/ma-dict-checkbox/index.vue'
-import MaDataColumn from '@/components/ma-data/ma-data-column/index.vue'
-import MaDataLabel from '@/components/ma-data/ma-data-label/index.vue'
-import MaDataSelect from '@/components/ma-data/ma-data-select/index.vue'
-import MaDataTreeSelect from '@/components/ma-data/ma-data-tree-select/index.vue'
-import MaDataTreeLeft from '@/components/ma-data/ma-data-tree-left/index.vue'
-import MaDataTable from '@/components/ma-data/ma-data-table/index.vue'
-import MaImageColumn from '@/components/ma-image-column/index.vue'
+import TgDictColumn from '@/components/tg-dict/tg-dict-column/index.vue'
+import TgDictRadio from '@/components/tg-dict/tg-dict-radio/index.vue'
+import TgDictTreeSelect from '@/components/tg-dict/tg-dict-tree-select/index.vue'
+import TgDictSelect from '@/components/tg-dict/tg-dict-select/index.vue'
+import TgDictCheckbox from '@/components/tg-dict/tg-dict-checkbox/index.vue'
+import TgDataColumn from '@/components/tg-data/tg-data-column/index.vue'
+import TgDataLabel from '@/components/tg-data/tg-data-label/index.vue'
+import TgDataSelect from '@/components/tg-data/tg-data-select/index.vue'
+import TgDataTreeSelect from '@/components/tg-data/tg-data-tree-select/index.vue'
+import TgDataTreeLeft from '@/components/tg-data/tg-data-tree-left/index.vue'
+import TgDataTable from '@/components/tg-data/tg-data-table/index.vue'
+import TgImageColumn from '@/components/tg-image-column/index.vue'
 
-import MaIcon from '@/components/ma-icon/index.vue'
-import MaEditor from '@/components/ma-editor/index.vue'
-import MaMarkdown from '@/components/ma-markdown/index.vue'
-import MaAddress from '@/components/ma-address/index.vue'
-import MaUserInput from '@/components/ma-user/ma-user-input/index.vue'
-import MaUserDialog from '@/components/ma-user/ma-user-dialog/index.vue'
-import MaOrgSelect from '@/components/ma-org/ma-org-select/index.vue'
-import MaOrgInput from '@/components/ma-org/ma-org-input/index.vue'
-import MaRoleInput from '@/components/ma-role-input/index.vue'
-import MaPostInput from '@/components/ma-post-input/index.vue'
-import MaUploadImage from '@/components/ma-upload/ma-upload-image/index.vue'
-import MaUploadImages from '@/components/ma-upload/ma-upload-images/index.vue'
-import MaUploadFile from '@/components/ma-upload/ma-upload-file/index.vue'
-import MaUploadExcel from '@/components/ma-upload/ma-upload-excel/index.vue'
+import TgIcon from '@/components/tg-icon/index.vue'
+import TgEditor from '@/components/tg-editor/index.vue'
+import TgMarkdown from '@/components/tg-markdown/index.vue'
+import TgAddress from '@/components/tg-address/index.vue'
+import TgUserInput from '@/components/tg-user/tg-user-input/index.vue'
+import TgUserDialog from '@/components/tg-user/tg-user-dialog/index.vue'
+import TgOrgSelect from '@/components/tg-org/tg-org-select/index.vue'
+import TgOrgInput from '@/components/tg-org/tg-org-input/index.vue'
+import TgRoleInput from '@/components/tg-role-input/index.vue'
+import TgPostInput from '@/components/tg-post-input/index.vue'
+import TgUploadImage from '@/components/tg-upload/tg-upload-image/index.vue'
+import TgUploadImages from '@/components/tg-upload/tg-upload-images/index.vue'
+import TgUploadFile from '@/components/tg-upload/tg-upload-file/index.vue'
+import TgUploadExcel from '@/components/tg-upload/tg-upload-excel/index.vue'
 
 const components = [
-	MaEditor,
-	MaMarkdown,
-	MaAddress,
-	MaIcon,
-	MaDictColumn,
-	MaDictRadio,
-	MaDictSelect,
-	MaDictCheckbox,
-	MaDictTreeSelect,
-	MaDataColumn,
-	MaDataLabel,
-	MaDataSelect,
-	MaDataTreeSelect,
-	MaDataTreeLeft,
-	MaDataTable,
-	MaImageColumn,
-	MaUserInput,
-	MaUserDialog,
-	MaOrgSelect,
-	MaOrgInput,
-	MaRoleInput,
-	MaPostInput,
-	MaUploadImage,
-	MaUploadImages,
-	MaUploadFile,
-	MaUploadExcel
+	TgEditor,
+	TgMarkdown,
+	TgAddress,
+	TgIcon,
+	TgDictColumn,
+	TgDictRadio,
+	TgDictSelect,
+	TgDictCheckbox,
+	TgDictTreeSelect,
+	TgDataColumn,
+	TgDataLabel,
+	TgDataSelect,
+	TgDataTreeSelect,
+	TgDataTreeLeft,
+	TgDataTable,
+	TgImageColumn,
+	TgUserInput,
+	TgUserDialog,
+	TgOrgSelect,
+	TgOrgInput,
+	TgRoleInput,
+	TgPostInput,
+	TgUploadImage,
+	TgUploadImages,
+	TgUploadFile,
+	TgUploadExcel
 ]
 
-const MaComponent: Plugin = {
+const TgComponent: Plugin = {
 	install(Vue: App) {
 		components.forEach((component: any) => {
 			Vue.component(component.name, component)
@@ -64,4 +64,4 @@ const MaComponent: Plugin = {
 	}
 }
 
-export default MaComponent
+export default TgComponent

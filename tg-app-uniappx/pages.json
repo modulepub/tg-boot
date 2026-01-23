@@ -119,6 +119,20 @@
 					}
 				}
 			]
+		},
+		{
+			"root": "pages/recommend",
+			"pages": [
+				{
+					"path": "recommendDetail",
+					"style": {
+						"navigationBarTitleText": "推荐详情"
+					},
+					"meta": {
+						"isAuth": false
+					}
+				}
+			]
 		}
 	],
 	"globalStyle": {

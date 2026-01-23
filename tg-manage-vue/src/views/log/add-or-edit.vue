@@ -13,38 +13,17 @@
 			<el-form-item label="日志内容" prop="log_content">
 				<el-input v-model="dataForm.log_content" placeholder="日志内容"></el-input>
 			</el-form-item>
-			<el-form-item label="日志描述" prop="log_description">
-				<el-input v-model="dataForm.log_description" placeholder="日志描述"></el-input>
+			<el-form-item label="客户端IP" prop="log_client_ip">
+				<el-input v-model="dataForm.log_client_ip" placeholder="客户端IP"></el-input>
 			</el-form-item>
 			<el-form-item label="事务编码" prop="log_transaction_code">
 				<el-input v-model="dataForm.log_transaction_code" placeholder="事务编码"></el-input>
 			</el-form-item>
+			<el-form-item label="用户编码" prop="log_user_code">
+				<el-input v-model="dataForm.log_user_code" placeholder="用户编码"></el-input>
+			</el-form-item>
 			<el-form-item label="用户名" prop="log_user_name">
 				<el-input v-model="dataForm.log_user_name" placeholder="用户名"></el-input>
-			</el-form-item>
-			<el-form-item label="ID" prop="id">
-				<el-input v-model="dataForm.id" placeholder="ID"></el-input>
-			</el-form-item>
-			<el-form-item label="创建人" prop="create_by">
-				<el-input v-model="dataForm.create_by" placeholder="创建人"></el-input>
-			</el-form-item>
-			<el-form-item label="创建日期" prop="create_time">
-				<el-input v-model="dataForm.create_time" placeholder="创建日期"></el-input>
-			</el-form-item>
-			<el-form-item label="更新人" prop="update_by">
-				<el-input v-model="dataForm.update_by" placeholder="更新人"></el-input>
-			</el-form-item>
-			<el-form-item label="更新日期" prop="update_time">
-				<el-input v-model="dataForm.update_time" placeholder="更新日期"></el-input>
-			</el-form-item>
-			<el-form-item label="删除标识" prop="deleted">
-				<el-input v-model="dataForm.deleted" placeholder="删除标识"></el-input>
-			</el-form-item>
-			<el-form-item label="版本" prop="version">
-				<el-input v-model="dataForm.version" placeholder="版本"></el-input>
-			</el-form-item>
-			<el-form-item label="序号" prop="seq_no">
-				<el-input v-model="dataForm.seq_no" placeholder="序号"></el-input>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -70,7 +49,9 @@
 ,	log_method_name: ''
 ,	log_content: ''
 ,	log_description: ''
+,	log_client_ip: ''
 ,	log_transaction_code: ''
+,	log_user_code: ''
 ,	log_user_name: ''
 ,	id: ''
 ,	create_by: ''
@@ -80,6 +61,7 @@
 ,	deleted: ''
 ,	version: ''
 ,	seq_no: ''
+,	org_code: ''
 	})
 
 	const init = (id?: number) => {

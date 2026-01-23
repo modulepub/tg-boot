@@ -1,6 +1,6 @@
 <template>
 	<el-dropdown trigger="click" @command="componentSizeChange">
-		<ma-icon icon="icon-font-size"></ma-icon>
+		<tg-icon icon="icon-font-size"></tg-icon>
 		<template #dropdown>
 			<el-dropdown-menu>
 				<el-dropdown-item command="large" :disabled="componentSize === 'large'">{{ $t('app.large') }}</el-dropdown-item>

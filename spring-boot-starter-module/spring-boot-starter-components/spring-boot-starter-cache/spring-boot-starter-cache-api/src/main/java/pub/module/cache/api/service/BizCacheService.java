@@ -1,7 +1,6 @@
 package pub.module.cache.api.service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -69,12 +68,6 @@ public interface BizCacheService {
      */
     String hGet(String key, String field);
 
-    /**
-     * 获取在哈希表中指定 key 的所有字段和值
-     * @param key 键
-     * @return 字段和值的映射
-     */
-    Map<String, String> hGetAll(String key);
 
     /**
      * 删除哈希表 key 中的一个或多个指定字段
@@ -149,9 +142,6 @@ public interface BizCacheService {
      */
     boolean exists(String key);
 
-    /**
-     * 清除所有缓存
-     */
-    void flushAll();
+
 
 }

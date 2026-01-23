@@ -43,8 +43,7 @@ public class StartApplication extends SpringBootServletInitializer {
         String printStr = """
                 Application is running! Access URLs:
                 code generator: \t\thttp://localhost:{port}{path}/pub/generator/index
-                Local: \t\t\t\t\t\thttp://localhost:{port}{path}
-                Swagger: \t\t\t\thttp://localhost:{port}{path}/doc.html
+                Swagger: \t\t\t\thttp://localhost:{port}{path}/swagger-ui/index.html
                 """;
         printStr = printStr.replace("{ip}", ip);
         printStr = printStr.replace("{port}", port != null ? port : "??");

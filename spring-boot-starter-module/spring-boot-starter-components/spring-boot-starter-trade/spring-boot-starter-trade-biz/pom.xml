@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -9,20 +9,14 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-trade</artifactId>
-        <version>1.1.8.RELEASE</version>
+        <version>3.5.5</version>
     </parent>
     <dependencies>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+
 
         <!-- hutool工具类-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -37,26 +31,26 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-system-api</artifactId>
-            <version>1.1.8.RELEASE</version>
+            <version>3.5.5</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-data-api</artifactId>
-            <version>1.1.8.RELEASE</version>
+            <version>3.5.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-trade-api</artifactId>
-            <version>1.1.8.RELEASE</version>
+            <version>3.5.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-wechat-api</artifactId>
-            <version>1.1.8.RELEASE</version>
+            <version>3.5.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

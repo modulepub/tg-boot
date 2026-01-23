@@ -34,7 +34,7 @@
 			<el-table-column prop="perCode" label="编码" header-align="center" align="center" width="120"></el-table-column>
 			<el-table-column prop="perIcon" label="图标" header-align="center" align="center">
 				<template #default="scope">
-					<ma-icon :icon="scope.row.perIcon"></ma-icon>
+					<tg-icon :icon="scope.row.perIcon"></tg-icon>
 				</template>
 			</el-table-column>
 			<el-table-column prop="perTypeCode" label="类型" header-align="center" align="center">

@@ -1,5 +1,5 @@
 <template>
-	<ma-icon icon="icon-reload" @click="refresh"></ma-icon>
+	<tg-icon icon="icon-reload" @click="refresh"></tg-icon>
 </template>
 
 <script setup lang="ts">

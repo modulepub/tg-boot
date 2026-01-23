@@ -29,7 +29,7 @@ public class OcrController {
     @Operation(summary = "银行卡OCR识别")
     @PostMapping(value = "/bankOcr", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Result<BizOcrService.BankOcr> bankOcr(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile) {
-        File file = FileUtil.createTempFile();
+        File file = FileUtil.createTempFile(FileUtil.getTmpDir());
         BizOcrService bizOcrService = SpringUtil.getBean("bizKsOcrService");
         try {
             multipartFile.transferTo(file);

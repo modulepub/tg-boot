@@ -8,13 +8,13 @@
 				<el-tab-pane label="华为云" :name="3"> </el-tab-pane>
 			</el-tabs>
 			<el-form-item label="短信模板" prop="id">
-				<ma-data-select
+				<tg-data-select
 					:key="dataForm.platform"
 					v-model="dataForm.id"
 					:url="`/sys/sms/config/list?platform=${dataForm.platform}`"
 					:props="{ label: 'templateId', value: 'id' }"
 					placeholder="选择短信模板"
-				></ma-data-select>
+				></tg-data-select>
 			</el-form-item>
 			<el-form-item label="手机号" prop="mobile">
 				<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>

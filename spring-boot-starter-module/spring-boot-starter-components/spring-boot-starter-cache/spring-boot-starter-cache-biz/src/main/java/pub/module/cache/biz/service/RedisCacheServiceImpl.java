@@ -7,9 +7,7 @@ import pub.module.cache.api.service.BizCacheService;
 
 import jakarta.annotation.Resource;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -60,7 +58,6 @@ public class RedisCacheServiceImpl implements BizCacheService {
         }
     }
 
-    // ===============================  Hash 类型操作  ===============================
 
     @Override
     public void hSet(String key, String field, String value) {
@@ -72,13 +69,7 @@ public class RedisCacheServiceImpl implements BizCacheService {
         return (String) redisTemplate.opsForHash().get(key, field);
     }
 
-    @Override
-    public Map<String, String> hGetAll(String key) {
-        Map<Object, Object> resultI =  redisTemplate.opsForHash().entries(key);
-        Map<String, String> result = new HashMap<>();
-        //result.putAll();
-        return result;
-    }
+
 
     @Override
     public void hDelete(String key, String... fields) {
@@ -116,7 +107,7 @@ public class RedisCacheServiceImpl implements BizCacheService {
 
     @Override
     public boolean sIsMember(String key, String member) {
-        return redisTemplate.opsForSet().isMember(key, member);
+        return Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(key, member));
     }
 
     // ===============================  通用操作  ===============================
@@ -131,9 +122,6 @@ public class RedisCacheServiceImpl implements BizCacheService {
         return redisTemplate.hasKey(key);
     }
 
-    @Override
-    public void flushAll() {
-        redisTemplate.getConnectionFactory().getConnection().flushAll();
-    }
+
 
 }

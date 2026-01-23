@@ -7,7 +7,7 @@
 						<el-input v-model="dataForm.userName" placeholder="用户名"></el-input>
 					</el-form-item>
 					<el-form-item prop="orgId" label="所属机构">
-						<ma-org-select v-model="dataForm.orgCodeList" placeholder="请选择"></ma-org-select>
+						<tg-org-select v-model="dataForm.orgCodeList" placeholder="请选择"></tg-org-select>
 					</el-form-item>
 					<el-form-item prop="mobile" label="手机号">
 						<el-input v-model="dataForm.userPhone" placeholder="手机号"></el-input>
@@ -19,10 +19,10 @@
 						<el-input v-model="dataForm.userRealName" placeholder="姓名"></el-input>
 					</el-form-item>
 					<el-form-item prop="userSexCode" label="性别">
-						<ma-dict-radio v-model="dataForm.userSexCode" dict-code="userSexCode"></ma-dict-radio>
+						<tg-dict-radio v-model="dataForm.userSexCode" dict-code="userSexCode"></tg-dict-radio>
 					</el-form-item>
 					<el-form-item prop="userEnabledCode" label="是否启用">
-						<ma-dict-radio v-model="dataForm.userEnabledCode" dict-code="userEnabledCode"></ma-dict-radio>
+						<tg-dict-radio v-model="dataForm.userEnabledCode" dict-code="userEnabledCode"></tg-dict-radio>
 					</el-form-item>
 				</el-col>
 			</el-row>

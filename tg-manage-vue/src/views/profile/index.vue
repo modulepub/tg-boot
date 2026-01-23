@@ -4,22 +4,22 @@
 			<el-card class="profile-card">
 				<template #header> 个人信息 </template>
 				<div class="avatar">
-					<ma-upload-image v-model:image-url="userStore.user.userAvatar" biz="avatar" :drag="false" border-radius="50%" @success="handleSuccess">
+					<tg-upload-image v-model:image-url="userStore.user.userAvatar" biz="avatar" :drag="false" border-radius="50%" @success="handleSuccess">
 						<template #empty>
 							<el-icon><Avatar /></el-icon>
 							<span>请上传头像</span>
 						</template>
-					</ma-upload-image>
+					</tg-upload-image>
 				</div>
 				<ul>
 					<li>
-						<ma-icon icon="icon-user" /> 用户名 <span>{{ userStore.user.userName }}</span>
+						<tg-icon icon="icon-user" /> 用户名 <span>{{ userStore.user.userName }}</span>
 					</li>
 					<li>
-						<ma-icon icon="icon-idcard" /> 姓名 <span>{{ userStore.user.userRealName }}</span>
+						<tg-icon icon="icon-idcard" /> 姓名 <span>{{ userStore.user.userRealName }}</span>
 					</li>
 					<li>
-						<ma-icon icon="icon-phone" /> 手机号码 <span>{{ userStore.user.userPhone }}</span>
+						<tg-icon icon="icon-phone" /> 手机号码 <span>{{ userStore.user.userPhone }}</span>
 					</li>
 				</ul>
 			</el-card>

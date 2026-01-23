@@ -6,13 +6,13 @@
 				<el-tab-pane label="阿里云邮件" :name="0"> </el-tab-pane>
 			</el-tabs>
 			<el-form-item label="邮件分组" prop="id">
-				<ma-data-select
+				<tg-data-select
 					:key="dataForm.platform"
 					v-model="dataForm.id"
 					:url="`/sys/mail/config/list?platform=${dataForm.platform}`"
 					:props="{ label: 'groupName', value: 'id' }"
 					placeholder="选择邮件分组"
-				></ma-data-select>
+				></tg-data-select>
 			</el-form-item>
 			<el-form-item label="发送方式" prop="mailFormat">
 				<el-radio-group v-model="dataForm.mailFormat">
@@ -44,7 +44,7 @@
 			</el-form-item>
 			<el-form-item v-if="dataForm.mailFormat !== 'template'" label="邮件正文" prop="content">
 				<el-input v-if="dataForm.mailFormat === 'text'" v-model="dataForm.content" type="textarea" :rows="12"></el-input>
-				<ma-editor v-else v-model="dataForm.content"></ma-editor>
+				<tg-editor v-else v-model="dataForm.content"></tg-editor>
 			</el-form-item>
 		</el-form>
 		<template #footer>

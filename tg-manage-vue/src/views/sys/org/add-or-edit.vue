@@ -5,10 +5,10 @@
 				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="pid" label="上级机构">
-				<ma-org-select v-model="dataForm.pid" placeholder="请选择"></ma-org-select>
+				<tg-org-select v-model="dataForm.pid" placeholder="请选择"></tg-org-select>
 			</el-form-item>
 			<el-form-item prop="leaderId" label="负责人">
-				<ma-user-input v-model="dataForm.leaderId" placeholder="机构负责人"></ma-user-input>
+				<tg-user-input v-model="dataForm.leaderId" placeholder="机构负责人"></tg-user-input>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
 				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" aria-label="排序"></el-input-number>
@@ -24,8 +24,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import MaUserInput from '@/components/ma-user/ma-user-input/index.vue'
-import MaOrgSelect from '@/components/ma-org/ma-org-select/index.vue'
+import TgUserInput from '@/components/tg-user/tg-user-input/index.vue'
+import TgOrgSelect from '@/components/tg-org/tg-org-select/index.vue'
 
 const emit = defineEmits(['refreshDataList'])
 

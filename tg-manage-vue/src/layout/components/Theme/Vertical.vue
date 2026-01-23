@@ -75,7 +75,7 @@ const layoutHeaderHeight = computed(() => {
 	background: var(--theme-header-bg-color);
 	border-bottom: 1px solid var(--theme-border-color-light);
 	color: var(--theme-header-text-color);
-	::v-deep(.ma-icon) {
+	::v-deep(.tg-icon) {
 		align-items: center;
 		cursor: pointer;
 		height: var(--theme-header-height);

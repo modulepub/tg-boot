@@ -3,7 +3,7 @@ export const proxy = {
 	dev: {
 		// 官方测试地址
 		// 本地地址
-		 target: "http://127.0.0.1:8888",
+		 target: "http://127.0.0.1:9999",
 		changeOrigin: true,
 		rewrite: (path: string) => path.replace("/dev", "")
 	},

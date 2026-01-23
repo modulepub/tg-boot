@@ -7,16 +7,16 @@
 		</div>
 		<div class="third-btns">
 			<button class="third-btn wechat-work" title="企业微信" @click="thirdLogin('wechat_work')">
-				<ma-icon icon="icon-workweixin" size="20" />
+				<tg-icon icon="icon-workweixin" size="20" />
 			</button>
 			<button class="third-btn dingtalk" title="钉钉" @click="thirdLogin('dingtalk')">
-				<ma-icon icon="icon-dingding" size="20" />
+				<tg-icon icon="icon-dingding" size="20" />
 			</button>
 			<button class="third-btn feishu" title="飞书" @click="thirdLogin('feishu')">
-				<ma-icon icon="icon-feishu" size="20" />
+				<tg-icon icon="icon-feishu" size="20" />
 			</button>
 			<button class="third-btn wechat" title="微信" @click="thirdLogin('wechat_open')">
-				<ma-icon icon="icon-weixin" size="20" />
+				<tg-icon icon="icon-weixin" size="20" />
 			</button>
 		</div>
 	</div>

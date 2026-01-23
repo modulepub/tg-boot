@@ -52,7 +52,7 @@
 			<el-row>
 				<el-col :span="12">
 					<el-form-item label="操作类型">
-						<ma-dict-select v-model="dataForm.operateType" dict-type="log_operate_type" disabled style="width: 100%"></ma-dict-select>
+						<tg-dict-select v-model="dataForm.operateType" dict-type="log_operate_type" disabled style="width: 100%"></tg-dict-select>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">

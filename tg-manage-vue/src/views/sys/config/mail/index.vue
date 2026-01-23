@@ -11,9 +11,9 @@
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border class="layout-table" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
-			<ma-dict-column prop="platform" label="平台类型" dict-type="mail_platform"></ma-dict-column>
+			<tg-dict-column prop="platform" label="平台类型" dict-type="mail_platform"></tg-dict-column>
 			<el-table-column prop="groupName" label="分组名称" header-align="center" align="center"></el-table-column>
-			<ma-dict-column prop="status" label="状态" dict-type="enable_disable"></ma-dict-column>
+			<tg-dict-column prop="status" label="状态" dict-type="enable_disable"></tg-dict-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">

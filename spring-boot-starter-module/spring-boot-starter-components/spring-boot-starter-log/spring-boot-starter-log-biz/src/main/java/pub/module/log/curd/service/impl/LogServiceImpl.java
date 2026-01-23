@@ -54,7 +54,10 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
     @Override
     @Transactional
     public boolean save(Log entity) {
-        Assert.isNull(this.getByCode(ReflectUtil.getFieldValue(entity, bizCode).toString()), "编码已存在");
+        Object code = ReflectUtil.getFieldValue(entity, bizCode);
+        if (code != null) {
+            Assert.notNull(this.getByCode(code.toString()), "编码已存在");
+        }
         this.setDefaultValue(entity);
         this.getBaseMapper().insert(entity);
 

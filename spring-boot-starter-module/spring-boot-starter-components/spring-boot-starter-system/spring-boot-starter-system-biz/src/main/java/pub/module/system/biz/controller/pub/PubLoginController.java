@@ -1,5 +1,6 @@
 package pub.module.system.biz.controller.pub;
 
+import cn.hutool.core.net.Ipv4Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import pub.module.log.api.util.LogUtil;
 import pub.module.security.api.util.PasswordUtil;
 import pub.module.system.api.service.BizCaptchaService;
 import pub.module.system.api.service.BizSysUserService;
@@ -65,6 +67,7 @@ public class PubLoginController {
         UserDTO userDTO = bizSysUserService.getUserByUserName(loginVO.getUsername());
         BizSysUserService.LoginDTO loginDTO = bizSysUserService.loginByCode(userDTO.getUserCode());
         SysUserTokenVO token = new SysUserTokenVO(loginDTO.getAccessToken(),loginDTO.getAccessToken(), loginDTO.getExpireTime(), loginDTO.getExpireTime());
+        LogUtil.record("登陆","用户："+loginVO.getUsername(), userDTO.getUserCode());
         return Result.ok(token);
     }
 

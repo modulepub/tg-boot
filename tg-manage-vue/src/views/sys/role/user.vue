@@ -7,14 +7,14 @@
 			<el-input v-model="state.queryForm.mobile" placeholder="手机号"></el-input>
 		</el-form-item>
 		<el-form-item>
-			<ma-dict-select v-model="state.queryForm.gender" dict-type="user_gender" clearable placeholder="性别"></ma-dict-select>
+			<tg-dict-select v-model="state.queryForm.gender" dict-type="user_gender" clearable placeholder="性别"></tg-dict-select>
 		</el-form-item>
 		<el-form-item>
 			<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
 		</el-form-item>
 		<el-form-item>
 			<el-button icon="Plus" type="primary" @click="userSelectVisible = true">新增</el-button>
-			<ma-user-dialog :key="userSelectVisible" v-model:visible="userSelectVisible" multiple @select="userHandle"></ma-user-dialog>
+			<tg-user-dialog :key="userSelectVisible" v-model:visible="userSelectVisible" multiple @select="userHandle"></tg-user-dialog>
 		</el-form-item>
 		<el-form-item>
 			<el-button icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
@@ -32,7 +32,7 @@
 		<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 		<el-table-column prop="mobile" label="手机号" header-align="center" align="center"></el-table-column>
 		<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
-		<ma-dict-column prop="gender" label="性别" dict-type="user_gender"></ma-dict-column>
+		<tg-dict-column prop="gender" label="性别" dict-type="user_gender"></tg-dict-column>
 		<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 			<template #default="scope">
 				<el-button type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>

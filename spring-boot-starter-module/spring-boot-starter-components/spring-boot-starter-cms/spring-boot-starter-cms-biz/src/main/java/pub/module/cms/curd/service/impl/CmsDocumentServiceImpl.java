@@ -37,8 +37,6 @@ import cn.hutool.core.util.ReflectUtil;
 public class CmsDocumentServiceImpl extends ServiceImpl<CmsDocumentMapper, CmsDocument> implements ICmsDocumentService {
 
     @Resource
-    ApplicationEventPublisher applicationEventPublisher;
-    @Resource
     ICmsChannelService cmsChannelService;
 
     public void setDefaultValue(CmsDocument entity) {

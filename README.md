@@ -1,3 +1,8 @@
+---
+title: 整体架构
+createTime: 2026/01/12 20:05:26
+permalink: /dev/tgBoot/
+---
 
 
 
@@ -16,7 +21,7 @@
 
 # 技术栈
 
-- 后台框架：springboot 3.5.5 支持到jdk24
+- 后台框架：springboot 3.5.5 、spring security
 - 前台框架：vue3、element ui
 - 小程序框架：uniapp x (支持鸿蒙开发) 、cool ui、 vit
 -
@@ -25,14 +30,15 @@
 - 特别鸣谢 Hu tool 作者提供的工具类库，weixin-java-tools 作者提供微信开发工具类库。
 
 # 仓库地址及演示环境
-- Gitee仓库：https://gitee.com/pub_module/tg-boot.git
-- 文档地址：https://docs.module.pub
-- 演示环境：https://tg-boot.module.pub
-- # 成果展示
-1、启动速度快，5.44秒完成启动- ![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/ea4a5d8b2d834b9ebed8e77261df0bbb.png)
-2、支持前后端代码生成
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/c1f2fd806f28431fafdced1ba43b7c90.png)
-
+- Gitee仓库：[https://gitee.com/pub_module/tg-boot.git](https://gitee.com/pub_module/tg-boot.git)
+- 文档地址：[http://docs.module.pub](http://docs.module.pub)
+- 演示环境：[http://tg.module.pub](http://tg-boot.module.pub)
+# 框架特点
+- 启动速度快，5.44秒完成启动
+- 用户-角色-部门三者绑定，解决组织机构中常见不同用户借调或者身兼多部门角色的问题，切换部门同样会切换角色，避免越权。
+- 支持excel模板导入导出，自由且简单的发挥表格支持的样式、函数等所有特性，解耦导出excel表格和业务模块耦合，业务模块专注提供数据，excel模块根据模板渲染数据！
+- 规范前端侧支持字典，摒弃后端翻译的弊端。
+- 支持分片文件上传、单传。支持本地、minio、阿里云OS端的存储，且使用spi的方式易于扩展其他存储。
 
 # 树图风格 (Tree Graph简称TG)
 
@@ -55,7 +61,8 @@
 ```angular2svg
 springboot
 ├── spring-boot-starter-module（根模块）
-│   ├── spring-boot-starter-parent（父级模块）
+│   ├── spring-boot-starter-business（主要业务，子模块按照业务划分或者不划分）
+│   ├── spring-boot-starter-components（组件化模块，为基础代码库贡献资源）
 │   │   │   ├── 短信、支付、文件、IM、OCR、字典、缓存（）、日志、权限、消息队列、用户中心、工作流、定时任务、持久化数据
 │   ├── 普通业务模块
 |-- spring-boot-starter-runner(单应用启动器)
@@ -63,19 +70,19 @@ springboot
 
 
 ```angular2svg
-代码结构 模块架构
+代码架构
 ├── spring-boot-starter-system-biz
 │   ├── biz（自定义业务代码包）
 │   │   ├──service
-│   │   │   ├── BizSysUserServiceImpl.java
-│   │   │   ├── BizSysRoleServiceImpl.java
+│   │   │   ├── SpiSysUserServiceImpl.java spi为插件式设计模式接口，模块内部使用
+│   │   │   ├── ApiSysRoleServiceImpl.java api为模块化通信接口，模块间使用
 │   |   ├──controller
-│   │   │   ├── CusSysUserController.java
-│   │   │   ├── PubSysRoleController.java
-│   │   │   ├── MgtSysRoleController.java 路径带mgt区分管理端接口
+│   │   │   ├── CusSysUserController.java 路径带cus为客户端接口
+│   │   │   ├── PubSysRoleController.java 路径带pub为公开接口
+│   │   │   ├── MgtSysRoleController.java 路径带mgt为管理端接口
 │   |   ├──websocket
 │   |   ├──grpc
-│   ├── curd（代码生成器生成的增删改查实体）
+│   ├── curd（代码生成器生成的增删改查实体,里面可以增加维持数据一致性的数据服务）
 │   │   ├── mapper
 │   │   │   ├── TgUserMapper.java
 │   │   │   ├── TgRoleMapper.java
@@ -85,30 +92,23 @@ springboot
 |   |   ├──service
 │   │   │   ├── TgUserService.java
 │   │   │   ├── TgRoleService.java
-|   |   ├──controller
-│   │   │   ├── TgUserController.java
-│   │   │   ├── TgRoleController.java
+
 代码结构 API模块
 ├── spring-boot-starter-system-api
 │   ├── api（接口定义包）
 │   │   ├──service
-│   │   │   ├── BizXXXService.java (业务模块间通信接口)
-│   │   │   ├── SpiXXXService.java (模块内扩展接口，可插拔)
-│   ├── curd（代码生成器生成的增删改查实体）
-│   │   ├── entity(如果API层未定义VO但依赖于实体模型，该目录可以从业务模块平移)
-│   │   │   ├── TgUser.java
-│   │   │   ├── TgRole.java
+│   │   │   ├── ApiXXXService.java (业务模块间通信接口)
+
 
 
 分库分表指南：
 在业务模块的starter的配置类中配置要查询的数据源。
-分库分表微服务化指南：
-打开启动类注释，实现模块的分布式能力需要严格遵守架构设计，关联模块之间的依赖只能依赖API层。目前API层配置了feign和dubbo注解，因此支持feign和duboo两种方式，但是在使用上只能二选一。
-
+微服务化指南：
+随着业务增长，模块化单体不能满足大流量的情况下，可以对访问量大的模块拆成微服务独立部署。
 ```
 ```angular2svg
 业务表设计：
-├── 系统根表字段（id,create_time,update_time,create_by,update_by,deleted,version,sequence……,table_name,table_data,operate_type 等字段(可以是抽象的表，也可以是具体的表)
+├── 系统根表(抽象的表)字段 id,create_time,update_time,create_by,update_by,deleted,version,seq_no
 ├── 业务字段
 │   ├── 表前缀+字段名称（符合目录式命名规范）
 │   ├── 冗余字段（与来源名称一致，冗余字段是随着外键冗余过来的字段，该字段通常具有以下几种特点：不经常变更内容、属于其他系统或模块、需要关联查询、需要提升查询效率。

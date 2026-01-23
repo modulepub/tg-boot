@@ -59,7 +59,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import SelectIcon from '@/components/ma-icon-select/index.vue'
+import SelectIcon from '@/components/tg-icon-select/index.vue'
 import service from '@/utils/request'
 
 const emit = defineEmits(['refreshDataList'])

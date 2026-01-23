@@ -29,15 +29,15 @@ type Config = {
 
 // 根据环境导出最终配置
 export const config = {
-	name: "Cool Unix",
+	name: "卿卿之恋",
 	version: "1.0.0",
 	locale: "zh",
 	website: "https://cool-js.com",
-	showDarkButton: isMp() ? false : true,
+	showDarkButton: false,
 	isCustomTabBar: true,
 	backTop: true,
 	wx: {
-		debug: false
+		debug: true
 	},
 	...(isDev ? dev() : prod())
 } as Config;
