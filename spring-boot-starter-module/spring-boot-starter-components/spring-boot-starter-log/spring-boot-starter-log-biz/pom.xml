@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,6 +6,34 @@
     <artifactId>spring-boot-starter-log-biz</artifactId>
 
     <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>TG-boot 日志 业务实现模块</description>
+    <url>https://github.com/modulepub/tg-boot.git</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+            <comments>Permissive open source license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>panzhen</id>
+            <name>panzhen</name>
+            <email>panzhen@mail.module.pub</email>
+            <url>https://github.com/modulepub/tg-boot.git</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
+        <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
+        <url>https://github.com/modulepub/tg-boot.git</url>
+        <tag>3.5.0</tag>
+    </scm>
 
     <parent>
         <groupId>pub.module</groupId>
@@ -18,18 +46,20 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-security-api</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
         
         <!-- System模块依赖（用于访问用户和权限服务） -->
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-system-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- Data模块依赖（用于MyBatis-Plus） -->
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-data-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- Spring Security -->
         <dependency>
@@ -51,15 +81,18 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-cache-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-web-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-log-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
 

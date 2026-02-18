@@ -1,0 +1,3 @@
+mvn install:install-file -Dfile=C:\Users\User\Documents\workspace\tg-boot\libs\crypto-sdk-1.1.6.jar -DgroupId=com.bill99.crypto -DartifactId=crypto-sdk -Dversion=1.1.6 -Dpackaging=jar
+mvn install:install-file -Dfile=C:\Users\User\Documents\workspace\tg-boot\libs\netsign-sdk-3.0.6.mix.jar -DgroupId=com.ancun.netsign -DartifactId=netsign-sdk -Dversion=3.0.6 -Dpackaging=jar
+mvn install:install-file -Dfile=C:\Users\User\Documents\workspace\tg-boot\libs\mos-sdk-6.5.4.jar -DgroupId=com.xuanwu -DartifactId=mos-sdk -Dversion=6.5.4 -Dpackaging=jar

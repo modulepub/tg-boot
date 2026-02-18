@@ -16,6 +16,7 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-customer-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- Thymeleaf 依赖（必选） -->
         <dependency>

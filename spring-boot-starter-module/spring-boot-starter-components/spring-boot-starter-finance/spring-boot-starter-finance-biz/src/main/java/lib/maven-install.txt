@@ -1,2 +1,0 @@
-//短信
-mvn install:install-file -Dfile=E:\workspace\hhscboot\spring-boot-starter-apps\spring-boot-starter-tools\spring-boot-starter-finance\spring-boot-starter-finance-biz\src\main\java\lib\crypto-sdk-1.1.6.jar -DgroupId=com.bill99.crypto -DartifactId=crypto-sdk -Dversion=1.1.6 -Dpackaging=jar

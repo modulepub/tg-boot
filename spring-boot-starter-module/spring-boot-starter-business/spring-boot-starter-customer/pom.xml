@@ -13,6 +13,34 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-boot-starter-customer</artifactId>
     <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>TG-boot 客户业务模块聚合</description>
+    <url>https://github.com/modulepub/tg-boot.git</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+            <comments>Permissive open source license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>panzhen</id>
+            <name>panzhen</name>
+            <email>panzhen@mail.module.pub</email>
+            <url>https://github.com/modulepub/tg-boot.git</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
+        <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
+        <url>https://github.com/modulepub/tg-boot.git</url>
+        <tag>3.5.0</tag>
+    </scm>
 
     <modules>
         <module>spring-boot-starter-customer-biz</module>

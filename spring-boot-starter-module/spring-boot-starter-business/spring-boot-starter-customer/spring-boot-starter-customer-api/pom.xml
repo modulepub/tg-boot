@@ -18,14 +18,17 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-data-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-system-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-web-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>
