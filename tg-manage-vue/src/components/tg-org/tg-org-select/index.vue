@@ -4,10 +4,10 @@
 		:data="orgList"
 		value-key="orgCode"
 		check-strictly
-    show-checkbox
-    multiple
+		show-checkbox
+		multiple
 		:render-after-expand="false"
-    :props="{ label: 'orgName', children: 'children' }"
+		:props="{ label: 'orgName', children: 'children' }"
 		style="width: 100%"
 		:clearable="clearable"
 		:placeholder="placeholder"
@@ -17,7 +17,7 @@
 
 <script setup lang="ts" name="TgOrgSelect">
 import { ref } from 'vue'
-import service from "@/utils/request"
+import service from '@/utils/request'
 
 defineProps({
 	clearable: {

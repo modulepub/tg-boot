@@ -12,7 +12,7 @@ import pub.module.im.api.service.BizImSysNoticeService;
 import pub.module.im.biz.ry.service.BizRyService;
 import pub.module.im.curd.entity.ImSysNotice;
 import pub.module.im.curd.service.IImSysNoticeService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 
 import jakarta.annotation.Resource;
@@ -33,7 +33,7 @@ public class BizImSysNoticeServiceImpl implements BizImSysNoticeService {
     @Resource
     BizRyService bizRyService;
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
 
 
@@ -59,7 +59,7 @@ public class BizImSysNoticeServiceImpl implements BizImSysNoticeService {
         JSONObject noticeConfig = new JSONObject();
         imSysNotice.setImSysNoticePublishStateCode(ImSysNoticePublishStateCodeEnum.YES.getCode());
         imSysNoticeService.updateById(imSysNotice);
-        List<UserDTO> sysUserList = bizSysUserService.list(new UserDTO());
+        List<UserDTO> sysUserList = apiSysUserService.list(new UserDTO());
         List<String> userCodeList = sysUserList.stream().map(UserDTO::getUserCode).toList();
 
         int spNum = userCodeList.size() / 80;

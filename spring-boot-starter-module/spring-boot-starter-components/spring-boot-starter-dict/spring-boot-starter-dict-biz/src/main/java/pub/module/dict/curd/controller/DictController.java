@@ -6,7 +6,7 @@ import pub.module.web.vo.Result;
 import pub.module.web.util.WebQueryUtil;
 
 import pub.module.dict.curd.entity.Dict;
-import pub.module.dict.curd.service.IDictService;
+import pub.module.dict.curd.service.DictService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Slf4j
 public class DictController {
 	@Resource
-	private IDictService sysDictService;
+	private DictService sysDictService;
 	
 	@Operation(summary="sys_dict-分页列表查询")
 	@GetMapping(value = "/list")

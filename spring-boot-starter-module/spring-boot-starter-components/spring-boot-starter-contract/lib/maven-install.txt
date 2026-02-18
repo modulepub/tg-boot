@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=E:\workspace\tg-boot\spring-boot-starter-module\spring-boot-starter-components\spring-boot-starter-contract\lib\netsign-sdk-3.0.6.mix.jar -DgroupId=com.ancun.netsign -DartifactId=netsign-sdk -Dversion=3.0.6 -Dpackaging=jar

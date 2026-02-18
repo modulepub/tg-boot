@@ -9,11 +9,10 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.dict.curd.entity.Dict;
-import pub.module.dict.curd.service.IDictService;
+import pub.module.dict.curd.service.DictService;
 import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 @Tag(name="字典管理")
@@ -22,7 +21,7 @@ import java.util.Collection;
 @Slf4j
 public class MgtDictController {
 	@Resource
-	private IDictService sysDictService;
+	private DictService sysDictService;
 	
 	@Operation(summary="sys_dict-分页列表查询")
 	@GetMapping(value = "/list")

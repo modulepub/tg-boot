@@ -19,7 +19,6 @@ service.interceptors.request.use(
 
 		if (userStore?.token) {
 			config.headers.Authorization = `Bearer ${userStore.token}`
-			console.log(config.headers.Authorization)
 		}
 
 		config.headers['Accept-Language'] = cache.getLanguage()
@@ -32,14 +31,6 @@ service.interceptors.request.use(
 		if (Object.values(config.headers).includes('application/x-www-form-urlencoded')) {
 			config.data = qs.stringify(config.data)
 		}
-
-		// 打印完整请求信息，用于调试参数传递
-		console.log('请求信息>>', {
-			url: config.url,
-			method: config.method,
-			params: config.params,
-			data: config.data
-		})
 
 		return config
 	},
@@ -61,7 +52,6 @@ const getRefreshToken = (refreshToken: string) => {
 // 响应拦截器
 service.interceptors.response.use(
 	async (response: AxiosResponse<any>) => {
-		console.log('返回>>', response)
 		// 没有权限，如：未登录、token过期
 		if (response.status === 401) {
 			return Promise.reject(new Error('登录超时，请重新登录'))

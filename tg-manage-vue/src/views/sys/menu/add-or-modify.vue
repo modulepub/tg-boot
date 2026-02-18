@@ -42,9 +42,6 @@
 					<el-radio :value="'1'">外部打开</el-radio>
 				</el-radio-group>
 			</el-form-item>
-			<el-form-item prop="authority" label="授权标识">
-				<el-input v-model="dataForm.perAuthority" placeholder="多个用逗号分隔，如：sys:menu:save,sys:menu:update"></el-input>
-			</el-form-item>
 			<el-form-item v-if="dataForm.perTypeCode === '0'" prop="icon" label="图标" class="popover-list">
 				<SelectIcon v-model="dataForm.perIcon" />
 			</el-form-item>
@@ -76,7 +73,6 @@ const dataForm = reactive({
 	perParentCode: '',
 	parentName: '',
 	perUrl: '',
-	perAuthority: '',
 	perIcon: '',
 	perOpenStyleCode: '0',
 	seqNo: '0'
@@ -97,7 +93,6 @@ const init = (isUpdate: boolean, row: any) => {
 		perParentCode: 'root',
 		parentName: '',
 		perUrl: '',
-		perAuthority: '',
 		perIcon: '',
 		perOpenStyleCode: '0',
 		seqNo: '0'
@@ -121,7 +116,7 @@ const menuTypeChange = (perParentCode: any) => {
 // 获取菜单列表
 const getMenuList = async () => {
 	// 使用新接口获取所有菜单结构
-	const res = await service.get('/cus/sysPermission/getByCode', {
+	const res = await service.get('/mgt/sysPermission/getByCode', {
 		params: {
 			code: 'root'
 		}
@@ -148,7 +143,6 @@ const getMenu = (isUpdate: boolean, row: any) => {
 		dataForm.perCode = ''
 		dataForm.parentName = ''
 		dataForm.perUrl = ''
-		dataForm.perAuthority = ''
 		dataForm.seqNo = '0'
 		dataForm.perIcon = ''
 		dataForm.perOpenStyleCode = '0'
@@ -168,9 +162,9 @@ const submitHandle = () => {
 		}
 		let http
 		if (dataForm.id) {
-			http = service.post('/cus/sysPermission/edit', dataForm)
+			http = service.post('/mgt/sysPermission/edit', dataForm)
 		} else {
-			http = service.post('/cus/sysPermission/add', dataForm)
+			http = service.post('/mgt/sysPermission/add', dataForm)
 		}
 		http.then(() => {
 			ElMessage.success({

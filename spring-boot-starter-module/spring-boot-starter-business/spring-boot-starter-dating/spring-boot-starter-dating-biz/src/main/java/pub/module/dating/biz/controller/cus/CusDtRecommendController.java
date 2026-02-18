@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pub.module.dating.curd.entity.DtRecommended;
 import pub.module.dating.curd.service.DtRecommendedService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
 import pub.module.web.vo.Result;
@@ -31,7 +31,7 @@ public class CusDtRecommendController {
     @Resource
     DtRecommendedService dtRecommendedService;
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
     @EqualsAndHashCode(callSuper = true)
     @Data
@@ -51,7 +51,7 @@ public class CusDtRecommendController {
         HashSet<String> userCodes = new HashSet<>();
         userCodes.add("-");
         userCodes.addAll(recommendedMap.keySet());
-        IPage<UserDTO> page = bizSysUserService.page(sysUserDTO,pageNo, pageSize);
+        IPage<UserDTO> page = apiSysUserService.page(sysUserDTO,pageNo, pageSize);
         IPage<RecommendedVO> result = new Page<>(page.getCurrent(), page.getSize(), page.getTotal());
         List<RecommendedVO> recommendedVOList = new ArrayList<>();
         for(UserDTO userDTO:page.getRecords()){

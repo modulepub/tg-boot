@@ -6,7 +6,7 @@ import pub.module.web.vo.Result;
 import pub.module.web.util.WebQueryUtil;
 
 import pub.module.dict.curd.entity.DictItem;
-import pub.module.dict.curd.service.IDictItemService;
+import pub.module.dict.curd.service.DictItemService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Slf4j
 public class DictItemController {
 	@Resource
-	private IDictItemService sysDictItemService;
+	private DictItemService sysDictItemService;
 	
 	@Operation(summary="sys_dict_item-分页列表查询")
 	@GetMapping(value = "/list")

@@ -74,7 +74,10 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         SysOrganization entity = this.getBaseMapper().selectById(id);
         Assert.notNull(entity, "SysOrganization 不存在");
         this.getBaseMapper().deleteById(id);
-
+        List<SysOrganization> childList = this.getBaseMapper().selectList(new QueryWrapper<SysOrganization>().lambda().eq(SysOrganization::getOrgParentCode, entity.getOrgCode()));
+        for (SysOrganization child : childList) {
+            this.removeById(child.getId());
+        }
         return true;
     }
 

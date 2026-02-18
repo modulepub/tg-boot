@@ -18,7 +18,7 @@
 					</div>
 					<h1 class="brand-title">{{ $t('app.title') }}</h1>
 				</div>
-				<p class="brand-slogan">企业级低代码开发平台，让开发更简单！</p>
+				<p class="brand-slogan">成功源于坚持不屑的努力和开放合作的态度！</p>
 				<div class="brand-desc">
 					{{ $t('app.description') }}
 				</div>
@@ -29,7 +29,7 @@
 								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
 							</svg>
 						</div>
-						<span>安全可靠</span>
+						<span>拥有梦想</span>
 					</div>
 					<div class="feature-item">
 						<div class="feature-icon">
@@ -38,7 +38,7 @@
 								<polyline points="12 6 12 12 16 14" />
 							</svg>
 						</div>
-						<span>快速开发</span>
+						<span>明确目标</span>
 					</div>
 					<div class="feature-item">
 						<div class="feature-icon">
@@ -48,7 +48,7 @@
 								<line x1="9" y1="21" x2="9" y2="9" />
 							</svg>
 						</div>
-						<span>灵活扩展</span>
+						<span>乐在其中</span>
 					</div>
 					<div class="feature-item">
 						<div class="feature-icon">
@@ -65,7 +65,7 @@
 								<line x1="1" y1="14" x2="4" y2="14" />
 							</svg>
 						</div>
-						<span>支持信创</span>
+						<span>信念达成</span>
 					</div>
 				</div>
 			</div>

@@ -1,18 +1,23 @@
 package pub.module.dict.curd.service.impl;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 
+import pub.module.data.api.entity.BaseEntity;
 import pub.module.dict.curd.entity.Dict;
+import pub.module.dict.curd.entity.DictItem;
 import pub.module.dict.curd.mapper.DictMapper;
-import pub.module.dict.curd.service.IDictService;
+import pub.module.dict.curd.service.DictItemService;
+import pub.module.dict.curd.service.DictService;
 import cn.hutool.core.util.IdUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.context.ApplicationEventPublisher;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import jakarta.annotation.Resource;
 import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.Collection;
@@ -30,8 +35,10 @@ import cn.hutool.core.util.ReflectUtil;
  */
 @Slf4j
 @Service
-public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements IDictService {
-
+public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
+    @Resource
+    DictItemService dictItemService;
+    String bizCode = "dictCode";
     public void setDefaultValue(Dict entity) {
         Field declaredField = ReflectUtil.getField(entity.getClass(), "dictCode");
            Assert.notNull(declaredField,"CODE 字段名称未設置");
@@ -39,7 +46,10 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
             ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
         }
     }
-
+    @Override
+    public Dict getByCode(String code) {
+        return this.getBaseMapper().selectOne(new QueryWrapper<Dict>().eq(StrUtil.toUnderlineCase(bizCode), code),false);
+    }
 
     @Override
     @Transactional
@@ -72,8 +82,20 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     @Override
     @Transactional
     public boolean updateById(Dict entity) {
+        Dict old = this.getById(entity.getId());
+        if(!old.getDictCode().equals(entity.getDictCode())){
+            Dict other = this.getByCode(entity.getDictCode());
+            if(other!=null){
+                throw new IllegalArgumentException("编码已经存在！");
+            }
+            UpdateWrapper<DictItem> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.lambda().set(DictItem::getDictCode,entity.getDictCode());
+            updateWrapper.lambda().eq(DictItem::getDictCode,old.getDictCode());
+            dictItemService.update(updateWrapper);
+        }
+
         this.getBaseMapper().updateById(entity);
-        
+
         return true;
     }
 

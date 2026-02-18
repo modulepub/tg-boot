@@ -15,8 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.cache.api.constants.CacheConstant;
 import pub.module.cache.api.service.BizCacheService;
-import pub.module.system.api.service.BizSysUserOrganizationService;
-import pub.module.system.curd.service.SysOrganizationService;
+import pub.module.system.api.service.ApiSysUserOrganizationService;
 import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
 import pub.module.system.curd.entity.SysUser;
@@ -45,7 +44,7 @@ public class MgtSysUserController {
    @Resource
    private SysUserService sysUserService;
    @Resource
-   private BizSysUserOrganizationService bizSysUserOrganizationService;
+   private ApiSysUserOrganizationService apiSysUserOrganizationService;
 
    @EqualsAndHashCode(callSuper = true)
    @Data
@@ -63,7 +62,7 @@ public class MgtSysUserController {
        sysUser.setOrgCode(null);
         QueryWrapper<SysUser> queryWrapper = WebQueryUtil.buildQuery(sysUser);
         if(StrUtil.isNotBlank(orgCode)){
-            List<String> userCodes = bizSysUserOrganizationService.getUserCodes(orgCode);
+            List<String> userCodes = apiSysUserOrganizationService.getUserCodes(orgCode);
             userCodes.add("-");
             queryWrapper.lambda().in(SysUser::getUserCode,userCodes);
         }
@@ -72,12 +71,10 @@ public class MgtSysUserController {
         IPage<SysUserVO> resultPage = pageList.convert(sysUserItem -> {
             SysUserVO sysUserVO = new SysUserVO();
             BeanUtil.copyProperties(sysUserItem, sysUserVO);
-            if(StrUtil.isNotBlank(sysUserVO.getOrgCode())){
-              List<String> orgNames = bizSysUserOrganizationService.getOrgNames(sysUserVO.getUserCode());
+              List<String> orgNames = apiSysUserOrganizationService.getSysOrganizationNameByUserCode(sysUserVO.getUserCode());
                 if(!orgNames.isEmpty()){
                     sysUserVO.setUserOrgNames(StrUtil.join(",",orgNames));
                 }
-            }
             return sysUserVO;
         });
         return Result.ok(resultPage);
@@ -114,7 +111,7 @@ public class MgtSysUserController {
     @PostMapping(value = "/add")
     public Result<String> add(@RequestBody SysUserSaveVO sysUserSaveVO) {
         sysUserService.save(sysUserSaveVO);
-        bizSysUserOrganizationService.saveOrgCodes(sysUserSaveVO.getOrgCodeList(),sysUserSaveVO.getUserCode());
+        apiSysUserOrganizationService.saveOrgCodes(sysUserSaveVO.getOrgCodeList(),sysUserSaveVO.getUserCode());
         return Result.ok("添加成功！");
     }
 
@@ -127,10 +124,10 @@ public class MgtSysUserController {
     @PostMapping(value = "/edit")
     public Result<String> edit(@RequestBody SysUserSaveVO sysUserSaveVO) {
         sysUserService.updateById(sysUserSaveVO);
-        bizSysUserOrganizationService.saveOrgCodes(sysUserSaveVO.getOrgCodeList(),sysUserSaveVO.getUserCode());
+        apiSysUserOrganizationService.saveOrgCodes(sysUserSaveVO.getOrgCodeList(),sysUserSaveVO.getUserCode());
         return Result.ok("编辑成功!");
     }
-    
+
     @Operation(summary="用户 - 批量删除")
     @PostMapping(value = "/delete")
     public Result<String> deleteBatch(@RequestBody Collection<String> list) {
@@ -143,7 +140,7 @@ public class MgtSysUserController {
     public Result<SysUserVO> queryById(@RequestParam(name="id") String id) {
         SysUser sysUser = sysUserService.getById(id);
         SysUserVO result = BeanUtil.copyProperties(sysUser, SysUserVO.class);
-        List<String> orgCodes = bizSysUserOrganizationService.getOrgCodes(result.getUserCode());
+        List<String> orgCodes = apiSysUserOrganizationService.getOrgCodes(result.getUserCode());
         result.setOrgCodeList(orgCodes);
         return Result.ok(result);
 

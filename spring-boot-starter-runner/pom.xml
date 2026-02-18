@@ -5,12 +5,20 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>tg-boot</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-boot-starter-runner</artifactId>
-
+    <!-- 新增：跳过该模块的部署和安装（核心配置） -->
+    <properties>
+        <!-- 跳过部署到远程仓库（Sonatype） -->
+        <maven.deploy.skip>false</maven.deploy.skip>
+        <!-- 跳过安装到本地仓库（可选，如需本地使用可注释） -->
+        <!-- <maven.install.skip>true</maven.install.skip> -->
+        <!-- 跳过Spring Boot胖JAR打包（仅保留普通JAR） -->
+        <spring-boot.repackage.skip>false</spring-boot.repackage.skip>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,6 +47,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-customer-biz</artifactId>
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
@@ -118,6 +130,7 @@
     </dependencies>
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

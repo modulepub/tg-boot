@@ -12,7 +12,7 @@ import pub.module.web.vo.Result;
 import pub.module.im.api.service.BizImGroupService;
 import pub.module.im.curd.entity.ImGroup;
 import pub.module.im.curd.service.IImGroupService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.util.UserUtil;
 
 import jakarta.annotation.Resource;
@@ -34,7 +34,7 @@ public class BizImGroupController {
 	@Resource
 	BizImGroupService bizImGroupService;
 	@Resource
-	BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 	
 	@Operation(summary="即时通讯群组-分页列表查询")
 	@GetMapping(value = "/list")
@@ -48,7 +48,7 @@ public class BizImGroupController {
 		Page<ImGroup> page = new Page<>(pageNo, pageSize);
 		IPage<ImGroup> pageList = imGroupService.page(page, queryWrapper);
 		for(ImGroup item:pageList.getRecords()){
-            UserDTO sysUser = bizSysUserService.getUserByUserCode(item.getImGroupBelongSysUserCode());
+            UserDTO sysUser = apiSysUserService.getUserByUserCode(item.getImGroupBelongSysUserCode());
 			item.setImGroupBelongSysUser(sysUser);
 		}
 		return Result.ok(pageList);

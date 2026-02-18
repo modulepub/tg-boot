@@ -41,7 +41,7 @@ import { ElTree } from 'element-plus'
 import { onMounted, PropType, ref, watch } from 'vue'
 import emit, { MittEvent } from '@/utils/emits'
 import { generateUUID } from '@/utils/tool'
-import service from "@/utils/request";
+import service from '@/utils/request'
 
 const dataList = ref()
 const keyword = ref()

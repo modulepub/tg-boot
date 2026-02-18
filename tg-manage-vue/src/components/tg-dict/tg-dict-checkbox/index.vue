@@ -4,7 +4,7 @@
 	</el-checkbox-group>
 </template>
 
-<script setup lang="ts" name="MaDictCheckbox">
+<script setup lang="ts" name="TgDictCheckbox">
 import { getDictDataList } from '@/utils/tool'
 import { useAppStore } from '@/store/modules/app'
 import { ref, watch } from 'vue'

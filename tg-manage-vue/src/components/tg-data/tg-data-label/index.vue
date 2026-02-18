@@ -2,7 +2,7 @@
 	<span>{{ label }}</span>
 </template>
 
-<script setup lang="ts" name="MaDataLabel">
+<script setup lang="ts" name="TgDataLabel">
 import { PropType, ref } from 'vue'
 import service from '@/utils/request'
 

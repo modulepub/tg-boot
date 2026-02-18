@@ -2,6 +2,7 @@
 	<el-card>
 		<el-table
 			v-loading="state.dataListLoading"
+			align="center"
 			show-overflow-tooltip
 			:data="state.dataList"
 			border
@@ -9,8 +10,8 @@
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="userName" label="用户名" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="userRealName" label="姓名" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="userName" label="用户名" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="userRealName" label="姓名" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button type="primary" link @click="logoutHandle(scope.row.userName)">踢出</el-button>

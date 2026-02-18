@@ -4,15 +4,15 @@ import java.util.Collection;
 import java.util.List;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.lang.Assert;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
 import pub.module.system.curd.entity.SysOrganization;
-import pub.module.system.curd.entity.SysUser;
 import pub.module.system.curd.service.SysOrganizationService;
-import pub.module.system.curd.service.SysUserService;
 import pub.module.web.vo.Result;
 import pub.module.web.util.WebQueryUtil;
 
@@ -45,37 +45,43 @@ public class MgtSysUserOrganizationController {
     @Resource
     private SysOrganizationService sysOrganizationService;
     @Resource
-    private BizSysUserService bizSysUserService;
+    private ApiSysUserService apiSysUserService;
 
     @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class ListByUserVO extends SysOrganization {
+    public static class ListByUserResVO extends SysOrganization {
         boolean selected = false;
     }
 
+    @Data
+    public static class ListByUserReqVO {
+        String userCode;
+    }
+
+
     @Operation(summary = "用户所属组织机构 - 分页列表查询")
     @GetMapping(value = "/listByUser")
-    public Result<List<ListByUserVO>> listByUser() {
-        UserDTO userDTO = UserUtil.getCurrentSysUser();
-        String sql = "select org_code from sys_user_organization where user_code = '${userCode}'";
+    public Result<List<ListByUserResVO>> listByUser(ListByUserReqVO  listByUserReqVO) {
+        Assert.notEmpty(listByUserReqVO.getUserCode(),"用户编码不能为空！");
         QueryWrapper<SysOrganization> queryWrapper = new QueryWrapper<>();
-        sql = sql.replace("${userCode}", userDTO.getUserCode());
+        String sql = "select org_code from sys_user_organization where deleted = 0 and user_code = '${userCode}'";
+        sql = sql.replace("${userCode}", listByUserReqVO.getUserCode());
         queryWrapper.lambda().inSql(SysOrganization::getOrgCode, sql);
         List<SysOrganization> list = sysOrganizationService.list(queryWrapper);
-        List<ListByUserVO> result = BeanUtil.copyToList(list, ListByUserVO.class);
-        for (ListByUserVO listByUserVO : result) {
-            if (listByUserVO.getOrgCode().equals(userDTO.getUserOrgCode())) {
-                listByUserVO.setSelected(true);
-            }
-        }
+        List<ListByUserResVO> result = BeanUtil.copyToList(list, ListByUserResVO.class);
         return Result.ok(result);
     }
 
+    @Data
+    public static class ChangeCurrentOrgVO{
+        @Schema(description = "机构编码")
+        private String orgCode;
+    }
     @Operation(summary = "用户所属组织机构 - 变更组织机构")
-    @PostMapping(value = "/change")
-    public Result<BizSysUserService.LoginDTO> change(@RequestBody SysUserOrganization sysUserOrganization) {
+    @PostMapping(value = "/changeCurrentOrg")
+    public Result<ApiSysUserService.LoginDTO> changeCurrentOrg(@RequestBody ChangeCurrentOrgVO changeCurrentOrgVO) {
         UserDTO userDTO = UserUtil.getCurrentSysUser();
-        return Result.ok(bizSysUserService.changeOrg(userDTO.getUserCode(),sysUserOrganization.getOrgCode()));
+        return Result.ok(apiSysUserService.changeOrg(userDTO.getUserCode(),changeCurrentOrgVO.getOrgCode()));
     }
 
     @Operation(summary = "用户所属组织机构 - 分页列表查询")

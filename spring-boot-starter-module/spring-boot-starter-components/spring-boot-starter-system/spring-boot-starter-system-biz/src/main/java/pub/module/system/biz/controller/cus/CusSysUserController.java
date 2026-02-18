@@ -9,12 +9,12 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.vo.SysUserTokenVO;
 import pub.module.system.curd.entity.SysUser;
 import pub.module.system.curd.service.SysUserService;
 import pub.module.web.vo.Result;
-import pub.module.system.api.service.BizSysUserService;
 import pub.module.system.api.util.UserUtil;
 
 import jakarta.annotation.Resource;
@@ -34,7 +34,7 @@ import java.io.Serializable;
 @Slf4j
 public class CusSysUserController {
    @Resource
-   private BizSysUserService bizSysUserService;
+   private ApiSysUserService apiSysUserService;
    @Resource
    private SysUserService sysUserService;
 
@@ -71,7 +71,7 @@ public class CusSysUserController {
     @PostMapping(value = "/changePassword")
     public Result<String> changePassword(@RequestBody ChangePasswordVO changePasswordVO) {
         UserDTO userDTO = UserUtil.getCurrentSysUser();
-        bizSysUserService.changePassword(userDTO.getUserName(), changePasswordVO.getOldPassword(),changePasswordVO.getNewPassword());
+        apiSysUserService.changePassword(userDTO.getUserName(), changePasswordVO.getOldPassword(),changePasswordVO.getNewPassword());
         return Result.ok("修改密码成功!");
     }
 
@@ -88,7 +88,7 @@ public class CusSysUserController {
     @Operation(summary = "获取用户信息-通过用户编码")
     @GetMapping(value = "/getInfoByCode")
     public Result<UserDTO> getInfoByCode(GetInfoByCodeVO getInfoByCodeVO) {
-        UserDTO result = bizSysUserService.getUserByUserCode(getInfoByCodeVO.getUserCode());
+        UserDTO result = apiSysUserService.getUserByUserCode(getInfoByCodeVO.getUserCode());
         return Result.ok(result);
     }
 
@@ -96,14 +96,14 @@ public class CusSysUserController {
     @Operation(summary = "退出")
     public Result<String> logout() {
         UserDTO userDTO = UserUtil.getCurrentSysUser();
-        bizSysUserService.logout(userDTO.getUserCode());
+        apiSysUserService.logout(userDTO.getUserCode());
         return Result.ok();
     }
 
     @PostMapping("/refreshToken")
     @Operation(summary = "获取 accessToken")
     public Result<SysUserTokenVO> token(String refreshToken) {
-        BizSysUserService.LoginDTO loginDTO = bizSysUserService.loginByCode(UserUtil.getCurrentSysUser().getUserCode());
+        ApiSysUserService.LoginDTO loginDTO = apiSysUserService.loginByCode(UserUtil.getCurrentSysUser().getUserCode());
         SysUserTokenVO token = new SysUserTokenVO(loginDTO.getAccessToken(), loginDTO.getAccessToken(), loginDTO.getExpireTime(),  loginDTO.getExpireTime());
         return Result.ok(token);
     }

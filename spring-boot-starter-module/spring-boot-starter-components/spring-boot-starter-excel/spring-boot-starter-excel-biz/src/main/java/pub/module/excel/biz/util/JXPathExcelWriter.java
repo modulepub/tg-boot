@@ -1,5 +1,6 @@
 package pub.module.excel.biz.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.jxpath.JXPathNotFoundException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -27,18 +28,15 @@ import java.util.regex.Pattern;
  * @since 2026-01-02
  * @version V1.0
  */
+@Slf4j
 public class JXPathExcelWriter {
 
     private final Workbook templateWorkbook;
     private static final Pattern pattern = Pattern.compile("\\{=(.+?)}");
     private final boolean xls2007;
-    Map<String, String> dictMap = new HashMap<>();
 
-    public JXPathExcelWriter(String templateFile, Map<String, String> dictMap) {
+    public JXPathExcelWriter(String templateFile) {
         xls2007 = templateFile.toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
-        if(dictMap!=null){
-            this.dictMap.putAll(dictMap);
-        }
         try (FileInputStream fileInputStream = new FileInputStream(templateFile)) {
             templateWorkbook = xls2007 ? new XSSFWorkbook(fileInputStream) : new HSSFWorkbook(new POIFSFileSystem(fileInputStream));
         } catch (IOException e) {
@@ -46,10 +44,6 @@ public class JXPathExcelWriter {
         }
     }
 
-    private Object transDict(String code,Object value){
-        String key = code+value;
-        return dictMap.get(key)==null?value:dictMap.get(key);
-    }
 
     private void setOutputCellType(Cell templateCell, Cell outputCell, JXPathContext objectContext) {
         switch (templateCell.getCellType()) {
@@ -70,11 +64,9 @@ public class JXPathExcelWriter {
                     Object valueObj = null;
                     try {
                         valueObj = objectContext.getValue(xpath);
-                        String[] xpathArray = xpath.split("/");
-                        valueObj = transDict(xpathArray[xpathArray.length-1],valueObj);
-
                     } catch (JXPathNotFoundException e) {
                         //forget it
+                        log.error(e.getMessage(), e);
                     }
                     replacerMap.put(matcher.group(0), valueObj == null ? "" : valueObj);
                 }

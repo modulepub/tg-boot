@@ -1,6 +1,5 @@
 package pub.module.system.biz.controller.pub;
 
-import cn.hutool.core.net.Ipv4Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.log.api.util.LogUtil;
 import pub.module.security.api.util.PasswordUtil;
-import pub.module.system.api.service.BizCaptchaService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiCaptchaService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.vo.SysUserTokenVO;
 import pub.module.web.vo.Result;
@@ -35,9 +34,9 @@ import java.io.Serializable;
 public class PubLoginController {
 
     @Resource
-    BizCaptchaService bizCaptchaService;
+    ApiCaptchaService apiCaptchaService;
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
 
 
@@ -61,11 +60,11 @@ public class PubLoginController {
     @PostMapping("/login")
     @Operation(summary = "账号密码登录")
     public Result<SysUserTokenVO> login(@RequestBody SysAccountLoginVO loginVO) {
-        bizCaptchaService.validate(loginVO.getKey(), loginVO.getCaptcha());
+        apiCaptchaService.validate(loginVO.getKey(), loginVO.getCaptcha());
         String password = PasswordUtil.decryptPassword(loginVO.getPassword());
-        bizSysUserService.authUserNamePassword(loginVO.getUsername(), password);
-        UserDTO userDTO = bizSysUserService.getUserByUserName(loginVO.getUsername());
-        BizSysUserService.LoginDTO loginDTO = bizSysUserService.loginByCode(userDTO.getUserCode());
+        apiSysUserService.authUserNamePassword(loginVO.getUsername(), password);
+        UserDTO userDTO = apiSysUserService.getUserByUserName(loginVO.getUsername());
+        ApiSysUserService.LoginDTO loginDTO = apiSysUserService.loginByCode(userDTO.getUserCode());
         SysUserTokenVO token = new SysUserTokenVO(loginDTO.getAccessToken(),loginDTO.getAccessToken(), loginDTO.getExpireTime(), loginDTO.getExpireTime());
         LogUtil.record("登陆","用户："+loginVO.getUsername(), userDTO.getUserCode());
         return Result.ok(token);
@@ -87,9 +86,9 @@ public class PubLoginController {
     @Operation(summary = "手机号登录接口")
     @PostMapping("/phoneLogin")
     public Result<SysUserTokenVO> phoneLogin(@RequestBody LoginByPhoneVO loginByPhone) {
-            bizSysUserService.authSmsCode(loginByPhone.getPhone(), loginByPhone.getSmsAuthCode());
-            UserDTO result = bizSysUserService.registerByPhone(loginByPhone.getPhone());
-            BizSysUserService.LoginDTO loginDTO = bizSysUserService.loginByCode(result.getUserCode());
+            apiSysUserService.authSmsCode(loginByPhone.getPhone(), loginByPhone.getSmsAuthCode());
+            UserDTO result = apiSysUserService.registerByPhone(loginByPhone.getPhone());
+            ApiSysUserService.LoginDTO loginDTO = apiSysUserService.loginByCode(result.getUserCode());
             SysUserTokenVO token = new SysUserTokenVO(loginDTO.getAccessToken(),loginDTO.getAccessToken(), loginDTO.getExpireTime(), loginDTO.getExpireTime());
             return Result.ok(token);
     }
@@ -106,7 +105,7 @@ public class PubLoginController {
     @PostMapping("/sendSms")
     public Result<String> phoneLogin(@RequestBody SendSms sendSms) {
         log.info("发送短信参数{}", sendSms);
-        bizSysUserService.sendSmsCode(sendSms.getPhone());
+        apiSysUserService.sendSmsCode(sendSms.getPhone());
         return Result.ok("发送成功，默认密码888888，不要使用后端返回的信息提示用户，不方便做国际化");
     }
 

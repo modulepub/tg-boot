@@ -4,9 +4,9 @@
 	</el-select>
 </template>
 
-<script setup lang="ts" name="MaDataSelect">
+<script setup lang="ts" name="TgDataSelect">
 import { PropType, ref, watch } from 'vue'
-import service from "@/utils/request";
+import service from '@/utils/request'
 interface Prop {
 	value: any
 	label: string

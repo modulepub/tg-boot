@@ -37,7 +37,7 @@ const constantRoutes: RouteRecordRaw[] = [
 const asyncRoutes: RouteRecordRaw = {
 	path: '/',
 	component: () => import('../layout/index.vue'),
-	redirect: '/dashboard/index',
+	redirect: '/home/index',
 	children: [
 		{
 			path: '/profile',
@@ -55,20 +55,11 @@ const asyncRoutes: RouteRecordRaw = {
 export const dashboardMenu = [
 	{
 		perCode: 100,
-		perName: '看板',
-		perUrl: null,
+		perName: '首页',
+		perUrl: 'home/index',
 		perOpenStyleCode: 0,
-		perIcon: 'icon-appstore',
-		children: [
-			{
-				perCode: 101,
-				perName: '首页',
-				perUrl: 'dashboard/index',
-				perOpenStyleCode: 0,
-				perIcon: 'icon-home',
-				affix: true
-			}
-		]
+		perIcon: 'icon-home',
+		affix: true
 	}
 ]
 
@@ -193,7 +184,7 @@ const getDynamicComponent = (path: string): any => {
 // 根据菜单列表，生成路由数据
 export const generateRoutes = (menuList: any): RouteRecordRaw[] => {
 	const routerList: RouteRecordRaw[] = []
-	menuList.forEach((menu: any) => {
+	menuList?.forEach((menu: any) => {
 		let component
 		let path
 		let menuUrl = menu.perUrl

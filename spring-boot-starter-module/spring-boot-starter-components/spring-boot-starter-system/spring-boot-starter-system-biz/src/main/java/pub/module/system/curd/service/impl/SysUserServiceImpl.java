@@ -1,5 +1,6 @@
 package pub.module.system.curd.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import cn.hutool.core.lang.Assert;
@@ -10,6 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import pub.module.security.api.util.PasswordUtil;
 import pub.module.system.curd.entity.SysUser;
 import pub.module.system.curd.mapper.SysUserMapper;
 import pub.module.system.curd.service.SysUserService;
@@ -42,6 +44,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         Assert.notNull(declaredField,"CODE 字段名称未設置");
         if (ReflectUtil.getFieldValue(entity, declaredField) == null) {
             ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+        }
+        if(StrUtil.isEmpty(entity.getUserPassword())){
+            String salt = PasswordUtil.genSalt();
+            String passwordEncrypt = PasswordUtil.hashPassword(entity.getUserName(), salt);
+            entity.setUserPassword(passwordEncrypt);
+            entity.setUserPasswordSalt(salt);
         }
     }
 
@@ -90,7 +98,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Transactional
     public boolean updateById(SysUser entity) {
         this.getBaseMapper().updateById(entity);
-
         return true;
     }
 

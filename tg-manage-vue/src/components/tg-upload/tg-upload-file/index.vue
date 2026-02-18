@@ -2,26 +2,25 @@
 	<el-upload
 		v-model:file-list="fileList"
 		style="width: 100%"
-		:action="uploadUrl"
-		:headers="{ Authorization: cache.getToken() }"
+		action="#"
 		multiple
 		:limit="limit"
 		:before-upload="handleBeforeUpload"
 		:on-exceed="handleExceed"
 		:on-preview="handlePreview"
 		:on-remove="handleRemove"
-		:on-success="handleSuccess"
+		:http-request="handleHttpUpload"
 		:disabled="disabled"
 	>
 		<el-button icon="Upload" plain> 点击上传</el-button>
 	</el-upload>
 </template>
 
-<script setup lang="ts" name="MaUploadFile">
-import { ElMessage, ElNotification, UploadProps, UploadUserFile } from 'element-plus'
-import constant from '@/utils/constant'
-import cache from '@/utils/cache'
+<script setup lang="ts" name="TgUploadFile">
+import { ElNotification, UploadProps, UploadUserFile } from 'element-plus'
 import { ref, watch } from 'vue'
+import type { UploadRequestOptions } from 'element-plus'
+import service from '@/utils/request'
 
 const props = defineProps({
 	action: {
@@ -40,11 +39,12 @@ const props = defineProps({
 	disabled: {
 		type: Boolean,
 		default: false
+	},
+	biz: {
+		type: String,
+		default: 'temp'
 	}
 })
-
-// 上传URL
-const uploadUrl = props.action ? constant.apiUrl + props.action : constant.uploadUrl
 
 const model = defineModel<any>()
 const fileList = ref<UploadUserFile[]>([])
@@ -75,7 +75,7 @@ const handlePreview: UploadProps['onPreview'] = (uploadFile: any) => {
 
 const handleRemove: UploadProps['onRemove'] = (file, uploadFiles) => {
 	const files = uploadFiles.map((file: any) => {
-		return file.response.data.url
+		return file.response?.data?.filePath || file.url
 	})
 
 	if (files.length === 0) {
@@ -85,16 +85,20 @@ const handleRemove: UploadProps['onRemove'] = (file, uploadFiles) => {
 	}
 }
 
-const handleSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
-	if (response.code !== 0) {
-		ElMessage.error('上传失败：' + response.msg)
-		return false
-	}
-
-	if (model.value) {
-		model.value = model.value + ',' + response.data.url
-	} else {
-		model.value = response.data.url
+const handleHttpUpload = async (options: UploadRequestOptions) => {
+	let formData = new FormData()
+	formData.append('file', options.file)
+	formData.append('biz', props.biz)
+	try {
+		const { data } = await service.postForm('/file/upload', formData)
+		if (model.value) {
+			model.value = model.value + ',' + data.filePath
+		} else {
+			model.value = data.filePath
+		}
+		options.onSuccess(data)
+	} catch (error) {
+		options.onError(error as any)
 	}
 }
 

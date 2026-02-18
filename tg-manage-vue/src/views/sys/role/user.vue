@@ -29,9 +29,9 @@
 		@sort-change="sortChangeHandle"
 	>
 		<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-		<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
-		<el-table-column prop="mobile" label="手机号" header-align="center" align="center"></el-table-column>
-		<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
+		<el-table-column prop="username" label="用户名" header-align="center" show-overflow-tooltip></el-table-column>
+		<el-table-column prop="mobile" label="手机号" header-align="center" show-overflow-tooltip></el-table-column>
+		<el-table-column prop="realName" label="姓名" header-align="center" show-overflow-tooltip></el-table-column>
 		<tg-dict-column prop="gender" label="性别" dict-type="user_gender"></tg-dict-column>
 		<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 			<template #default="scope">

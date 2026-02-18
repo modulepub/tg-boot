@@ -91,6 +91,11 @@
 </template>
 
 <script setup lang="ts">
+function toLike() {
+	uni.navigateTo({
+		url: '/pages/user/like'
+	});
+}
 	import { ref, computed, onMounted, watch } from 'vue';
 	import CustomTabbar from "@/components/tabbar.uvue";
 
@@ -334,7 +339,7 @@
 		});
 		// 跳转到推荐详情页面
 		uni.navigateTo({
-			url: '/pages/recommend/recommendDetail'
+			url: '/pages/custom/home'
 		});
 	};
 </script>

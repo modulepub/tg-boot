@@ -103,7 +103,7 @@ const submitHandle = () => {
 		if (dataForm.id) {
 			http = service.put('/mgt/sysRole/edit', dataForm)
 		} else {
-			http = service.post('/mgt/sysRole/save', dataForm)
+			http = service.post('/mgt/sysRole/add', dataForm)
 		}
 		http.then(() => {
 			ElMessage.success({

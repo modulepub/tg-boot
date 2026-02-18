@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.entity.BaseEntity;
+import pub.module.data.api.entity.BaseEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -41,10 +41,6 @@ public class PermissionDTO extends BaseEntity implements Serializable {
     /** 菜单 URL */
     @Schema(description = "菜单 URL")
     private String perUrl;
-
-    /** 授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save) */
-    @Schema(description = "授权标识(多个用逗号分隔，如：sys:menu:list,sys:menu:save)")
-    private String perAuthority;
 
     /** 类型   0：菜单   1：按钮   2：接口 */
     @Schema(description = "类型   0：菜单   1：按钮   2：接口")

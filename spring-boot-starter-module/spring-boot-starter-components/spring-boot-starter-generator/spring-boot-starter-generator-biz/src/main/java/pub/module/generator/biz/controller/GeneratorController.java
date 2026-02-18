@@ -170,7 +170,7 @@ public class GeneratorController
     @ResponseBody
     public GenResult<?> remove(String ids)
     {
-        genTableService.deleteGenTableByIds(ids);
+        genTableService.deleteGenTableByIds(List.of(ids.split(",")));
         return GenResult.ok();
     }
 

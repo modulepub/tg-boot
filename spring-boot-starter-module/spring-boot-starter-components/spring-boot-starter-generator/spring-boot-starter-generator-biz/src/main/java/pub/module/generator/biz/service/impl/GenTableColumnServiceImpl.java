@@ -2,6 +2,8 @@ package pub.module.generator.biz.service.impl;
 
 import java.util.List;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import pub.module.generator.biz.entity.GenTableColumn;
@@ -28,6 +30,13 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
     @Override
     public List<GenTableColumn> selectGenTableColumnListByTableId(GenTableColumn genTableColumn)
     {
-        return genTableColumnMapper.selectGenTableColumnListByTableId(genTableColumn);
+        QueryWrapper<GenTableColumn> queryWrapper = new QueryWrapper<>();
+        if(StrUtil.isNotEmpty(genTableColumn.getColumnName())){
+            queryWrapper.lambda().like(GenTableColumn::getColumnName, genTableColumn.getColumnName());
+        }
+        if(genTableColumn.getTableId()!=null){
+            queryWrapper.lambda().eq(GenTableColumn::getTableId, genTableColumn.getTableId());
+        }
+        return genTableColumnMapper.selectList(queryWrapper);
     }
 }

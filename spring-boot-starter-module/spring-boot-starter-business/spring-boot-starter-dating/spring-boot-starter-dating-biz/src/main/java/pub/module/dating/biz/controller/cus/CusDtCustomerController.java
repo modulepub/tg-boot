@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
 import pub.module.web.vo.Result;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 
 import jakarta.annotation.Resource;
 
@@ -18,19 +18,19 @@ import jakarta.annotation.Resource;
 @Slf4j
 public class CusDtCustomerController {
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
     @Operation(summary = "客户信息-通过客户编码查询")
     @GetMapping(value = "/queryCusInfoByCode")
     public Result<UserDTO> queryCusInfoByCode(@RequestParam("code") String code) {
-        UserDTO dtCustomer = bizSysUserService.getUserByUserCode(code);
+        UserDTO dtCustomer = apiSysUserService.getUserByUserCode(code);
         return Result.ok(dtCustomer);
     }
 
     @Operation(summary = "红娘信息-通过客户编码查询")
     @GetMapping(value = "/selfInfo")
     public Result<UserDTO> selfInfo() {
-        UserDTO dtCustomer = bizSysUserService.getUserByUserCode(UserUtil.getCurrentSysUser().getUserCode());
+        UserDTO dtCustomer = apiSysUserService.getUserByUserCode(UserUtil.getCurrentSysUser().getUserCode());
         return Result.ok(dtCustomer);
     }
 

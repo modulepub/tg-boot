@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.dating.curd.constants.DtLikeDegreeCodeEnum;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.web.vo.Result;
 import pub.module.dating.curd.entity.DtLike;
@@ -35,7 +35,7 @@ public class CusDtLikeController {
     @Resource
     private DtLikeService dtLikeService;
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
     @Operation(summary ="添加对象的喜好情况")
     @PostMapping(value = "/add")
@@ -60,7 +60,7 @@ public class CusDtLikeController {
                                             @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize
     ) {
         List<DtLike> dtLikeList = dtLikeService.list(new QueryWrapper<DtLike>().lambda().eq(DtLike::getLikeDegreeCode, DtLikeDegreeCodeEnum.like.getCode()).eq(DtLike::getLikeOwnSysUserCode, UserUtil.getCurrentSysUser().getUserCode()));
-        IPage<UserDTO> page = bizSysUserService.page(sysUser,pageNo, pageSize);
+        IPage<UserDTO> page = apiSysUserService.page(sysUser,pageNo, pageSize);
         return Result.ok(page);
     }
 

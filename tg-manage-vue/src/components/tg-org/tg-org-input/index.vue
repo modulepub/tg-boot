@@ -23,7 +23,7 @@
 
 <script setup lang="ts" name="TgOrgInput">
 import { ref, watch } from 'vue'
-import service from "@/utils/request";
+import service from '@/utils/request'
 
 const props = defineProps({
 	multiple: {

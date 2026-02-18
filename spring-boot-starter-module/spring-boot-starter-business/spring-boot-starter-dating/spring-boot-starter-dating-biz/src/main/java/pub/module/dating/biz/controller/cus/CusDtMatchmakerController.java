@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.web.vo.Result;
-import pub.module.system.api.service.BizSysUserService;
 
 import jakarta.annotation.Resource;
 
@@ -19,13 +19,13 @@ import jakarta.annotation.Resource;
 @Slf4j
 public class CusDtMatchmakerController {
     @Resource
-    private BizSysUserService bizSysUserService;
+    private ApiSysUserService apiSysUserService;
 
 
     @Operation(summary ="红娘-红娘详情")
     @GetMapping(value = "/queryBySysUserCode")
     public Result<UserDTO> dtMkSysUserCode(@RequestParam(name = "userCode") String userCode) {
-        UserDTO dtMatchmaker = bizSysUserService.getUserByUserCode(userCode);
+        UserDTO dtMatchmaker = apiSysUserService.getUserByUserCode(userCode);
         return Result.ok(dtMatchmaker);
     }
 
@@ -33,7 +33,7 @@ public class CusDtMatchmakerController {
     @Operation(summary = "红娘-添加客户")
     @PostMapping(value = "/add")
     public Result<UserDTO> addCustom(@RequestBody UserDTO dtCustomer) {
-        bizSysUserService.addSysUser(dtCustomer);
+        apiSysUserService.addSysUser(dtCustomer);
         return Result.ok(dtCustomer);
     }
 
@@ -42,7 +42,7 @@ public class CusDtMatchmakerController {
     public Result<IPage<UserDTO>> myCustomList(UserDTO dtCustomer,
                                                @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
                                                @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
-        IPage<UserDTO> pageList = bizSysUserService.page(dtCustomer, pageNo,pageSize);
+        IPage<UserDTO> pageList = apiSysUserService.page(dtCustomer, pageNo,pageSize);
         return Result.ok(pageList);
     }
 
@@ -51,7 +51,7 @@ public class CusDtMatchmakerController {
     public Result<IPage<UserDTO>> myCusList(UserDTO dtCustomer,
                                             @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
                                             @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
-        IPage<UserDTO> pageList = bizSysUserService.page(dtCustomer, pageNo,pageSize);
+        IPage<UserDTO> pageList = apiSysUserService.page(dtCustomer, pageNo,pageSize);
         return Result.ok(pageList);
     }
 
@@ -63,14 +63,14 @@ public class CusDtMatchmakerController {
     @Operation(summary = "红娘-删除我的客户")
     @PostMapping(value = "/delete")
     public Result<String> delete(@RequestBody DeleteCustomerVO deleteCustomerVo) {
-        bizSysUserService.deleteByCode(deleteCustomerVo.getUserCode());
+        apiSysUserService.deleteByCode(deleteCustomerVo.getUserCode());
         return Result.ok("删除成功!");
     }
 
     @Operation(summary = "红娘-编辑我的客户信息")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
     public Result<String> edit(@RequestBody UserDTO dtCustomer) {
-        bizSysUserService.updateById(dtCustomer);
+        apiSysUserService.updateById(dtCustomer);
         return Result.ok("编辑成功!");
     }
 }

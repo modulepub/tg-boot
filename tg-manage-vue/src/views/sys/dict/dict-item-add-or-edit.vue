@@ -1,19 +1,19 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :width="600" :close-on-click-modal="false" draggable>
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px" @keyup.enter="submitHandle()">
-			<el-form-item prop="dictValue" label="字典值">
-				<el-input v-model="dataForm.dictItemValue" placeholder="字典值"></el-input>
-			</el-form-item>
-			<el-form-item prop="dictLabel" label="字典标签">
+			<el-form-item prop="dictItemText" label="字典标签">
 				<el-input v-model="dataForm.dictItemText" placeholder="字典标签"></el-input>
+			</el-form-item>
+			<el-form-item prop="dictItemValue" label="字典值">
+				<el-input v-model="dataForm.dictItemValue" placeholder="字典值"></el-input>
 			</el-form-item>
 			<el-form-item prop="dictItemColor" label="标签颜色">
 				<el-color-picker v-model="dataForm.dictItemColor" placeholder="选择颜色" show-alpha></el-color-picker>
 			</el-form-item>
-			<el-form-item prop="sort" label="排序">
+			<el-form-item prop="seqNo" label="排序">
 				<el-input-number v-model="dataForm.seqNo" controls-position="right" :min="0" aria-label="排序"></el-input-number>
 			</el-form-item>
-			<el-form-item prop="remark" label="备注">
+			<el-form-item prop="dictItemDescription" label="备注">
 				<el-input v-model="dataForm.dictItemDescription" placeholder="备注"></el-input>
 			</el-form-item>
 		</el-form>
@@ -44,8 +44,8 @@ const dataForm = reactive({
 })
 
 const dataRules = ref({
-  dictItemText: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-  dictItemValue: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+	dictItemText: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	dictItemValue: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 const init = (id?: number) => {

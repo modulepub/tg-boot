@@ -19,6 +19,7 @@ import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -82,12 +83,13 @@ public class MgtSysRoleController {
         return Result.ok("编辑成功!");
     }
 
-    @Operation(summary = "角色 - 通过id删除")
-    @DeleteMapping(value = "/delete")
-    public Result<String> delete(@RequestParam(name = "id") String id) {
-        sysRoleService.removeById(id);
-        return Result.ok("删除成功!");
+    @Operation(summary="管户关系 - 批量删除")
+    @PostMapping(value = "/delete")
+    public Result<String> deleteBatch(@RequestBody Collection<String> list) {
+        this.sysRoleService.removeByIds(list);
+        return Result.ok("批量删除成功!");
     }
+
 
     @Operation(summary = "角色 - 批量删除")
     @DeleteMapping(value = "/deleteBatch")

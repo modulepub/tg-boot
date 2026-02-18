@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
-import pub.module.data.constants.PropertiesConstant;
+import pub.module.data.api.constants.BaseEntityFiled;
 import pub.module.trade.biz.service.BizTradeOrderService;
 import pub.module.trade.api.constants.TdOdPaidCodeEnum;
 import pub.module.trade.curd.entity.TdGoods;
@@ -49,7 +49,7 @@ public class BizTradeOrderServiceImpl implements BizTradeOrderService {
             Assert.notNull(tdGoods, "tradeGoods not null");
             Assert.notNull(tdOrderGoods.getTdOdGdNum(), "tdOdGdNum not null");
             Assert.notNull(tdGoods.getTdCyCode(), "tdCyCode not null");
-            BeanUtil.copyProperties(tdGoods, tdOrderGoods, PropertiesConstant.BASE_PROPERTIES);
+            BeanUtil.copyProperties(tdGoods, tdOrderGoods, BaseEntityFiled.NAMES);
             if(index==0){
                 goodsNames = new StringBuilder(tdGoods.getTdGdName());
                 tdCyCode =  tdGoods.getTdCyCode();

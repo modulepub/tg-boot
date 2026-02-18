@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.web.vo.Result;
-import pub.module.system.api.service.BizSysUserService;
 import pub.module.wx.biz.utils.WxUtil;
 import pub.module.wx.biz.vo.LoginRequest;
 import pub.module.wx.biz.vo.WxMaUserInfoEx;
@@ -32,7 +32,7 @@ import jakarta.annotation.Resource;
 @Slf4j
 public class WxLoginController {
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
 
 
@@ -64,8 +64,8 @@ public class WxLoginController {
         LoginRequest loginRequest = new LoginRequest();
         BeanUtil.copyProperties(request, loginRequest);
         WxMaUserInfoEx wxMaUserInfo = WxUtil.getWxMaUserInfo(loginRequest);
-        UserDTO user = bizSysUserService.registerByOpenId(wxMaUserInfo.getOpenId());
-        bizSysUserService.loginByCode(user.getUserCode());
+        UserDTO user = apiSysUserService.registerByOpenId(wxMaUserInfo.getOpenId());
+        apiSysUserService.loginByCode(user.getUserCode());
         user.setUserWxUnionId(wxMaUserInfo.getUnionId());
         user.setUserWxOpenId(wxMaUserInfo.getOpenId());
         user.setUserAvatar(wxMaUserInfo.getAvatarUrl());

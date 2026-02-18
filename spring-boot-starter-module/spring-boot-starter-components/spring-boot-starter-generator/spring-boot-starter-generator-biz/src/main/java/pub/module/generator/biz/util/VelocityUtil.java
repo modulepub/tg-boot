@@ -49,8 +49,9 @@ public class VelocityUtil {
         velocityContext.put("tableName", genTable.getTableName());
         velocityContext.put("functionName", StringUtils.isNotEmpty(functionName) ? functionName : "【请填写功能名称】");
         velocityContext.put("ClassName", genTable.getClassName());
-        velocityContext.put("className", StringUtils.uncapitalize(genTable.getClassName()));
+        velocityContext.put("className", StrUtil.lowerFirst(genTable.getClassName()));
         velocityContext.put("moduleName", genTable.getModuleName());
+        velocityContext.put("ModuleName", StrUtil.upperFirst(genTable.getModuleName()));
         velocityContext.put("businessName", genTable.getBusinessName());
         velocityContext.put("BusinessName", StrUtil.upperFirst(genTable.getBusinessName()));
         velocityContext.put("basePackage", getPackagePrefix(packageName));
@@ -83,6 +84,7 @@ public class VelocityUtil {
          templatePath = templatePath.replace("${ClassName}",StrUtil.upperFirst(genTable.getClassName()));
          templatePath = templatePath.replace("${className}",StrUtil.lowerFirst(genTable.getClassName()));
          templatePath = templatePath.replace("${moduleName}",StrUtil.lowerFirst(genTable.getModuleName()));
+         templatePath = templatePath.replace("${ModuleName}",StrUtil.upperFirst(genTable.getModuleName()));
         return templatePath;
     }
 

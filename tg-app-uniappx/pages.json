@@ -94,16 +94,7 @@
 					}
 				},
 				{
-					"path": "edit-name",
-					"style": {
-						"navigationStyle": "custom"
-					},
-					"meta": {
-						"isAuth": true
-					}
-				},
-				{
-					"path": "edit-description",
+					"path": "like",
 					"style": {
 						"navigationStyle": "custom"
 					},
@@ -121,15 +112,52 @@
 			]
 		},
 		{
-			"root": "pages/recommend",
+			"root": "pages/custom",
 			"pages": [
 				{
-					"path": "recommendDetail",
+					"path": "home",
 					"style": {
-						"navigationBarTitleText": "推荐详情"
+						"navigationStyle": "custom"
 					},
 					"meta": {
 						"isAuth": false
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/contract",
+			"pages": [
+				{
+					"path": "contract",
+					"style": {
+						"navigationStyle": "custom"
+					},
+					"meta": {
+						"isAuth": false
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/matchmaker",
+			"pages": [
+				{
+					"path": "home",
+					"style": {
+						"navigationStyle": "custom"
+					},
+					"meta": {
+						"isAuth": false
+					}
+				},
+				{
+					"path": "guest",
+					"style": {
+						"navigationStyle": "custom"
+					},
+					"meta": {
+						"isAuth": true
 					}
 				}
 			]

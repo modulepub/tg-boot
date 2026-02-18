@@ -35,20 +35,13 @@
 						<el-button icon="Plus" type="primary" @click="addOrEditHandle()">新增</el-button>
 					</el-space>
 					<el-space>
-						<tg-upload-excel action="/sys/user/import">
-							<el-button plain icon="Upload">导入</el-button>
-						</tg-upload-excel>
-					</el-space>
-					<el-space>
-						<el-button plain icon="Download" @click="downloadHandle('/sys/user/export')">导出</el-button>
-					</el-space>
-					<el-space>
 						<el-button icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
 					</el-space>
 				</el-space>
 
 				<el-table
 					v-loading="state.dataListLoading"
+					align="center"
 					show-overflow-tooltip
 					:data="state.dataList"
 					border
@@ -56,13 +49,12 @@
 					@selection-change="selectionChangeHandle"
 				>
 					<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-					<el-table-column prop="userRealName" label="姓名" header-align="center" align="center"></el-table-column>
-					<el-table-column prop="userName" label="用户名" header-align="center" align="center"></el-table-column>
-					<tg-dict-column prop="userSexCode" label="性别" dict-code="userSexCode"></tg-dict-column>
-					<el-table-column prop="userPhone" label="手机号" header-align="center" align="center"></el-table-column>
-					<el-table-column prop="userOrgNames" label="所属机构" header-align="center" align="center"></el-table-column>
+					<el-table-column prop="userRealName" label="姓名" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+					<el-table-column prop="userName" label="用户名" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+					<el-table-column prop="userPhone" label="手机号" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+					<el-table-column prop="userOrgNames" label="所属机构" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 					<tg-dict-column prop="userEnabledCode" label="是否启用" dict-code="userEnabledCode"></tg-dict-column>
-					<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
+					<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 					<el-table-column label="操作" fixed="right" header-align="center" align="center" width="220">
 						<template #default="scope">
 							<el-button type="primary" link @click="addOrEditHandle(scope.row.id)">修改</el-button>
@@ -100,7 +92,7 @@ import { IHooksOptions } from '@/hooks/interface'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/mgt/sysUser/list',
-	deleteUrl: '/sys/user',
+	deleteUrl: '/mgt/sysUser/delete',
 	order: '-createTime',
 	queryForm: {
 		userName: null,

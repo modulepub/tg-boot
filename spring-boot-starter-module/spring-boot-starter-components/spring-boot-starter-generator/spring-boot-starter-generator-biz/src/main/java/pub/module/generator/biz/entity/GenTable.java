@@ -1,52 +1,28 @@
 package pub.module.generator.biz.entity;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import pub.module.generator.biz.constant.GenConstants;
-import pub.module.generator.biz.util.StringUtils;
+import lombok.EqualsAndHashCode;
+import pub.module.data.api.entity.BaseEntity;
 
 /**
  * 业务表 gen_table
  * 
  * @author ruoyi
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class GenTable
+public class GenTable extends BaseEntity
 {
-    @JsonIgnore
-    private String searchValue;
-    /** 创建者 */
-    private String createBy;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
-
-    /** 更新者 */
-    private String updateBy;
-
-    /** 更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
-
-    /** 备注 */
-    private String remark;
-    /** 请求参数 */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Map<String, Object> params;
-
-
     /** 编号 */
-    private Long tableId;
+    private String tableId;
 
     /** 表名称 */
     @NotBlank(message = "表名称不能为空")
@@ -98,64 +74,44 @@ public class GenTable
     /** 生成路径（不填默认项目路径） */
     private String genPath;
 
-    /** 主键信息 */
-    private GenTableColumn pkColumn;
-
-    /** 子表信息 */
-    private GenTable subTable;
-
-    /** 表列信息 */
-    @Valid
-    private List<GenTableColumn> columns;
-
     /** 其它生成选项 */
     private String options;
 
-    /** 树编码字段 */
-    private String treeCode;
-
-    /** 树父编码字段 */
-    private String treeParentCode;
-
+    @TableField(exist = false)
+    /** 备注 */
+    private String remark;
+    @TableField(exist = false)
     /** 树名称字段 */
     private String treeName;
-
+    @TableField(exist = false)
     /** 上级菜单 ID字段 */
     private String parentMenuId;
-
+    @TableField(exist = false)
     /** 上级菜单名称字段 */
     private String parentMenuName;
 
+    @TableField(exist = false)
+    /** 树父编码字段 */
+    private String treeParentCode;
+    @TableField(exist = false)
+    /** 树编码字段 */
+    private String treeCode;
+    @TableField(exist = false)
+    /** 子表信息 */
+    private GenTable subTable;
 
-
-    public boolean isSub()
-    {
-        return isSub(this.tplCategory);
-    }
-
-    public static boolean isSub(String tplCategory)
-    {
-        return tplCategory != null && StringUtils.equals(GenConstants.TPL_SUB, tplCategory);
-    }
-
-    public boolean isTree()
-    {
-        return isTree(this.tplCategory);
-    }
-
-    public static boolean isTree(String tplCategory)
-    {
-        return tplCategory != null && StringUtils.equals(GenConstants.TPL_TREE, tplCategory);
-    }
-
-
-    public Map<String, Object> getParams()
-    {
-        if (params == null)
-        {
-            params = new HashMap<>();
-        }
-        return params;
-    }
-
+    @TableField(exist = false)
+    /** 主键信息 */
+    private GenTableColumn pkColumn;
+    /** 表列信息 */
+    @TableField(exist = false)
+    @Valid
+    private List<GenTableColumn> columns;
+    @TableField(exist = false)
+    /* 请求参数 */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private Map<String, Object> params;
+    @TableField(exist = false)
+    @JsonIgnore
+    private String searchValue;
 }

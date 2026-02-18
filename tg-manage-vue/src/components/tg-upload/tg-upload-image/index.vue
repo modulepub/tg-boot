@@ -47,13 +47,13 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="MaUploadImage">
+<script setup lang="ts" name="TgUploadImage">
 import { ref, computed, inject } from 'vue'
 import { ElNotification, formContextKey, formItemContextKey } from 'element-plus'
 import type { UploadProps, UploadRequestOptions } from 'element-plus'
 import { generateUUID } from '@/utils/tool'
 import FileUtil from '../utils/FileUtil'
-import service from "@/utils/request";
+import service from '@/utils/request'
 
 interface UploadFileProps {
 	imageUrl: string // 图片地址 ==> 必传
@@ -77,7 +77,7 @@ const props = withDefaults(defineProps<UploadFileProps>(), {
 	height: '150px',
 	width: '150px',
 	borderRadius: '8px',
-  biz: 'temp'
+	biz: 'temp'
 })
 
 // 生成组件唯一id

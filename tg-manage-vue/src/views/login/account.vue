@@ -56,7 +56,7 @@ import constant from '@/utils/constant'
 import { sm2Encrypt } from '@/utils/smCrypto'
 import cache from '@/utils/cache'
 import { useUserStore } from '@/store/modules/user'
-import service from "@/utils/request";
+import service from '@/utils/request'
 
 const userStore = useUserStore()
 const router = useRouter()

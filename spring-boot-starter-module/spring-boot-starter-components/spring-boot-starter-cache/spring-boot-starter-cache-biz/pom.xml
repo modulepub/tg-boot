@@ -7,7 +7,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.0</version>
     </parent>
 
     <artifactId>spring-boot-starter-cache-biz</artifactId>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-cache-api</artifactId>
-            <version>3.5.5</version>
+            <version>3.5.0</version>
         </dependency>
 
         <!-- Spring Boot Redis Dependencies -->

@@ -1,13 +1,11 @@
 package pub.module.finance.curd.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.entity.BaseEntity;
+import pub.module.data.api.entity.BaseEntity;
 
 import java.io.Serial;
 import java.io.Serializable;

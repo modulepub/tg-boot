@@ -25,9 +25,9 @@
 
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border class="layout-table" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="roleName" label="名称" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="roleCode" label="编码" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="roleDescription" label="备注" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="roleName" label="名称" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="roleCode" label="编码" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="roleDescription" label="备注" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="200">
 				<template #default="scope">
@@ -76,7 +76,7 @@ import { IHooksOptions } from '@/hooks/interface'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/mgt/sysRole/list',
-	deleteUrl: '/sys/role',
+	deleteUrl: '/mgt/sysRole/delete',
 	queryForm: {
 		name: ''
 	}
@@ -85,6 +85,7 @@ const state: IHooksOptions = reactive({
 const queryRef = ref()
 const addOrUpdateRef = ref()
 const addOrModifyHandle = (roleCode?: number) => {
+	console.log('xxxxxxx', roleCode)
 	addOrUpdateRef.value.init(roleCode)
 }
 

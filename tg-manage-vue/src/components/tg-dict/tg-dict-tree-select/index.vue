@@ -16,7 +16,7 @@
 	/>
 </template>
 
-<script setup lang="ts" name="MaDictTreeSelect">
+<script setup lang="ts" name="TgDictTreeSelect">
 import { getDictDataList, treeDataTranslate } from '@/utils/tool'
 import { useAppStore } from '@/store/modules/app'
 import { computed } from 'vue'

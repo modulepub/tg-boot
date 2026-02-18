@@ -36,7 +36,7 @@ const currentOrg = ref<Org>({
 // 获取机构列表
 const getOrgList = async () => {
 	try {
-		const res = await service.get('/mgt/sysUserOrganization/listByUser')
+		const res = await service.get('/cus/sysUserOrganization/listByUser')
 		orgList.value = res.data || []
 		// 设置默认机构
 		for (let item of res.data) {
@@ -53,11 +53,11 @@ const getOrgList = async () => {
 const orgChange = async (org: Org) => {
 	currentOrg.value = org
 	// 这里可以添加切换机构的逻辑，比如保存到store或localStorage
-	const res = await service.post('/mgt/sysUserOrganization/change', org)
+	const res = await service.post('/mgt/sysUserOrganization/changeCurrentOrg', org)
 	console.log('切换机构:', org, res)
 	userStore.setToken(res.data.accessToken)
 	userStore.setRefreshToken(res.data.refreshToken)
-  window.location.reload()
+	window.location.reload()
 }
 
 onMounted(() => {

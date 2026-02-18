@@ -1,46 +1,24 @@
 package pub.module.generator.biz.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pub.module.data.api.entity.BaseEntity;
 import pub.module.generator.biz.util.StringUtils;
-
-import java.util.Date;
 
 /**
  * 代码生成业务字段表 gen_table_column
- * 
- * @author ruoyi
  */
-@Setter
-@Getter
-public class GenTableColumn
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class GenTableColumn extends BaseEntity
 {
-    @JsonIgnore
-    private String searchValue;
-    /** 创建者 */
-    private String createBy;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
-
-    /** 更新者 */
-    private String updateBy;
-
-    /** 更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
-
-    /** 备注 */
-    private String remark;
-
     /** 编号 */
-    private Long columnId;
+    private String columnId;
 
     /** 归属表编号 */
-    private Long tableId;
+    private String tableId;
 
     /** 列名称 */
     private String columnName;
@@ -89,6 +67,13 @@ public class GenTableColumn
 
     /** 排序 */
     private Integer sort;
+
+    @TableField(exist = false)
+    /* 备注 */
+    private String remark;
+    @JsonIgnore
+    @TableField(exist = false)
+    private String searchValue;
 
     public boolean isPk()
     {

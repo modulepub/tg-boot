@@ -1,6 +1,7 @@
 package pub.module.security.api.filter;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.net.Ipv4Util;
 import cn.hutool.core.text.AntPathMatcher;
 import cn.hutool.extra.spring.SpringUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pub.module.security.api.util.JwtTokenProvider;
+import pub.module.web.util.IpUtil;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -42,7 +44,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws IOException, ServletException {
         String requestPath = request.getServletPath();
-        log.debug("requestPath:{}", requestPath);
+        String ip = IpUtil.getRealIp(request);
+        log.debug("requestPath:{} IP:{}", requestPath,ip );
         boolean isPublicEndpoint = isPublicEndpoint(requestPath);
         if (isPublicEndpoint) {
             filterChain.doFilter(request, response);
@@ -83,8 +86,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("application/json");
-                response.getWriter().write("未授权");
+                String msg = "Intruder, you have been locked down.Your IP(${ip}) address has been uploaded to the Cybersecurity Center.".replace("${ip}", ip);
+                response.getWriter().write(msg);
                 response.getWriter().flush();
             }
         }

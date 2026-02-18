@@ -54,7 +54,7 @@ const getDictItem = (dictCode: string, dictItemValue: string) => {
 	let dictItemArray: any = []
 	const appStore = useAppStore()
 	const dict: any = appStore.dictList.find((element: any) => element.dictCode === dictCode)
-	if (dict) {
+	if (dict && dictItemValue) {
 		dictItemValue.split(',').forEach((value: string) => {
 			const val = dict.dictItemList.find((element: any) => element.dictItemValue === value)
 			if (val) {

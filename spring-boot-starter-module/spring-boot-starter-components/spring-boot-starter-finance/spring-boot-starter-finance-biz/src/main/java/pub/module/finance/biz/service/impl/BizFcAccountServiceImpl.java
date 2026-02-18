@@ -11,11 +11,10 @@ import pub.module.finance.api.dto.FcAccountDTO;
 import pub.module.finance.api.dto.FcAccountLogDTO;
 import pub.module.finance.api.service.BizFcAccountService;
 import pub.module.finance.curd.entity.FcAccount;
-import pub.module.finance.curd.entity.FcAccountLog;
 import pub.module.finance.curd.entity.FcProduct;
 import pub.module.finance.curd.service.IFcAccountService;
 import pub.module.finance.curd.service.IFcProductService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 
 import jakarta.annotation.Resource;
@@ -38,7 +37,7 @@ public class BizFcAccountServiceImpl implements BizFcAccountService {
     @Resource
     IFcProductService fcProductService;
     @Resource
-    BizSysUserService bizSysUserService;
+    ApiSysUserService apiSysUserService;
 
 
 
@@ -64,7 +63,7 @@ public class BizFcAccountServiceImpl implements BizFcAccountService {
             fcAccountService.save(fcAccount);
         }
         if(StrUtil.isEmpty(fcAccount.getFcAcSysUserRealName())){
-            UserDTO sysUser = bizSysUserService.getUserByUserCode(fcAccount.getFcAcSysUserCode());
+            UserDTO sysUser = apiSysUserService.getUserByUserCode(fcAccount.getFcAcSysUserCode());
             Assert.notNull(sysUser,"严重异常：主动补偿用户信息发生错误，未查询到该用户信息！");
             fcAccount.setFcAcSysUserRealName(sysUser.getUserRealName());
             fcAccount.setFcAcIdCardNo(sysUser.getUserIdCardNum());

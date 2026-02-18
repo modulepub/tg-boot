@@ -4,7 +4,7 @@ package pub.module.dating.curd.entity;
     import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pub.module.data.entity.BaseEntity;
+import pub.module.data.api.entity.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**

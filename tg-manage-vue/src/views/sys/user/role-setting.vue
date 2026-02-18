@@ -2,7 +2,7 @@
 	<el-dialog v-model="visible" :title="title" width="700px" @close="handleClose">
 		<el-card>
 			<el-table v-loading="orgListLoading" :data="orgList" border class="layout-table">
-				<el-table-column prop="orgName" label="机构名称" header-align="center" align="center"></el-table-column>
+				<el-table-column prop="orgName" label="机构名称" header-align="center" show-overflow-tooltip></el-table-column>
 				<el-table-column label="角色" header-align="center" align="center">
 					<template #default="scope">
 						<el-select v-model="scope.row.roleCodes" placeholder="请选择角色" clearable filterable multiple>
@@ -64,9 +64,12 @@ defineExpose({
 const getOrgList = async () => {
 	orgListLoading.value = true
 	try {
-		// 使用顶部切换部门的接口获取用户所在机构列表
-		// 先检查用户所在机构接口
-		let res = await service.get('/mgt/sysUserOrganization/listByUser')
+		let data = {
+			params: {
+				userCode: userCode.value
+			}
+		}
+		let res = await service.get('/mgt/sysUserOrganization/listByUser', data)
 		orgList.value = res.data || []
 
 		// 确保每个机构都有roleCodes字段

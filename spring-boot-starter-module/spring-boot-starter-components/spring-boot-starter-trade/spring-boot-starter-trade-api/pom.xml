@@ -9,7 +9,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-trade</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.0</version>
     </parent>
     <dependencies>
 

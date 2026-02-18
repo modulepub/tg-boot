@@ -16,10 +16,9 @@ export default {
 	updateTime: '更新时间',
 	required: '必填项不能为空',
 	app: {
-		title: '低代码开发平台',
-		description:
-			'强大的代码生成器，一键生成前后端代码，帮助Java项目解决70%的重复工作，让开发者有更多时间去开发业务，提升开发效率。',
-		logoText: '低代码平台',
+		title: 'TG快速开发平台',
+		description: '不辜负每一份热爱，不敷衍每一次努力，时光不会亏待执着且坚定的人，你只管向前，自有繁花相送。',
+		logoText: 'TG快速开发平台',
 		miniLogoText: 'TG',
 		username: '用户名',
 		password: '密码',

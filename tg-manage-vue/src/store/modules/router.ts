@@ -12,7 +12,7 @@ export const useRouterStore = defineStore('routerStore', {
 	actions: {
 		async getMenuRoutes() {
 			const { data } = await service.get('/cus/sysPermission/getByCode?code=manage')
-			const routes = generateRoutes(data.children)
+			const routes = generateRoutes(data?.children)
 
 			// 控制台菜单
 			const dashboardRoutes = generateRoutes(dashboardMenu)

@@ -2,19 +2,12 @@ package pub.module.trade.curd.entity;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.time.LocalDateTime;
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.entity.BaseEntity;
+import pub.module.data.api.entity.BaseEntity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 /**

@@ -6,7 +6,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-wechat</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.0</version>
     </parent>
 
     <artifactId>spring-boot-starter-wechat-api</artifactId>
@@ -63,14 +63,14 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-system-api</artifactId>
-            <version>3.5.5</version>
+            <version>3.5.0</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-data-api</artifactId>
-            <version>3.5.5</version>
+            <version>3.5.0</version>
             <scope>compile</scope>
         </dependency>
 

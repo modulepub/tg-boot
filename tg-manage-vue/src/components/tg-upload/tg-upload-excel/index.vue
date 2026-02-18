@@ -1,7 +1,7 @@
 <template>
 	<el-upload
 		:action="uploadUrl"
-		:headers="{ Authorization: cache.getToken() }"
+		:headers="{ Authorization: 'Bearer ' + cache.getToken() }"
 		:before-upload="beforeUpload"
 		:on-success="handleSuccess"
 		:show-file-list="false"
@@ -10,7 +10,7 @@
 	</el-upload>
 </template>
 
-<script setup lang="ts" name="MaUploadExcel">
+<script setup lang="ts" name="TgUploadExcel">
 import type { UploadProps } from 'element-plus'
 import constant from '@/utils/constant'
 import { ElMessage } from 'element-plus/es'
@@ -26,11 +26,6 @@ const props = defineProps({
 // 上传URL
 const uploadUrl = constant.apiUrl + props.action
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
-	if (res.code !== 0) {
-		ElMessage.error('上传失败：' + res.msg)
-		return false
-	}
-
 	ElMessage.success({
 		message: '上传成功',
 		duration: 500,

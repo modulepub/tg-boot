@@ -6,7 +6,7 @@
 			list-type="picture-card"
 			:class="['upload', self_disabled ? 'disabled' : '', drag ? 'no-border' : '', isUploadLimit ? 'hide' : '']"
 			:multiple="true"
-			:headers="{ Authorization: cache.getToken() }"
+			:headers="{ Authorization: 'Bearer ' + cache.getToken() }"
 			:disabled="self_disabled"
 			:limit="limit"
 			:http-request="handleHttpUpload"
@@ -41,13 +41,13 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="MaUploadImages">
+<script setup lang="ts" name="TgUploadImages">
 import { ref, computed, inject, watch } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { UploadProps, UploadFile, UploadUserFile, UploadRequestOptions } from 'element-plus'
 import { ElNotification, formContextKey } from 'element-plus'
 import cache from '@/utils/cache'
-import service from "@/utils/request";
+import service from '@/utils/request'
 
 interface UploadFileProps {
 	drag?: boolean // 是否支持拖拽上传 ==> 非必传（默认为 true）
@@ -136,7 +136,7 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	let formData = new FormData()
 	formData.append('file', options.file)
 	try {
-		const { data } = await service.postForm('/file/upload',formData)
+		const { data } = await service.postForm('/file/upload', formData)
 		options.onSuccess(data)
 	} catch (error) {
 		options.onError(error as any)

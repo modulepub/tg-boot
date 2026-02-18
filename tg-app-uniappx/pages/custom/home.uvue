@@ -1,0 +1,172 @@
+<template>
+	<cl-page>
+		<cl-topbar fixed safe-area-top>
+			<cl-text>主页</cl-text>
+			<template #append>
+				<view class="h-[44px] w-[30px] flex items-center justify-center mr-1">
+					<cl-icon name="share-fill"></cl-icon>
+				</view>
+			</template>
+		</cl-topbar>
+		<!-- 滚动图片区域 -->
+		<swiper class="swiper-container" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+			<swiper-item v-for="(item, index) in swiperList" :key="index">
+				<cl-image :src="item" mode="aspectFill" class="swiper-image" :width="'100%'" :height="'100%'"
+						  :preview="true" :preview-list="swiperList" :preview-current="index"></cl-image>
+			</swiper-item>
+		</swiper>
+
+		<!-- 用户资料卡片 -->
+		<item :label="'基础资料'" class="profile-card" style="margin-top: -110rpx;" id="info1">
+			<view class="info-grid">
+				<view class="info-item">
+					<text class="info-label">年龄</text>
+					<text class="info-value">{{ userInfo.age }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">身高</text>
+					<text class="info-value">{{ userInfo.height }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">现居城市</text>
+					<text class="info-value">{{ userInfo.city }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">职业</text>
+					<text class="info-value">{{ userInfo.occupation }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">房产认证</text>
+					<text class="info-value">{{ userInfo.houseCert }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">车产认证</text>
+					<text class="info-value">{{ userInfo.carCert }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">年收入</text>
+					<text class="info-value">{{ userInfo.income }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">婚姻状况</text>
+					<text class="info-value">{{ userInfo.maritalStatus }}</text>
+				</view>
+				<view class="info-item">
+					<text class="info-label">牵手次数</text>
+					<text class="info-value">{{ userInfo.hometown }}</text>
+				</view>
+			</view>
+		</item>
+		<item :label="'兴趣爱好'" class="profile-card " id="info2">
+			<view class="flex flex-row flex-wrap">
+				<cl-tag type="primary" plain>主要</cl-tag>
+				<cl-tag type="success" plain>主要</cl-tag>
+				<cl-tag type="warn" plain>主要</cl-tag>
+				<cl-tag type="error" plain>主要</cl-tag>
+				<cl-tag type="info" plain>主要</cl-tag>
+			</view>
+		</item>
+		<item :label="'感情观'" class="profile-card " id="info3">
+			<cl-text :pt="{ className: 'text-lg text-surface-400' }" v-if="userInfo.relationshipView != ''">
+				{{ userInfo.relationshipView }}
+			</cl-text>
+		</item>
+		<!-- Ta的红娘 -->
+		<item :label="'Ta的红娘'" class="profile-card " id="info4">
+			<Comment />
+		</item>
+	</cl-page>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import Item from "./components/item.uvue";
+import Comment from "./components/comment.uvue";
+
+// 定义用户信息类型
+interface UserInfo {
+	age: string;
+	height: string;
+	city: string;
+	occupation: string;
+	houseCert: string;
+	carCert: string;
+	income: string;
+	maritalStatus: string;
+	hometown: string;
+	hobbies: string[];
+	relationshipView: string;
+}
+
+// 轮播图数据
+const swiperList = ref([
+	"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+	"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+	"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+]);
+
+// 用户信息数据
+const userInfo = ref<UserInfo>({
+	age: "28",
+	height: "165cm",
+	city: "北京",
+	occupation: "设计师",
+	houseCert: "已认证",
+	carCert: "已认证",
+	income: "20-30万",
+	maritalStatus: "未婚",
+	hometown: "上海",
+	hobbies: ["旅行", "阅读", "健身", "烹饪"],
+	relationshipView: "希望找到一个真诚、有责任心的伴侣，一起度过余生。"
+});
+
+</script>
+
+<style lang="scss" scoped>
+/* 轮播图样式 */
+.swiper-container {
+	height: 500rpx;
+	width: 100%;
+}
+
+.swiper-image {
+	width: 100%;
+	height: 100%;
+}
+/* 资料卡片样式 */
+.profile-card {
+	margin-left: 20rpx;
+	margin-right: 20rpx;
+	background-color: #fff;
+	border-radius: 20rpx;
+	padding: 30rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	position: relative;
+	z-index: 10;
+}
+
+/* 基础资料网格样式 */
+.info-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20rpx;
+}
+
+.info-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.info-label {
+	font-size: 24rpx;
+	color: #999;
+	margin-bottom: 5rpx;
+}
+
+.info-value {
+	font-size: 26rpx;
+	color: #333;
+}
+
+</style>

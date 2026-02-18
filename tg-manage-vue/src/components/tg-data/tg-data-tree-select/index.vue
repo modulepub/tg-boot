@@ -13,7 +13,7 @@
 	/>
 </template>
 
-<script setup lang="ts" name="MaDataTreeSelect">
+<script setup lang="ts" name="TgDataTreeSelect">
 import { PropType, ref, watch } from 'vue'
 import { treeDataTranslate } from '@/utils/tool'
 import service from '@/utils/request'
@@ -76,7 +76,7 @@ const getDataList = async () => {
 		return
 	}
 	const data = await service.get(prop.url)
-	dataList.value = treeDataTranslate(data, prop.props.value, prop.props.pid)
+	dataList.value = treeDataTranslate(data as any, prop.props.value, prop.props.pid)
 }
 
 getDataList()

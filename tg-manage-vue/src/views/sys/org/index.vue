@@ -2,7 +2,7 @@
 	<el-card>
 		<el-space>
 			<el-space>
-				<el-button type="primary" icon="Plus" @click="addOrEditHandle(false, null)">新增</el-button>
+				<el-button type="primary" icon="Plus" @click="addOrEditHandle()">新增</el-button>
 			</el-space>
 			<el-space>
 				<el-button plain @click="toggleExpandAll()">
@@ -24,13 +24,12 @@
 			border
 			class="layout-table"
 		>
-			<el-table-column prop="orgName" label="名称" header-align="center"></el-table-column>
-			<el-table-column prop="seqNo" label="排序" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="orgName" label="名称" header-align="left"></el-table-column>
+			<el-table-column prop="seqNo" label="排序" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="160">
 				<template #default="scope">
-					<el-button type="primary" link @click="addOrEditHandle(false, scope.row)">新增</el-button>
-					<el-button type="primary" link @click="addOrEditHandle(true, scope.row)">修改</el-button>
-					<el-button type="primary" link @click="deleteHandle(scope.row.id)">删除</el-button>
+					<el-button type="primary" link @click="addOrEditHandle(scope.row.id)">修改</el-button>
+					<el-button type="primary" link @click="deleteHandle([scope.row.id])">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -47,13 +46,13 @@ import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/mgt/sysOrganization/list',
-	deleteUrl: '/sys/org',
+	deleteUrl: '/mgt/sysOrganization/delete',
 	isPage: false
 })
 
 const addOrEditRef = ref()
-const addOrEditHandle = (isUpdate: Boolean, row: any) => {
-	addOrEditRef.value.init(isUpdate, row)
+const addOrEditHandle = (id?: number) => {
+	addOrEditRef.value.init(id)
 }
 
 const { getDataList, deleteHandle } = useCrud(state)

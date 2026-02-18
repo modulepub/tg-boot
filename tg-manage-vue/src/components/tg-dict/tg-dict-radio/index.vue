@@ -4,7 +4,7 @@
 	</el-radio-group>
 </template>
 
-<script setup lang="ts" name="MaDictRadio">
+<script setup lang="ts" name="TgDictRadio">
 import { useAppStore } from '@/store/modules/app'
 import { getDictDataList } from '@/utils/tool'
 import { computed } from 'vue'

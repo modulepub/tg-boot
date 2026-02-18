@@ -2,16 +2,10 @@
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" draggable>
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="120px" @keyup.enter="submitHandle()">
 			<el-form-item prop="name" label="名称">
-				<el-input v-model="dataForm.name" placeholder="名称"></el-input>
-			</el-form-item>
-			<el-form-item prop="pid" label="上级机构">
-				<tg-org-select v-model="dataForm.pid" placeholder="请选择"></tg-org-select>
-			</el-form-item>
-			<el-form-item prop="leaderId" label="负责人">
-				<tg-user-input v-model="dataForm.leaderId" placeholder="机构负责人"></tg-user-input>
+				<el-input v-model="dataForm.orgName" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item prop="sort" label="排序">
-				<el-input-number v-model="dataForm.sort" controls-position="right" :min="0" aria-label="排序"></el-input-number>
+				<el-input-number v-model="dataForm.seqNo" controls-position="right" :min="0" aria-label="排序"></el-input-number>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -24,8 +18,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import TgUserInput from '@/components/tg-user/tg-user-input/index.vue'
-import TgOrgSelect from '@/components/tg-org/tg-org-select/index.vue'
+import service from '@/utils/request'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -34,50 +27,34 @@ const dataFormRef = ref()
 
 const dataForm = reactive({
 	id: '',
-	name: '',
-	pid: '',
-	parentName: '',
-	leaderId: '',
-	sort: 0
+	orgName: '',
+	seqNo: 0
 })
 
-const init = (isUpdate: boolean, row: any) => {
+const init = (id?: number) => {
 	visible.value = true
+	dataForm.id = ''
 
 	// 重置表单数据
 	if (dataFormRef.value) {
 		dataFormRef.value.resetFields()
 	}
 
-	// 更新表单数据
-	if (row) {
-		getOrg(isUpdate, row)
-	} else {
-		dataForm.id = ''
-		dataForm.pid = ''
-		dataForm.parentName = ''
-		dataForm.name = ''
-		dataForm.sort = 0
-		dataForm.leaderId = ''
+	// id 存在则为修改
+	if (id) {
+		getOrg(id)
 	}
 }
-
 // 获取信息
-const getOrg = (isUpdate: boolean, row: any) => {
-	Object.assign(dataForm, row)
-	if (!isUpdate) {
-		// 是新增，重置表单数据
-		dataForm.pid = dataForm.id
-		dataForm.parentName = dataForm.name
-		dataForm.id = ''
-		dataForm.name = ''
-		dataForm.sort = 0
-	}
+const getOrg = (id: number) => {
+	service.get('/mgt/sysOrganization/queryById?id=' + id).then(res => {
+		Object.assign(dataForm, res.data)
+	})
 }
 
 const dataRules = ref({
-	name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	parentName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+	orgName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	seqNo: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 // 表单提交
@@ -86,12 +63,12 @@ const submitHandle = () => {
 		if (!valid) {
 			return false
 		}
-    let http
-    if (dataForm.id) {
-      http =  service.put('/sys/org', dataForm)
-    } else {
-      http =  service.post('/sys/org', dataForm)
-    }
+		let http
+		if (dataForm.id) {
+			http = service.post('/mgt/sysOrganization/edit', dataForm)
+		} else {
+			http = service.post('/mgt/sysOrganization/add', dataForm)
+		}
 		http.then(() => {
 			ElMessage.success({
 				message: '操作成功',

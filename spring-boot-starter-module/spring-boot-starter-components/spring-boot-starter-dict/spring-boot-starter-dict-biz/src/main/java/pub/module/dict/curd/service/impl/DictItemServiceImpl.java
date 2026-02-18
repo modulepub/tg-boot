@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import pub.module.dict.api.constants.DictCacheKey;
 import pub.module.dict.curd.entity.DictItem;
 import pub.module.dict.curd.mapper.DictItemMapper;
-import pub.module.dict.curd.service.IDictItemService;
+import pub.module.dict.curd.service.DictItemService;
 import cn.hutool.core.util.IdUtil;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ import cn.hutool.core.util.ReflectUtil;
  */
 @Slf4j
 @Service
-public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> implements IDictItemService {
+public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> implements DictItemService {
 
 
     public void setDefaultValue(DictItem entity) {

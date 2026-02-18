@@ -3,18 +3,17 @@
 		:key="visible + ''"
 		v-model:visible="visible"
 		title="用户选择"
-		url="/sys/user/page"
+		url="/mgt/sysUser/list"
 		:multiple
 		:columns="[
-			{ field: 'id', label: '用户ID' },
-			{ field: 'username', label: '用户名' },
-			{ field: 'realName', label: '姓名' },
-			{ field: 'mobile', label: '手机号' },
+			{ field: 'userName', label: '用户名' },
+			{ field: 'userRealName', label: '姓名' },
+			{ field: 'userMobile', label: '手机号' },
 			{ field: 'createTime', label: '创建时间' }
 		]"
 		:query-params="[
-			{ field: 'username', label: '用户名' },
-			{ field: 'mobile', label: '手机号' }
+			{ field: 'userName', label: '用户名' },
+			{ field: 'userMobile', label: '手机号' }
 		]"
 		@select="onSelect"
 	></tg-data-table>

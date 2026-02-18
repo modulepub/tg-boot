@@ -10,7 +10,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-log</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.0</version>
     </parent>
 
     <dependencies>
@@ -22,6 +22,9 @@
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-data-api</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-web-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

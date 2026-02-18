@@ -1,19 +1,12 @@
 package pub.module.finance.curd.entity;
 
-import cn.hutool.json.JSONObject;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.format.annotation.DateTimeFormat;
-import pub.module.data.entity.BaseEntity;
+import pub.module.data.api.entity.BaseEntity;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**

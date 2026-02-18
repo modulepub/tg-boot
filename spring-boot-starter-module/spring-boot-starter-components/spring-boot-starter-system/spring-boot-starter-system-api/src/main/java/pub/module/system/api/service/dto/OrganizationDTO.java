@@ -3,7 +3,6 @@ package pub.module.system.api.service.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pub.module.data.entity.BaseEntity;
 
 import java.util.List;
 
@@ -17,6 +16,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "组织机构")
 public class OrganizationDTO {
+
+    private String id;
     /**
      * 机构编码
      */

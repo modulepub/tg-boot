@@ -13,7 +13,7 @@ import pub.module.dating.curd.entity.DtIntention;
 import pub.module.dating.curd.entity.DtRecommended;
 import pub.module.dating.curd.service.DtIntentionService;
 import pub.module.dating.curd.service.DtRecommendedService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 
 import jakarta.annotation.Resource;
@@ -33,7 +33,7 @@ public class BizDtIntentionImpl implements BizDtIntentionService {
     @Resource
     private DtIntentionService dtIntentionService;
     @Resource
-    private BizSysUserService bizSysUserService;
+    private ApiSysUserService apiSysUserService;
     @Resource
     private DtRecommendedService dtRecommendedService;;
 
@@ -49,7 +49,7 @@ public class BizDtIntentionImpl implements BizDtIntentionService {
     public DtIntentionDTO initDtIntention(DtIntentionDTO intentionDTO) {
         DtIntention intention = BeanUtil.copyProperties(intentionDTO,DtIntention.class);
         intention.setIntentionMatchesTargetNum(10L);
-        IPage<UserDTO> userPage = bizSysUserService.page(new UserDTO(),1, 10);
+        IPage<UserDTO> userPage = apiSysUserService.page(new UserDTO(),1, 10);
         List<DtRecommended> recommendedList = new ArrayList<>();
         for(UserDTO user : userPage.getRecords()){
             long count = dtRecommendedService.count(new LambdaQueryWrapper<DtRecommended>().eq(DtRecommended::getRcSysUserCode, intention.getIntentionSysUserCode())
@@ -70,8 +70,8 @@ public class BizDtIntentionImpl implements BizDtIntentionService {
         dtIntentionService.save(intention);
         dtRecommendedService.saveBatch(recommendedList);
         log.info("initDtIntention result:{}",intention);
-        UserDTO sysUser = bizSysUserService.getUserByUserCode(intention.getIntentionSysUserCode());
-        bizSysUserService.updateById(sysUser);
+        UserDTO sysUser = apiSysUserService.getUserByUserCode(intention.getIntentionSysUserCode());
+        apiSysUserService.updateById(sysUser);
         return BeanUtil.copyProperties(intention,DtIntentionDTO.class);
     }
 }

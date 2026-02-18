@@ -11,13 +11,14 @@ import jakarta.annotation.Resource;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import pub.module.system.api.service.BizSysOrganizationService;
+import pub.module.system.api.service.ApiSysOrganizationService;
 import pub.module.system.api.service.dto.OrganizationDTO;
 import pub.module.system.curd.entity.SysOrganization;
 import pub.module.system.curd.service.SysOrganizationService;
 import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -25,8 +26,8 @@ import java.util.List;
  * 组织机构 Controller
  *
  * @author PZ
- * @since 2026-01-02
  * @version V1.0
+ * @since 2026-01-02
  */
 @Tag(name = "组织机构管理")
 @RestController
@@ -34,7 +35,7 @@ import java.util.List;
 @Slf4j
 public class MgtSysOrganizationController {
     @Resource
-    private BizSysOrganizationService bizSysOrganizationService;
+    private ApiSysOrganizationService apiSysOrganizationService;
     @Resource
     private SysOrganizationService sysOrganizationService;
 
@@ -45,35 +46,66 @@ public class MgtSysOrganizationController {
         @Schema(description = "机构编码")
         private String orgCode;
     }
+
     @Operation(summary = "组织机构树 - 分页列表查询")
     @GetMapping(value = "/tree")
     public Result<OrganizationDTO> tree(TreeVO treeVO) {
-        return Result.ok(bizSysOrganizationService.getByCode(treeVO.getOrgCode()));
+        return Result.ok(apiSysOrganizationService.getByCode(treeVO.getOrgCode()));
     }
 
     @Operation(summary = "公司 - 分页列表查询")
     @GetMapping(value = "/listCompany")
     public Result<List<OrganizationDTO>> listCompany() {
-        return Result.ok(bizSysOrganizationService.listRootCompany());
+        return Result.ok(apiSysOrganizationService.listRootCompany());
     }
 
     /**
      * Queries and returns paginated list of organizations with tree structure
      */
-    @Operation(summary="组织机构管理 - 分页列表查询")
+    @Operation(summary = "组织机构管理 - 分页列表查询")
     @GetMapping(value = "/list")
     public Result<IPage<OrganizationDTO>> queryPageList(SysOrganization sysOrganization,
-                                                        @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-                                                        @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
+                                                        @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+                                                        @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         QueryWrapper<SysOrganization> queryWrapper = WebQueryUtil.buildQuery(sysOrganization);
         queryWrapper.lambda().isNull(SysOrganization::getOrgParentCode);
         Page<SysOrganization> page = new Page<>(pageNo, pageSize);
         IPage<SysOrganization> pageList = sysOrganizationService.page(page, queryWrapper);
         IPage<OrganizationDTO> resultPage = pageList.convert(sysOrganizationItem -> {
             OrganizationDTO organizationDTO = BeanUtil.copyProperties(sysOrganizationItem, OrganizationDTO.class);
-            bizSysOrganizationService.setTree(organizationDTO);
+            apiSysOrganizationService.setTree(organizationDTO);
             return organizationDTO;
         });
         return Result.ok(resultPage);
     }
+
+    @Operation(summary = "管户关系 - 添加")
+    @PostMapping(value = "/add")
+    public Result<String> add(@RequestBody SysOrganization sysOrganization) {
+
+        sysOrganizationService.save(sysOrganization);
+        return Result.ok("添加成功！");
+    }
+
+    @Operation(summary = "管户关系 - 编辑")
+    @PostMapping(value = "/edit")
+    public Result<String> edit(@RequestBody SysOrganization sysOrganization) {
+        sysOrganizationService.updateById(sysOrganization);
+        return Result.ok("编辑成功!");
+    }
+
+    @Operation(summary = "管户关系 - 批量删除")
+    @PostMapping(value = "/delete")
+    public Result<String> deleteBatch(@RequestBody Collection<String> list) {
+        this.sysOrganizationService.removeByIds(list);
+        return Result.ok("批量删除成功!");
+    }
+
+    @Operation(summary = "管户关系 - 通过id查询")
+    @GetMapping(value = "/queryById")
+    public Result<SysOrganization> queryById(@RequestParam(name = "id") String id) {
+        SysOrganization sysOrganization = sysOrganizationService.getById(id);
+        return Result.ok(sysOrganization);
+    }
+
 }

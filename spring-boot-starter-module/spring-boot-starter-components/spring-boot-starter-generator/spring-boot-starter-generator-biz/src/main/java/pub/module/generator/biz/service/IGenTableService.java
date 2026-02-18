@@ -45,11 +45,12 @@ public interface IGenTableService
     /**
      * 查询业务信息
      * 
-     * @param id 业务 ID
+     * @param tableId 业务 ID
      * @return 业务信息
      */
-    GenTable selectGenTableById(Long id);
+    GenTable selectGenTableById(Long tableId);
 
+     GenTable selectGenTableByName(String tableName);
     /**
      * 修改业务
      * 
@@ -62,7 +63,7 @@ public interface IGenTableService
      * 
      * @param ids 需要删除的数据 ID
      */
-    void deleteGenTableByIds(String ids);
+    void deleteGenTableByIds(List<String> ids);
 
     /**
      * 创建表

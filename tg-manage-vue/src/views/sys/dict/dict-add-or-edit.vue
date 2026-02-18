@@ -1,11 +1,11 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" draggable>
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px">
-			<el-form-item prop="dictType" label="字典编码">
-				<el-input v-model="dataForm.dictCode" placeholder="字典编码"></el-input>
-			</el-form-item>
 			<el-form-item prop="dictName" label="字典名称">
 				<el-input v-model="dataForm.dictName" placeholder="字典名称"></el-input>
+			</el-form-item>
+			<el-form-item prop="dictCode" label="字典编码">
+				<el-input v-model="dataForm.dictCode" placeholder="字典编码"></el-input>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -32,7 +32,7 @@ const dataForm = reactive({
 
 const dataRules = ref({
 	dictCode: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	dictName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	dictName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 const init = (id?: number) => {

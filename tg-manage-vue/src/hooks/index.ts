@@ -16,7 +16,7 @@ export const useCrud = (options: IHooksOptions) => {
 		pageNo: 1,
 		pageSize: 10,
 		total: 0,
-		pageSizes: [10, 20, 50, 100, 200, 500, 1000],
+		pageSizes: [10, 20, 50, 100, 200, 500, 1000, 5000],
 		dataListLoading: false,
 		dataListSelections: [],
 		dataListSelectionKeys: []
@@ -161,7 +161,7 @@ export const useCrud = (options: IHooksOptions) => {
 		})
 			.then(() => {
 				if (state.deleteUrl) {
-					service.post(state.deleteUrl, data ).then(() => {
+					service.post(state.deleteUrl, data).then(() => {
 						ElMessage.success('删除成功')
 
 						query()

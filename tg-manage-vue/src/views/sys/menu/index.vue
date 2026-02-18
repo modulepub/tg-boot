@@ -31,7 +31,7 @@
 			@expand-change="handleExpandChange"
 		>
 			<el-table-column prop="perName" label="名称" header-align="center" min-width="150"></el-table-column>
-			<el-table-column prop="perCode" label="编码" header-align="center" align="center" width="120"></el-table-column>
+			<el-table-column prop="perCode" label="编码" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column prop="perIcon" label="图标" header-align="center" align="center">
 				<template #default="scope">
 					<tg-icon :icon="scope.row.perIcon"></tg-icon>
@@ -51,9 +51,8 @@
 					<el-tag v-else type="info">外部打开</el-tag>
 				</template>
 			</el-table-column>
-			<el-table-column prop="seqNo" label="排序" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="perUrl" label="路由" header-align="center" align="center" width="150"></el-table-column>
-			<el-table-column prop="perAuthority" label="授权标识" header-align="center" align="center" width="150"></el-table-column>
+			<el-table-column prop="perUrl" label="路由" header-align="center" align="center" width="250"></el-table-column>
+			<el-table-column prop="seqNo" label="排序" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="220">
 				<template #default="scope">
 					<el-button type="primary" link @click="addOrModifyHandle(false, scope.row)">新增下级</el-button>
@@ -76,7 +75,7 @@ import { ElMessage } from 'element-plus/es'
 const state = reactive({
 	dataList: [] as any[],
 	dataListLoading: false,
-	deleteUrl: '/cus/sysPermission/delete'
+	deleteUrl: '/mgt/sysPermission/delete'
 })
 
 const addOrModifyRef = ref()
@@ -116,7 +115,6 @@ const getDataList = async () => {
 				code: 'root'
 			}
 		})
-		console.log('菜单数据:', res)
 		// 检查响应数据格式，确保正确解析
 		const menuData = res.data || {}
 		const children = menuData.children || []

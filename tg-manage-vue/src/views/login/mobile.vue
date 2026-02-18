@@ -51,7 +51,7 @@ import { mobileRegExp } from '@/utils/validate'
 import { ElMessage } from 'element-plus'
 import constant from '@/utils/constant'
 import cache from '@/utils/cache'
-import service from "@/utils/request";
+import service from '@/utils/request'
 
 const userStore = useUserStore()
 const loading = ref(false)
@@ -63,7 +63,7 @@ const sendCode = () => {
 		return
 	}
 
-  service.post('/pub/auth/sendSms' ,loginForm).then(() => {
+	service.post('/pub/auth/sendSms', loginForm).then(() => {
 		timerHandler()
 	})
 }
@@ -95,13 +95,13 @@ const { t } = useI18n()
 const loginFormRef = ref()
 
 const loginForm = reactive({
-  phone: '',
-  smsAuthCode: ''
+	phone: '',
+	smsAuthCode: ''
 })
 
 const loginRules = ref({
-  phone: [{ required: true, message: t('required'), trigger: 'blur' }],
-  smsAuthCode: [{ required: true, message: t('required'), trigger: 'blur' }]
+	phone: [{ required: true, message: t('required'), trigger: 'blur' }],
+	smsAuthCode: [{ required: true, message: t('required'), trigger: 'blur' }]
 })
 
 const onLogin = () => {

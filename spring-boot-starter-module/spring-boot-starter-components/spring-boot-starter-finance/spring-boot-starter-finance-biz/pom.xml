@@ -10,9 +10,17 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-finance</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.0</version>
     </parent>
-
+    <properties>
+        <weixin-java-mp.version>4.6.0</weixin-java-mp.version>
+        <weixin-java-miniapp.version>4.6.0</weixin-java-miniapp.version>
+        <weixin-java-open.version>4.6.0</weixin-java-open.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hutool-all.version>5.3.8</hutool-all.version>
+    </properties>
 
     <dependencies>
 
@@ -21,10 +29,10 @@
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-finance-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-pay</artifactId>
+            <version>${weixin-java-miniapp.version}</version>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -41,10 +49,6 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-system-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-pay</artifactId>
         </dependency>
 
 

@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.dating.curd.entity.DtCusMatchmaker;
 import pub.module.dating.curd.service.DtCusMatchmakerService;
-import pub.module.system.api.service.BizSysUserService;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
@@ -35,7 +35,7 @@ public class CusDtCusMatchmakerController {
         @Resource
         private DtCusMatchmakerService dtCusMatchmakerService;
         @Resource
-        private BizSysUserService bizSysUserService;
+        private ApiSysUserService apiSysUserService;
 
         @EqualsAndHashCode(callSuper = true)
         @Data
@@ -54,7 +54,7 @@ public class CusDtCusMatchmakerController {
             //TODO 实际业务场景客户端不会在循环中查询用户信息，因为会造成N+1问题，这里只是为了演示，所以这里直接将用户信息放到DtCusMatchmakerRes中
             IPage<DtCusMatchmakerRes> pageRes = pageList.convert(item -> {
                 DtCusMatchmakerRes res = BeanUtil.copyProperties(item, DtCusMatchmakerRes.class);
-                UserDTO cmMt = bizSysUserService.getUserByUserCode(item.getCmMtCode());
+                UserDTO cmMt = apiSysUserService.getUserByUserCode(item.getCmMtCode());
                 res.setCmMt(cmMt);
                 return res;
             });

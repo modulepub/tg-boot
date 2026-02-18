@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import pub.module.data.entity.BaseEntity;
 import pub.module.system.curd.entity.SysPermission;
 import pub.module.system.curd.mapper.SysPermissionMapper;
 import pub.module.system.curd.service.SysPermissionService;

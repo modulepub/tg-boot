@@ -20,7 +20,7 @@
 	</el-table-column>
 </template>
 
-<script setup lang="ts" name="MaDictColumn">
+<script setup lang="ts" name="TgDictColumn">
 import getDictItem from '@/utils/tool'
 
 const props = defineProps({

@@ -1,7 +1,20 @@
 import { defineStore } from 'pinia'
 import { ITheme } from '@/store/theme/interface'
 import cache from '@/utils/cache'
-import service from "@/utils/request";
+import service from '@/utils/request'
+
+// 字典项类型
+export interface DictItem {
+	dictItemValue: string
+	dictItemText: string
+	dictItemColor?: string
+}
+
+// 字典类型
+export interface Dict {
+	dictCode: string
+	dictItemList: DictItem[]
+}
 
 export const useAppStore = defineStore('appStore', {
 	state: () => ({
@@ -12,7 +25,7 @@ export const useAppStore = defineStore('appStore', {
 		// 组件大小
 		componentSize: cache.getComponentSize(),
 		// 字典列表
-		dictList: [],
+		dictList: [] as Dict[],
 		// 主题
 		theme: cache.getTheme()
 	}),

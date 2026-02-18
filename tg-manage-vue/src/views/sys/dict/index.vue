@@ -30,6 +30,7 @@
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
 			border
+			align="center"
 			show-overflow-tooltip
 			class="layout-table"
 			row-key="id"
@@ -41,7 +42,7 @@
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="dictCode" label="字典编码" header-align="center" align="center"> </el-table-column>
-			<el-table-column prop="dictName" label="字典名称" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="dictName" label="字典名称" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="createBy" label="创建人" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="200">

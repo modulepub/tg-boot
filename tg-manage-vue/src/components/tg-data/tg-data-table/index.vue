@@ -26,9 +26,9 @@
 			</el-table>
 			<el-pagination
 				v-if="page"
-				:current-page="state.page"
+				:current-page="state.pageNo"
 				:page-sizes="state.pageSizes"
-				:page-size="state.limit"
+				:page-size="state.pageSize"
 				:total="state.total"
 				layout="total, sizes, prev, pager, next, jumper"
 				@size-change="sizeChangeHandle"
@@ -43,7 +43,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="MaDataTable">
+<script setup lang="ts" name="TgDataTable">
 import { ref, reactive, PropType } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import { useCrud } from '@/hooks'

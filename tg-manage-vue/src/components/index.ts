@@ -11,6 +11,7 @@ import TgDataTreeSelect from '@/components/tg-data/tg-data-tree-select/index.vue
 import TgDataTreeLeft from '@/components/tg-data/tg-data-tree-left/index.vue'
 import TgDataTable from '@/components/tg-data/tg-data-table/index.vue'
 import TgImageColumn from '@/components/tg-image-column/index.vue'
+import TgFileColumn from '@/components/tg-file-column/index.vue'
 
 import TgIcon from '@/components/tg-icon/index.vue'
 import TgEditor from '@/components/tg-editor/index.vue'
@@ -44,6 +45,7 @@ const components = [
 	TgDataTreeLeft,
 	TgDataTable,
 	TgImageColumn,
+	TgFileColumn,
 	TgUserInput,
 	TgUserDialog,
 	TgOrgSelect,

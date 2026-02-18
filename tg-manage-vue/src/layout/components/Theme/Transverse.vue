@@ -87,6 +87,10 @@ const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'he
 			}
 			padding: 0;
 		}
+		::v-deep(.el-menu-item.is-active) {
+			color: #fff !important;
+			background-color: var(--el-color-primary) !important;
+		}
 	}
 }
 </style>

@@ -12,16 +12,16 @@
 		@sort-change="sortChangeHandle"
 	>
 		<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-		<el-table-column prop="dictItemValue" label="字典值" header-align="center" align="center"></el-table-column>
 		<el-table-column prop="dictItemText" label="字典标签" header-align="center" align="center">
 			<template #default="scope">
-				<el-tag :color="scope.row.dictItemColor" v-if="scope.row.dictItemColor" effect="dark" :style="{border: 'none'}">
+				<el-tag v-if="scope.row.dictItemColor" :color="scope.row.dictItemColor" effect="dark" :style="{ border: 'none' }">
 					{{ scope.row.dictItemText }}
 				</el-tag>
 				<span v-else>{{ scope.row.dictItemText }}</span>
 			</template>
 		</el-table-column>
-		<el-table-column prop="sort" label="排序" sortable="custom" header-align="center" align="center"></el-table-column>
+		<el-table-column prop="dictItemValue" label="字典值" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+		<el-table-column prop="seqNo" label="排序" sortable="custom" header-align="center" align="center" show-overflow-tooltip></el-table-column>
 		<el-table-column prop="createTime" label="创建时间" header-align="center" align="center" width="180"></el-table-column>
 		<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 			<template #default="scope">

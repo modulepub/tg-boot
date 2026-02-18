@@ -14,7 +14,7 @@
 	</el-table-column>
 </template>
 
-<script setup lang="ts" name="MaDataColumn">
+<script setup lang="ts" name="TgDataColumn">
 import { PropType, ref } from 'vue'
 
 interface Prop {

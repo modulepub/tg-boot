@@ -2,6 +2,7 @@ package pub.module.web.util;
 
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
@@ -32,6 +33,13 @@ public class WebQueryUtil {
         }
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         for (Field field : ReflectUtil.getFields(searchObj.getClass())) {
+            TableField tableField = field.getAnnotation(TableField.class);
+            if(tableField != null){
+                boolean exist = tableField.exist();
+                if(!exist){
+                    continue;
+                }
+            }
             String fieldName = field.getName();
             field.setAccessible(true);
             Object fieldValue = field.get(searchObj);

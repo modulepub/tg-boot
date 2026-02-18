@@ -5,10 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -17,10 +14,13 @@ import java.util.zip.ZipOutputStream;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
 import jakarta.annotation.Resource;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.apache.velocity.Template;
@@ -60,13 +60,22 @@ public class GenTableServiceImpl implements IGenTableService
     /**
      * 查询业务信息
      * 
-     * @param id 业务ID
      * @return 业务信息
      */
     @Override
     public GenTable selectGenTableById(Long id)
     {
-        GenTable genTable = genTableMapper.selectGenTableById(id);
+        GenTable genTable = genTableMapper.selectOne(new QueryWrapper<GenTable>().lambda().eq(GenTable::getTableId, id));
+        List<GenTableColumn> columns = genTableColumnMapper.selectList(new QueryWrapper<GenTableColumn>().lambda().eq(GenTableColumn::getTableId, id));
+        genTable.setColumns(columns);
+        setTableFromOptions(genTable);
+        return genTable;
+    }
+
+    public GenTable selectGenTableByName(String tableName){
+        GenTable genTable = genTableMapper.selectOne(new QueryWrapper<GenTable>().lambda().eq(GenTable::getTableName, tableName));
+        List<GenTableColumn> columns = genTableColumnMapper.selectList(new QueryWrapper<GenTableColumn>().lambda().eq(GenTableColumn::getTableId, genTable.getTableId()));
+        genTable.setColumns(columns);
         setTableFromOptions(genTable);
         return genTable;
     }
@@ -80,7 +89,11 @@ public class GenTableServiceImpl implements IGenTableService
     @Override
     public List<GenTable> selectGenTableList(GenTable genTable)
     {
-        return genTableMapper.selectGenTableList(genTable);
+        QueryWrapper<GenTable> queryWrapper = new QueryWrapper<>();
+        if(StrUtil.isNotEmpty(genTable.getTableName())){
+            queryWrapper.lambda().like(GenTable::getTableName, genTable.getTableName());
+        }
+        return genTableMapper.selectList(queryWrapper);
     }
 
     /**
@@ -115,7 +128,12 @@ public class GenTableServiceImpl implements IGenTableService
     @Override
     public List<GenTable> selectGenTableAll()
     {
-        return genTableMapper.selectGenTableAll();
+        List<GenTable> tables = genTableMapper.selectList(new QueryWrapper<GenTable>().lambda().orderByAsc(GenTable::getId));
+        for (GenTable table : tables){
+            List<GenTableColumn> columns = genTableColumnMapper.selectList(new QueryWrapper<GenTableColumn>().lambda().eq(GenTableColumn::getTableId, table.getTableId()));
+            table.setColumns(columns);
+        }
+        return tables;
     }
 
     /**
@@ -127,14 +145,12 @@ public class GenTableServiceImpl implements IGenTableService
     @Transactional
     public void updateGenTable(GenTable genTable)
     {
-        String options = JSONUtil.toJsonPrettyStr(genTable.getParams());
-        genTable.setOptions(options);
-        int row = genTableMapper.updateGenTable(genTable);
+        int row = genTableMapper.updateById(genTable);
         if (row > 0)
         {
             for (GenTableColumn genTableColumn : genTable.getColumns())
             {
-                genTableColumnMapper.updateGenTableColumn(genTableColumn);
+                genTableColumnMapper.updateById(genTableColumn);
             }
         }
     }
@@ -146,10 +162,14 @@ public class GenTableServiceImpl implements IGenTableService
      */
     @Override
     @Transactional
-    public void deleteGenTableByIds(String ids)
+    public void deleteGenTableByIds(List<String> ids)
     {
-        genTableMapper.deleteGenTableByIds(ids.split(","));
-        genTableColumnMapper.deleteGenTableColumnByIds(ids.split(","));
+        QueryWrapper<GenTable> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.lambda().in(GenTable::getTableId,ids);
+        genTableMapper.delete(queryWrapper1);
+        QueryWrapper<GenTableColumn> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().in(GenTableColumn::getTableId,ids);
+        genTableColumnMapper.delete(queryWrapper);
     }
 
     /**
@@ -161,7 +181,9 @@ public class GenTableServiceImpl implements IGenTableService
     @Override
     public boolean createTable(String sql)
     {
-        return genTableMapper.createTable(sql) == 0;
+        SqlRunner SQL_RUNNER = SqlRunner.db();
+        SQL_RUNNER.update(sql, (Object) null);
+        return true;
     }
 
     /**
@@ -178,6 +200,7 @@ public class GenTableServiceImpl implements IGenTableService
 
             for (GenTable table : tableList)
             {
+                table.setId(IdUtil.getSnowflakeNextIdStr());
                 String tableName = table.getTableName();
                 table.setCreateBy("admin");
                 table.setFunctionName(table.getTableComment());
@@ -190,15 +213,18 @@ public class GenTableServiceImpl implements IGenTableService
                 int nameLength = tableName.length();
                 String businessName =  StrUtil.toCamelCase(StringUtils.substring(tableName, lastIndex+1, nameLength));
                 table.setBusinessName(businessName);
-                int row = genTableMapper.insertGenTable(table);
+                table.setTableId(IdUtil.getSnowflakeNextIdStr());
+                int row = genTableMapper.insert(table);
                 if (row > 0)
                 {
                     // 保存列信息
                     List<GenTableColumn> genTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
                     for (GenTableColumn column : genTableColumns)
                     {
+                        column.setColumnId(IdUtil.getSnowflakeNextIdStr());
+                        column.setId(IdUtil.getSnowflakeNextIdStr());
                         this.initColumnField(column, table);
-                        genTableColumnMapper.insertGenTableColumn(column);
+                        genTableColumnMapper.insert(column);
                     }
                 }
         }
@@ -312,7 +338,7 @@ public class GenTableServiceImpl implements IGenTableService
     {
         Map<String, String> dataMap = new LinkedHashMap<>();
         // 查询表信息
-        GenTable table = genTableMapper.selectGenTableById(tableId);
+        GenTable table = this.selectGenTableById(tableId);
         // 设置主子表信息
         setSubTable(table);
         // 设置主键列信息
@@ -344,7 +370,7 @@ public class GenTableServiceImpl implements IGenTableService
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        generatorCode(tableName, zip);
+        generatorCode(tableName, zip,new HashSet<>());
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
@@ -358,7 +384,7 @@ public class GenTableServiceImpl implements IGenTableService
     public void generatorCode(String tableName)
     {
         // 查询表信息
-        GenTable table = genTableMapper.selectGenTableByName(tableName);
+        GenTable table = this.selectGenTableByName(tableName);
         // 设置主子表信息
         setSubTable(table);
         // 设置主键列信息
@@ -392,7 +418,7 @@ public class GenTableServiceImpl implements IGenTableService
     @Transactional
     public void synDb(String tableName)
     {
-        GenTable table = genTableMapper.selectGenTableByName(tableName);
+        GenTable table = this.selectGenTableByName(tableName);
         List<GenTableColumn> tableColumns = table.getColumns();
         Map<String, GenTableColumn> tableColumnMap = tableColumns.stream().collect(Collectors.toMap(GenTableColumn::getColumnName, Function.identity()));
 
@@ -420,16 +446,18 @@ public class GenTableServiceImpl implements IGenTableService
                     column.setIsRequired(prevColumn.getIsRequired());
                     column.setHtmlType(prevColumn.getHtmlType());
                 }
-                genTableColumnMapper.updateGenTableColumn(column);
+                genTableColumnMapper.updateById(column);
             }
             else
             {
-                genTableColumnMapper.insertGenTableColumn(column);
+                genTableColumnMapper.insert(column);
             }
         });
 
-        List<GenTableColumn> delColumns = tableColumns.stream().filter(column -> !dbTableColumnNames.contains(column.getColumnName())).collect(Collectors.toList());
-        genTableColumnMapper.deleteGenTableColumns(delColumns);
+        List<GenTableColumn> delColumns = tableColumns.stream().filter(column -> !dbTableColumnNames.contains(column.getColumnName())).toList();
+        for (GenTableColumn column : delColumns){
+            genTableColumnMapper.deleteById(column);
+        }
     }
 
     /**
@@ -443,9 +471,10 @@ public class GenTableServiceImpl implements IGenTableService
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
+        Set<String> handledFileNames = new HashSet<>();
         for (String tableName : tableNames)
         {
-            generatorCode(tableName, zip);
+            generatorCode(tableName, zip,handledFileNames);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
@@ -454,10 +483,10 @@ public class GenTableServiceImpl implements IGenTableService
     /**
      * 查询表信息并生成代码
      */
-    private void generatorCode(String tableName, ZipOutputStream zip)
+    private void generatorCode(String tableName, ZipOutputStream zip,Set<String> handledFileNames)
     {
         // 查询表信息
-        GenTable table = genTableMapper.selectGenTableByName(tableName);
+        GenTable table = this.selectGenTableByName(tableName);
         // 设置主子表信息
         setSubTable(table);
         // 设置主键列信息
@@ -477,12 +506,17 @@ public class GenTableServiceImpl implements IGenTableService
             tpl.merge(context, sw);
             try
             {
+                String fileName = VelocityUtil.getFileName(template, table);
+                if(handledFileNames.contains(fileName)){
+                    continue;
+                }
                 // 添加到 zip
-                zip.putNextEntry(new ZipEntry(VelocityUtil.getFileName(template, table)));
+                zip.putNextEntry(new ZipEntry(fileName));
                 IoUtil.write(zip, false,sw.toString().getBytes(StandardCharsets.UTF_8));
                 IOUtils.closeQuietly(sw);
                 zip.flush();
                 zip.closeEntry();
+                handledFileNames.add(fileName);
             }
             catch (IOException e)
             {
@@ -499,24 +533,8 @@ public class GenTableServiceImpl implements IGenTableService
     @Override
     public void validateEdit(GenTable genTable)
     {
-        if (GenConstants.TPL_TREE.equals(genTable.getTplCategory()))
-        {
-            String options = JSONUtil.toJsonPrettyStr(genTable.getParams());
-            JSONObject paramsObj = JSONUtil.parseObj(options);
-            if (StringUtils.isEmpty(paramsObj.getStr(GenConstants.TREE_CODE)))
-            {
-                throw new RuntimeException("树编码字段不能为空");
-            }
-            else if (StringUtils.isEmpty(paramsObj.getStr(GenConstants.TREE_PARENT_CODE)))
-            {
-                throw new RuntimeException("树父编码字段不能为空");
-            }
-            else if (StringUtils.isEmpty(paramsObj.getStr(GenConstants.TREE_NAME)))
-            {
-                throw new RuntimeException("树名称字段不能为空");
-            }
-        }
-        else if (GenConstants.TPL_SUB.equals(genTable.getTplCategory()))
+
+         if (GenConstants.TPL_SUB.equals(genTable.getTplCategory()))
         {
             if (StringUtils.isEmpty(genTable.getSubTableName()))
             {
@@ -546,7 +564,7 @@ public class GenTableServiceImpl implements IGenTableService
         }
         if (StringUtils.isNull(table.getPkColumn()))
         {
-            table.setPkColumn(table.getColumns().get(0));
+            table.setPkColumn(table.getColumns().getFirst());
         }
         if (GenConstants.TPL_SUB.equals(table.getTplCategory()))
         {
@@ -560,7 +578,7 @@ public class GenTableServiceImpl implements IGenTableService
             }
             if (StringUtils.isNull(table.getSubTable().getPkColumn()))
             {
-                table.getSubTable().setPkColumn(table.getSubTable().getColumns().get(0));
+                table.getSubTable().setPkColumn(table.getSubTable().getColumns().getFirst());
             }
         }
     }
@@ -575,7 +593,7 @@ public class GenTableServiceImpl implements IGenTableService
         String subTableName = table.getSubTableName();
         if (StringUtils.isNotEmpty(subTableName))
         {
-            table.setSubTable(genTableMapper.selectGenTableByName(subTableName));
+            table.setSubTable(this.selectGenTableByName(subTableName));
         }
     }
 

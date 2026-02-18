@@ -34,87 +34,87 @@
 </template>
 
 <script setup lang="ts">
-	import { reactive, ref } from 'vue'
-	import { ElMessage } from 'element-plus/es'
-	import service from '@/utils/request'
+import { reactive, ref } from 'vue'
+import { ElMessage } from 'element-plus/es'
+import service from '@/utils/request'
 
-	const emit = defineEmits(['refreshDataList'])
+const emit = defineEmits(['refreshDataList'])
 
-	const visible = ref(false)
-	const dataFormRef = ref()
+const visible = ref(false)
+const dataFormRef = ref()
 
-	const dataForm = reactive({
-	log_code: ''
-,	log_name: ''
-,	log_method_name: ''
-,	log_content: ''
-,	log_description: ''
-,	log_client_ip: ''
-,	log_transaction_code: ''
-,	log_user_code: ''
-,	log_user_name: ''
-,	id: ''
-,	create_by: ''
-,	create_time: ''
-,	update_by: ''
-,	update_time: ''
-,	deleted: ''
-,	version: ''
-,	seq_no: ''
-,	org_code: ''
+const dataForm = reactive({
+	log_code: '',
+	log_name: '',
+	log_method_name: '',
+	log_content: '',
+	log_description: '',
+	log_client_ip: '',
+	log_transaction_code: '',
+	log_user_code: '',
+	log_user_name: '',
+	id: '',
+	create_by: '',
+	create_time: '',
+	update_by: '',
+	update_time: '',
+	deleted: '',
+	version: '',
+	seq_no: '',
+	org_code: ''
+})
+
+const init = (id?: number) => {
+	visible.value = true
+	dataForm.id = ''
+
+	// 重置表单数据
+	if (dataFormRef.value) {
+		dataFormRef.value.resetFields()
+	}
+
+	if (id) {
+		getLog(id)
+	}
+}
+
+const getLog = (id: number) => {
+	service.get('/mgt/log/queryById?id=' + id).then(res => {
+		Object.assign(dataForm, res.data)
 	})
+}
 
-	const init = (id?: number) => {
-		visible.value = true
-		dataForm.id = ''
+const dataRules = ref({
+	log_code: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+	log_name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+})
 
-		// 重置表单数据
-		if (dataFormRef.value) {
-			dataFormRef.value.resetFields()
+// 表单提交
+const submitHandle = () => {
+	dataFormRef.value.validate((valid: boolean) => {
+		if (!valid) {
+			return false
 		}
-
-		if (id) {
-			getLog(id)
+		let http: any
+		if (dataForm.id) {
+			http = service.post('/mgt/log/edit', dataForm)
+		} else {
+			http = service.post('/mgt/log/add', dataForm)
 		}
-	}
-
-	const getLog = (id: number) => {
-		service.get('/mgt/log/queryById?id=' + id).then(res => {
-			Object.assign(dataForm, res.data)
-		})
-	}
-
-	const dataRules = ref({
-	log_code: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
-,	log_name: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
-,	})
-
-	// 表单提交
-	const submitHandle = () => {
-		dataFormRef.value.validate((valid: boolean) => {
-			if (!valid) {
-				return false
-			}
-			let http: any
-			if (dataForm.id) {
-				http =  service.post('/mgt/log/edit', dataForm)
-			} else {
-				http =  service.post('/mgt/log/add', dataForm)
-			}
-			http.then(() => {
-				ElMessage.success({
-					message: '操作成功',
-					duration: 500,
-					onClose: () => {
-						visible.value = false
-						emit('refreshDataList')
-					}
-				})
+		http.then(() => {
+			ElMessage.success({
+				message: '操作成功',
+				duration: 500,
+				onClose: () => {
+					visible.value = false
+					emit('refreshDataList')
+				}
 			})
 		})
-	}
-
-	defineExpose({
-		init
 	})
+}
+
+defineExpose({
+	init
+})
 </script>

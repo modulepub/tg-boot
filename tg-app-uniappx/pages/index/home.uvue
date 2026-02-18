@@ -42,37 +42,21 @@
 				</view>
 			</view>
 		</cl-topbar>
-
-		<view class="p-3">
-			<view class="group" v-for="item in data" :key="item.label">
-				<cl-text :pt="{ className: '!text-sm !text-surface-400 mb-2 ml-2' }"
-					>{{ item.label }}（{{ item.children?.length ?? 0 }}）</cl-text
-				>
-
-				<view class="list">
-					<cl-row :gutter="10">
-						<template v-for="child in item.children" :key="child.label">
-							<cl-col :span="6" v-if="child.hidden != true">
-								<view
-									class="item dark:!bg-surface-800"
-									hover-class="opacity-80"
-									:hover-stay-time="250"
-									@tap="toPath(child)"
-								>
-									<cl-icon :name="child.icon" :size="36"></cl-icon>
-									<cl-text
-										:pt="{
-											className: 'mt-1 !text-xs text-center'
-										}"
-										>{{ child.label }}</cl-text
-									>
-								</view>
-							</cl-col>
-						</template>
-					</cl-row>
-				</view>
-			</view>
-		</view>
+		<cl-banner
+			:list="bannerList"
+			:height="500"
+			:pt="{
+				className: 'rounded-none',
+				image: {
+					className: '!rounded-none'
+				}
+			}"
+		/>
+		<cl-list>
+			<cl-list-item>
+			xx
+			</cl-list-item>
+		</cl-list>
 
 		<!-- 自定义底部导航栏 -->
 		<custom-tabbar></custom-tabbar>
@@ -86,10 +70,16 @@
 </template>
 
 <script lang="ts" setup>
+const bannerList = ref<string[]>([
+	"https://unix.cool-js.com/images/demo/goods/banner-1.jpg",
+	"https://unix.cool-js.com/images/demo/goods/banner-2.jpg",
+	"https://unix.cool-js.com/images/demo/goods/banner-3.jpg",
+	"https://unix.cool-js.com/images/demo/goods/banner-4.jpg"
+]);
 import { isApp, isMp, router, useRefs } from "@/cool";
 import { toggleTheme, isDark } from "@/cool/theme";
 import { t } from "@/locale";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useUi } from "@/uni_modules/cool-ui";
 import { config } from "@/config";
 import LocaleSet from "@/components/locale-set.uvue";

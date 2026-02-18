@@ -24,13 +24,21 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result<String> exception(Exception e) {
         log.error(e.getMessage(), e);
-        return Result.error(e.getMessage());
+        return Result.error("服务器错误，管理员已收到反馈");
     }
 
     //未知异常处理
     @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result<String> runtimeExceptionHandler(RuntimeException e) {
+        log.error(e.getMessage(), e);
+        return Result.error("攻城狮已收到异常，火速排查中");
+    }
+
+    //未知异常处理
+    @ExceptionHandler({IllegalArgumentException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result<String> illegalArgumentException(IllegalArgumentException e) {
         log.error(e.getMessage(), e);
         return Result.error(e.getMessage());
     }

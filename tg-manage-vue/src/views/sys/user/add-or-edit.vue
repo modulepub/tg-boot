@@ -18,9 +18,6 @@
 					<el-form-item prop="userRealName" label="姓名">
 						<el-input v-model="dataForm.userRealName" placeholder="姓名"></el-input>
 					</el-form-item>
-					<el-form-item prop="userSexCode" label="性别">
-						<tg-dict-radio v-model="dataForm.userSexCode" dict-code="userSexCode"></tg-dict-radio>
-					</el-form-item>
 					<el-form-item prop="userEnabledCode" label="是否启用">
 						<tg-dict-radio v-model="dataForm.userEnabledCode" dict-code="userEnabledCode"></tg-dict-radio>
 					</el-form-item>
@@ -48,7 +45,7 @@ const dataForm = reactive({
 	id: '',
 	userName: '',
 	userRealName: '',
-	userEnabledCode: '',
+	userEnabledCode: '0',
 	userSexCode: '',
 	userPhone: '',
 	orgCodeList: [] as any[]

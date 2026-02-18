@@ -9,11 +9,10 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.dict.curd.entity.DictItem;
-import pub.module.dict.curd.service.IDictItemService;
+import pub.module.dict.curd.service.DictItemService;
 import pub.module.web.util.WebQueryUtil;
 import pub.module.web.vo.Result;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -29,7 +28,7 @@ import java.util.Collection;
 @Slf4j
 public class MgtDictItemController {
 	@Resource
-	private IDictItemService sysDictItemService;
+	private DictItemService sysDictItemService;
 	
 	@Operation(summary="sys_dict_item-分页列表查询")
 	@GetMapping(value = "/list")
