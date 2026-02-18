@@ -41,7 +41,7 @@ public class SecurityConfig {
 
     public static String[] publicEndpoints = {"/pub/**" };
     public static String[] swaggerEndpoints = {"/swagger-ui/**" , "/doc.html/**" , "/webjars.html/**","/webjars/**", "/v3/**"};
-    public static String[] staticEndpoints = { "/css/**" , "/docs/**"  , "/js/**" , "/fonts/**" , "/img/**" , "/ajax/**","/html/**"  };
+    public static String[] staticEndpoints = { "/css/**" , "/docs/**"  , "/favicon.ico","/js/**" , "/fonts/**" , "/img/**" , "/ajax/**","/html/**"  };
     public static String[] genEndpoints = { "/tool/**" };
 
     static {
