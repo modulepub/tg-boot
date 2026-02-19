@@ -1,5 +1,7 @@
-package pub.module.excel.biz.util;
+package pub.module.excel.api.util;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.jxpath.JXPathNotFoundException;
@@ -34,9 +36,11 @@ public class JXPathExcelWriter {
     private final Workbook templateWorkbook;
     private static final Pattern pattern = Pattern.compile("\\{=(.+?)}");
     private final boolean xls2007;
+    private final File templateFile;
 
-    public JXPathExcelWriter(String templateFile) {
-        xls2007 = templateFile.toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
+    public JXPathExcelWriter(File templateFile) {
+        this.templateFile = templateFile;
+        xls2007 = templateFile.getAbsolutePath().toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
         try (FileInputStream fileInputStream = new FileInputStream(templateFile)) {
             templateWorkbook = xls2007 ? new XSSFWorkbook(fileInputStream) : new HSSFWorkbook(new POIFSFileSystem(fileInputStream));
         } catch (IOException e) {
@@ -98,7 +102,8 @@ public class JXPathExcelWriter {
         }
     }
 
-    public void fillToFile(Object object, String outFile) {
+    public File fillToFile(Object object) {
+        String outFileName = FileUtil.getTmpDirPath() + File.separator + DateUtil.date().getTime() + FileUtil.getName(templateFile.getName());
         JXPathContext objectContext = JXPathContext.newContext(object);
         try (
                 Workbook workbook = xls2007 ? new XSSFWorkbook() : new HSSFWorkbook()
@@ -194,7 +199,7 @@ public class JXPathExcelWriter {
                 outputSheet.addMergedRegion(copyRegion);
             }
 
-            File excelFile = new File(outFile);
+            File excelFile = new File(outFileName);
             if (excelFile.getParentFile() != null && !excelFile.getParentFile().exists()) {
                 boolean mkDirResult = excelFile.getParentFile().mkdirs();
                 if (!mkDirResult) {
@@ -202,13 +207,15 @@ public class JXPathExcelWriter {
                 }
             }
             try (
-                    FileOutputStream fileOutputStream = new FileOutputStream(outFile)
+                    FileOutputStream fileOutputStream = new FileOutputStream(outFileName)
             ) {
                 workbook.write(fileOutputStream);
             }
+            return excelFile;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     protected Sheet ensureOpenSheet(Workbook workbook) {

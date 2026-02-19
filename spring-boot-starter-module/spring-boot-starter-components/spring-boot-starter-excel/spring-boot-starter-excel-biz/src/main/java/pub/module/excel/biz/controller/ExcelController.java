@@ -1,6 +1,5 @@
 package pub.module.excel.biz.controller;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
@@ -13,7 +12,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +21,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pub.module.excel.api.service.BizExcelService;
 
 
-import jakarta.annotation.Resource;
+import pub.module.excel.api.util.JXPathExcelReader;
+import pub.module.excel.api.util.JXPathExcelWriter;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -49,8 +45,6 @@ import java.util.concurrent.Executors;
 @RequestMapping("/cus/excel")
 public class ExcelController {
 
-    @Resource
-    BizExcelService bizExcelService;
     ExecutorService executorService = Executors.newFixedThreadPool(1);
     final String importStatusKeyPredix = "excel_";
 
@@ -78,7 +72,8 @@ public class ExcelController {
         }
         Map<String, Object> data = JSONUtil.parseObj(dataJsonStr);
         File templateFile = getTemplateFile(exportExcelVO.getTemplatePath());
-        File excelFile = bizExcelService.exportExcel(templateFile, data);
+        JXPathExcelWriter fill = new JXPathExcelWriter(templateFile);
+        File excelFile = fill.fillToFile(data);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(excelFile));
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
@@ -105,8 +100,18 @@ public class ExcelController {
     @SneakyThrows
     @Operation(summary = "导入EXCEL", description = "导入EXCEL")
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> importExcel(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile, HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public ResponseEntity<?> importExcel(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile, HttpServletRequest request, @RequestHeader HttpHeaders headers) {
+        String dataUrl = request.getParameter("dataUrl");
+        HttpRequest httpRequest = HttpUtil.createPost(dataUrl);
+        Map<String,String> headersMap = new HashMap<>();
+        headers.forEach((key, value) -> {
+            if ("content-type,content-length,accept-encoding".contains(key)) {
+                return;
+            }
+            headersMap.put(key, value.getFirst());
+        });
+        headersMap.put("content-type", "application/json;charset=utf-8");
+        httpRequest.addHeaders(headersMap);
         if (multipartFile.isEmpty()) {
             throw new IllegalArgumentException("上传的文件不能为空");
         }
@@ -114,37 +119,19 @@ public class ExcelController {
         File localFile = FileUtil.newFile(fileName);
         FileUtil.writeBytes(multipartFile.getBytes(), localFile);
         System.err.println("上传的文件：" + localFile.getAbsolutePath());
-        String importStatusKey = importStatusKeyPredix + fileName;
-        String beginTime = LocalDateTimeUtil.format(LocalDateTime.now(), DateTimeFormatter.ISO_LOCAL_DATE);
-        String endTime = LocalDateTimeUtil.format(LocalDateTime.now(), DateTimeFormatter.ISO_LOCAL_DATE);
-        Map<String, Object> ingData = new HashMap<>();
-        ingData.put("importStatus", "ing");
-        ingData.put("fileName", fileName);
-        ingData.put("file", localFile);
-        ingData.put("beginTime", beginTime);
-        ingData.put("endTime", endTime);
-        session.setAttribute(importStatusKey, ingData);
         executorService.submit(() -> {
             try {
-                boolean success = bizExcelService.importExcel(localFile);
-                if (success) {
-                    Map<String, Object> successData = new HashMap<>();
-                    successData.put("importStatus", "success");
-                    successData.put("fileName", fileName);
-                    successData.put("file", localFile);
-                    successData.put("beginTime", beginTime);
-                    successData.put("endTime", LocalDateTimeUtil.format(LocalDateTime.now(), DateTimeFormatter.ISO_LOCAL_DATE));
-                    session.setAttribute(importStatusKey, successData);
-                } else {
-                    Map<String, Object> failData = new HashMap<>();
-                    failData.put("importStatus", "fail");
-                    failData.put("fileName", fileName);
-                    failData.put("file", localFile);
-                    failData.put("beginTime", beginTime);
-                    failData.put("endTime", LocalDateTimeUtil.format(LocalDateTime.now(), DateTimeFormatter.ISO_LOCAL_DATE));
-                    session.setAttribute(importStatusKey, failData);
-                }
-
+                JXPathExcelReader reader = new JXPathExcelReader(localFile);
+                reader.push(data -> {
+                    String result = "";
+                    httpRequest.body(JSONUtil.toJsonStr(data));
+                    try (cn.hutool.http.HttpResponse response = httpRequest.execute()) {
+                        result = response.body();
+                    } catch (Exception e) {
+                        log.error("推送数据失败，",e);
+                    }
+                    return result;
+                });
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }

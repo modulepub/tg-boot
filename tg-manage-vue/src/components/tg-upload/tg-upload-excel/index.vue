@@ -24,7 +24,7 @@ const props = defineProps({
 })
 
 // 上传URL
-const uploadUrl = constant.apiUrl + props.action
+const uploadUrl = constant.apiUrl + props.action + `?dataUrl=${constant.apiUrl + '/mgt/customer/customer/add'}`
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
 	ElMessage.success({
 		message: '上传成功',

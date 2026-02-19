@@ -2,10 +2,13 @@ package pub.module.customer.biz.controller.mgt;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import lombok.Data;
+import pub.module.customer.api.service.ApiCustomerService;
 import pub.module.customer.biz.service.SpiCustomerPromotionRelationService;
+import pub.module.customer.biz.service.SpiCustomerService;
 import pub.module.web.vo.Result;
 import pub.module.web.util.WebQueryUtil;
 
@@ -36,6 +39,8 @@ public class MgtCustomerController {
 
     @Resource
     CustomerService customerService;
+    @Resource
+    ApiCustomerService apiCustomerService;
 
     @Operation(summary = "客户 - 分页列表查询")
     @GetMapping(value = "/list")
@@ -45,12 +50,16 @@ public class MgtCustomerController {
         IPage<Customer> pageList = customerService.page(page, queryWrapper);
         return Result.ok(pageList);
     }
-
+    @Operation(summary = "客户 - 推送成功")
+    @PostMapping(value = "/push")
+    public Result<String> push(@RequestBody Map<String,Object> customer) {
+        apiCustomerService.importData(customer);
+        return Result.ok("推送成功！");
+    }
 
     @Operation(summary = "客户 - 添加")
     @PostMapping(value = "/add")
     public Result<String> add(@RequestBody Customer customer) {
-
         customerService.save(customer);
         return Result.ok("添加成功！");
     }

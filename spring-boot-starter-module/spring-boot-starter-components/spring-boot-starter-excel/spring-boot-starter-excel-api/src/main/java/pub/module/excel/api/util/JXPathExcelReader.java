@@ -1,23 +1,17 @@
-package pub.module.excel.biz.util;
+package pub.module.excel.api.util;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.ReflectUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * XPath Excel导入工具类
@@ -58,18 +52,10 @@ public class JXPathExcelReader {
         return comStr;
     }
 
-    public boolean push() {
-        boolean success = true;
+    public void push(PushDataHandler pushDataHandler) {
         Sheet templateSheet;
         templateSheet = dataWorkbook.getSheetAt(0);
         List<String> keys = new ArrayList<>();
-        Row interfaceRow = templateSheet.getRow(0);
-        Cell interfaceRowCell = interfaceRow.getCell(0);
-        String interfaceStr = getCommentStr(interfaceRowCell);
-        Assert.isTrue(interfaceStr.contains("."), "数据模板标题错误，未设置数据接口地址");
-        String serviceName = interfaceStr.split("\\.")[0];
-        String methodName = interfaceStr.split("\\.")[1];
-        Object bean = SpringUtil.getBean(serviceName);
         Row titleRow = templateSheet.getRow(1);
         for (int i = 0; i < titleRow.getPhysicalNumberOfCells(); i++) {
             Cell cell = titleRow.getCell(i);
@@ -88,11 +74,10 @@ public class JXPathExcelReader {
             Cell outputCell = dataRow.createCell(cellNum + 1);
             try {
                 //执行业务数据写入
-                ReflectUtil.invoke(bean, methodName, dataMap);
+                String result = pushDataHandler.push(dataMap);
                 outputCell.setCellType(Cell.CELL_TYPE_STRING);
-                outputCell.setCellValue("success");
+                outputCell.setCellValue(result);
             } catch (Exception e) {
-                success = false;
                 outputCell.setCellType(Cell.CELL_TYPE_STRING);
                 outputCell.setCellValue("fail:" + e.getMessage());
                 log.error("Excel导入行失败！", e);
@@ -103,8 +88,6 @@ public class JXPathExcelReader {
         } catch (IOException e) {
             log.error("excel关闭失败", e);
         }
-        return success;
-
     }
 
     private Object getValue(Cell cell) {
