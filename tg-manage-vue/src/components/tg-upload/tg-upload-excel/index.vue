@@ -24,7 +24,6 @@
 			<div class="history-section">
 				<div class="history-title">历史导入记录</div>
 				<el-table :data="historyList" border size="small" max-height="300">
-					<el-table-column prop="batchId" label="导入批次" show-overflow-tooltip></el-table-column>
 					<el-table-column prop="excelName" label="文件名" show-overflow-tooltip></el-table-column>
 
 					<el-table-column prop="completed" label="是否完成" width="80" align="center">
