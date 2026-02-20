@@ -1,5 +1,5 @@
 <template>
-	<el-button @click="openDialog">
+	<el-button icon="Upload" @click="openDialog">
 		<slot />
 	</el-button>
 
@@ -64,7 +64,11 @@ const props = defineProps({
 		type: String,
 		required: true
 	},
-	templateUrl: {
+	push: {
+		type: String,
+		default: ''
+	},
+	template: {
 		type: String,
 		default: ''
 	}
@@ -80,14 +84,14 @@ const openDialog = () => {
 }
 
 const downloadTemplate = () => {
-	if (props.templateUrl) {
-		window.open(props.templateUrl, '_blank')
+	if (props.template) {
+		window.open(props.template, '_blank')
 	} else {
 		ElMessage.warning('模板下载链接未配置')
 	}
 }
 
-const uploadUrl = constant.apiUrl + props.action + `?dataUrl=${constant.apiUrl + '/mgt/customer/customer/add'}`
+const uploadUrl = constant.apiUrl + props.action + `?pushUrl=${constant.apiUrl}${props.push}`
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
 	let importExcelStatus = Storage.getItem('importExcelStatus')
@@ -127,14 +131,14 @@ const resultHandle = (params: { completed: any; batchId: any }) => {
 	if (params.completed) {
 		let url = `${constant.apiUrl}/cus/excel/downloadImportResult?batchId=${params.batchId}`
 		service.get(url, { responseType: 'blob' }).then(res => {
-      let blob = new Blob([res.data], { type: 'application/vnd.ms-excel' })
-      let fileName = params.batchId + '.xlsx'
-      let a = document.createElement('a')
-      a.href = URL.createObjectURL(blob)
-      a.download = fileName
-      a.click()
-      URL.revokeObjectURL(a.href)
-    })
+			let blob = new Blob([res.data], { type: 'application/vnd.ms-excel' })
+			let fileName = params.batchId + '.xlsx'
+			let a = document.createElement('a')
+			a.href = URL.createObjectURL(blob)
+			a.download = fileName
+			a.click()
+			URL.revokeObjectURL(a.href)
+		})
 	} else {
 		ElMessage.warning('模板下载链接未配置')
 	}

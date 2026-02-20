@@ -64,8 +64,12 @@
 		<el-space style="margin-top: 10px">
 			<template v-if="poolStatusDict && poolStatusDict.find(item => item.dictItemValue === activeTab)?.dictItemValue === '0'">
 				<el-space>
-					<tg-upload-excel action="/cus/excel/import" template-url="https://matchlove.oss-cn-beijing.aliyuncs.com/avatar/20260106110129083/1jpg.jpg">
-						<el-button plain icon="Upload">导入</el-button>
+					<tg-upload-excel
+						push="/mgt/customer/customer/add"
+						action="/cus/excel/import"
+						template="https://matchlove.oss-cn-beijing.aliyuncs.com/avatar/20260106110129083/1jpg.jpg"
+					>
+						导入
 					</tg-upload-excel>
 					<el-space>
 						<el-button icon="Plus" plain type="primary" @click="inPoolBatchHandle()">入库</el-button>

@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -130,8 +129,8 @@ public class ExcelController {
     @Operation(summary = "导入EXCEL", description = "导入EXCEL")
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Result<?> importExcel(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile, HttpServletRequest request, @RequestHeader HttpHeaders headers) {
-        String dataUrl = request.getParameter("dataUrl");
-        HttpRequest httpRequest = HttpUtil.createPost(dataUrl);
+        String pushUrl = request.getParameter("pushUrl");
+        HttpRequest httpRequest = HttpUtil.createPost(pushUrl);
         httpRequest.addHeaders(this.copyGeneralHeader(headers));
         if (multipartFile.isEmpty()) {
             throw new IllegalArgumentException("上传的文件不能为空");
