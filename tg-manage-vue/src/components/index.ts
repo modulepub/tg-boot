@@ -23,10 +23,11 @@ import TgOrgSelect from '@/components/tg-org/tg-org-select/index.vue'
 import TgOrgInput from '@/components/tg-org/tg-org-input/index.vue'
 import TgRoleInput from '@/components/tg-role-input/index.vue'
 import TgPostInput from '@/components/tg-post-input/index.vue'
-import TgUploadImage from '@/components/tg-upload/tg-upload-image/index.vue'
-import TgUploadImages from '@/components/tg-upload/tg-upload-images/index.vue'
-import TgUploadFile from '@/components/tg-upload/tg-upload-file/index.vue'
-import TgUploadExcel from '@/components/tg-upload/tg-upload-excel/index.vue'
+import TgUploadImage from '@/components/tg-upload-image/index.vue'
+import TgUploadImages from '@/components/tg-upload-images/index.vue'
+import TgUploadFile from '@/components/tg-upload-file/index.vue'
+import TgUploadExcel from '@/components/tg-upload-excel/index.vue'
+import TgDownload from '@/components/tg-download/index.vue'
 
 const components = [
 	TgEditor,
@@ -55,7 +56,8 @@ const components = [
 	TgUploadImage,
 	TgUploadImages,
 	TgUploadFile,
-	TgUploadExcel
+	TgUploadExcel,
+	TgDownload
 ]
 
 const TgComponent: Plugin = {

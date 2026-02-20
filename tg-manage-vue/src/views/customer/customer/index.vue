@@ -66,15 +66,23 @@
 				<el-space>
 					<tg-upload-excel
 						push="/mgt/customer/customer/add"
-						action="/cus/excel/import"
-						template="https://matchlove.oss-cn-beijing.aliyuncs.com/avatar/20260106110129083/1jpg.jpg"
+						template="https://matchlove.oss-cn-beijing.aliyuncs.com/%E5%AE%A2%E6%88%B7%E5%AF%BC%E5%85%A5.xlsx"
 					>
 						导入
 					</tg-upload-excel>
-					<el-space>
-						<el-button icon="Plus" plain type="primary" @click="inPoolBatchHandle()">入库</el-button>
-					</el-space>
 				</el-space>
+				<el-space>
+					<tg-download
+						:data="`${state.dataListUrl}?pageNo=${state.pageNo}&pageSize=${state.pageSize}`"
+						template="https://matchlove.oss-cn-beijing.aliyuncs.com/fillExcelExample.xlsx"
+					>
+						导出
+					</tg-download>
+				</el-space>
+				<el-space>
+					<el-button icon="Plus" plain type="primary" @click="inPoolBatchHandle()">入库</el-button>
+				</el-space>
+
 				<el-space>
 					<el-button icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
 				</el-space>

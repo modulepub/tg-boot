@@ -52,7 +52,7 @@ import { ref, computed, inject } from 'vue'
 import { ElNotification, formContextKey, formItemContextKey } from 'element-plus'
 import type { UploadProps, UploadRequestOptions } from 'element-plus'
 import { generateUUID } from '@/utils/tool'
-import FileUtil from '../utils/FileUtil'
+import FileUtil from '@/utils/FileUtil'
 import service from '@/utils/request'
 
 interface UploadFileProps {

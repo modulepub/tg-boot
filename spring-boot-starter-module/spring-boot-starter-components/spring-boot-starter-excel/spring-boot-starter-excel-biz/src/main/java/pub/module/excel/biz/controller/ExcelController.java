@@ -77,8 +77,8 @@ public class ExcelController {
 
     @SneakyThrows
     @Operation(summary = "导出EXCEL", description = "导出EXCEL")
-    @PostMapping(value = "/export")
-    public ResponseEntity<?> export(@RequestBody ExportExcelVO exportExcelVO, @RequestHeader HttpHeaders headers) {
+    @GetMapping(value = "/export")
+    public ResponseEntity<?> export(ExportExcelVO exportExcelVO, @RequestHeader HttpHeaders headers) {
         HttpRequest httpRequest = HttpUtil.createGet(exportExcelVO.getDataUrl());
         httpRequest.addHeaders(this.copyGeneralHeader(headers));
         String dataJsonStr;
@@ -89,6 +89,7 @@ public class ExcelController {
         }
         Map<String, Object> data = JSONUtil.parseObj(dataJsonStr);
         File templateFile = getTemplateFile(exportExcelVO.getTemplatePath());
+        //File templateFile = new File("E:\\workspace_public\\tg-boot\\spring-boot-starter-module\\spring-boot-starter-components\\spring-boot-starter-excel\\exportTemplate.xlsx");
         JXPathExcelWriter fill = new JXPathExcelWriter(templateFile);
         File excelFile = fill.fillToFile(data);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(excelFile));

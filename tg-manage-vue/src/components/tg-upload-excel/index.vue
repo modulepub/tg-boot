@@ -60,10 +60,6 @@ import service from '@/utils/request'
 import { Storage } from '@/utils/storage'
 
 const props = defineProps({
-	action: {
-		type: String,
-		required: true
-	},
 	push: {
 		type: String,
 		default: ''
@@ -91,7 +87,7 @@ const downloadTemplate = () => {
 	}
 }
 
-const uploadUrl = constant.apiUrl + props.action + `?pushUrl=${constant.apiUrl}${props.push}`
+const uploadUrl = constant.apiUrl + `/cus/excel/import?pushUrl=${constant.apiUrl}${props.push}`
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
 	let importExcelStatus = Storage.getItem('importExcelStatus')
