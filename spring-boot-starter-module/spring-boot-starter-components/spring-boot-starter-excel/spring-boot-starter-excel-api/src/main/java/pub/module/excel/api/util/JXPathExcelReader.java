@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -29,8 +30,10 @@ import java.util.*;
 public class JXPathExcelReader {
 
     private final Workbook dataWorkbook;
+    private final File excelFile;
 
     public JXPathExcelReader(File excelFile) {
+        this.excelFile = excelFile;
         String filePath = excelFile.getAbsolutePath();
         boolean xls2007 = filePath.toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
         try (FileInputStream fileInputStream = new FileInputStream(excelFile)) {
@@ -61,6 +64,9 @@ public class JXPathExcelReader {
             Cell cell = titleRow.getCell(i);
             keys.add(getCommentStr(cell));
         }
+        Cell titleRowCell = titleRow.createCell(titleRow.getPhysicalNumberOfCells());
+        titleRowCell.setCellType(Cell.CELL_TYPE_STRING);
+        titleRowCell.setCellValue("**导入结果**");
         //拷贝行列数据
         for (int j = 2; j < templateSheet.getLastRowNum() + 1; j++) {
             Row dataRow = templateSheet.getRow(j);
@@ -71,7 +77,7 @@ public class JXPathExcelReader {
                 Cell cell = dataRow.getCell(i);
                 dataMap.put(keys.get(i), getValue(cell));
             }
-            Cell outputCell = dataRow.createCell(cellNum + 1);
+            Cell outputCell = dataRow.createCell(cellNum);
             try {
                 //执行业务数据写入
                 String result = pushDataHandler.push(dataMap);
@@ -82,6 +88,12 @@ public class JXPathExcelReader {
                 outputCell.setCellValue("fail:" + e.getMessage());
                 log.error("Excel导入行失败！", e);
             }
+        }
+        System.err.println(excelFile.getAbsolutePath());
+        try (FileOutputStream fileOutputStream = new FileOutputStream(excelFile)) {
+            dataWorkbook.write(fileOutputStream);
+        } catch (IOException e) {
+            log.error("excel写入失败", e);
         }
         try {
             dataWorkbook.close();

@@ -130,7 +130,6 @@ public class ExcelController {
     @Operation(summary = "导入EXCEL", description = "导入EXCEL")
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Result<?> importExcel(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile, HttpServletRequest request, @RequestHeader HttpHeaders headers) {
-        HttpSession session = request.getSession();
         String dataUrl = request.getParameter("dataUrl");
         HttpRequest httpRequest = HttpUtil.createPost(dataUrl);
         httpRequest.addHeaders(this.copyGeneralHeader(headers));
@@ -152,12 +151,13 @@ public class ExcelController {
             try {
                 JXPathExcelReader reader = new JXPathExcelReader(localFile);
                 reader.push(data -> {
-                    String result = "";
+                    String result = "导入成功";
                     httpRequest.body(JSONUtil.toJsonStr(data));
                     try (cn.hutool.http.HttpResponse response = httpRequest.execute()) {
                         JSONObject res = JSONUtil.parseObj(response.body());
                         if(res.getInt("code")!=null&& res.getInt("code")!=0){
                             importExcelVO.setHasError(true);
+                            result = res.getStr("msg");
                         }else {
                             importExcelVO.setHasError(false);
                         }
