@@ -68,9 +68,11 @@ service.interceptors.response.use(
 		// 响应成功
 		if (res.code === 0) {
 			return res
-		} else {
+		} else if (res.code && res.code > 0) {
 			ElMessage.error(res.message)
 			return Promise.reject(new Error(response.statusText || 'Error'))
+		} else {
+			return res
 		}
 	},
 	error => {

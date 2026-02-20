@@ -1,17 +1,20 @@
 package pub.module.excel.biz.controller;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +28,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import pub.module.excel.api.util.JXPathExcelReader;
 import pub.module.excel.api.util.JXPathExcelWriter;
+import pub.module.web.vo.Result;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,7 +51,8 @@ import java.util.concurrent.Executors;
 public class ExcelController {
 
     ExecutorService executorService = Executors.newFixedThreadPool(1);
-    final String importStatusKeyPredix = "excel_";
+    final String IMPORT_PREDIX = "excel_";
+    Map<String, ImportExcelVO> IMPORT_STATUS_MAP = new HashMap<>();
 
     @Data
     @Schema(description = "导出EXCEL VO")
@@ -58,12 +64,24 @@ public class ExcelController {
     }
 
 
+    public Map<String, String> copyGeneralHeader(HttpHeaders headers) {
+        Map<String, String> headersMap = new HashMap<>();
+        headers.forEach((key, value) -> {
+            if ("content-type,content-length,accept-encoding".contains(key)) {
+                return;
+            }
+            headersMap.put(key, value.getFirst());
+        });
+        headersMap.put("content-type", "application/json;charset=utf-8");
+        return headersMap;
+    }
+
     @SneakyThrows
     @Operation(summary = "导出EXCEL", description = "导出EXCEL")
     @PostMapping(value = "/export")
     public ResponseEntity<?> export(@RequestBody ExportExcelVO exportExcelVO, @RequestHeader HttpHeaders headers) {
         HttpRequest httpRequest = HttpUtil.createGet(exportExcelVO.getDataUrl());
-        headers.forEach((key, value) -> httpRequest.header(key, value.getFirst()));
+        httpRequest.addHeaders(this.copyGeneralHeader(headers));
         String dataJsonStr;
         try (cn.hutool.http.HttpResponse response = httpRequest.execute()) {
             dataJsonStr = response.body();
@@ -97,28 +115,39 @@ public class ExcelController {
         return result;
     }
 
+    @Data
+    public static class ImportExcelVO {
+        String batchId;
+        String excelName;
+        Boolean completed;
+        Boolean hasError;
+        String filePath;
+        String beginImportTime;
+        String completeImportTime;
+    }
+
     @SneakyThrows
     @Operation(summary = "导入EXCEL", description = "导入EXCEL")
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> importExcel(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile, HttpServletRequest request, @RequestHeader HttpHeaders headers) {
+    public Result<?> importExcel(@Parameter(description = "上传的文件", required = true) @RequestPart(value = "file") MultipartFile multipartFile, HttpServletRequest request, @RequestHeader HttpHeaders headers) {
+        HttpSession session = request.getSession();
         String dataUrl = request.getParameter("dataUrl");
         HttpRequest httpRequest = HttpUtil.createPost(dataUrl);
-        Map<String,String> headersMap = new HashMap<>();
-        headers.forEach((key, value) -> {
-            if ("content-type,content-length,accept-encoding".contains(key)) {
-                return;
-            }
-            headersMap.put(key, value.getFirst());
-        });
-        headersMap.put("content-type", "application/json;charset=utf-8");
-        httpRequest.addHeaders(headersMap);
+        httpRequest.addHeaders(this.copyGeneralHeader(headers));
         if (multipartFile.isEmpty()) {
             throw new IllegalArgumentException("上传的文件不能为空");
         }
-        String fileName = FileUtil.getTmpDirPath() + File.separator + IdUtil.getSnowflakeNextIdStr() + File.separator + multipartFile.getOriginalFilename();
-        File localFile = FileUtil.newFile(fileName);
+        String filePath = FileUtil.getTmpDirPath() + File.separator + IdUtil.getSnowflakeNextIdStr() + File.separator + multipartFile.getOriginalFilename();
+        File localFile = FileUtil.newFile(filePath);
         FileUtil.writeBytes(multipartFile.getBytes(), localFile);
-        System.err.println("上传的文件：" + localFile.getAbsolutePath());
+        String batchId = IMPORT_PREDIX + IdUtil.getSnowflakeNextIdStr();
+        ImportExcelVO importExcelVO = new ImportExcelVO();
+        importExcelVO.setBatchId(batchId);
+        importExcelVO.setExcelName(multipartFile.getOriginalFilename());
+        importExcelVO.setCompleted(false);
+        importExcelVO.setBeginImportTime(LocalDateTimeUtil.format(LocalDateTime.now(), "yyyy-MM-dd HH:mm:ss"));
+        importExcelVO.setFilePath(filePath);
+        IMPORT_STATUS_MAP.put(batchId, importExcelVO);
         executorService.submit(() -> {
             try {
                 JXPathExcelReader reader = new JXPathExcelReader(localFile);
@@ -126,39 +155,52 @@ public class ExcelController {
                     String result = "";
                     httpRequest.body(JSONUtil.toJsonStr(data));
                     try (cn.hutool.http.HttpResponse response = httpRequest.execute()) {
-                        result = response.body();
+                        JSONObject res = JSONUtil.parseObj(response.body());
+                        if(res.getInt("code")!=null&& res.getInt("code")!=0){
+                            importExcelVO.setHasError(true);
+                        }else {
+                            importExcelVO.setHasError(false);
+                        }
                     } catch (Exception e) {
-                        log.error("推送数据失败，",e);
+                        log.error("推送数据失败，", e);
                     }
                     return result;
                 });
+                importExcelVO.setCompleted(true);
+                importExcelVO.setCompleteImportTime(LocalDateTimeUtil.format(LocalDateTime.now(), "yyyy-MM-dd HH:mm:ss"));
+                IMPORT_STATUS_MAP.put(batchId, importExcelVO);
+
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
         });
-        return ResponseEntity.ok("上传成功！");
+        return Result.ok(batchId);
     }
 
 
     @SneakyThrows
     @Operation(summary = "导入状态", description = "导入状态")
     @GetMapping(value = "/getImportStatus")
-    public ResponseEntity<?> getImportStatus(HttpServletRequest request) {
-        Enumeration<String> attrs = request.getSession().getAttributeNames();
-        List<Map<String, Object>> result = new ArrayList<>();
-        while (attrs.hasMoreElements()) {
-            String key = attrs.nextElement();
-            if (key.startsWith(importStatusKeyPredix)) {
-                Map<String, Object> map = new HashMap<>();
-                Object value = request.getSession().getAttribute(key);
-                if (value instanceof Map<?, ?>) {
-                    map.putAll((Map<String, Object>) value);
-                    map.remove("file");
-                }
-                result.add(map);
+    public Result<?> getImportStatus(@RequestParam String keys) {
+        List<ImportExcelVO> result = new ArrayList<>();
+        for (String key : IMPORT_STATUS_MAP.keySet()) {
+            if (keys.contains(key)) {
+                result.add(IMPORT_STATUS_MAP.get(key));
             }
         }
-        return ResponseEntity.ok(result);
+        return Result.ok(result);
+    }
+
+    @SneakyThrows
+    @Operation(summary = "下载导入EXCEL结果", description = "下载导入EXCEL结果")
+    @GetMapping(value = "/downloadImportResult")
+    public ResponseEntity<?> export(@RequestParam String batchId) {
+        File excelFile = new File(IMPORT_STATUS_MAP.get(batchId).filePath);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(excelFile));
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= " + excelFile.getName())
+                .body(resource);
     }
 
 }
