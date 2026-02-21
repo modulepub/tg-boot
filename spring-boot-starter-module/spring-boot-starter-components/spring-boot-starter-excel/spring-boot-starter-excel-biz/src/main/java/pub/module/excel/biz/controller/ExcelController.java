@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import pub.module.excel.api.util.JXPathExcelReader;
-import pub.module.excel.api.util.JXPathExcelWriter;
+import pub.module.excel.api.util.ExportHandler;
+import pub.module.excel.api.util.ImportHandler;
 import pub.module.web.vo.Result;
 
 import java.io.*;
@@ -90,7 +90,7 @@ public class ExcelController {
         Map<String, Object> data = JSONUtil.parseObj(dataJsonStr);
         File templateFile = getTemplateFile(exportExcelVO.getTemplatePath());
         //File templateFile = new File("E:\\workspace_public\\tg-boot\\spring-boot-starter-module\\spring-boot-starter-components\\spring-boot-starter-excel\\exportTemplate.xlsx");
-        JXPathExcelWriter fill = new JXPathExcelWriter(templateFile);
+        ExportHandler fill = new ExportHandler(templateFile);
         File excelFile = fill.fillToFile(data);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(excelFile));
         return ResponseEntity.ok()
@@ -149,7 +149,7 @@ public class ExcelController {
         IMPORT_STATUS_MAP.put(batchId, importExcelVO);
         executorService.submit(() -> {
             try {
-                JXPathExcelReader reader = new JXPathExcelReader(localFile);
+                ImportHandler reader = new ImportHandler(localFile);
                 reader.push(data -> {
                     String result = "导入成功";
                     httpRequest.body(JSONUtil.toJsonStr(data));

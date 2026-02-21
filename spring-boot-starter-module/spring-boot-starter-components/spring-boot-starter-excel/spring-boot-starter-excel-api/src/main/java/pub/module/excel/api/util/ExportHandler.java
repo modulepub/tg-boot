@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
  * @version V1.0
  */
 @Slf4j
-public class JXPathExcelWriter {
+public class ExportHandler {
 
     private final Workbook templateWorkbook;
     private static final Pattern pattern = Pattern.compile("\\{=(.+?)}");
     private final boolean xls2007;
     private final File templateFile;
 
-    public JXPathExcelWriter(File templateFile) {
+    public ExportHandler(File templateFile) {
         this.templateFile = templateFile;
         xls2007 = templateFile.getAbsolutePath().toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
         try (FileInputStream fileInputStream = new FileInputStream(templateFile)) {

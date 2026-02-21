@@ -27,12 +27,12 @@ import java.util.*;
  */
 @Data
 @Slf4j
-public class JXPathExcelReader {
+public class ImportHandler {
 
     private final Workbook dataWorkbook;
     private final File excelFile;
 
-    public JXPathExcelReader(File excelFile) {
+    public ImportHandler(File excelFile) {
         this.excelFile = excelFile;
         String filePath = excelFile.getAbsolutePath();
         boolean xls2007 = filePath.toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
