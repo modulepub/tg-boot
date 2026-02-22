@@ -4,7 +4,7 @@
     <packaging>pom</packaging>
     <groupId>pub.module</groupId>
     <artifactId>tg-boot</artifactId>
-    <version>3.5.0</version>
+   <version>3.5.1</version>
     <name>tg-boot</name>
     <description>TG是基于树图架构的框架，以spring boot为框架的开发平台，以spring boot
         starter的方式封装了一系列常见的业务模块。
@@ -34,7 +34,7 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.0</tag> <!-- 必须与版本号对应，git tag -a v1.0.0 -m "Release v1.0.0" git push origin v1.0.0 -->
+        <tag>3.5.1</tag> <!-- 必须与版本号对应，git tag -a v1.0.0 -m "Release v1.0.0" git push origin v1.0.0 -->
     </scm>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -225,6 +225,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>true</skip>
                     <useAgent>true</useAgent> <!-- 使用GPG本地代理，避免密钥文件找不到 -->
                 </configuration>
             </plugin>

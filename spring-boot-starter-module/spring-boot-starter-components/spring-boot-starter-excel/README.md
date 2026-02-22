@@ -32,13 +32,13 @@ https://maven.org/
 <dependency>
     <groupId>pub.module</groupId>
     <artifactId>spring-boot-starter-excel-api</artifactId>
-    <version>3.5.0</version>
+   <version>3.5.1</version>
 </dependency>
 
 <dependency>
     <groupId>pub.module</groupId>
     <artifactId>spring-boot-starter-excel-biz</artifactId>
-    <version>3.5.0</version>
+   <version>3.5.1</version>
 </dependency>
 ```
 

@@ -1,7 +1,7 @@
-package pub.module.excel;
+package pub.module.excel.biz;
 
 import lombok.Data;
-import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,8 +14,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration
-@ComponentScan(basePackages = {"pub.module.excel.**"})
+@ComponentScan(basePackages = {"pub.module.excel.biz.**"})
 public class BizExcelAutoConfiguration {
 
+    public BizExcelAutoConfiguration() {
+        System.err.println("已经加载配置类");
+    }
 
 }

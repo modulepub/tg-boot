@@ -10,7 +10,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-customer</artifactId>
-        <version>3.5.0</version>
+       <version>3.5.1</version>
     </parent>
     <name>${project.artifactId}</name>
     <description>业务模块聚合</description>
@@ -38,7 +38,7 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.0</tag>
+        <tag>3.5.1</tag>
     </scm>
 
     <dependencies>
