@@ -49,7 +49,7 @@
 	</el-dialog>
 </template>
 
-<script setup lang="ts" name="TgUploadExcel">
+<script setup lang="ts" name="TgExcelUpload">
 import { ref } from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import type { UploadProps } from 'element-plus'

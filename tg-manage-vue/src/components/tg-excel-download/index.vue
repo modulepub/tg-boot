@@ -4,7 +4,7 @@
 	</el-button>
 </template>
 
-<script setup lang="ts" name="TgDownload">
+<script setup lang="ts" name="TgExcelDownload">
 import constant from '@/utils/constant'
 import service from '@/utils/request'
 

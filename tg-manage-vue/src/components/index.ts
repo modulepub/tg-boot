@@ -26,8 +26,8 @@ import TgPostInput from '@/components/tg-post-input/index.vue'
 import TgUploadImage from '@/components/tg-upload-image/index.vue'
 import TgUploadImages from '@/components/tg-upload-images/index.vue'
 import TgUploadFile from '@/components/tg-upload-file/index.vue'
-import TgUploadExcel from '@/components/tg-upload-excel/index.vue'
-import TgDownload from '@/components/tg-download/index.vue'
+import TgExcelUpload from '@/components/tg-excel-upload/index.vue'
+import TgExcelDownload from '@/components/tg-excel-download/index.vue'
 
 const components = [
 	TgEditor,
@@ -56,8 +56,8 @@ const components = [
 	TgUploadImage,
 	TgUploadImages,
 	TgUploadFile,
-	TgUploadExcel,
-	TgDownload
+	TgExcelUpload,
+	TgExcelDownload
 ]
 
 const TgComponent: Plugin = {

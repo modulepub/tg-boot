@@ -64,20 +64,20 @@
 		<el-space style="margin-top: 10px">
 			<template v-if="poolStatusDict && poolStatusDict.find(item => item.dictItemValue === activeTab)?.dictItemValue === '0'">
 				<el-space>
-					<tg-upload-excel
+					<tg-excel-upload
 						push="/mgt/customer/customer/add"
 						template="https://matchlove.oss-cn-beijing.aliyuncs.com/%E5%AE%A2%E6%88%B7%E5%AF%BC%E5%85%A5.xlsx"
 					>
 						导入
-					</tg-upload-excel>
+					</tg-excel-upload>
 				</el-space>
 				<el-space>
-					<tg-download
+					<tg-excel-download
 						:data="`${state.dataListUrl}?pageNo=${state.pageNo}&pageSize=${state.pageSize}`"
 						template="https://matchlove.oss-cn-beijing.aliyuncs.com/exportTemplate.xlsx"
 					>
 						导出
-					</tg-download>
+					</tg-excel-download>
 				</el-space>
 				<el-space>
 					<el-button icon="Plus" plain type="primary" @click="inPoolBatchHandle()">入库</el-button>
