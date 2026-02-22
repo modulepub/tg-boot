@@ -67,7 +67,7 @@ spring:
       web-stat-filter:
         enabled: true
     url: jdbc:mysql://v.com:3306/tg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-    username: root
+    username: tg
     password: xaw6CB251EbDQ22n
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
