@@ -41,7 +41,7 @@ public class CusCustomerPromotionRelationController {
     @GetMapping(value = "/myCusList")
     public Result<IPage<CustomerPromotionRelation>> notDealList(CustomerPromotionRelation customerPromotionRelation, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         QueryWrapper<CustomerPromotionRelation> queryWrapper = WebQueryUtil.buildQuery(customerPromotionRelation);
-        if(customerPromotionRelation.getCreateDateRangeArray()!=null){
+        if(customerPromotionRelation.getCreateDateRangeArray()!=null&&customerPromotionRelation.getCreateDateRangeArray().length==2){
             queryWrapper.ge("DATE(create_time)", customerPromotionRelation.getCreateDateRangeArray()[0]);
             queryWrapper.le("DATE(create_time)", customerPromotionRelation.getCreateDateRangeArray()[1]);
         }
