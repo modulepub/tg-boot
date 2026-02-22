@@ -37,7 +37,6 @@ public class ControllerExceptionHandler {
 
     //未知异常处理
     @ExceptionHandler({IllegalArgumentException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result<String> illegalArgumentException(IllegalArgumentException e) {
         log.error(e.getMessage(), e);
         return Result.error(e.getMessage());

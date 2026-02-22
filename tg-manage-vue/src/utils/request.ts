@@ -53,18 +53,11 @@ const getRefreshToken = (refreshToken: string) => {
 service.interceptors.response.use(
 	async (response: AxiosResponse<any>) => {
 		// 没有权限，如：未登录、token过期
-		if (response.status === 401) {
-			return Promise.reject(new Error('登录超时，请重新登录'))
-		}
-		if (response.status !== 200) {
-			return Promise.reject(new Error(response.statusText || 'Error'))
-		}
-
+		console.log('响应', response)
 		const res = response.data
 		if (Object.prototype.toString.call(res) === '[object Blob]') {
 			return response
 		}
-
 		// 响应成功
 		if (res.code === 0) {
 			return res
@@ -83,10 +76,8 @@ service.interceptors.response.use(
 				ElMessage.error('认证失败，请重新登录')
 				window.location.reload()
 			}
-			if (error.response.status === 400) {
-				ElMessage.error(error.response.data)
-			}
-			if (error.response.status === 500) {
+
+			if (error.response.status === 500 || error.response.status === 400) {
 				ElMessage.error('服务器内部错误')
 			}
 		} else if (error.request) {

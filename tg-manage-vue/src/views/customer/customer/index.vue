@@ -74,7 +74,7 @@
 				<el-space>
 					<tg-download
 						:data="`${state.dataListUrl}?pageNo=${state.pageNo}&pageSize=${state.pageSize}`"
-						template="https://matchlove.oss-cn-beijing.aliyuncs.com/fillExcelExample.xlsx"
+						template="https://matchlove.oss-cn-beijing.aliyuncs.com/exportTemplate.xlsx"
 					>
 						导出
 					</tg-download>

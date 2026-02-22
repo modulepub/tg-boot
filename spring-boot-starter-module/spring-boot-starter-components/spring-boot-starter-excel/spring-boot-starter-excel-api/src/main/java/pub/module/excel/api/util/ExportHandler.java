@@ -10,13 +10,13 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.util.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,18 +26,23 @@ import java.util.regex.Pattern;
  * 填充数据依据xpath来定位对象数据
  * 支持EXCEL头部尾部
  * 如果不考虑背景色的话，建议使用xls而不是xlsx来实现循环输出，性能差约5倍
+ *
  * @author PZ
- * @since 2026-01-02
  * @version V1.0
+ * @since 2026-01-02
  */
 @Slf4j
 public class ExportHandler {
 
     private final Workbook templateWorkbook;
-    private static final Pattern pattern = Pattern.compile("\\{=(.+?)}");
     private final boolean xls2007;
     private final File templateFile;
+    private final Pattern pattern = Pattern.compile("\\$\\{([^}]+)}");
 
+    public Matcher getMatcher(String str) {
+        str = str.replaceAll("[\r\n]", "");
+        return pattern.matcher(str);
+    }
     public ExportHandler(File templateFile) {
         this.templateFile = templateFile;
         xls2007 = templateFile.getAbsolutePath().toUpperCase().endsWith(".XLSX"); //建议使用xls模式填充
@@ -50,6 +55,15 @@ public class ExportHandler {
 
 
     private void setOutputCellType(Cell templateCell, Cell outputCell, JXPathContext objectContext) {
+        String templateCellValue = templateCell.getStringCellValue();
+        Object value;
+        Matcher matcher = this.getMatcher(templateCellValue);
+        if (matcher.find()) {
+            value = objectContext.getValue(matcher.group(1));
+        } else {
+            value = templateCellValue;
+        }
+
         switch (templateCell.getCellType()) {
             case Cell.CELL_TYPE_FORMULA:
                 outputCell.setCellType(Cell.CELL_TYPE_FORMULA);
@@ -57,43 +71,18 @@ public class ExportHandler {
                 break;
             case Cell.CELL_TYPE_NUMERIC:
                 outputCell.setCellType(Cell.CELL_TYPE_NUMERIC);
-                outputCell.setCellValue(templateCell.getNumericCellValue());
+                try {
+                    double dValue = Double.parseDouble(value.toString());
+                    outputCell.setCellValue(dValue);
+                } catch (Exception e) {
+                    outputCell.setCellType(Cell.CELL_TYPE_STRING);
+                    outputCell.setCellValue("源数据无法转为数字类型");
+                }
+
                 break;
             case Cell.CELL_TYPE_STRING:
-                String templateCellValue = templateCell.getStringCellValue();
-                Matcher matcher = pattern.matcher(templateCellValue);
-                Map<String, Object> replacerMap = new HashMap<>();
-                while (matcher.find()) {
-                    String xpath = matcher.group(1);
-                    Object valueObj = null;
-                    try {
-                        valueObj = objectContext.getValue(xpath);
-                    } catch (JXPathNotFoundException e) {
-                        //forget it
-                        log.error(e.getMessage(), e);
-                    }
-                    replacerMap.put(matcher.group(0), valueObj == null ? "" : valueObj);
-                }
-                if (replacerMap.size() == 1 && templateCellValue.equals(replacerMap.keySet().iterator().next())) {
-                    Object valueObj = replacerMap.values().iterator().next();
-                    if (valueObj instanceof Integer) {
-                        outputCell.setCellType(Cell.CELL_TYPE_NUMERIC);
-                        outputCell.setCellValue((Integer) valueObj);
-                    } else if (valueObj instanceof Double) {
-                        outputCell.setCellType(Cell.CELL_TYPE_NUMERIC);
-                        outputCell.setCellValue((Double) valueObj);
-                    } else {
-                        outputCell.setCellType(Cell.CELL_TYPE_STRING);
-                        outputCell.setCellValue(valueObj.toString());
-                    }
-                    break;
-                } else {
-                    for (Entry<String, Object> entry : replacerMap.entrySet()) {
-                        templateCellValue = templateCellValue.replace(entry.getKey(), entry.getValue().toString());
-                    }
-                }
                 outputCell.setCellType(Cell.CELL_TYPE_STRING);
-                outputCell.setCellValue(templateCellValue);
+                outputCell.setCellValue(value != null ? value.toString() : "");
                 break;
             default:
                 outputCell.setCellType(Cell.CELL_TYPE_BLANK);
@@ -130,7 +119,13 @@ public class ExportHandler {
                     iterateRow = j;
                     iterateCount = 0; //准备输出
                     try {
-                        Object iterateObj = objectContext.getValue(commentExpression.getString().getString());
+                        String express = commentExpression.getString().getString().trim();
+                        Matcher matcher = this.getMatcher(express);
+                        if (!matcher.find()) {
+                            throw new RuntimeException("模板配置错误："+express);
+                        }
+                        Object iterateObj = objectContext.getValue((matcher.group(1)));
+                        Assert.notNull(iterateObj, "模板错误，未正确获取迭代对象！");
                         if (iterateObj.getClass().isArray() || iterateObj instanceof Collection) {
                             List<Object> iterateDataList = (iterateObj instanceof Collection ? new ArrayList<>((Collection<?>) iterateObj) : Collections.singletonList(iterateObj));
                             List<CellStyle> cellStyleCache = new ArrayList<>();
