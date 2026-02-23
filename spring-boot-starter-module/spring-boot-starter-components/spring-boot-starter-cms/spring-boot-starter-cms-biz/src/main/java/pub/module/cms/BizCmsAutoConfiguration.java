@@ -1,4 +1,4 @@
-package pub.module.ocr.biz;
+package pub.module.cms;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;
@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Data
-@ComponentScan(basePackages = {"pub.module.ocr.**"})
 @Configuration
-public class BizOcrAutoConfiguration {
-
+@ComponentScan(basePackages = {"pub.module.cms.**"})
+@MapperScan(basePackages = {"pub.module.cms.**.mapper"})
+public class BizCmsAutoConfiguration {
 
 }

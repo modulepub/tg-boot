@@ -1,4 +1,4 @@
-package pub.module.dict.biz;
+package pub.module.ocr;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;
@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Data
+@ComponentScan(basePackages = {"pub.module.ocr.**"})
 @Configuration
-@ComponentScan(basePackages = {"pub.module.dict.**"})
-@MapperScan(basePackages = {"pub.module.dict.**.mapper"})
-public class BizDictAutoConfiguration {
+public class BizOcrAutoConfiguration {
+
 
 }

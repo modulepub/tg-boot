@@ -8,7 +8,7 @@ import com.aliyun.oss.model.*;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import pub.module.file.biz.BizFileAutoConfiguration;
+import pub.module.file.BizFileAutoConfiguration;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.Resource;

@@ -1,4 +1,4 @@
-package pub.module.contract.biz;
+package pub.module.contract;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;

@@ -1,4 +1,4 @@
-package pub.module.file.biz;
+package pub.module.file;
 
 import io.minio.MinioClient;
 import lombok.Data;

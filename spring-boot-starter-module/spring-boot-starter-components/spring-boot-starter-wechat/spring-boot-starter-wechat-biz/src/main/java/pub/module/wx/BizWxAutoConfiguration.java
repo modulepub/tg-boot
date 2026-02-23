@@ -1,4 +1,4 @@
-package pub.module.wx.biz;
+package pub.module.wx;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;

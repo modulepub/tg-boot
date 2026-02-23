@@ -1,4 +1,4 @@
-package pub.module.dating.biz;
+package pub.module.dating;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;
@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = {"pub.module.dating.**"})
 @MapperScan(basePackages = {"pub.module.dating.**.mapper"})
 @Configuration
-public class BizDtConfiguration {
+public class BizDatingConfiguration {
 }

@@ -1,4 +1,4 @@
-package pub.module.generator.biz;
+package pub.module.system;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;
@@ -8,13 +8,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Data
+@ComponentScan(basePackages = {"pub.module.system.**", "cn.hutool.extra.spring"})
+@MapperScan(basePackages = {"pub.module.system.**.mapper"})
 @Configuration
-@ComponentScan(basePackages = {"pub.module.generator.**"})
-@MapperScan(basePackages = {"pub.module.generator.**.mapper"})
-public class BizGenerateAutoConfiguration {
+public class BizSystemAutoConfiguration {
+
+
+
     @Bean
     @ConditionalOnMissingBean
-    public BizGenerateAutoConfiguration init() {
-        return new BizGenerateAutoConfiguration();
+    public BizSystemAutoConfiguration init() {
+        return new BizSystemAutoConfiguration();
     }
 }

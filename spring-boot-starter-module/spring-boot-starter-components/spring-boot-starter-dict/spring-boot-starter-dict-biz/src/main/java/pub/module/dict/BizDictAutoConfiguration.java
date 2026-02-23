@@ -1,4 +1,4 @@
-package pub.module.trade.biz;
+package pub.module.dict;
 
 import lombok.Data;
 import org.mybatis.spring.annotation.MapperScan;
@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Data
-@ComponentScan(basePackages = {"pub.module.trade.**"})
-@MapperScan(basePackages = {"pub.module.trade.**.mapper"})
 @Configuration
-public class BizTradeAutoConfiguration {
+@ComponentScan(basePackages = {"pub.module.dict.**"})
+@MapperScan(basePackages = {"pub.module.dict.**.mapper"})
+public class BizDictAutoConfiguration {
 
 }

@@ -2,7 +2,7 @@ package pub.module.file.biz.service;
 
 import cn.hutool.core.io.FileUtil;
 import lombok.Cleanup;
-import pub.module.file.biz.BizFileAutoConfiguration;
+import pub.module.file.BizFileAutoConfiguration;
 import com.google.common.collect.Sets;
 import io.minio.*;
 import io.minio.messages.DeleteError;

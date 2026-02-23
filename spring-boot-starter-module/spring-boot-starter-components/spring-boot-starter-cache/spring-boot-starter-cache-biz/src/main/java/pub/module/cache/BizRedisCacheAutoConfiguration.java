@@ -16,7 +16,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableCaching
 @EnableAspectJAutoProxy(exposeProxy = true) // 暴露代理
-public class RedisCacheAutoConfiguration {
+public class BizRedisCacheAutoConfiguration {
 
     /**
      * 配置 RedisTemplate

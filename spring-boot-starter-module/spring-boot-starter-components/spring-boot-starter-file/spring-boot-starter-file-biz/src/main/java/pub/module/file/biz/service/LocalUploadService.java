@@ -2,7 +2,7 @@ package pub.module.file.biz.service;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
-import pub.module.file.biz.BizFileAutoConfiguration;
+import pub.module.file.BizFileAutoConfiguration;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

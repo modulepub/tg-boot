@@ -1,6 +1,7 @@
-package pub.module.data.biz;
+package pub.module.generator;
 
 import lombok.Data;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,11 +9,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ComponentScan(basePackages = {"pub.module.data.**"})
-public class BizDataAutoConfiguration {
+@ComponentScan(basePackages = {"pub.module.generator.**"})
+@MapperScan(basePackages = {"pub.module.generator.**.mapper"})
+public class BizGenerateAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
-    public BizDataAutoConfiguration init() {
-        return new BizDataAutoConfiguration();
+    public BizGenerateAutoConfiguration init() {
+        return new BizGenerateAutoConfiguration();
     }
 }
