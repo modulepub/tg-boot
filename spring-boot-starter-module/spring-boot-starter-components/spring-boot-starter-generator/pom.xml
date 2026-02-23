@@ -41,7 +41,14 @@
         <url>https://github.com/modulepub/tg-boot.git</url>
         <tag>3.5.3</tag>
     </scm>
-
+    <properties>
+        <!-- 跳过部署到远程仓库（Sonatype） -->
+        <maven.deploy.skip>false</maven.deploy.skip>
+        <!-- 跳过安装到本地仓库（可选，如需本地使用可注释） -->
+        <!-- <maven.install.skip>true</maven.install.skip> -->
+        <!-- 跳过Spring Boot胖JAR打包（仅保留普通JAR） -->
+        <spring-boot.repackage.skip>false</spring-boot.repackage.skip>
+    </properties>
     <modules>
         <module>spring-boot-starter-generator-biz</module>
         <module>spring-boot-starter-generator-api</module>

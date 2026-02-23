@@ -9,7 +9,7 @@ server:
     enabled: true
     min-response-size: 1024
     mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
-  port: 9991
+  port: 9999
   servlet:
     context-path:
 spring:
@@ -54,7 +54,6 @@ spring:
     static-locations: classpath:/static/,classpath:/public/
   autoconfigure:
     exclude:
-      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
       # 如果不需要MongoDB，可以取消注释下面这行来禁用MongoDB自动配置
       # - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
   datasource:
@@ -86,7 +85,7 @@ spring:
 
 #mybatis plus 设置
 mybatis-plus:
-  mapper-locations: classpath*:pub/module//**/xml/*Mapper.xml
+  mapper-locations: classpath*:pub/module/**/xml/*Mapper.xml
   type-aliases-package: pub.module.**.entity
   global-config:
     # 关闭MP3.0自带的banner
@@ -103,21 +102,10 @@ mybatis-plus:
     call-setters-on-nulls: true
 logging:
   level:
-    org.flywaydb: debug
-    org.jeecg.modules.system.mapper: debug
-    org.jeecg.modules.demo.test.mapper: debug
-    pub.module: debug
+    pub.module.*: debug
+    org.springframework.boot.autoconfigure: INFO
 
-#swagger
-knife4j:
-  #开启增强配置
-  enable: false
-  #开启生产环境屏蔽
-  production: false
-  basic:
-    enable: false
-    username: jeecg
-    password: jeecg1314
+
 
 wechat:
   mini:
