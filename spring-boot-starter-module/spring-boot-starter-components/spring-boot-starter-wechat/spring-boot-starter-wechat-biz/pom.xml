@@ -6,7 +6,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-wechat</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.1</version>
     </parent>
 
     <artifactId>spring-boot-starter-wechat-biz</artifactId>
@@ -37,7 +37,7 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.3</tag>
+        <tag>3.5.1</tag>
     </scm>
 
     <properties>
