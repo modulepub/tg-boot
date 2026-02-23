@@ -3,7 +3,7 @@ package pub.module.file.biz.service.impl;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
-import pub.module.file.BizFileAutoConfiguration;
+import pub.module.file.biz.BizFileAutoConfiguration;
 import pub.module.file.api.service.BizUploadService;
 import pub.module.file.biz.constants.UploadTypeEnum;
 import pub.module.file.biz.service.AliOSSService;

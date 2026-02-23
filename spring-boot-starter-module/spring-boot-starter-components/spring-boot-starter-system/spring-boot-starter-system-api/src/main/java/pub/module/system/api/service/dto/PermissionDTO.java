@@ -1,12 +1,10 @@
 package pub.module.system.api.service.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.api.entity.BaseEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,11 +16,10 @@ import java.io.Serializable;
   * @version V1.0
   */
 @Data
-@TableName("sys_permission")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@Schema(description="菜单实体")
-public class PermissionDTO extends BaseEntity implements Serializable {
+@Schema(description="菜单")
+public class PermissionDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
