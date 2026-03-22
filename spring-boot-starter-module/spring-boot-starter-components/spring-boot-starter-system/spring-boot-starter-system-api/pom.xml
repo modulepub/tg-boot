@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>spring-boot-starter-system-api</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>TG-boot 系统 API接口模块</description>
+    <url>https://github.com/modulepub/tg-boot.git</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+            <comments>Permissive open source license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>panzhen</id>
+            <name>panzhen</name>
+            <email>panzhen@mail.module.pub</email>
+            <url>https://github.com/modulepub/tg-boot.git</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
+        <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
+        <url>https://github.com/modulepub/tg-boot.git</url>
+        <tag>3.5.1</tag>
+    </scm>
+
+    <parent>
+        <groupId>pub.module</groupId>
+        <artifactId>spring-boot-starter-system</artifactId>
+        <version>3.5.1</version>
+    </parent>
+    <dependencies>
+        <!-- Spring Boot Starter -->
+
+
+        <!-- Spring Boot Web Starter (for JSON support) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-data-api</artifactId>
+            <version>3.5.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+</project>

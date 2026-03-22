@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "M3"
+    }
+
+    stages {
+           stage('Build') {
+                    steps {
+                        // 使用 Maven 构建项目
+                        bat  "mvn clean package -s D:\\soft\\apache-maven-3.6.3\\conf\\settings.xml -DskipTests"
+                    }
+           }
+
+
+         stage('Deploy') {
+                    steps {
+                    sshPublisher(publishers: [sshPublisherDesc(configName: '175.178.42.62', transfers: [
+                    sshTransfer(cleanRemote: false, excludes: '', execCommand: 'echo "copy deploy.sh……"', execTimeout: 120000, flatten: true, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/www/wwwroot/matchmaker.gcblock.cn/server', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/deploy.sh'),
+                    sshTransfer(cleanRemote: false, excludes: '', execCommand: 'echo "copy jar……"', execTimeout: 120000, flatten: true,  makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/www/wwwroot/matchmaker.gcblock.cn/server', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/module-matchmaker-3.0.0-exec.jar')],usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)
+                    ])
+                    sshPublisher(publishers: [sshPublisherDesc(configName: '175.178.42.62', transfers: [
+                    sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cd /www/wwwroot/matchmaker.gcblock.cn/server;sed -i "s/\\\\r$//" deploy.sh ; ./deploy.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/www/wwwroot/matchmaker.gcblock.cn/server', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)
+                    ])
+                    }
+         }
+    }
+}

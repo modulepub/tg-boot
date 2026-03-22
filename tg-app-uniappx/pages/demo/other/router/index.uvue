@@ -1,0 +1,32 @@
+<template>
+	<cl-page>
+		<view class="p-3">
+			<demo-item :label="t('跳转')">
+				<cl-button @click="toPush">{{ t("跳转") }}</cl-button>
+			</demo-item>
+
+			<demo-item :label="t('带参数')">
+				<cl-button @click="toQuery">{{ t("跳转") }}</cl-button>
+			</demo-item>
+
+			<demo-item :label="t('需登录')">
+				<cl-text>{{ t("如需配置路由守卫，请参考脚手架项目中的相关实现。") }}</cl-text>
+			</demo-item>
+		</view>
+	</cl-page>
+</template>
+
+<script lang="ts" setup>
+import { router, uuid, t } from "@/uni_modules/cool-unix";
+import DemoItem from "../../components/item.uvue";
+
+function toPush() {
+	router.to("/pages/demo/other/router/query");
+}
+
+function toQuery() {
+	router.push({ path: "/pages/demo/other/router/query", query: { id: uuid() } });
+}
+</script>
+
+<style lang="scss" scoped></style>

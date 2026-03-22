@@ -1,0 +1,22 @@
+<template>
+	<cl-page>
+		<view class="p-3">
+			<demo-item :label="t('ID')">
+				<cl-text>{{ id ?? "-" }}</cl-text>
+			</demo-item>
+		</view>
+	</cl-page>
+</template>
+
+<script lang="ts" setup>
+import { t } from "@/uni_modules/cool-unix";
+import DemoItem from "../../components/item.uvue";
+
+const props = defineProps({
+	id: {
+		type: String
+	}
+});
+</script>
+
+<style lang="scss" scoped></style>

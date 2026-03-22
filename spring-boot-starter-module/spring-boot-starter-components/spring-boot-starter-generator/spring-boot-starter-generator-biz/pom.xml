@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>spring-boot-starter-generator-biz</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>TG-boot 代码生成 业务实现模块</description>
+    <url>https://github.com/modulepub/tg-boot.git</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+            <comments>Permissive open source license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>panzhen</id>
+            <name>panzhen</name>
+            <email>panzhen@mail.module.pub</email>
+            <url>https://github.com/modulepub/tg-boot.git</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
+        <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
+        <url>https://github.com/modulepub/tg-boot.git</url>
+        <tag>3.5.1</tag>
+    </scm>
+    <parent>
+        <groupId>pub.module</groupId>
+        <artifactId>spring-boot-starter-generator</artifactId>
+        <version>3.5.1</version>
+    </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-generator-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Thymeleaf 依赖（必选） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- 可选：Thymeleaf 布局插件（如需模板布局） -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+        <!-- velocity 代码生成使用模板 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <!-- 阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <filtering>false</filtering> <!-- 核心：关闭过滤 -->
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.json</include>
+                    <include>**/*.ftl</include>
+                </includes>
+            </resource>
+            <resource>
+                <filtering>false</filtering> <!-- 核心：关闭过滤 -->
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/**/*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>

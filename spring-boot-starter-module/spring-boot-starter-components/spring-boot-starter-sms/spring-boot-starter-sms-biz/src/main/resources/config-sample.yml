@@ -1,0 +1,19 @@
+## >>>>>>FILE模块上传配置 BEGIN
+upload:
+  urlPrefix: https://file.iqingqing.net/matchmaker
+  # 文件上传方式，可选项：local（本地）、minio（minio）
+  type: minio
+  local:
+    path: /opt/upFiles
+    # minio文件上传
+  minio:
+    minioUrl: http://175.178.42.62:9000
+    minioName: admin
+    minioPass: admin123
+    bucketName: matchmaker
+  oss:
+    accessKey: LTAI5t8r28qrUFgewKatAeHP
+    secretKey: R70xinD8EXeOCvBeiE8M8w1TXtOp0x
+    endpoint: oss-cn-beijing.aliyuncs.com
+    bucketName: matchlove
+## <<<<<<FILE模块上传配置 END

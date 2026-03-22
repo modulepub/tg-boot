@@ -1,0 +1,17 @@
+## ide
+**/.idea
+*.iml
+rebel.xml
+## backend
+**/target
+**/logs
+**/logback
+
+## front
+**/*.lock
+os_del.cmd
+os_del_doc.cmd
+.svn
+derby.log
+.vscode/settings.json
+**/**/${project.build.directory}

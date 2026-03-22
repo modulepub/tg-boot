@@ -1,0 +1,14 @@
+package ${packageName}.api.service;
+
+
+/**
+ * Api ${functionName} Service
+ *
+ * @author ${author}
+ * ${datetime}
+ */
+public interface Api${ClassName}Service  {
+
+
+
+}

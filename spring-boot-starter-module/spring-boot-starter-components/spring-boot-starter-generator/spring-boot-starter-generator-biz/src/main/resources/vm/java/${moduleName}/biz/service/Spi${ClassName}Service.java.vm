@@ -1,0 +1,21 @@
+package ${packageName}.biz.service;
+
+import ${packageName}.curd.entity.${ClassName};
+import ${packageName}.curd.mapper.${ClassName}Mapper;
+import ${packageName}.curd.service.${ClassName}Service;
+
+import org.springframework.stereotype.Service;
+
+
+/**
+ * Spi ${functionName} Service
+ *
+ * @author ${author}
+ * ${datetime}
+ */
+@Service
+public interface Spi${ClassName}Service  {
+
+
+
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pub.module.generator.biz.mapper.GenTableMapper">
+
+	<select id="selectDbTableList" parameterType="GenTable" resultType="GenTable">
+		select table_name, table_comment, create_time, update_time from information_schema.tables
+		where table_schema = (select database())
+		AND table_name NOT LIKE 'qrtz\_%' AND table_name NOT LIKE 'gen\_%'
+		AND table_name NOT IN (select table_name from gen_table where deleted = 0)
+		<if test="tableName != null and tableName != ''">
+			AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
+		</if>
+		<if test="tableComment != null and tableComment != ''">
+			AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
+		</if>
+		order by create_time desc
+	</select>
+	<select id="selectDbTableListByNames"  resultType="GenTable">
+		select table_name, table_comment, create_time, update_time from information_schema.tables
+		where table_name NOT LIKE 'qrtz\_%' and table_name NOT LIKE 'gen\_%' and table_schema = (select database())
+		and table_name in
+		<foreach collection="array" item="name" open="(" separator="," close=")">
+			#{name}
+		</foreach>
+	</select>
+</mapper> 

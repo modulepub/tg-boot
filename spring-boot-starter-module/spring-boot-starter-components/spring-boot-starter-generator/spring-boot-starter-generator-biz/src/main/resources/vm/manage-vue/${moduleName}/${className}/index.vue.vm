@@ -1,0 +1,116 @@
+<template>
+	<el-card class="layout-query">
+		<el-form ref="queryRef" :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
+			#foreach($field in $queryList)
+				<el-form-item prop="$!{field.javaField}">
+					#if($field.htmlType == 'text' || $field.htmlType == 'textarea' || $field.htmlType == 'editor')
+						<el-input v-model="state.queryForm.$!{field.javaField}" placeholder="$!{field.columnComment}"></el-input>
+					#elseif($field.htmlType == 'select')
+						#if($field.queryDict)
+							<ma-dict-select v-model="state.queryForm.$!{field.javaField}" dict-type="$!{field.queryDict}" placeholder="$!{field.columnComment}" clearable></ma-dict-select>
+						#else
+							<el-select v-model="state.queryForm.$!{field.javaField}" placeholder="$!{field.columnComment}">
+								<el-option label="选择" value="0"></el-option>
+							</el-select>
+						#end
+					#elseif($field.htmlType == 'radio')
+						#if($field.formDict)
+							<ma-dict-radio v-model="state.queryForm.$!{field.javaField}" dict-type="$!{field.formDict}"></ma-dict-radio>
+						#else
+							<el-radio-group v-model="state.queryForm.$!{field.javaField}">
+								<el-radio :label="0">单选</el-radio>
+							</el-radio-group>
+						#end
+					#elseif($field.htmlType == 'date')
+						<el-date-picker
+								v-model="state.queryForm.$!{field.javaField}"
+								type="daterange"
+								format="YYYY-MM-DD"
+								value-format="YYYY-MM-DD"
+								clearable
+						>
+						</el-date-picker>
+					#elseif($field.htmlType == 'datetime')
+						<el-date-picker
+								v-model="state.queryForm.$!{field.javaField}"
+								type="datetimerange"
+								format="YYYY-MM-DD HH:mm:ss"
+								value-format="YYYY-MM-DD HH:mm:ss"
+								clearable
+						>
+						</el-date-picker>
+					#else
+						<el-input v-model="state.queryForm.$!{field.javaField}" placeholder="$!{field.columnComment}"></el-input>
+					#end
+				</el-form-item>
+			#end
+			<el-form-item>
+				<el-button icon="Search" type="primary" @click="getDataList()">查询</el-button>
+			</el-form-item>
+			<el-form-item>
+				<el-button icon="RefreshRight" @click="reset(queryRef)">重置</el-button>
+			</el-form-item>
+		</el-form>
+	</el-card>
+
+	<el-card>
+		<el-space>
+			<el-space>
+				<el-button v-auth="'${moduleName}${ClassName}Add'" icon="Plus" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+			</el-space>
+			<el-space>
+				<el-button v-auth="'${moduleName}${ClassName}Delete'" icon="Delete" plain type="danger" @click="deleteBatchHandle()">批量删除</el-button>
+			</el-space>
+		</el-space>
+		<el-table v-loading="state.dataListLoading" :data="state.dataList" border class="layout-table" @selection-change="selectionChangeHandle">
+			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
+			#foreach($field in $columns)
+					<el-table-column prop="$!{field.javaField}" label="$!{field.columnComment}" header-align="center" align="center" show-overflow-tooltip></el-table-column>
+				#end
+			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
+				<template #default="scope">
+					<el-button v-auth="'${moduleName}${ClassName}Edit'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
+					<el-button v-auth="'${moduleName}${ClassName}Delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+		<el-pagination
+				:current-page="state.pageNo"
+				:page-size="state.pageSize"
+				:total="state.total"
+				layout="total, sizes, prev, pager, next, jumper"
+				@size-change="sizeChangeHandle"
+				@current-change="currentChangeHandle"
+		>
+		</el-pagination>
+
+		<!-- 弹窗, 新增 / 修改 -->
+		<add-or-edit ref="addOrEditRef" @refreshDataList="getDataList"></add-or-edit>
+	</el-card>
+</template>
+
+<script setup lang="ts" name="${ModuleName}${businessName}Index">
+	import {useCrud} from '@/hooks'
+	import {reactive, ref} from 'vue'
+	import {IHooksOptions} from '@/hooks/interface'
+	import AddOrEdit from './add-or-edit.vue'
+
+	const state: IHooksOptions = reactive({
+		dataListUrl: '/mgt/${moduleName}/${className}/list',
+		deleteUrl: '/mgt/${moduleName}/${className}/delete',
+		queryForm: {
+			#foreach($field in $queryList)
+					$!{field.javaField}: ''
+				#if($foreach.hasNext),#end
+			#end
+		}
+	})
+
+	const queryRef = ref()
+	const addOrEditRef = ref()
+	const addOrUpdateHandle = (id?: number) => {
+		addOrEditRef.value.init(id)
+	}
+
+	const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle, reset } = useCrud(state)
+</script>

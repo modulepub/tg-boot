@@ -1,0 +1,15 @@
+${AnsiColor.BRIGHT_BLUE}
+                                  .o8              oooo                                        .o8
+                                 "888              `888                                       "888
+ooo. .oo.  .oo.    .ooooo.   .oooo888  oooo  oooo   888   .ooooo.      oo.ooooo.  oooo  oooo   888oooo.
+`888P"Y88bP"Y88b  d88' `88b d88' `888  `888  `888   888  d88' `88b      888' `88b `888  `888   d88' `88b
+ 888   888   888  888   888 888   888   888   888   888  888ooo888      888   888  888   888   888   888
+ 888   888   888  888   888 888   888   888   888   888  888    .o .o.  888   888  888   888   888   888
+o888o o888o o888o `Y8bod8P' `Y8bod88P"  `V88V"V8P' o888o `Y8bod8P' Y8P  888bod8P'  `V88V"V8P'  `Y8bod8P'
+                                                                        888
+                                                                       o888o
+${AnsiColor.BRIGHT_GREEN}
+Direct usage and secondary development are both permitted. We kindly request that you respect the author’s efforts and keep the author’s credit information intact.
+${AnsiColor.BRIGHT_GREEN}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+
