@@ -22,7 +22,7 @@ import pub.module.customer.curd.service.CustomerContactRecordService;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,12 +31,12 @@ import java.util.List;
 
 
 /**
- * 客户 Controller
+ * 管理端-客户
  *
  * @author tg
  * 2026-02-01 10:25:44
  */
-@Tag(name = "客户 CURD 处理器")
+@Tag(name = "管理端-客户")
 @RestController
 @RequestMapping("/mgt/customer/dashboard")
 @Slf4j
@@ -52,39 +52,39 @@ public class MgtCustomerEmDashboardController {
     @EqualsAndHashCode(callSuper = true)
     @Data
     public static class SalesPerformanceResVO extends UserDTO {
-        @Schema(description = "总数")
+        @Schema(description = "管理端-总数")
         long cusSalesTotal;
-        @Schema(description = "已跟进")
+        @Schema(description = "管理端-已跟进")
         long cusFollowUpTotal;
-        @Schema(description = "已成交总数")
+        @Schema(description = "管理端-已成交总数")
         long cusSalesDealtTotal;
-        @Schema(description = "跟进率")
+        @Schema(description = "管理端-跟进率")
         BigDecimal cusFollowUpRate;
-        @Schema(description = "成交率")
+        @Schema(description = "管理端-成交率")
         BigDecimal cusSalesDealtRate;
-        @Schema(description = "总电话数")
+        @Schema(description = "管理端-总电话数")
         BigDecimal cusContactRecordTotal;
-        @Schema(description = "意向总数")
+        @Schema(description = "管理端-意向总数")
         long cusIntentionTotal;
-        @Schema(description = "意向率")
+        @Schema(description = "管理端-意向率")
         BigDecimal cusIntentionRate;
-        @Schema(description = "接听数")
+        @Schema(description = "管理端-接听数")
         long cusAnswerTotal;
-        @Schema(description = "接听率")
+        @Schema(description = "管理端-接听率")
         BigDecimal cusAnswerRate;
-        @Schema(description = "有效通话数")
+        @Schema(description = "管理端-有效通话数")
         long cusEffectiveCallDurationTotal;
-        @Schema(description = "有效通话率")
+        @Schema(description = "管理端-有效通话率")
         BigDecimal cusEffectiveCallDurationRate;
     }
 
     @Data
     public static class SalesPerformanceReqVO {
-        @Schema(description = "创建日期检索")
+        @Schema(description = "管理端-创建日期检索")
         private String[] createDateRangeArray;
     }
 
-    @Operation(summary = "客户 - 分页列表查询")
+    @Operation(summary = "管理端-客户分页列表查询")
     @GetMapping(value = "/salesPerformanceList")
     public Result<IPage<SalesPerformanceResVO>> salesPerformanceList(SalesPerformanceReqVO salesPerformanceReqVO) {
         Assert.notNull(salesPerformanceReqVO.getCreateDateRangeArray());

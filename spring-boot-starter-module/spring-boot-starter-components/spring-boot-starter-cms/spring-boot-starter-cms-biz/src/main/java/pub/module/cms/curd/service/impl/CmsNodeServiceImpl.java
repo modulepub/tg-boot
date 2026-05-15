@@ -10,7 +10,7 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 import pub.module.cms.curd.entity.CmsNode;
 import pub.module.cms.curd.mapper.CmsNodeMapper;
 import pub.module.cms.curd.service.CmsNodeService;

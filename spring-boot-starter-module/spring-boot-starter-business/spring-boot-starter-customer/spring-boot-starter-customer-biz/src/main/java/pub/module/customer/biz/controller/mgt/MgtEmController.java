@@ -15,7 +15,7 @@ import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,12 +23,12 @@ import java.time.LocalTime;
 
 
 /**
- * 客户 Controller
+ * 管理端-客户
  *
  * @author tg
  * 2026-02-01 10:25:44
  */
-@Tag(name = "客户 CURD 处理器")
+@Tag(name = "管理端-客户")
 @RestController
 @RequestMapping("/mgt/customer/staff")
 @Slf4j
@@ -45,7 +45,7 @@ public class MgtEmController {
         long todayContactTaskNum = 0;
     }
 
-    @Operation(summary = "客户 - 分页列表查询")
+    @Operation(summary = "管理端-客户分页列表查询")
     @GetMapping(value = "/list")
     public Result<IPage<StaffVO>> queryPageList(UserDTO userDTO, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         // 1. 构造今日开始时间：yyyy-MM-dd 00:00:00

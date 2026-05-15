@@ -1,5 +1,8 @@
 package pub.module.customer.curd.service;
 
+import java.util.List;
+
+import pub.module.customer.api.service.dto.CusCityResidenceOptionDTO;
 import pub.module.customer.curd.entity.Customer;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CustomerService extends IService<Customer> {
     Customer getByCode(String code);
+
+    /** 客户表中已出现的常驻城市（按编码分组，含名称） */
+    List<CusCityResidenceOptionDTO> listDistinctResidenceCities();
 }

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 import pub.module.file.curd.entity.BizFile;
 import pub.module.file.curd.mapper.BizFileMapper;
 import pub.module.file.curd.service.BizFileService;

@@ -1,6 +1,7 @@
 package pub.module.trade.curd.service.impl;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,6 +41,12 @@ public class TdOrderGoodsServiceImpl extends ServiceImpl<TdOrderGoodsMapper, TdO
            Assert.notNull(declaredField,"CODE 字段名称未設置");
         if (ReflectUtil.getFieldValue(entity, declaredField) == null) {
             ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+        }
+        Field odGdCodeField = ReflectUtil.getField(entity.getClass(), "tdOdGdCode");
+        Assert.notNull(odGdCodeField, "tdOdGdCode 字段未设置");
+        Object odGdCodeVal = ReflectUtil.getFieldValue(entity, odGdCodeField);
+        if (odGdCodeVal == null || StrUtil.isBlank(odGdCodeVal.toString())) {
+            ReflectUtil.setFieldValue(entity, odGdCodeField, IdUtil.getSnowflakeNextIdStr());
         }
     }
 

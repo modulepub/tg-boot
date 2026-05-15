@@ -11,7 +11,7 @@ import pub.module.customer.curd.entity.Customer;
 import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.customer.curd.service.CustomerService;
-import pub.module.data.api.constants.BaseEntityFiled;
+import pub.module.common.constants.BaseEntityFiled;
 import pub.module.customer.biz.service.*;
 
 import org.springframework.stereotype.Service;

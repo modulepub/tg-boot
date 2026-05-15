@@ -1,6 +1,5 @@
 package pub.module.excel;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * @version V1.0
  */
 @Slf4j
-@Data
 @Configuration
 @ComponentScan(basePackages = {"pub.module.excel.**"})
 public class BizExcelAutoConfiguration {

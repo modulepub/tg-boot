@@ -10,7 +10,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 
 /**
  * 业务表 gen_table

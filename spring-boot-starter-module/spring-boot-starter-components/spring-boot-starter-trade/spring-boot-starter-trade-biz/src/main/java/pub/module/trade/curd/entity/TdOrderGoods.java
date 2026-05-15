@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
  /**
@@ -22,48 +22,43 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @EqualsAndHashCode(callSuper = false)
 @Schema(title="td_order_goods对象",description="td_order_goods对象")
 public class TdOrderGoods extends BaseEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
+     /**编码*/
+     @Schema(description = "订单商品明细编码")
+     private java.lang.String tdOdGdCode;
 	/**编码*/
-    @Schema(description = "编码")
+    @Schema(description = "商品编码")
     private java.lang.String tdGdCode;
 	/**价格*/
-    @Schema(description = "价格")
+    @Schema(description = "商品价格")
     private java.math.BigDecimal tdGdPrice;
+	/**价值*/
+    @Schema(description = "商品价值")
+    private java.math.BigDecimal tdGdValue;
 	/**描述*/
-    @Schema(description = "描述")
+    @Schema(description = "商品描述")
     private java.lang.String tdGdDescription;
 	/**供应商*/
-    @Schema(description = "供应商")
+    @Schema(description = "商品供应商")
     private java.lang.String tdGdSysUserCode;
 	/**供应商名称*/
-    @Schema(description = "供应商名称")
+    @Schema(description = "商品供应商名称")
     private java.lang.String tdGdSysUserRealName;
 	/**供应商电话*/
-    @Schema(description = "供应商电话")
+    @Schema(description = "商品供应商电话")
     private java.lang.String tdGdSysUserPhone;
 	/**启用状态*/
-    @Schema(description = "启用状态")
+    @Schema(description = "商品启用状态")
     private java.lang.String tdGdEnabledCode;
 	/**服务期限*/
-    @Schema(description = "服务期限")
+    @Schema(description = "商品服务期限")
     private java.lang.String tdGdPeriod;
-	/**货币类型*/
-    @Schema(description = "货币类型")
-    private java.lang.String tdCyCode;
-	/**合同*/
-    @Schema(description = "合同")
-    private java.lang.String tdGdContractFile;
 	/**名称*/
-    @Schema(description = "名称")
+    @Schema(description = "商品名称")
     private java.lang.String tdGdName;
 	/**商品类目*/
     @Schema(description = "商品类目")
     private java.lang.String tdGdCgyCode;
-	/**订单商品编码*/
-    @Schema(description = "订单商品编码")
-    private java.lang.String tdOdGdCode;
 	/**下单数量*/
     @Schema(description = "下单数量")
     private java.math.BigDecimal tdOdGdNum;

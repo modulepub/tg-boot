@@ -2,8 +2,8 @@ package pub.module.dict.curd.controller;
 import java.util.Arrays;
 
 
-import pub.module.web.vo.Result;
-import pub.module.web.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
+import pub.module.common.util.WebQueryUtil;
 
 import pub.module.dict.curd.entity.DictItem;
 import pub.module.dict.curd.service.DictItemService;

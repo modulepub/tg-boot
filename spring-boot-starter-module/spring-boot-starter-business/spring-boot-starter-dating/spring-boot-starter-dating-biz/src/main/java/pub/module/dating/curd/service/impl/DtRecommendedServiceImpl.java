@@ -6,10 +6,11 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.IdUtil;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import pub.module.common.model.po.BaseEntity;
 import pub.module.dating.curd.entity.DtRecommended;
 import pub.module.dating.curd.mapper.DtRecommendedMapper;
 import pub.module.dating.curd.service.DtRecommendedService;
@@ -26,10 +27,10 @@ import cn.hutool.core.util.ReflectUtil;
 
 
 /**
- * 推荐 Service
+ * 对象推荐 Service
  *
  * @author tg
- * 2026-01-07 23:30:24
+ * 2026-03-30 00:52:26
  */
 @Slf4j
 @Service
@@ -40,8 +41,8 @@ public class DtRecommendedServiceImpl extends ServiceImpl<DtRecommendedMapper, D
     public void setDefaultValue(DtRecommended entity) {
         Field declaredField = ReflectUtil.getField(entity.getClass(), bizCode);
         Assert.notNull(declaredField,"CODE 字段名称未設置");
-        if (ReflectUtil.getFieldValue(entity, declaredField) == null) {
-            ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+        if (ReflectUtil.getFieldValue(entity, declaredField) == null||StrUtil.isEmpty(ReflectUtil.getFieldValue(entity, declaredField).toString())) {
+            ReflectUtil.setFieldValue(entity, declaredField,"RC"+ IdUtil.getSnowflakeNextIdStr());
         }
     }
 
@@ -53,6 +54,10 @@ public class DtRecommendedServiceImpl extends ServiceImpl<DtRecommendedMapper, D
     @Override
     @Transactional
     public boolean save(DtRecommended entity) {
+        Object code = ReflectUtil.getFieldValue(entity, bizCode);
+        if (code!=null&&StrUtil.isNotEmpty(code.toString())) {
+            Assert.isNull(this.getByCode(code.toString()), "编码已存在");
+        }
         this.setDefaultValue(entity);
         this.getBaseMapper().insert(entity);
 
@@ -89,6 +94,8 @@ public class DtRecommendedServiceImpl extends ServiceImpl<DtRecommendedMapper, D
     @Override
     @Transactional
     public boolean updateById(DtRecommended entity) {
+        BaseEntity target = this.getByCode(ReflectUtil.getFieldValue(entity, bizCode).toString());
+        Assert.isFalse(target!= null && !target.getId().equals(entity.getId()), "编码已存在");
         this.getBaseMapper().updateById(entity);
 
         return true;

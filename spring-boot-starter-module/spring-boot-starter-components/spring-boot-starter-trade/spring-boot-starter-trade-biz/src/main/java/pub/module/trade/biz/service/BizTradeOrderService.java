@@ -1,5 +1,7 @@
 package pub.module.trade.biz.service;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import pub.module.trade.curd.entity.TdOrder;
 import pub.module.trade.curd.entity.TdOrderGoods;
 
@@ -14,7 +16,17 @@ import java.util.List;
  * @version V1.0
  */
 public interface BizTradeOrderService {
-    TdOrder createOrder(List<TdOrderGoods> tdOrderGoodsList, String tdOdUserCode, String tdOdUserRealName, String tdOdUserPhone );
+    @Schema(title ="下单")
+    @Data
+    class OrderGoodsDTO{
+        /**编码*/
+        @Schema(description = "编码")
+        private java.lang.String tdGdCode;
+        /**下单数量*/
+        @Schema(description = "下单数量")
+        private java.math.BigDecimal tdOdGdNum;
+    }
+    TdOrder createOrder(List<OrderGoodsDTO> tdOrderGoodsList, String tdOdUserCode, String tdOdUserRealName, String tdOdUserPhone );
     TdOrder queryOrderByCode(String tdOdCode);
-    TdOrder paidOrder(BigDecimal validateAmount, String tdOdCode);
+    TdOrder paidOrder(String tdOdCode);
 }

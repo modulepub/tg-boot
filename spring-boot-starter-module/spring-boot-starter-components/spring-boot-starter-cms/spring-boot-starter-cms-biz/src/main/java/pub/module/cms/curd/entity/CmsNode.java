@@ -2,12 +2,11 @@ package pub.module.cms.curd.entity;
 
 import java.util.Date;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 
 /**
  * CMS-节点 对象

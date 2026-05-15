@@ -7,11 +7,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pub.module.system.api.service.ApiCaptchaService;
 import pub.module.system.api.vo.*;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 
 
 /**
- * 认证管理 Controller
+ * 公开-认证管理
  *
  * @author PZ
  * @since 2026-01-02
@@ -19,7 +19,7 @@ import pub.module.web.vo.Result;
  */
 @RestController
 @RequestMapping("/pub/auth")
-@Tag(name = "认证管理")
+@Tag(name = "公开-免鉴权-验证码")
 @AllArgsConstructor
 public class PubCaptchaController {
 
@@ -27,14 +27,14 @@ public class PubCaptchaController {
     ApiCaptchaService apiCaptchaService;
 
     @GetMapping("/captcha")
-    @Operation(summary = "验证码")
+    @Operation(summary = "公开-免鉴权-验证码")
     public Result<SysCaptchaVO> captcha() {
         SysCaptchaVO captchaVO = apiCaptchaService.generate();
         return Result.ok(captchaVO);
     }
 
     @GetMapping("/captcha/enabled")
-    @Operation(summary = "是否开启验证码")
+    @Operation(summary = "公开-免鉴权-是否开启验证码")
     public Result<Boolean> captchaEnabled() {
         boolean enabled = apiCaptchaService.isCaptchaEnabled();
 

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -31,6 +31,14 @@ public class Customer extends BaseEntity {
      */
     @Schema(description = "客户生活照")
     private String cusLifePhoto;
+    @Schema(description = "头像")
+    private String cusAvatar;
+
+    /**
+     * 少年感照片
+     */
+    @Schema(description = "少年感照片")
+    private String cusTeenagePhoto;
 
     /**
      * 客户姓名
@@ -43,6 +51,12 @@ public class Customer extends BaseEntity {
      */
     @Schema(description = "证件号")
     private String cusIdNo;
+
+    @Schema(description = "学历编码")
+    private String cusEducationCode;
+
+    @Schema(description = "学历名称")
+    private String cusEducationName;
     /**
      * 证件类型
      */
@@ -60,6 +74,12 @@ public class Customer extends BaseEntity {
      */
     @Schema(description = "客户性别")
     private String cusSexCode;
+
+    /**
+     * 客户身份（字典：self 本人；parent 客户端展示为「家长」）
+     */
+    @Schema(description = "客户身份编码：self 本人，parent（界面展示家长）")
+    private String cusKinshipCode;
 
     /**
      * 年龄
@@ -86,16 +106,55 @@ public class Customer extends BaseEntity {
     private String cusMaritalStatusCode;
 
     /**
+     * 是否二婚（字典：1 是 / 0 否，与前端约定一致即可）
+     */
+    @Schema(description = "是否二婚")
+    private String cusRemarriageStatusCode;
+
+    /**
+     * 是否残疾
+     */
+    @Schema(description = "是否残疾")
+    private String cusDisabledStatusCode;
+
+    /**
      * 牵手次数
      */
     @Schema(description = "牵手次数")
     private Long cusHandholdsNum;
 
     /**
+     * 添加好友次数权益
+     */
+    @Schema(description = "添加好友次数权益")
+    private Long cusAddFriendRightValue;
+
+    /**
+     * 推荐次数权益
+     */
+    @Schema(description = "推荐次数权益")
+    private Long cusRecommendRightValue;
+
+    /**
+     * 牵线次数权益
+     */
+    @Schema(description = "牵线次数权益")
+    private Long cusMatchRightValue;
+
+    @Schema(description = "经纬度")
+    private String cusResidenceLngLat;
+
+    /**
      * 常驻城市
      */
     @Schema(description = "常驻城市")
     private String cusCityResidenceCode;
+
+    /**
+     * 常驻城市名称
+     */
+    @Schema(description = "常驻城市名称")
+    private String cusCityResidenceName;
 
     /**
      * 是否有车
@@ -187,6 +246,9 @@ public class Customer extends BaseEntity {
     @Schema(description = "客户需求")
     private String cusDemand;
 
+    @Schema(description = "用户说说")
+    private String cusMoment;
+
     /**
      * 是否入库
      */
@@ -212,9 +274,10 @@ public class Customer extends BaseEntity {
     @Schema(description = "微信号")
     private String cusWechatId;
     /**
-     * 客户用户号
+     * 客户绑定的系统用户编码（表字段 cus_user_code）
      */
     @Schema(description = "客户用户号")
+    @TableField("cus_user_code")
     private String cusUserCode;
 
     /**

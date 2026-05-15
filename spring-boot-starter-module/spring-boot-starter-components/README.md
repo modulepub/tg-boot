@@ -1,92 +1,32 @@
-# spring-boot-starter-components 模块
+# spring-boot-starter-components
 
-## 模块介绍
+**通用能力聚合**：为业务模块提供系统管理、交易支付、内容、字典、文件、消息、任务调度等可装配 starter；多数能力采用 `-api`（契约/DTO/配置）+ `-biz`（实现、HTTP、自动配置）分层。
 
-spring-boot-starter-components 是一个基础组件模块的集合，主要包含各种通用的功能组件。该模块旨在为应用提供基础设施和通用功能，包括但不限于缓存、安全、文件处理、日志、消息等领域的组件。
+`spring-boot-starter-common`（统一响应、异常、基础实体、插件 SPI 等）已作为 [`spring-boot-starter-module`](../) 的直接子模块，见其 [README.md](../spring-boot-starter-common/README.md)。
 
-## 模块结构
+## 子模块一览（与 `pom.xml` 一致）
 
-该模块包含以下子模块：
+| 模块 | 业务与职责摘要 | 文档 |
+|------|------------------|------|
+| `spring-boot-starter-system` | 登录/验证码、用户组织角色权限等后台与用户端能力 | [README.md](spring-boot-starter-system/README.md) |
+| `spring-boot-starter-trade` | 商品订单、微信支付配置与回调、`SpiNotifyThirdPaidResultService` 按商品品类扩展付费后逻辑 | [README.md](spring-boot-starter-trade/README.md) |
+| `spring-boot-starter-wechat` | 微信网页能力、登录等（`WxController` / `WxLoginController`） | [README.md](spring-boot-starter-wechat/README.md) |
+| `spring-boot-starter-file` | 上传与文件管理（`FileController`、`MgtFileController` 等） | [README.md](spring-boot-starter-file/README.md) |
+| `spring-boot-starter-dict` | 字典项、区域字典；对外 `PubDictController` / `PubDictAreaController` | [README.md](spring-boot-starter-dict/README.md) |
+| `spring-boot-starter-cms` | CMS 节点；公开与管理端接口 | [README.md](spring-boot-starter-cms/README.md) |
+| `spring-boot-starter-im` | IM 相关用户端接口 | [README.md](spring-boot-starter-im/README.md) |
+| `spring-boot-starter-excel` | Excel 导入导出（如 `PubExcelController`） | [README.md](spring-boot-starter-excel/README.md) |
+| `spring-boot-starter-ocr` | OCR HTTP（银行卡等），底层实现通过命名 Bean（如 `bizKsOcrService`） | [README.md](spring-boot-starter-ocr/README.md) |
+| `spring-boot-starter-sms` | 短信发送门面 `BizSmsService`，多厂商实现可切换 | [README.md](spring-boot-starter-sms/README.md) |
+| `spring-boot-starter-generator` | 代码生成 Web（`/pub/generator/index` 等） | [README.md](spring-boot-starter-generator/README.md) |
+| `spring-boot-starter-job` | 与 XXL-Job 集成的定时任务说明 | [README.md](spring-boot-starter-job/README.md) |
 
-- **spring-boot-starter-cache**: 缓存相关功能
-- **spring-boot-starter-cms**: 内容管理系统相关功能
-- **spring-boot-starter-contract**: 合同管理相关功能
-- **spring-boot-starter-data**: 数据处理相关功能
-- **spring-boot-starter-dict**: 字典管理相关功能
-- **spring-boot-starter-excel**: Excel处理相关功能
-- **spring-boot-starter-file**: 文件处理相关功能
-- **spring-boot-starter-finance**: 财务管理相关功能
-- **spring-boot-starter-generator**: 代码生成相关功能
-- **spring-boot-starter-im**: 即时通讯相关功能
-- **spring-boot-starter-job**: 任务调度相关功能
-- **spring-boot-starter-log**: 日志处理相关功能
-- **spring-boot-starter-ocr**: 光学字符识别相关功能
-- **spring-boot-starter-security**: 安全相关功能
-- **spring-boot-starter-sms**: 短信服务相关功能
-- **spring-boot-starter-system**: 系统管理相关功能
-- **spring-boot-starter-trade**: 交易相关功能
-- **spring-boot-starter-web**: Web相关功能
-- **spring-boot-starter-wechat**: 微信相关功能
+## 装配方式
 
-## 业务描述
-
-spring-boot-starter-components 模块主要负责提供应用所需的各种基础组件和通用功能，为业务模块提供技术支持。该模块的设计遵循高内聚、低耦合的原则，每个组件都可以独立使用或与其他组件集成。
-
-### 核心功能
-
-1. **基础设施提供**: 为应用提供各种基础设施，如缓存、安全、文件存储等
-2. **通用功能封装**: 封装各种通用功能，如日志记录、短信发送、Excel处理等
-3. **技术接口标准化**: 为各种技术服务提供标准化的接口，如微信接口、OCR接口等
-4. **与业务模块集成**: 为业务模块提供技术支持，使业务模块能够专注于业务逻辑的实现
-
-## 流程图
-
-### 组件模块调用流程
-
-```mermaid
-graph TD
-    A[业务模块] --> B[组件模块API]
-    B --> C[组件模块Biz]
-    C --> D[内部实现]
-    D --> E[与外部服务交互]
-    E --> F[返回处理结果]
-    F --> G[组件模块API响应]
-    G --> H[业务模块处理]
-```
-
-### 模块依赖关系
-
-```mermaid
-graph TD
-    A[spring-boot-starter-components] --> B[spring-boot-starter-web]
-    A --> C[spring-boot-starter-security]
-    A --> D[spring-boot-starter-cache]
-    A --> E[spring-boot-starter-file]
-    A --> F[spring-boot-starter-log]
-    A --> G[spring-boot-starter-job]
-    A --> H[spring-boot-starter-sms]
-    A --> I[spring-boot-starter-excel]
-    A --> J[spring-boot-starter-data]
-    A --> K[spring-boot-starter-system]
-    A --> L[spring-boot-starter-trade]
-    A --> M[spring-boot-starter-contract]
-    A --> N[spring-boot-starter-im]
-    A --> O[spring-boot-starter-ocr]
-    A --> P[spring-boot-starter-wechat]
-    A --> Q[spring-boot-starter-finance]
-    A --> R[spring-boot-starter-generator]
-    A --> S[spring-boot-starter-dict]
-    A --> T[spring-boot-starter-cms]
-```
-
-## 使用说明
-
-1. **引入依赖**: 在项目的pom.xml文件中引入相应的组件模块依赖
-2. **配置组件**: 根据组件模块的要求进行配置（如在application.yml中添加相关配置）
-3. **使用组件**: 通过组件模块提供的接口使用组件功能
+- 各 `-biz` 模块通过 `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` 注册 `Biz*AutoConfiguration`，引入对应依赖后即参与 Spring Boot 自动配置。
+- 跨模块协作优先依赖 **对方 `-api` 模块** 中的接口与 DTO，避免直连 `-biz` 实现类。
 
 ## 扩展建议
 
-1. **添加新组件模块**: 当需要添加新的基础组件时，可以在spring-boot-starter-components下创建新的子模块
-2. **扩展现有组件**: 可以通过继承或实现现有组件的接口来扩展组件功能
-3. **自定义组件配置**: 可以根据具体业务需求自定义组件的配置和行为
+- 新增组件：在本聚合下新建 `spring-boot-starter-xxx`（含 `-api`/`-biz`），并实现自动配置类。
+- 交易后业务扩展：实现 `pub.module.trade.api.service.SpiNotifyThirdPaidResultService`，Spring Bean 名称与订单商品品类编码对齐（参见 trade-biz 中对 `SpiNotifyThirdPaidResultService` 的解析方式）。

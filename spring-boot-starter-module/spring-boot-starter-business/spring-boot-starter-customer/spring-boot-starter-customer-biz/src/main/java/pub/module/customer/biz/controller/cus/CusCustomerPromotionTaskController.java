@@ -15,17 +15,17 @@ import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
-import pub.module.web.util.WebQueryUtil;
-import pub.module.web.vo.Result;
+import pub.module.common.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
 
 
 /**
- * 客户营销关系 Controller
+ * 用户端-客户营销关系
  *
  * @author tg
  * 2026-02-01 10:25:44
  */
-@Tag(name = "客户端-营销池客户")
+@Tag(name = "用户端-客户端-营销池客户")
 @RestController
 @RequestMapping("/cus/customer/customerPromotionTask")
 @Slf4j
@@ -36,7 +36,7 @@ public class CusCustomerPromotionTaskController {
     private SpiCustomerPromotionRelationService spiCustomerPromotionRelationService;
 
 
-    @Operation(summary = "客户端-营销池客户 - 分页列表查询")
+    @Operation(summary = "用户端-客户端-营销池客户分页列表查询")
     @GetMapping(value = "/myCusList")
     public Result<IPage<CustomerPromotionTask>> notDealList(CustomerPromotionTask customerPromotionTask, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         QueryWrapper<CustomerPromotionTask> queryWrapper = WebQueryUtil.buildQuery(customerPromotionTask);
@@ -53,26 +53,26 @@ public class CusCustomerPromotionTaskController {
 
     @Data
     public static class DealtVO {
-        @Schema(description = "编码")
+        @Schema(description = "用户端-编码")
         private String promotionTaskCode;
     }
 
 
-    @Operation(summary = "客户端-成交")
+    @Operation(summary = "用户端-客户端-成交")
     @PostMapping(value = "/dealt")
     public Result<?> dealt(@RequestBody DealtVO dealtVO) {
         spiCustomerPromotionRelationService.dealt(dealtVO.getPromotionTaskCode());
         return Result.ok("success");
     }
 
-    @Operation(summary = "客户端-完单")
+    @Operation(summary = "用户端-客户端-完单")
     @PostMapping(value = "/complete")
     public Result<?> complete(@RequestBody DealtVO dealtVO) {
         spiCustomerPromotionRelationService.complete(dealtVO.getPromotionTaskCode());
         return Result.ok("success");
     }
 
-    @Operation(summary = "客户端-营销池客户 - 通过id查询")
+    @Operation(summary = "用户端-客户端-营销池客户通过id查询")
     @GetMapping(value = "/queryById")
     public Result<CustomerPromotionTask> queryById(@RequestParam(name = "id") String id) {
         CustomerPromotionTask customerPromotionTask = customerPromotionTaskService.getById(id);

@@ -35,13 +35,14 @@ import cn.hutool.core.util.ReflectUtil;
 @Service
 public class DtMatchServiceImpl extends ServiceImpl<DtMatchMapper, DtMatch> implements DtMatchService {
 
-    String bizCode = "matchCode";
+    /** 与实体字段 {@link DtMatch#getMtCode()} 一致 */
+    String bizCode = "mtCode";
 
     public void setDefaultValue(DtMatch entity) {
         Field declaredField = ReflectUtil.getField(entity.getClass(), bizCode);
         Assert.notNull(declaredField,"CODE 字段名称未設置");
         if (ReflectUtil.getFieldValue(entity, declaredField) == null) {
-            ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+            ReflectUtil.setFieldValue(entity, declaredField,"MT"+  IdUtil.getSnowflakeNextIdStr());
         }
     }
 

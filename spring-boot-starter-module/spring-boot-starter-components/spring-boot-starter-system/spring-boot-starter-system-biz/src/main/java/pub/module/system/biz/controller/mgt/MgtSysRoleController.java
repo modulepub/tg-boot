@@ -15,8 +15,8 @@ import pub.module.system.curd.entity.SysRole;
 import pub.module.system.curd.entity.SysRolePermission;
 import pub.module.system.curd.service.SysRolePermissionService;
 import pub.module.system.curd.service.SysRoleService;
-import pub.module.web.util.WebQueryUtil;
-import pub.module.web.vo.Result;
+import pub.module.common.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,13 +24,13 @@ import java.util.List;
 
 
 /**
- * 角色 Controller
+ * 管理端-角色
  *
  * @author PZ
  * @since 2026-01-02
  * @version V1.0
  */
-@Tag(name = "角色管理")
+@Tag(name = "管理端-角色管理")
 @RestController
 @RequestMapping("/mgt/sysRole")
 @Slf4j
@@ -41,7 +41,7 @@ public class MgtSysRoleController {
     private SysRolePermissionService sysRolePermissionService;
 
 
-    @Operation(summary = "角色 - 分页列表查询")
+    @Operation(summary = "管理端-角色分页列表查询")
     @GetMapping(value = "/list")
     public Result<IPage<SysRole>> queryPageList(SysRole sysRole,
                                                 @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -52,7 +52,7 @@ public class MgtSysRoleController {
         return Result.ok(pageList);
     }
 
-    @Operation(summary = "角色 - 添加")
+    @Operation(summary = "管理端-角色添加")
     @PostMapping(value = "/add")
     public Result<String> add(@RequestBody SysRole sysRole) {
 
@@ -67,7 +67,7 @@ public class MgtSysRoleController {
         List<String> sysRolePermissionList;
     }
 
-    @Operation(summary = "角色 - 编辑")
+    @Operation(summary = "管理端-角色编辑")
     @RequestMapping(value = "/edit", method = {RequestMethod.PUT, RequestMethod.POST})
     public Result<String> edit(@RequestBody EditRoleVO editRoleVO) {
         sysRoleService.updateById(editRoleVO);
@@ -83,7 +83,7 @@ public class MgtSysRoleController {
         return Result.ok("编辑成功!");
     }
 
-    @Operation(summary="管户关系 - 批量删除")
+    @Operation(summary="管理端-管户关系批量删除")
     @PostMapping(value = "/delete")
     public Result<String> deleteBatch(@RequestBody Collection<String> list) {
         this.sysRoleService.removeByIds(list);
@@ -91,7 +91,7 @@ public class MgtSysRoleController {
     }
 
 
-    @Operation(summary = "角色 - 批量删除")
+    @Operation(summary = "管理端-角色批量删除")
     @DeleteMapping(value = "/deleteBatch")
     public Result<String> deleteBatch(@RequestParam(name = "ids") String ids) {
         this.sysRoleService.removeByIds(Arrays.asList(ids.split(",")));
@@ -104,7 +104,7 @@ public class MgtSysRoleController {
         private List<SysRolePermission> sysRolePermissionList;
     }
 
-    @Operation(summary = "角色 - 通过id查询")
+    @Operation(summary = "管理端-角色通过id查询")
     @GetMapping(value = "/queryByCode")
     public Result<SysRoleVO> queryByCode(@RequestParam(name = "code") String code) {
         SysRole sysRole = sysRoleService.getByCode(code);

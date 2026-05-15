@@ -1,13 +1,17 @@
 package pub.module.trade.curd.service.impl;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 
 import pub.module.trade.curd.entity.TdGoods;
+import pub.module.trade.curd.entity.TdGoodsCategory;
 import pub.module.trade.curd.mapper.TdGoodsMapper;
+import pub.module.trade.curd.service.ITdGoodsCategoryService;
 import pub.module.trade.curd.service.ITdGoodsService;
 import cn.hutool.core.util.IdUtil;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 
@@ -33,6 +37,8 @@ import cn.hutool.core.util.ReflectUtil;
 @Service
 public class TdGoodsServiceImpl extends ServiceImpl<TdGoodsMapper, TdGoods> implements ITdGoodsService {
 
+    @Resource
+    private ITdGoodsCategoryService tdGoodsCategoryService;
 
 
     public void setDefaultValue(TdGoods entity) {
@@ -43,11 +49,23 @@ public class TdGoodsServiceImpl extends ServiceImpl<TdGoodsMapper, TdGoods> impl
         }
     }
 
+    private void syncCategoryName(TdGoods entity) {
+        if (StrUtil.isBlank(entity.getTdGdCgyCode())) {
+            entity.setTdGdCgyName(null);
+            return;
+        }
+        TdGoodsCategory category = tdGoodsCategoryService.lambdaQuery()
+                .eq(TdGoodsCategory::getTdGdCgyCode, entity.getTdGdCgyCode())
+                .one();
+        entity.setTdGdCgyName(category == null ? null : category.getTdGdCgyName());
+    }
+
 
     @Override
     @Transactional
     public boolean save(TdGoods entity) {
         this.setDefaultValue(entity);
+        this.syncCategoryName(entity);
         this.getBaseMapper().insert(entity);
 
         return true;
@@ -82,6 +100,7 @@ public class TdGoodsServiceImpl extends ServiceImpl<TdGoodsMapper, TdGoods> impl
     @Override
     @Transactional
     public boolean updateById(TdGoods entity) {
+        this.syncCategoryName(entity);
         this.getBaseMapper().updateById(entity);
 
         return true;

@@ -8,7 +8,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 import pub.module.wx.biz.utils.WxUtil;
 import pub.module.wx.biz.vo.LoginRequest;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.Resource;
 
 /**
- * 微信控制器
+ * 公开-微信控制器
  * 提供微信公众号和小程序相关的API接口
  * @author PZ
  * @since 2026-01-02

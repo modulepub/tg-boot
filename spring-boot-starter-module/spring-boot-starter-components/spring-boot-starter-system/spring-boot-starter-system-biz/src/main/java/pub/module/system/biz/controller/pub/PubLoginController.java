@@ -8,19 +8,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import pub.module.log.api.util.EasyLog;
-import pub.module.security.api.util.PasswordUtil;
+import pub.module.common.util.log.EasyLog;
+import pub.module.system.biz.config.security.util.PasswordUtil;
 import pub.module.system.api.service.ApiCaptchaService;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.vo.SysUserTokenVO;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 
 import java.io.Serializable;
 
 
 /**
- * 认证管理 Controller
+ * 公开-认证管理
  *
  * @author PZ
  * @since 2026-01-02
@@ -28,7 +28,7 @@ import java.io.Serializable;
  */
 @RestController
 @RequestMapping("/pub/auth")
-@Tag(name = "认证管理")
+@Tag(name = "公开-免鉴权-登录相关接口")
 @AllArgsConstructor
 @Slf4j
 public class PubLoginController {
@@ -39,9 +39,8 @@ public class PubLoginController {
     ApiSysUserService apiSysUserService;
 
 
-
     @Data
-    @Schema(description = "账号登录")
+    @Schema(description = "免鉴权-账号登录")
     public static class SysAccountLoginVO implements Serializable {
 
         @Schema(description = "用户名")
@@ -58,7 +57,7 @@ public class PubLoginController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "账号密码登录")
+    @Operation(summary = "公开-免鉴权-账号密码登录")
     public Result<SysUserTokenVO> login(@RequestBody SysAccountLoginVO loginVO) {
         apiCaptchaService.validate(loginVO.getKey(), loginVO.getCaptcha());
         String password = PasswordUtil.decryptPassword(loginVO.getPassword());
@@ -72,7 +71,7 @@ public class PubLoginController {
 
 
     @Data
-    @Schema(description = "手机号登录 VO")
+    @Schema(description = "免鉴权-手机号登录VO")
     public static class LoginByPhoneVO {
         @Schema(description = "手机号")
         public String phone;
@@ -83,7 +82,7 @@ public class PubLoginController {
 
     }
 
-    @Operation(summary = "手机号登录接口")
+    @Operation(summary = "公开-免鉴权-手机号登录接口")
     @PostMapping("/phoneLogin")
     public Result<SysUserTokenVO> phoneLogin(@RequestBody LoginByPhoneVO loginByPhone) {
             apiSysUserService.authSmsCode(loginByPhone.getPhone(), loginByPhone.getSmsAuthCode());
@@ -101,7 +100,7 @@ public class PubLoginController {
         public String captchaKey;
     }
 
-    @Operation(summary = "发送短信接口")
+    @Operation(summary = "公开-免鉴权-发送短信接口")
     @PostMapping("/sendSms")
     public Result<String> phoneLogin(@RequestBody SendSms sendSms) {
         log.info("发送短信参数{}", sendSms);

@@ -5,7 +5,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-components</artifactId>
-        <version>3.5.1</version>
+        <version>${revision}</version>
     </parent>
 
 
@@ -39,7 +39,7 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.1</tag>
+        <tag>${revision}</tag>
     </scm>
     <properties>
         <!-- 跳过部署到远程仓库（Sonatype） -->

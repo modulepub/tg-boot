@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.Resource;
-import pub.module.config.api.service.ApiConfigService;
+import pub.module.file.api.service.ApiConfigService;
 
 import java.io.File;
 import java.io.InputStream;

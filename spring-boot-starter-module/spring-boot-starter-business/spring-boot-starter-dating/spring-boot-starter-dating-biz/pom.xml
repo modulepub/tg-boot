@@ -10,7 +10,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-dating</artifactId>
-       <version>3.5.1</version>
+       <version>${revision}</version>
     </parent>
     <name>${project.artifactId}</name>
     <description>业务模块聚合</description>
@@ -38,7 +38,7 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.1</tag>
+        <tag>${revision}</tag>
     </scm>
 
     <dependencies>
@@ -46,7 +46,7 @@
 
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-web-api</artifactId>
+            <artifactId>spring-boot-starter-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- hutool工具类-->
@@ -80,7 +80,32 @@
             <artifactId>spring-boot-starter-dating-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-customer-api</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-im-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-trade-api</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- 腾讯云人脸核身 SaaS DetectAuth / GetDetectInfoEnhanced -->
+        <!-- 腾讯云全量 Java SDK（含 FaceID） -->
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>3.1.1140</version>
+        </dependency>
 
 
     </dependencies>

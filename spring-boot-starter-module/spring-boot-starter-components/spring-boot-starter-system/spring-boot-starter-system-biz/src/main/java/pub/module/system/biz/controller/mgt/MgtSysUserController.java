@@ -12,12 +12,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.*;
-import pub.module.cache.api.constants.CacheConstant;
-import pub.module.cache.api.service.BizCacheService;
+import pub.module.system.api.constants.UserOlineStatusCodeEnum;
 import pub.module.system.api.service.ApiSysUserOrganizationService;
-import pub.module.web.util.WebQueryUtil;
-import pub.module.web.vo.Result;
+import pub.module.common.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
+import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.curd.entity.SysUser;
 import pub.module.system.curd.service.SysUserService;
 
@@ -30,13 +31,13 @@ import java.util.stream.Collectors;
 
 
 /**
- * 用户管理 Controller
+ * 管理端-用户管理
  *
  * @author PZ
  * @since 2026-01-02
  * @version V1.0
  */
-@Tag(name = "用户管理")
+@Tag(name = "管理端-用户管理")
 @RestController
 @RequestMapping("/mgt/sysUser")
 @Slf4j
@@ -45,15 +46,18 @@ public class MgtSysUserController {
    private SysUserService sysUserService;
    @Resource
    private ApiSysUserOrganizationService apiSysUserOrganizationService;
+   @Resource
+   private ApiSysUserService apiSysUserService;
+
 
    @EqualsAndHashCode(callSuper = true)
    @Data
    public static class SysUserVO extends SysUser {
-       @Schema(description = "用户所属机构名称")
+       @Schema(description = "管理端-用户所属机构名称")
        private String userOrgNames;
        private List<String> orgCodeList;
    }
-    @Operation(summary = "用户管理-分页列表查询")
+    @Operation(summary = "管理端-用户管理-分页列表查询")
     @GetMapping(value = "/list")
     public Result<IPage<SysUserVO>> queryPageList(SysUser sysUser,
                                                 @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -80,16 +84,14 @@ public class MgtSysUserController {
         return Result.ok(resultPage);
     }
 
-    @Operation(summary = "用户管理-在线用户列表查询")
+    @Operation(summary = "管理端-用户管理-在线用户列表查询")
     @GetMapping(value = "/listOnline")
     public Result<IPage<SysUser>> listOnline(SysUser sysUser,
                                                   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
                                                   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
 
         QueryWrapper<SysUser> queryWrapper = WebQueryUtil.buildQuery(sysUser);
-        Set<String> keys = SpringUtil.getBean(BizCacheService.class).keys(CacheConstant.USER_LOGIN_TOKEN).stream().map(key -> StrUtil.subAfter(key, CacheConstant.USER_LOGIN_TOKEN, true)).collect(Collectors.toSet());
-        keys.add("-");
-        queryWrapper.lambda().in(SysUser::getUserCode,keys);
+        queryWrapper.lambda().in(SysUser::getUserOlineStatusCode, UserOlineStatusCodeEnum.YES.getCode());
         IPage<SysUser> page = new Page<>(pageNo, pageSize);
         IPage<SysUser> pageList = sysUserService.page(page, queryWrapper);
         return Result.ok(pageList);
@@ -100,14 +102,14 @@ public class MgtSysUserController {
         private String userName;
     }
 
-    @Operation(summary="用户 - 下线")
+    @Operation(summary="管理端-用户下线")
     @PostMapping(value = "/takeOff")
     public Result<String> takeOff(@RequestBody TakeOffVO takeOffVO) {
-        SpringUtil.getBean(BizCacheService.class).delete(CacheConstant.USER_LOGIN_TOKEN+takeOffVO.getUserName());
+        apiSysUserService.logoutByUserName(takeOffVO.getUserName());
         return Result.ok("下线成功！");
     }
 
-    @Operation(summary="用户 - 添加")
+    @Operation(summary="管理端-用户添加")
     @PostMapping(value = "/add")
     public Result<String> add(@RequestBody SysUserSaveVO sysUserSaveVO) {
         sysUserService.save(sysUserSaveVO);
@@ -120,7 +122,7 @@ public class MgtSysUserController {
     public static class SysUserSaveVO extends SysUser{
        List<String> orgCodeList;
     }
-    @Operation(summary="用户 - 编辑")
+    @Operation(summary="管理端-用户编辑")
     @PostMapping(value = "/edit")
     public Result<String> edit(@RequestBody SysUserSaveVO sysUserSaveVO) {
         sysUserService.updateById(sysUserSaveVO);
@@ -128,14 +130,14 @@ public class MgtSysUserController {
         return Result.ok("编辑成功!");
     }
 
-    @Operation(summary="用户 - 批量删除")
+    @Operation(summary="管理端-用户批量删除")
     @PostMapping(value = "/delete")
     public Result<String> deleteBatch(@RequestBody Collection<String> list) {
         this.sysUserService.removeByIds(list);
         return Result.ok("批量删除成功!");
     }
 
-    @Operation(summary="用户 - 通过id查询")
+    @Operation(summary="管理端-用户通过id查询")
     @GetMapping(value = "/queryById")
     public Result<SysUserVO> queryById(@RequestParam(name="id") String id) {
         SysUser sysUser = sysUserService.getById(id);

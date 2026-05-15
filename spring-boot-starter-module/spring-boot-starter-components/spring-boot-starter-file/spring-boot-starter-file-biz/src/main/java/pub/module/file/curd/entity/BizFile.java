@@ -3,7 +3,7 @@ package pub.module.file.curd.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 
 /**
  * 文件 对象

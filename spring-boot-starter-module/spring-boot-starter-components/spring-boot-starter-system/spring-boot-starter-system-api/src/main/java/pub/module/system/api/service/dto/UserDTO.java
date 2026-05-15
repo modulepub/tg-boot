@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -56,4 +57,5 @@ public class UserDTO implements Serializable {
     /** 用户所属机构 */
     @Schema(description = "用户所属机构")
     private String userOrgCode;
+    String[] authorities;
 }

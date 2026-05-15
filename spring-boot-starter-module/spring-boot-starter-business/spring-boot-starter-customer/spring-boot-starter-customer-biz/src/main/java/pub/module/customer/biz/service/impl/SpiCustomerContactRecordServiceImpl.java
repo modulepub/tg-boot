@@ -14,7 +14,7 @@ import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerContactRecordService;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.customer.curd.service.CustomerService;
-import pub.module.data.api.constants.BaseEntityFiled;
+import pub.module.common.constants.BaseEntityFiled;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 import pub.module.wx.biz.utils.WxUtil;
 import pub.module.wx.biz.vo.LoginRequest;
 import pub.module.wx.biz.vo.WxMaUserInfoEx;
@@ -20,7 +20,7 @@ import pub.module.wx.biz.vo.WxMaUserInfoEx;
 import jakarta.annotation.Resource;
 
 /**
- * 微信登录控制器
+ * 公开-微信登录控制器
  * 提供微信小程序登录相关的API接口
  * @author PZ
  * @since 2026-01-02
@@ -28,7 +28,7 @@ import jakarta.annotation.Resource;
  */
 @RestController
 @RequestMapping("/pub")
-@Tag(name ="用户登录")
+@Tag(name ="公开-用户登录")
 @Slf4j
 public class WxLoginController {
     @Resource
@@ -60,17 +60,10 @@ public class WxLoginController {
     }
 
     @PostMapping("/wxMaLogin")
-    public Result<UserDTO> loginByMa(@RequestBody WxMaLoginRequest request) {
+    public Result<WxMaUserInfoEx> loginByMa(@RequestBody WxMaLoginRequest request) {
         LoginRequest loginRequest = new LoginRequest();
         BeanUtil.copyProperties(request, loginRequest);
         WxMaUserInfoEx wxMaUserInfo = WxUtil.getWxMaUserInfo(loginRequest);
-        UserDTO user = apiSysUserService.registerByOpenId(wxMaUserInfo.getOpenId());
-        apiSysUserService.loginByCode(user.getUserCode());
-        user.setUserWxUnionId(wxMaUserInfo.getUnionId());
-        user.setUserWxOpenId(wxMaUserInfo.getOpenId());
-        user.setUserAvatar(wxMaUserInfo.getAvatarUrl());
-        user.setUserNickName(wxMaUserInfo.getNickName());
-        user.setUserRealName(wxMaUserInfo.getNickName());
-        return Result.ok(user);
+        return Result.ok(wxMaUserInfo);
     }
 }

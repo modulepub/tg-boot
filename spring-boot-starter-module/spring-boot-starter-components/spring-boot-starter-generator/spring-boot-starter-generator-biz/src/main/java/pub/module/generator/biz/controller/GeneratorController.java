@@ -33,7 +33,7 @@ import pub.module.generator.biz.service.IGenTableColumnService;
 import pub.module.generator.biz.service.IGenTableService;
 
 /**
- * 代码生成 操作处理
+ * 公开-代码生成 操作处理
  * 
  * @author ruoyi
  */

@@ -4,7 +4,9 @@ import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.WxMaUserService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
+import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,10 @@ import pub.module.wx.biz.vo.LoginRequest;
 import pub.module.wx.biz.vo.WxMaUserInfoEx;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * 微信工具类
  * 提供微信小程序和公众号相关的工具方法
@@ -30,6 +36,7 @@ public class WxUtil {
 
     @SneakyThrows
     public static WxMaUserInfoEx getWxMaUserInfo(LoginRequest request) {
+        init();
         Assert.hasText(request.getCode(), "code不能为空");
         Assert.hasText(request.getAppId(), "appId不能为空");
         WxMaService wxMaService = SpringUtil.getBean(WxMaService.class);
@@ -45,6 +52,7 @@ public class WxUtil {
 
     @SneakyThrows
     public static WxMpUser getWxMpUserInfo(LoginRequest request) {
+        init();
         Assert.hasText(request.getCode(), "code不能为空");
         Assert.hasText(request.getAppId(), "appId不能为空");
         WxMpService wxMpService = SpringUtil.getBean(WxMpService.class);
@@ -54,6 +62,28 @@ public class WxUtil {
         log.info("微信公众号用户信息--{}", wxMpUser.toString());
         return wxMpUser;
     }
+
+    public static void init() {
+        WxMaService wxMaService = SpringUtil.getBean(WxMaService.class);
+        if(wxMaService.getWxMaConfig() == null){
+                List<WxMaDefaultConfigImpl> wxMpConfigurations = new ArrayList<>();
+                WxMaDefaultConfigImpl wxMaDefaultConfig = new WxMaDefaultConfigImpl();
+                wxMaDefaultConfig.setAppid("wxd414b5861f8f2a9a");
+                wxMaDefaultConfig.setSecret("e63b1412f02c95e0076cf737f83949b1");
+                wxMpConfigurations.add(wxMaDefaultConfig);
+                wxMaService.setMultiConfigs(
+                        wxMpConfigurations.stream()
+                                .map(a -> {
+                                    WxMaDefaultConfigImpl config = new WxMaDefaultConfigImpl();
+                                    config.setAppid(a.getAppid());
+                                    config.setSecret(a.getSecret());
+                                    //config.setToken(a.getWcToken());
+                                    //config.setAesKey(a.getWcAesKey());
+                                    config.setMsgDataFormat(a.getMsgDataFormat());
+                                    return config;
+                                }).collect(Collectors.toMap(WxMaDefaultConfigImpl::getAppid, a -> a, (o, n) -> o)));
+            }
+        }
 
 
 

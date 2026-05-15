@@ -16,12 +16,19 @@ public interface ApiSysUserService {
 
     @Data
     class LoginDTO{
+        String userCode;
         @TableField(exist = false)
         @Schema(description= "令牌")
         private java.lang.String accessToken;
         @Schema(description= "过期时间")
         Long expireTime;
+        String[] authorities;
     }
+
+
+    ApiSysUserService.LoginDTO loginByCode(String userCode);
+
+    void authenticate(String userCode);
 
     void authSmsCode(String phone,String smsCode);
     void authUserNamePassword(String username, String password);
@@ -30,12 +37,12 @@ public interface ApiSysUserService {
 
     UserDTO registerByOpenId(String openId);
 
-    LoginDTO loginByCode(String userCode);
 
 
     LoginDTO changeOrg(String userCode,String orgCode);
 
-    void logout(String userCode);
+    void logoutByUserName(String userName);
+    void logoutByCode(String userCode);
 
     void deleteByCode( String userCode);
 
@@ -48,6 +55,7 @@ public interface ApiSysUserService {
     UserDTO getUserByUserName(String sysUserName);
 
     void updateById(UserDTO userModel);
+    void updateAvatarByUserCode(String  userCode,String userAvatar);
 
     List<UserDTO> list(UserDTO userDTO);
 

@@ -5,7 +5,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-module</artifactId>
-       <version>3.5.1</version>
+       <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -38,29 +38,21 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.1</tag>
+        <tag>${revision}</tag>
     </scm>
 
     <modules>
-        <module>spring-boot-starter-log</module>
-        <module>spring-boot-starter-data</module>
         <module>spring-boot-starter-generator</module>
         <module>spring-boot-starter-file</module>
         <module>spring-boot-starter-cms</module>
         <module>spring-boot-starter-dict</module>
         <module>spring-boot-starter-im</module>
         <module>spring-boot-starter-ocr</module>
-        <module>spring-boot-starter-finance</module>
         <module>spring-boot-starter-trade</module>
         <module>spring-boot-starter-wechat</module>
         <module>spring-boot-starter-sms</module>
         <module>spring-boot-starter-excel</module>
         <module>spring-boot-starter-system</module>
-        <module>spring-boot-starter-contract</module>
-        <module>spring-boot-starter-web</module>
-        <module>spring-boot-starter-security</module>
-        <module>spring-boot-starter-cache</module>
         <module>spring-boot-starter-job</module>
-        <module>spring-boot-starter-config</module>
     </modules>
 </project>

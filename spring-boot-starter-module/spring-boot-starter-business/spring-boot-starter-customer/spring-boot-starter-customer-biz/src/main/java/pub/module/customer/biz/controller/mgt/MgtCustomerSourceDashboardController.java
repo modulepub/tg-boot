@@ -19,7 +19,7 @@ import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.customer.curd.service.CustomerService;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 
 
 /**
- * 客户渠道 Controller
+ * 管理端-客户渠道
  *
  * @author tg
  * 2026-02-01 10:25:44
@@ -48,33 +48,33 @@ public class MgtCustomerSourceDashboardController {
 
     @Data
     public static class SourcePerformanceResVO {
-        @Schema(description = "客户渠道来源")
+        @Schema(description = "管理端-客户渠道来源")
         String cusSourceCode;
-        @Schema(description = "客户总数")
+        @Schema(description = "管理端-客户总数")
         long cusTotal;
-        @Schema(description = "联络总数")
+        @Schema(description = "管理端-联络总数")
         long customerContactTotal;
-        @Schema(description = "无效客户数")
+        @Schema(description = "管理端-无效客户数")
         BigDecimal InvalidCustomerTotal;
-        @Schema(description = "接听数")
+        @Schema(description = "管理端-接听数")
         long cusAnswerTotal;
-        @Schema(description = "接听率")
+        @Schema(description = "管理端-接听率")
         BigDecimal cusAnswerRate;
-        @Schema(description = "有效通话客户数")
+        @Schema(description = "管理端-有效通话客户数")
         long cusEffectiveCallDurationTotal;
-        @Schema(description = "意向客户率")
+        @Schema(description = "管理端-意向客户率")
         BigDecimal cusIntentionRate;
-        @Schema(description = "成交率")
+        @Schema(description = "管理端-成交率")
         BigDecimal cusSalesDealtRate;
     }
 
     @Data
     public static class SourcePerformanceReqVO {
-        @Schema(description = "创建日期检索")
+        @Schema(description = "管理端-创建日期检索")
         private String[] createDateRangeArray;
     }
 
-    @Operation(summary = "客户渠道 - 分页列表查询")
+    @Operation(summary = "管理端-客户渠道分页列表查询")
     @GetMapping(value = "/resourceList")
     public Result<IPage<SourcePerformanceResVO>> resourceList(SourcePerformanceReqVO sourcePerformanceReqVO) {
         Assert.notNull(sourcePerformanceReqVO.getCreateDateRangeArray(),"统计日期不能为空！");

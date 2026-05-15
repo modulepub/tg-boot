@@ -31,13 +31,13 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.1</tag>
+        <tag>${revision}</tag>
     </scm>
 
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-system</artifactId>
-        <version>3.5.1</version>
+        <version>${revision}</version>
     </parent>
     <dependencies>
 
@@ -64,22 +64,7 @@
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-web-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-security-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-cache-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-log-api</artifactId>
+            <artifactId>spring-boot-starter-common</artifactId>
             <version>${project.version}</version>
         </dependency>
 

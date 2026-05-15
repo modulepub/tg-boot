@@ -41,7 +41,7 @@ public class DtIntentionServiceImpl extends ServiceImpl<DtIntentionMapper, DtInt
         Field declaredField = ReflectUtil.getField(entity.getClass(), bizCode);
         Assert.notNull(declaredField,"CODE 字段名称未設置");
         if (ReflectUtil.getFieldValue(entity, declaredField) == null) {
-            ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+            ReflectUtil.setFieldValue(entity, declaredField, "IT"+ IdUtil.getSnowflakeNextIdStr());
         }
     }
 

@@ -1,6 +1,5 @@
 package pub.module.system.curd.service.impl;
 
-import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import cn.hutool.core.lang.Assert;
@@ -11,7 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import pub.module.security.api.util.PasswordUtil;
+import pub.module.system.biz.config.security.util.PasswordUtil;
 import pub.module.system.curd.entity.SysUser;
 import pub.module.system.curd.mapper.SysUserMapper;
 import pub.module.system.curd.service.SysUserService;
@@ -43,7 +42,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         Field declaredField = ReflectUtil.getField(entity.getClass(), bizCode);
         Assert.notNull(declaredField,"CODE 字段名称未設置");
         if (ReflectUtil.getFieldValue(entity, declaredField) == null) {
-            ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+            ReflectUtil.setFieldValue(entity, declaredField, "U"+IdUtil.getSnowflakeNextIdStr());
         }
         if(StrUtil.isEmpty(entity.getUserPassword())){
             String salt = PasswordUtil.genSalt();

@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import pub.module.file.biz.utils.BizFileUtil;
 import pub.module.file.curd.entity.BizFile;
 import pub.module.file.curd.service.BizFileService;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 
 import jakarta.annotation.Resource;
 

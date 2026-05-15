@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pub.module.web.vo.Result;
+import pub.module.common.model.vo.Result;
 import pub.module.file.api.service.BizOcrService;
 
 import java.io.File;

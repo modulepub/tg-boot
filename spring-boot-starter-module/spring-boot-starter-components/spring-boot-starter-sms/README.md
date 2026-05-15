@@ -1,10 +1,14 @@
+# spring-boot-starter-sms
 
-短信模块
-===============
-- 1、实现短信标准接口，通过配置切换短信平台。
-- 2、第三方模块切换短信平台不必修改代码。
+**短信发送组件**：对上游暴露统一 **`BizSmsService`**（`spring-boot-starter-sms-api`），具体厂商（创蓝、玄武等）在 `-biz` 中通过 SPI/实现类切换，**换短信平台只需改配置，不必改业务代码**。
 
-```
-BizSmsService.sendSms(String mobile, String content);
-``` 
+## 对外 API
 
+- **`BizSmsService.sendSms(String mobile, String content)`** 等（以接口定义为准）。
+
+## Maven 结构
+
+- **`spring-boot-starter-sms-api`**：配置属性 `SmsProperties`、发送器工具类、常量枚举。
+- **`spring-boot-starter-sms-biz`**：`BizSmsAutoConfiguration`、默认业务实现与各厂商 `Spi*SmsServiceImpl`。
+
+引入 **`spring-boot-starter-sms-biz`** 即可获得自动配置与实现；仅契约依赖可单独引入 `-api`。

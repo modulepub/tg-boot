@@ -9,7 +9,7 @@
     <parent>
         <groupId>pub.module</groupId>
         <artifactId>spring-boot-starter-trade</artifactId>
-        <version>3.5.1</version>
+        <version>${revision}</version>
     </parent>
     <name>${project.artifactId}</name>
     <description>业务模块聚合</description>
@@ -37,7 +37,7 @@
         <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
         <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
         <url>https://github.com/modulepub/tg-boot.git</url>
-        <tag>3.5.1</tag>
+        <tag>${revision}</tag>
     </scm>
 
     <dependencies>
@@ -66,12 +66,6 @@
 
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-data-api</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-trade-api</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
@@ -84,7 +78,7 @@
         </dependency>
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-web-api</artifactId>
+            <artifactId>spring-boot-starter-common</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -2,8 +2,8 @@ package pub.module.dating.biz.controller.mgt;
 
 import java.util.Collection;
 
-import pub.module.web.vo.Result;
-import pub.module.web.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
+import pub.module.common.util.WebQueryUtil;
 
 import pub.module.dating.curd.entity.DtRecommended;
 import pub.module.dating.curd.service.DtRecommendedService;
@@ -20,12 +20,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 /**
- * 推荐 Controller
+ * 管理端-对象推荐
  *
  * @author tg
- *  2026-01-07 23:30:24
+ *  2026-03-30 00:52:26
  */
-@Tag(name="推荐 CURD 处理器")
+@Tag(name="管理端-对象推荐")
 @RestController
 @RequestMapping("/mgt/dating/dtRecommended")
 @Slf4j
@@ -34,7 +34,7 @@ public class MgtDtRecommendedController{
         private DtRecommendedService dtRecommendedService;
 
 
-        @Operation(summary="推荐 - 分页列表查询")
+        @Operation(summary="管理端-对象推荐分页列表查询")
         @GetMapping(value = "/list")
         public Result<IPage<DtRecommended>> queryPageList(DtRecommended dtRecommended,
                 @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -45,7 +45,7 @@ public class MgtDtRecommendedController{
             return Result.ok(pageList);
         }
 
-        @Operation(summary="推荐 - 添加")
+        @Operation(summary="管理端-对象推荐添加")
         @PostMapping(value = "/add")
         public Result<String> add(@RequestBody DtRecommended dtRecommended) {
 
@@ -53,7 +53,7 @@ public class MgtDtRecommendedController{
             return Result.ok("添加成功！");
         }
 
-        @Operation(summary="推荐 - 编辑")
+        @Operation(summary="管理端-对象推荐编辑")
         @PostMapping(value = "/edit")
         public Result<String> edit(@RequestBody DtRecommended dtRecommended) {
                 dtRecommendedService.updateById(dtRecommended);
@@ -61,14 +61,14 @@ public class MgtDtRecommendedController{
         }
 
 
-        @Operation(summary="推荐 - 批量删除")
+        @Operation(summary="管理端-对象推荐批量删除")
         @PostMapping(value = "/delete")
         public Result<String> deleteBatch(@RequestBody Collection<String> list) {
             this.dtRecommendedService.removeByIds(list);
             return Result.ok("批量删除成功!");
         }
 
-        @Operation(summary="推荐 - 通过id查询")
+        @Operation(summary="管理端-对象推荐通过id查询")
         @GetMapping(value = "/queryById")
         public Result<DtRecommended> queryById(@RequestParam(name="id") String id) {
             DtRecommended dtRecommended = dtRecommendedService.getById(id);

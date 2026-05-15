@@ -10,24 +10,18 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pub.module.cms.api.constants.NodePublishStatusCodeEnum;
-import pub.module.cms.api.constants.NodeTypeCodeEnum;
 import pub.module.cms.api.dto.CmsNodeDTO;
-import pub.module.cms.api.dto.CmsNodeTreeDTO;
-import pub.module.cms.biz.service.SpiCmsNodeService;
 import pub.module.cms.curd.entity.CmsNode;
 import pub.module.cms.curd.service.CmsNodeService;
-import pub.module.web.util.WebQueryUtil;
-import pub.module.web.vo.Result;
-
-import java.util.Collection;
-import java.util.List;
+import pub.module.common.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
 
 
 /**
  * @author tg
  * 2026-03-08 16:04:07
  */
-@Tag(name = "CMS内容")
+@Tag(name = "公开-CMS内容")
 @RestController
 @RequestMapping("/pub/cms/cmsNode")
 @Slf4j
@@ -35,7 +29,7 @@ public class PubCmsNodeController {
     @Resource
     private CmsNodeService cmsNodeService;
     
-    @Operation(summary = "CMS-节点 - 分页列表查询")
+    @Operation(summary = "公开-CMS-节点分页列表查询")
     @GetMapping(value = "/list")
     public Result<IPage<CmsNodeDTO>> queryPageList(CmsNode cmsNode,
                                                    @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -49,7 +43,7 @@ public class PubCmsNodeController {
         return Result.ok(cmsNodeDTOIPage);
     }
     
-    @Operation(summary = "CMS-节点 - 通过id查询")
+    @Operation(summary = "公开-CMS-节点通过id查询")
     @GetMapping(value = "/queryById")
     public Result<CmsNode> queryById(@RequestParam(name = "id") String id) {
         CmsNode cmsNode = cmsNodeService.getById(id);

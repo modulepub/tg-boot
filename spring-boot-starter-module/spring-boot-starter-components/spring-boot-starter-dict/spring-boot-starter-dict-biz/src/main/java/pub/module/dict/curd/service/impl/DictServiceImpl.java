@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 
-import pub.module.data.api.entity.BaseEntity;
 import pub.module.dict.curd.entity.Dict;
 import pub.module.dict.curd.entity.DictItem;
 import pub.module.dict.curd.mapper.DictMapper;

@@ -2,8 +2,8 @@ package ${packageName}.biz.controller.mgt;
 
 import java.util.Collection;
 
-import pub.module.web.vo.Result;
-import pub.module.web.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
+import pub.module.common.util.WebQueryUtil;
 
 import ${packageName}.curd.entity.${ClassName};
 import ${packageName}.curd.service.${ClassName}Service;
@@ -20,12 +20,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 /**
- * ${functionName} Controller
+ * 管理端-${functionName}
  *
  * @author ${author}
  *  ${datetime}
  */
-@Tag(name="${functionName} CURD 处理器")
+@Tag(name="管理端-${functionName}")
 @RestController
 @RequestMapping("/mgt/${moduleName}/${className}")
 @Slf4j
@@ -34,7 +34,7 @@ public class Mgt${ClassName}Controller{
         private ${ClassName}Service ${className}Service;
 
 
-        @Operation(summary="${functionName} - 分页列表查询")
+        @Operation(summary="管理端-${functionName}-分页列表查询")
         @GetMapping(value = "/list")
         public Result<IPage<${ClassName}>> queryPageList(${ClassName} ${className},
                 @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -45,15 +45,14 @@ public class Mgt${ClassName}Controller{
             return Result.ok(pageList);
         }
 
-        @Operation(summary="${functionName} - 添加")
+        @Operation(summary="管理端-${functionName}-添加")
         @PostMapping(value = "/add")
         public Result<String> add(@RequestBody ${ClassName} ${className}) {
-
                 ${className}Service.save(${className});
             return Result.ok("添加成功！");
         }
 
-        @Operation(summary="${functionName} - 编辑")
+        @Operation(summary="管理端-${functionName}-编辑")
         @PostMapping(value = "/edit")
         public Result<String> edit(@RequestBody ${ClassName} ${className}) {
                 ${className}Service.updateById(${className});
@@ -61,14 +60,14 @@ public class Mgt${ClassName}Controller{
         }
 
 
-        @Operation(summary="${functionName} - 批量删除")
+        @Operation(summary="管理端-${functionName}-批量删除")
         @PostMapping(value = "/delete")
         public Result<String> deleteBatch(@RequestBody Collection<String> list) {
             this.${className}Service.removeByIds(list);
             return Result.ok("批量删除成功!");
         }
 
-        @Operation(summary="${functionName} - 通过id查询")
+        @Operation(summary="管理端-${functionName}-通过id查询")
         @GetMapping(value = "/queryById")
         public Result<${ClassName}> queryById(@RequestParam(name="id") String id) {
             ${ClassName} ${className} = ${className}Service.getById(id);

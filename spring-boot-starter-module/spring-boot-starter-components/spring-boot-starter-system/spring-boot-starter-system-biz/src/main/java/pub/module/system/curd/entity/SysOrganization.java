@@ -2,7 +2,7 @@ package pub.module.system.curd.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**

@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pub.module.cache.api.service.BizCacheService;
 import pub.module.system.api.constants.PerTypeCodeEnum;
 import pub.module.system.api.service.ApiSysPermissionService;
 import pub.module.system.api.service.dto.PermissionDTO;
@@ -16,14 +15,14 @@ import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
 import pub.module.system.curd.entity.SysPermission;
 import pub.module.system.curd.service.SysPermissionService;
-import pub.module.web.util.WebQueryUtil;
-import pub.module.web.vo.Result;
+import pub.module.common.util.WebQueryUtil;
+import pub.module.common.model.vo.Result;
 
 import java.util.*;
 
 
 /**
- * 菜单管理 Controller
+ * 用户菜单管理
  *
  * @author PZ
  * @since 2026-01-02
@@ -31,7 +30,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/cus/sysPermission")
-@Tag(name = "菜单管理")
+@Tag(name = "用户端-菜单管理")
 @AllArgsConstructor
 public class CusPermissionController {
     @Resource
@@ -40,14 +39,14 @@ public class CusPermissionController {
     SysPermissionService sysPermissionService;
 
     @GetMapping("/getByCode")
-    @Operation(summary = "菜单导航")
+    @Operation(summary = "用户端-菜单导航")
     public Result<PermissionDTO> listAll(@RequestParam(name="code") String perCode) {
         UserDTO userDTO = UserUtil.getCurrentSysUser();
         List<PermissionDTO> permissionDTOList = apiSysPermissionService.getPermissionsByUserCode(userDTO.getUserCode()).stream().filter(permissionDTO -> PerTypeCodeEnum.MENU.getCode().equals(permissionDTO.getPerTypeCode())).toList();
         return Result.ok(apiSysPermissionService.buildTree(perCode,permissionDTOList));
     }
 
-    @Operation(summary="菜单 - 分页列表查询")
+    @Operation(summary="用户端-菜单分页列表查询")
     @GetMapping(value = "/list")
     public Result<IPage<SysPermission>> queryPageList(SysPermission permission,
                                                         @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -60,7 +59,7 @@ public class CusPermissionController {
     }
 
     @GetMapping("authority")
-    @Operation(summary = "用户权限标识")
+    @Operation(summary = "用户端-权限标识")
     public Result<List<String>> authority() {
         UserDTO userDTO = UserUtil.getCurrentSysUser();
         List<PermissionDTO> permissionDTOList = apiSysPermissionService.getPermissionsByUserCode(userDTO.getUserCode());

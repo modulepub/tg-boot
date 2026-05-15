@@ -1,86 +1,87 @@
 package pub.module.dating.biz.controller.cus;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import java.time.LocalDateTime;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import pub.module.dating.api.service.BizDtIntentionService;
+import pub.module.common.model.vo.Result;
+import pub.module.dating.api.service.ApiDtIntentionService;
+import pub.module.dating.api.service.ApiDtRecommendedService;
 import pub.module.dating.api.service.dto.DtIntentionDTO;
 import pub.module.dating.curd.entity.DtIntention;
 import pub.module.dating.curd.service.DtIntentionService;
-import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
-import pub.module.web.util.WebQueryUtil;
-import pub.module.web.vo.Result;
-
-import jakarta.annotation.Resource;
-
 
 
 /**
- * 相亲意向
+ * 用户端-交友意向
+ *
  * @author tg
- * @since 2025-05-27
- * @version V1.0
+ * 2026-01-07 23:30:24
  */
-@Tag(name ="相亲意向")
+@Tag(name = "用户端-交友意向")
 @RestController
-@RequestMapping("/cus/dtIntention")
+@RequestMapping("/cus/dating/dtIntention")
 @Slf4j
 public class CusDtIntentionController {
-	@Resource
-	private DtIntentionService dtIntentionService;
-	@Resource
-	private BizDtIntentionService bizDtIntentionService;
+    @Resource
+    private DtIntentionService dtIntentionService;
+    @Resource
+    private ApiDtIntentionService apiDtIntentionService;
+    @Resource
+    private ApiDtRecommendedService apiDtRecommendedService;
 
-	@Operation(summary = "相亲意向-分页列表查询")
-	@GetMapping(value = "/list")
-	public Result<IPage<DtIntention>> queryPageList(DtIntention dtIntention,
-								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
-		QueryWrapper<DtIntention> queryWrapper = WebQueryUtil.buildQuery(dtIntention);
-		queryWrapper.lambda().eq(DtIntention::getIntentionSysUserCode, UserUtil.getCurrentSysUser().getUserCode());
-		Page<DtIntention> page = new Page<>(pageNo, pageSize);
-		IPage<DtIntention> pageList = dtIntentionService.page(page, queryWrapper);
-		return Result.ok(pageList);
-	}
-	
-	@Operation(summary = "相亲意向-编辑")
-	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
-	public Result<String> edit(@RequestBody DtIntention dtIntention) {
-		if(!UserUtil.getCurrentSysUser().getUserCode().equals(dtIntention.getIntentionSysUserCode())){
-			throw new RuntimeException("只能编辑自己的相亲意向！");
-		}
-		dtIntentionService.updateById(dtIntention);
-		return Result.ok("编辑成功!");
-	}
-	
-	@Operation(summary = "相亲意向-通过code查询")
-	@GetMapping(value = "/queryByCode")
-	public Result<DtIntention> queryById(@RequestParam(name="code") String code) {
-		DtIntention dtIntention = dtIntentionService.getOne(new QueryWrapper<DtIntention>().lambda().eq(DtIntention::getIntentionCode, code), false);
-		return Result.ok(dtIntention);
-	}
+    ExecutorService executorService = Executors.newFixedThreadPool(1);
 
-	@Operation(summary = "相亲意向-获取上一次相亲意向")
-	@GetMapping(value = "/getLastDtIntention")
-	public Result<DtIntentionDTO> getLastDtIntention() {
-        UserDTO sysUser = UserUtil.getCurrentSysUser();
-		DtIntentionDTO dtIntention = bizDtIntentionService.getLastIntention(sysUser.getUserCode());
-		return Result.ok(dtIntention);
-	}
 
-	@Operation(summary = "相亲意向-用戶首次初始化")
-	@PostMapping(value = "/initDtIntention")
-	public Result<DtIntentionDTO> initDtIntention(@RequestBody DtIntentionDTO dtIntention) {
-        UserDTO sysUser = UserUtil.getCurrentSysUser();
-		dtIntention.setDtIntentionSysUserCode(sysUser.getUserCode());
-		bizDtIntentionService.initDtIntention(dtIntention);
-		return Result.ok(dtIntention);
-	}
+    @Operation(summary = "用户端-交友意向编辑")
+    @PostMapping(value = "/edit")
+    public Result<String> edit(@RequestBody DtIntention body) {
+        if (StrUtil.isBlank(body.getIntentionCode())) {
+            return Result.error("intentionCode不能为空");
+        }
+        String userCode = UserUtil.getCurrentSysUser().getUserCode();
+        if (StrUtil.isBlank(userCode)) {
+            return Result.error("未登录");
+        }
+        boolean exists = dtIntentionService.lambdaQuery()
+                .eq(DtIntention::getIntentionCode, body.getIntentionCode())
+                .eq(DtIntention::getIntentionUserCode, userCode)
+                .exists();
+        if (!exists) {
+            return Result.error("意向不存在或无权编辑");
+        }
+        LambdaUpdateWrapper<DtIntention> uw = new LambdaUpdateWrapper<>();
+        uw.eq(DtIntention::getIntentionCode, body.getIntentionCode())
+                .eq(DtIntention::getIntentionUserCode, userCode);
+        uw.set(DtIntention::getIntentionName, body.getIntentionName())
+                .set(DtIntention::getIntentionMinAge, body.getIntentionMinAge())
+                .set(DtIntention::getIntentionMaxAge, body.getIntentionMaxAge())
+                .set(DtIntention::getIntentionCityCode, body.getIntentionCityCode())
+                .set(DtIntention::getIntentionSexCode, body.getIntentionSexCode())
+                .set(DtIntention::getIntentionHaveHouseCode, body.getIntentionHaveHouseCode())
+                .set(DtIntention::getIntentionHaveCarCode, body.getIntentionHaveCarCode())
+                .set(DtIntention::getIntentionAgreeStatusCode,body.getIntentionAgreeStatusCode())
+                .set(DtIntention::getIntentionDisabledStatusCode, body.getIntentionDisabledStatusCode())
+                .set(DtIntention::getUpdateTime, LocalDateTime.now());
+        dtIntentionService.update(uw);
+        return Result.ok("编辑成功!");
+    }
 
+
+    @Operation(summary = "用户端-获得推荐意向")
+    @GetMapping(value = "/getDtIntention")
+    public Result<DtIntentionDTO> getDtIntention() {
+        executorService.execute(()->apiDtRecommendedService.synFreeRecommend());
+        DtIntentionDTO dtIntentionDTO = apiDtIntentionService.getDtIntention(UserUtil.getCurrentSysUser().getUserCode());
+        return Result.ok(dtIntentionDTO);
+    }
 
 }

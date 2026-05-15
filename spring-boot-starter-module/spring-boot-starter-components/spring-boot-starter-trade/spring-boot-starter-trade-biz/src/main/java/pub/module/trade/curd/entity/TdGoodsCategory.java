@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
  /**
@@ -22,8 +22,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @EqualsAndHashCode(callSuper = false)
 @Schema(title="td_goods_category对象",description="td_goods_category对象")
 public class TdGoodsCategory extends BaseEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
 
 	/**编码*/

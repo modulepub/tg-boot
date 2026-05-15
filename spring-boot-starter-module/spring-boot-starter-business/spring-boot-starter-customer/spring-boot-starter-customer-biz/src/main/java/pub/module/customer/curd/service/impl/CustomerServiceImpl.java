@@ -17,7 +17,8 @@ import pub.module.customer.curd.entity.CustomerContactRecord;
 import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerContactRecordService;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
+import pub.module.customer.api.service.dto.CusCityResidenceOptionDTO;
 import pub.module.customer.curd.entity.Customer;
 import pub.module.customer.curd.mapper.CustomerMapper;
 import pub.module.customer.curd.service.CustomerService;
@@ -145,5 +146,10 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             throw new IllegalArgumentException("查询条件有误，查询到多条数据");
         }
         return entity;
+    }
+
+    @Override
+    public List<CusCityResidenceOptionDTO> listDistinctResidenceCities() {
+        return getBaseMapper().listDistinctResidenceCities();
     }
 }

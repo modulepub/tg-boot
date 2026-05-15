@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import pub.module.data.api.entity.BaseEntity;
+import pub.module.common.model.po.BaseEntity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
  /**
@@ -22,16 +22,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @EqualsAndHashCode(callSuper = false)
 @Schema(title="td_order对象",description="td_order对象")
 public class TdOrder extends BaseEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
 
 	/**订单编号*/
     @Schema(description = "订单编号")
     private java.lang.String tdOdCode;
-	/**货币代码*/
-    @Schema(description = "货币代码")
-    private java.lang.String tdCyCode;
 	/**订单备注*/
     @Schema(description = "订单备注")
     private java.lang.String tdOdRemark;
@@ -49,11 +43,11 @@ public class TdOrder extends BaseEntity implements Serializable {
     private java.lang.String tdOdSysUserRealName;
 	/**支付状态*/
     @Schema(description = "支付状态")
-    private java.lang.String tdOdPaidCode;
+    private java.lang.String tdOdPaidStatusCode;
+     /**支付渠道*/
+     @Schema(description = "支付渠道")
+     private java.lang.String tdPaidChannelCode;
 	/**退款金额*/
     @Schema(description = "退款金额")
     private java.math.BigDecimal tdOdRefundAmount;
-	/**商户单号*/
-    @Schema(description = "商户单号")
-    private java.lang.String tdOdBizCode;
 }

@@ -42,38 +42,6 @@ public class WxMaConfiguration {
        return new WxMaServiceImpl();
     }
 
-    public WxMaService getWxMaService() {
-        WxMaService wxMaService = SpringUtil.getBean(WxMaService.class);
-        if(wxMaService.getWxMaConfig() == null){
-            JSONArray configs = new JSONArray();
-            if (!configs.isEmpty()) {
-                List<WxMaDefaultConfigImpl> wxMpConfigurations = new ArrayList<>();
-                for (int i = 0; i < configs.size(); i++) {
-                    JSONObject config = configs.getJSONObject(i);
-                    WxMaDefaultConfigImpl wxMaDefaultConfig = new WxMaDefaultConfigImpl();
-                    wxMaDefaultConfig.setAppid(config.getStr("appId"));
-                    wxMaDefaultConfig.setSecret(config.getStr("secret"));
-                    wxMaDefaultConfig.setToken(config.getStr("token"));
-                    wxMaDefaultConfig.setAesKey(config.getStr("aesKey"));
-                    wxMpConfigurations.add(wxMaDefaultConfig);
-                }
-                wxMaService.setMultiConfigs(
-                        wxMpConfigurations.stream()
-                                .map(a -> {
-                                    WxMaDefaultConfigImpl config = new WxMaDefaultConfigImpl();
-                                    // 使用上面的配置时，需要同时引入jedis-lock的依赖，否则会报类无法找到的异常
-                                    config.setAppid(a.getAppid());
-                                    config.setSecret(a.getSecret());
-                                    //config.setToken(a.getWcToken());
-                                    //config.setAesKey(a.getWcAesKey());
-                                    config.setMsgDataFormat(a.getMsgDataFormat());
-                                    return config;
-                                }).collect(Collectors.toMap(WxMaDefaultConfigImpl::getAppid, a -> a, (o, n) -> o)));
-            }
-        }
-        return wxMaService;
-    }
-
     @Bean
     public WxMaMessageRouter wxMaMessageRouter(WxMaService wxMaService) {
         final WxMaMessageRouter router = new WxMaMessageRouter(wxMaService);
