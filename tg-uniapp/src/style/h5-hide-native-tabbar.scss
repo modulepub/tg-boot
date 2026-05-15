@@ -1,0 +1,43 @@
+/**
+ * H5：pages.json 仍需合法 tabBar（避免 useShowTabBar 崩溃），
+ * 策略为 NO_TABBAR 时在 main.ts 给 html 加上 `no-native-tabbar`，此处强制收起原生底栏与占位。
+ */
+html.no-native-tabbar {
+  --tab-bar-height: 0px !important;
+}
+
+html.no-native-tabbar uni-tabbar,
+html.no-native-tabbar .uni-tabbar-bottom,
+html.no-native-tabbar .uni-tabbar-top {
+  display: none !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.no-native-tabbar .uni-tabbar ~ .uni-placeholder {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+}
+
+html.no-native-tabbar .uni-app--showtabbar uni-page-wrapper {
+  height: 100% !important;
+}
+
+html.no-native-tabbar .uni-app--showtabbar uni-page-wrapper::after {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  content: none !important;
+}
+
+html.no-native-tabbar uni-app.uni-app--showtabbar uni-page-body::after {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  content: none !important;
+}
