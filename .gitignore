@@ -15,3 +15,7 @@ os_del_doc.cmd
 derby.log
 .vscode/settings.json
 **/**/${project.build.directory}
+
+## local / embedded databases (may contain credentials — never commit)
+data/*.mv.db
+data/*.trace.db
