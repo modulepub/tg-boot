@@ -1,7 +1,7 @@
 package pub.module.common.exception;
 
 import lombok.Getter;
-import pub.module.common.constants.ErrorCodeEnum;
+import pub.module.common.enums.ErrorCodeEnum;
 
 /**
  * 统一业务异常（包含错误码）

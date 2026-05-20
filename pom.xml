@@ -36,17 +36,19 @@
         <url>https://github.com/modulepub/tg-boot.git</url>
         <tag>${revision}</tag> <!-- 必须与版本号对应，git tag -a v1.0.0 -m "Release v1.0.0" git push origin v1.0.0 -->
     </scm>
+    <!-- 使用 BOM 而非 starter-parent，避免继承 native / nativeTest 等 GraalVM 构建 profile -->
     <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
+        <artifactId>spring-boot-dependencies</artifactId>
         <version>3.5.5</version>
         <relativePath/>
     </parent>
     <properties>
         <!-- 统一版本号：子模块 parent / scm.tag 使用 ${revision}，模块间依赖使用 ${project.version} -->
-        <revision>3.5.2</revision>
+        <revision>3.6.0</revision>
         <!-- JDK版本支持17、21、24 -->
         <java.version>21</java.version>
+        <resource.delimiter>@</resource.delimiter>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.32</lombok.version>
         <hutool.version>5.8.25</hutool.version>
@@ -62,6 +64,10 @@
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -244,6 +250,20 @@
     </profiles>
     <!-- 构建配置（核心发布逻辑） -->
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <configuration>
+                        <delimiters>
+                            <delimiter>${resource.delimiter}</delimiter>
+                        </delimiters>
+                        <useDefaultDelimiters>false</useDefaultDelimiters>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <!-- JDK编译配置（指定JDK版本） -->
             <plugin>

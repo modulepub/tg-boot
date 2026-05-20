@@ -2,7 +2,6 @@ package pub.module.system.biz.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
@@ -22,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.context.ApplicationEventPublisher;
 import pub.module.system.api.constants.VerificationTypeCodeEnum;
 import pub.module.system.api.event.SysUserLoginEvent;
+import pub.module.system.api.event.SysUserRegisteredEvent;
 import pub.module.system.api.service.dto.PermissionDTO;
 import pub.module.system.api.vo.SysVerificationDTO;
 import pub.module.system.biz.config.security.util.JwtTokenProvider;
@@ -39,8 +39,6 @@ import pub.module.system.curd.service.SysUserService;
 import jakarta.annotation.Resource;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -83,7 +81,7 @@ public class ApiSysUserServiceImpl implements ApiSysUserService {
         List<PermissionDTO> permissionDTOList = SpringUtil.getBean(ApiSysPermissionService.class).getPermissionsByUserName(sysUser.getUserName());
         String[] authorities = permissionDTOList.stream().map(PermissionDTO::getPerCode).toArray(String[]::new);
         loginDTO.setAuthorities(authorities);
-        loginDTO.setExpireTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 100, ChronoUnit.DAYS).toInstant(ZoneOffset.of("+8")).toEpochMilli());
+        loginDTO.setExpireTime(expiryDate.getTime());
         UserDTO userDTO = BeanUtil.copyProperties(sysUser, UserDTO.class);
         userDTO.setAuthorities(authorities);
         SpringUtil.getBean(ApiSysVerificationService.class).set(VerificationTypeCodeEnum.LOGIN_ACCESS_TOKEN.getCode(), userCode, JSONUtil.toJsonStr(userDTO), DateUtil.toLocalDateTime(expiryDate));
@@ -118,7 +116,7 @@ public class ApiSysUserServiceImpl implements ApiSysUserService {
     }
 
     @Transactional
-    public UserDTO registerByPhone(String phone) {
+    public UserDTO registerByPhone(String phone, String userReferenceUserCode) {
         // 根据手机号、微信openid、微信unionid、用户名、用户编码查询用户
         SysUser sysUser = sysUserService.getOne(new QueryWrapper<SysUser>().lambda()
                         .eq(SysUser::getUserPhone, phone)
@@ -132,6 +130,16 @@ public class ApiSysUserServiceImpl implements ApiSysUserService {
             }
             // 生成推荐码
             sysUser.setUserReferenceCode(RandomUtil.randomNumbers(8));
+            String refUserCode = StrUtil.trimToNull(userReferenceUserCode);
+            if (StrUtil.isNotEmpty(refUserCode)) {
+                SysUser referrer = sysUserService.getByCode(refUserCode);
+                if (referrer != null) {
+                    sysUser.setUserReferenceUserCode(refUserCode);
+                }
+                else {
+                    log.warn("registerByPhone: userReferenceUserCode not found, skip. phone={}, ref={}", phone, refUserCode);
+                }
+            }
             String salt = PasswordUtil.genSalt();
             String passwordEncrypt = PasswordUtil.hashPassword(RandomUtil.randomString(10), salt);
             sysUser.setUserPassword(passwordEncrypt);
@@ -140,7 +148,8 @@ public class ApiSysUserServiceImpl implements ApiSysUserService {
             sysUser.setUserNickName(PoeticNickNameUtil.randomNickName());
             // 保存用户
             sysUserService.save(sysUser);
-
+            UserDTO registered = BeanUtil.copyProperties(sysUser, UserDTO.class);
+            applicationEventPublisher.publishEvent(new SysUserRegisteredEvent(registered, refUserCode));
         }
         // 返回用户
         return BeanUtil.copyProperties(sysUser, UserDTO.class);

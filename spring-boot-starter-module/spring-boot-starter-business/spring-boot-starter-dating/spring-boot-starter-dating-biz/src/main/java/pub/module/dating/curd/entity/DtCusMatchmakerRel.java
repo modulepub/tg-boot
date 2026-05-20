@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 /**
  * 客户红娘关系 对象
@@ -113,7 +114,7 @@ public class DtCusMatchmakerRel extends BaseEntity {
     private String cusAvatar;
 
     @Schema(description = "客户性别")
-    private String cusSexCode;
+    private UserSexCodeEnum cusSexCode;
 
     /**
      * 客户说说

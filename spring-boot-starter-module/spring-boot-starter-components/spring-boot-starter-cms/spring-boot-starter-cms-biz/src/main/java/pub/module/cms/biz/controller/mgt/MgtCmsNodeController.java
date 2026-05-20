@@ -49,7 +49,7 @@ public class MgtCmsNodeController{
                                                        @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
             QueryWrapper<CmsNode> queryWrapper = WebQueryUtil.buildQuery(cmsNode);
             WebQueryUtil.setSelect(queryWrapper, CmsNodeDTO.class);
-            queryWrapper.lambda().eq(CmsNode::getNodeTypeCode, NodeTypeCodeEnum.DOCUMENT.getCode());
+            queryWrapper.lambda().eq(CmsNode::getNodeTypeCode, NodeTypeCodeEnum.DOCUMENT);
             Page<CmsNode> page = new Page<>(pageNo, pageSize);
             IPage<CmsNode> pageList = cmsNodeService.page(page, queryWrapper);
             IPage<CmsNodeDTO> cmsNodeDTOIPage = pageList.convert(cmsNode1 -> BeanUtil.copyProperties(cmsNode1, CmsNodeDTO.class));
@@ -60,7 +60,7 @@ public class MgtCmsNodeController{
     @GetMapping(value = "/listCatalogTree")
     public Result<CmsNodeTreeDTO> listCatalogTree(String nodeCode) {
         QueryWrapper<CmsNode> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(CmsNode::getNodeTypeCode, NodeTypeCodeEnum.CATALOG.getCode());
+        queryWrapper.lambda().eq(CmsNode::getNodeTypeCode, NodeTypeCodeEnum.CATALOG);
         List<CmsNode> list = cmsNodeService.list(queryWrapper);
         return Result.ok(spiCmsNodeService.buildTree(nodeCode, BeanUtil.copyToList(list, CmsNodeTreeDTO.class)));
     }

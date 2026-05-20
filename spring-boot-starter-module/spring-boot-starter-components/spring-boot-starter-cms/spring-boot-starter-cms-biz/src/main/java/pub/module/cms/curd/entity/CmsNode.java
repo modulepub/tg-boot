@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.cms.api.constants.NodeContentTypeCodeEnum;
+import pub.module.cms.api.constants.NodePublishStatusCodeEnum;
+import pub.module.cms.api.constants.NodeTypeCodeEnum;
 
 /**
  * CMS-节点 对象
@@ -59,19 +62,19 @@ public class CmsNode extends BaseEntity {
      * 发布状态
      */
     @Schema(description = "发布状态")
-    private String nodePublishStatusCode;
+    private NodePublishStatusCodeEnum nodePublishStatusCode;
 
     /**
      * 节点类型（catalog栏目、document文章）
      */
     @Schema(description = "节点类型")
-    private String nodeTypeCode;
+    private NodeTypeCodeEnum nodeTypeCode;
 
     /**
      * 内容类型（text、文本、link、链接、citation、引用）
      */
     @Schema(description = "内容类型")
-    private String nodeContentTypeCode;
+    private NodeContentTypeCodeEnum nodeContentTypeCode;
 
     /**
      * 链接

@@ -14,7 +14,7 @@ import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerContactRecordService;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.customer.curd.service.CustomerService;
-import pub.module.common.constants.BaseEntityFiled;
+import pub.module.common.enums.BaseEntityFiled;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.system.api.util.UserUtil;
 
@@ -38,7 +38,7 @@ public class SpiCustomerContactRecordServiceImpl implements SpiCustomerContactRe
     public void doRecord(CustomerContactRecord customerContactRecord) {
         UserDTO userDTO = UserUtil.getCurrentSysUser();
         Customer customer = customerService.getByCode(customerContactRecord.getCusCode());
-        customer.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.YES.getCode());
+        customer.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.YES);
         customer.setCusWechatId(customerContactRecord.getCusWechatId());
         customer.setCusIntentionStatusCode(customerContactRecord.getCusIntentionStatusCode());
         customer.setCusIntentionLevelCode(customerContactRecord.getCusIntentionLevelCode());
@@ -52,7 +52,7 @@ public class SpiCustomerContactRecordServiceImpl implements SpiCustomerContactRe
                         .eq(CustomerPromotionTask::getCusCode, customer.getCusCode())
                         .eq(CustomerPromotionTask::getUserCode, userDTO.getUserCode())
                 , false);
-        customerPromotionTask.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.YES.getCode());
+        customerPromotionTask.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.YES);
         customerPromotionTask.setCusIntentionStatusCode(customerContactRecord.getCusIntentionStatusCode());
         customerPromotionTask.setCusIntentionLevelCode(customerContactRecord.getCusIntentionLevelCode());
         customerPromotionTaskService.updateById(customerPromotionTask);

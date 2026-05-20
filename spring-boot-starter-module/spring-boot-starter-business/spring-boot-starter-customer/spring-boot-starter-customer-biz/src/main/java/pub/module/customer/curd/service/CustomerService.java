@@ -15,6 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface CustomerService extends IService<Customer> {
     Customer getByCode(String code);
 
-    /** 客户表中已出现的常驻城市（按编码分组，含名称） */
+    /** 客户表中已出现的生活城市（按编码分组，含名称） */
     List<CusCityResidenceOptionDTO> listDistinctResidenceCities();
 }

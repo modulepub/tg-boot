@@ -18,7 +18,6 @@
 | `spring-boot-starter-excel` | Excel 导入导出（如 `PubExcelController`） | [README.md](spring-boot-starter-excel/README.md) |
 | `spring-boot-starter-ocr` | OCR HTTP（银行卡等），底层实现通过命名 Bean（如 `bizKsOcrService`） | [README.md](spring-boot-starter-ocr/README.md) |
 | `spring-boot-starter-sms` | 短信发送门面 `BizSmsService`，多厂商实现可切换 | [README.md](spring-boot-starter-sms/README.md) |
-| `spring-boot-starter-generator` | 代码生成 Web（`/pub/generator/index` 等） | [README.md](spring-boot-starter-generator/README.md) |
 | `spring-boot-starter-job` | 与 XXL-Job 集成的定时任务说明 | [README.md](spring-boot-starter-job/README.md) |
 
 ## 装配方式

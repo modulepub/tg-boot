@@ -7,9 +7,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.customer.api.constants.*;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 客户 对象
@@ -26,6 +29,14 @@ public class CustomerDTO extends BaseEntity {
      */
     private String cusCode;
 
+    @Schema(description = "客户昵称")
+    private String cusNickName;
+
+    /**
+     * 生日
+     */
+    @Schema(description = "年龄")
+    private Date cusBirthday;
     /**
      * 客户生活照
      */
@@ -44,6 +55,9 @@ public class CustomerDTO extends BaseEntity {
     @Schema(description = "客户姓名")
     private String cusName;
 
+    @Schema(description = "是否点亮爱与诚")
+    private String cusLsStatusCode;
+
     /**
      * 身份证号
      */
@@ -53,7 +67,7 @@ public class CustomerDTO extends BaseEntity {
      * 证件类型
      */
     @Schema(description = "证件类型")
-    private String cusIdTypeCode;
+    private CusIdTypeCodeEnum cusIdTypeCode;
 
     /**
      * 身份认证状态
@@ -65,7 +79,7 @@ public class CustomerDTO extends BaseEntity {
      * 客户性别
      */
     @Schema(description = "客户性别")
-    private String cusSexCode;
+    private UserSexCodeEnum cusSexCode;
 
     /**
      * 客户身份（字典：self 本人；parent 客户端展示为「家长」）
@@ -116,22 +130,32 @@ public class CustomerDTO extends BaseEntity {
     private String cusResidenceLngLat;
 
     /**
-     * 常驻城市
+     * 微信号
      */
-    @Schema(description = "常驻城市")
+    @Schema(description = "微信号")
+    private String cusWxIdNo;
+    @Schema(description = "学历编码")
+    private String cusEducationCode;
+
+    @Schema(description = "学历名称")
+    private String cusEducationName;
+    /**
+     * 生活城市
+     */
+    @Schema(description = "生活城市")
     private String cusCityResidenceCode;
 
     /**
-     * 常驻城市名称
+     * 生活城市名称
      */
-    @Schema(description = "常驻城市名称")
+    @Schema(description = "生活城市名称")
     private String cusCityResidenceName;
 
     /**
      * 是否有车
      */
     @Schema(description = "是否有车")
-    private String cusHaveCarStatusCode;
+    private CusHaveCarStatusCodeEnum cusHaveCarStatusCode;
 
     /**
      * 行驶证
@@ -143,7 +167,7 @@ public class CustomerDTO extends BaseEntity {
      * 是否有房
      */
     @Schema(description = "是否有房")
-    private String cusHaveHouseStatusCode;
+    private CusHaveHouseStatusCodeEnum cusHaveHouseStatusCode;
 
     /**
      * 房产证
@@ -179,25 +203,25 @@ public class CustomerDTO extends BaseEntity {
      * 来源
      */
     @Schema(description = "来源")
-    private String cusSourceCode;
+    private CusSourceCodeEnum cusSourceCode;
 
     /**
      * 用户标签
      */
     @Schema(description = "用户标签")
-    private String cusTagCode;
+    private CusTagCodeEnum cusTagCode;
 
     /**
      * 客户等级0-8：无效、普通、价值、黄金、钻石、至尊
      */
     @Schema(description = "客户等级0-8：无效、普通、价值、黄金、钻石、至尊")
-    private String cusLevelCode;
+    private CusLevelCodeEnum cusLevelCode;
 
     @Schema(description = "是否有意向")
-    private String cusIntentionStatusCode;
+    private CusIntentionStatusCodeEnum cusIntentionStatusCode;
 
     @Schema(description = "意向等级")
-    private String cusIntentionLevelCode;
+    private CusIntentionLevelCodeEnum cusIntentionLevelCode;
 
     /**
      * 用户描述
@@ -220,13 +244,16 @@ public class CustomerDTO extends BaseEntity {
     @Schema(description = "用户说说")
     private String cusMoment;
 
+    @Schema(description = "资料是否已完善：1 已完善，0 未完善")
+    private String cusComleteProfileStatusCode;
+
     /**
      * 是否入库
      */
     @Schema(description = "是否入库")
-    private String cusPoolStatusCode;
+    private CusPoolStatusCodeEnum cusPoolStatusCode;
     @Schema(description = "是否分配营销人员")
-    private String cusAssignSalesStatusCode;
+    private CusAssignSalesStatusCodeEnum cusAssignSalesStatusCode;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -237,7 +264,7 @@ public class CustomerDTO extends BaseEntity {
     @Schema(description = "分配时间检索")
     private String[] cusAssignSalesTimeRangeArray;
     @Schema(description = "是否分配服务人员")
-    private String cusAssignServersStatusCode;
+    private CusAssignServersStatusCodeEnum cusAssignServersStatusCode;
 
     /**
      * 微信号
@@ -255,20 +282,20 @@ public class CustomerDTO extends BaseEntity {
      * 是否成交
      */
     @Schema(description = "是否成交")
-    private String cusDealtStatusCode;
+    private CusDealtStatusCodeEnum cusDealtStatusCode;
     /**
      * 是否完单
      */
     @Schema(description = "是否完单")
-    private String cusDealtCompleteStatusCode;
+    private CusDealtCompleteStatusCodeEnum cusDealtCompleteStatusCode;
 
     /**
      * 是否跟进
      */
     @Schema(description = "是否跟进")
-    private String cusFollowUpStatusCode;
+    private CusFollowUpStatusCodeEnum cusFollowUpStatusCode;
     @Schema(description = "跟进提醒类型")
-    String cusFollowUpReminderTypeCode;
+    private CusFollowUpReminderTypeCodeEnum cusFollowUpReminderTypeCode;
 
         /**
      * 添加好友次数权益

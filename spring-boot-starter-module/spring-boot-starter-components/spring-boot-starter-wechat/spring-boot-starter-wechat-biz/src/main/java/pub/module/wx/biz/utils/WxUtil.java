@@ -6,6 +6,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import lombok.SneakyThrows;
@@ -20,8 +21,10 @@ import pub.module.wx.biz.vo.LoginRequest;
 import pub.module.wx.biz.vo.WxMaUserInfoEx;
 import org.springframework.util.Assert;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -126,6 +129,76 @@ public class WxUtil {
     public static String getMaterial(JSONObject material) {
         WxMpService wxMpService = SpringUtil.getBean(WxMpService.class);
         return wxMpService.post(" https://api.weixin.qq.com/cgi-bin/material/batchget_material", material);
+    }
+
+    private static final Set<String> POSTER_IMAGE_ALLOWED_HOSTS = Set.of(
+            "pubpicture.oss-cn-shenzhen.aliyuncs.com",
+            "matchlove.oss-cn-beijing.aliyuncs.com"
+    );
+
+    /**
+     * 服务端拉取 OSS 图片并转为 data URL，供 H5 海报 canvas 使用（避免浏览器跨域）。
+     */
+    public static String fetchPosterImageDataUrl(String imageUrl) {
+        String url = String.valueOf(imageUrl == null ? "" : imageUrl).trim();
+        Assert.hasText(url, "图片地址不能为空");
+        URI uri;
+        try {
+            uri = URI.create(url);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("图片地址不合法");
+        }
+        if (!"https".equalsIgnoreCase(uri.getScheme())) {
+            throw new IllegalArgumentException("仅支持 https 图片");
+        }
+        String host = String.valueOf(uri.getHost()).toLowerCase();
+        boolean allowed = POSTER_IMAGE_ALLOWED_HOSTS.stream()
+                .anyMatch(h -> h.equalsIgnoreCase(host));
+        if (!allowed) {
+            throw new IllegalArgumentException("图片域名不在白名单");
+        }
+        byte[] bytes = HttpUtil.downloadBytes(url);
+        if (bytes == null || bytes.length == 0) {
+            throw new IllegalArgumentException("图片内容为空");
+        }
+        String lower = url.toLowerCase();
+        String mime = lower.contains(".png") ? "image/png" : "image/jpeg";
+        return "data:" + mime + ";base64," + cn.hutool.core.codec.Base64.encode(bytes);
+    }
+
+    /**
+     * 生成小程序码（无数量限制接口），scene 最长 32 字符。
+     */
+    public static byte[] getWxaCodeUnlimit(String appId, String page, String scene, String envVersion)
+            throws WxErrorException {
+        init();
+        Assert.hasText(appId, "appId不能为空");
+        Assert.hasText(page, "page不能为空");
+        Assert.hasText(scene, "scene不能为空");
+        if (scene.length() > 32) {
+            throw new IllegalArgumentException("scene最长32字符");
+        }
+        String pagePath = page.startsWith("/") ? page.substring(1) : page;
+        String env = String.valueOf(envVersion == null ? "" : envVersion).trim();
+        if (!"develop".equals(env) && !"trial".equals(env) && !"release".equals(env)) {
+            env = "develop";
+        }
+        // develop/trial 未正式发布时 checkPath=true 会 41030 invalid page；仅正式版校验路径
+        boolean checkPath = "release".equals(env);
+        WxMaService wxMaService = SpringUtil.getBean(WxMaService.class);
+        wxMaService.switchoverTo(appId);
+        /** 微信允许 280–1280，海报需高清放大，取常用上限 430 */
+        int qrWidth = 430;
+        return wxMaService.getQrcodeService().createWxaCodeUnlimitBytes(
+                scene,
+                pagePath,
+                checkPath,
+                env,
+                qrWidth,
+                true,
+                null,
+                false
+        );
     }
 
 

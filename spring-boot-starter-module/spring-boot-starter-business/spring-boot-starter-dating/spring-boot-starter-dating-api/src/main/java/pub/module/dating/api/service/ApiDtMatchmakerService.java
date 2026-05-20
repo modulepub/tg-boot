@@ -9,6 +9,9 @@ package pub.module.dating.api.service;
  */
 public interface ApiDtMatchmakerService  {
 
-
+    /**
+     * 是否已登记为红娘（按 system userCode）。
+     */
+    boolean isMatchmakerByUserCode(String userCode);
 
 }

@@ -67,6 +67,11 @@
             <artifactId>spring-boot-starter-file-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-file-biz</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
@@ -85,6 +90,16 @@
             <artifactId>spring-boot-starter-customer-api</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-customer-biz</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-excel-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

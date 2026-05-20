@@ -54,10 +54,10 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         Field declaredField = ReflectUtil.getField(entity.getClass(), bizCode);
         Assert.notNull(declaredField,"CODE 字段名称未設置");
         if (ReflectUtil.getFieldValue(entity, declaredField) == null||StrUtil.isEmpty(ReflectUtil.getFieldValue(entity, declaredField).toString())) {
-            ReflectUtil.setFieldValue(entity, declaredField, IdUtil.getSnowflakeNextIdStr());
+            ReflectUtil.setFieldValue(entity, declaredField, "CUS"+IdUtil.getSnowflakeNextIdStr());
         }
-        if(StrUtil.isEmpty(entity.getCusPoolStatusCode())){
-            entity.setCusPoolStatusCode(CusPoolStatusCodeEnum.NO.getCode());
+        if (entity.getCusPoolStatusCode() == null) {
+            entity.setCusPoolStatusCode(CusPoolStatusCodeEnum.NOT_IN_POOL);
         }
         if(StrUtil.isNotEmpty(entity.getCusPhone())){
             entity.setCusPhone(entity.getCusPhone().trim());

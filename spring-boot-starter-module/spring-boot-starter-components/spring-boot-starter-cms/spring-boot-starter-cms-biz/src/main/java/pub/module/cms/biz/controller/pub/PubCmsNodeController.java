@@ -37,7 +37,7 @@ public class PubCmsNodeController {
         Page<CmsNode> page = new Page<>(pageNo, pageSize);
         QueryWrapper<CmsNode> queryWrapper = WebQueryUtil.buildQuery(cmsNode);
         WebQueryUtil.setSelect(queryWrapper, CmsNodeDTO.class);
-        queryWrapper.lambda().eq(CmsNode::getNodePublishStatusCode, NodePublishStatusCodeEnum.YES.getCode());
+        queryWrapper.lambda().eq(CmsNode::getNodePublishStatusCode, NodePublishStatusCodeEnum.YES);
         IPage<CmsNode> pageList = cmsNodeService.page(page, queryWrapper);
         IPage<CmsNodeDTO> cmsNodeDTOIPage = pageList.convert(cmsNode1 -> BeanUtil.copyProperties(cmsNode1, CmsNodeDTO.class));
         return Result.ok(cmsNodeDTOIPage);

@@ -23,9 +23,21 @@ public interface ApiCustomerService  {
      */
     void initCustomerByUser(UserDTO user);
 
+    /**
+     * 将系统用户昵称同步到绑定客户的 {@code cusNickName}（客户不存在时先幂等初始化）。
+     */
+    void syncCusNickNameFromUser(UserDTO user);
+
     CustomerDTO getCusByUserCode(String userCode);
     List<CustomerDTO> listAll(List<String> notIn);
+
     CustomerDTO getCusByCusCode(String cusCode);
+
+    List<CustomerDTO> findCustomer(List<String> notIn,CustomerDTO customerDTO);
+    /**
+     * 按客户昵称 {@code cusNickName} 精确查询；未找到返回 {@code null}。
+     */
+    CustomerDTO getCusByNickNameExact(String cusNickName);
 
     /** 批量按客户编码查询（联系人列表等回填展示字段） */
     List<CustomerDTO> listByCusCodes(Collection<String> cusCodes);
@@ -51,5 +63,15 @@ public interface ApiCustomerService  {
      * @param matchRightDelta       牵线权益增量，{@code null} 表示不调整该字段
      */
     void rechargeMemberBenefits(String tdOdGdCode, String tdOdCode, String userCode, Long addFriendRightDelta, Long recommendRightDelta, Long matchRightDelta);
+
+    /**
+     * 手机号二要素核验通过（阿里云 BizCode=1）后，更新绑定客户的实名状态与姓名。
+     *
+     * @param userCode 系统用户编码
+     * @param phone    核验手机号
+     * @param realName 核验姓名
+     * @return 是否已更新客户表
+     */
+    boolean applyIdentityAfterPhoneTwoFactorVerify(String userCode, String phone, String realName);
 
 }

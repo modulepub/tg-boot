@@ -15,7 +15,6 @@ os_del_doc.cmd
 derby.log
 .vscode/settings.json
 **/**/${project.build.directory}
-
-## local / embedded databases (may contain credentials — never commit)
-data/*.mv.db
-data/*.trace.db
+# monorepo：H5 误执行 pnpm 曾产生嵌套仓库；勿将 tg-matchmaker-h5 当作独立 Git 根
+tg-matchmaker-h5/.git
+/.vscode/

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>spring-boot-starter-distribution-trade-plugin</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>分销-交易联动插件：实现 trade 支付回调 SPI</description>
+
+    <parent>
+        <groupId>pub.module</groupId>
+        <artifactId>spring-boot-starter-distribution</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-trade-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-distribution-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+</project>

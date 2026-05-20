@@ -17,7 +17,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface CustomerMapper extends BaseMapper<Customer> {
 
     /**
-     * 按常驻城市编码分组，返回编码 + 名称（供推荐意向等：存编码、显名称）
+     * 按生活城市编码分组，返回编码 + 名称（供推荐意向等：存编码、显名称）
      */
     @Select("""
             SELECT cus_city_residence_code AS cusCityResidenceCode,

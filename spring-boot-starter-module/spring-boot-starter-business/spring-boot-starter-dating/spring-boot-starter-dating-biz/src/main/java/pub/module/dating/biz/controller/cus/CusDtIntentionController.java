@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -71,7 +72,22 @@ public class CusDtIntentionController {
                 .set(DtIntention::getIntentionAgreeStatusCode,body.getIntentionAgreeStatusCode())
                 .set(DtIntention::getIntentionDisabledStatusCode, body.getIntentionDisabledStatusCode())
                 .set(DtIntention::getUpdateTime, LocalDateTime.now());
+        if (StrUtil.isNotBlank(body.getCusKinshipCode())) {
+            uw.set(DtIntention::getCusKinshipCode, StrUtil.trim(body.getCusKinshipCode()));
+        }
+        if (StrUtil.isNotBlank(body.getIntentionLdrStatusCode())) {
+            uw.set(DtIntention::getIntentionLdrStatusCode, StrUtil.trim(body.getIntentionLdrStatusCode()));
+        }
+        if (StrUtil.isNotBlank(body.getIntentionHigherEducationStatusCode())) {
+            uw.set(DtIntention::getIntentionHigherEducationStatusCode, StrUtil.trim(body.getIntentionHigherEducationStatusCode()));
+        }
+        if (StrUtil.isNotBlank(body.getIntentionSupportStatusCode())) {
+            uw.set(DtIntention::getIntentionSupportStatusCode, StrUtil.trim(body.getIntentionSupportStatusCode()));
+        }
         dtIntentionService.update(uw);
+        //判断是否需要推荐
+        DtIntentionDTO dtIntentionDTO = BeanUtil.copyProperties(body,DtIntentionDTO.class);
+        apiDtRecommendedService.synFreeRecommend(dtIntentionDTO,userCode);
         return Result.ok("编辑成功!");
     }
 
@@ -79,7 +95,6 @@ public class CusDtIntentionController {
     @Operation(summary = "用户端-获得推荐意向")
     @GetMapping(value = "/getDtIntention")
     public Result<DtIntentionDTO> getDtIntention() {
-        executorService.execute(()->apiDtRecommendedService.synFreeRecommend());
         DtIntentionDTO dtIntentionDTO = apiDtIntentionService.getDtIntention(UserUtil.getCurrentSysUser().getUserCode());
         return Result.ok(dtIntentionDTO);
     }

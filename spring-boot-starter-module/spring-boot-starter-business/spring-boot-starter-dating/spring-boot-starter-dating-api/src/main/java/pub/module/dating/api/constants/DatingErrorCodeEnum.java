@@ -1,7 +1,7 @@
 package pub.module.dating.api.constants;
 
 import lombok.Getter;
-import pub.module.common.constants.ErrorCodeEnum;
+import pub.module.common.enums.ErrorCodeEnum;
 
 @Getter
 public enum DatingErrorCodeEnum implements ErrorCodeEnum {

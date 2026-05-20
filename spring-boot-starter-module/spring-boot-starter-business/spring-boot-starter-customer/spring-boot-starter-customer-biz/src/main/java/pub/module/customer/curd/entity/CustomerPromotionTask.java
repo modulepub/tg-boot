@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.customer.api.constants.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -19,10 +20,10 @@ public class CustomerPromotionTask extends BaseEntity {
 
 
     @Schema(description = "任务编码")
-    private String promotionTaskCode;
+    private PromotionTaskCodeEnum promotionTaskCode;
 
     @Schema(description = "营销任务类型编码")
-    private String promotionTaskTypeCode;
+    private PromotionTaskTypeCodeEnum promotionTaskTypeCode;
 
     @Schema(description = "客户编码")
     private String cusCode;
@@ -42,20 +43,20 @@ public class CustomerPromotionTask extends BaseEntity {
     private String cusIdCardNum;
 
     @Schema(description = "是否跟进")
-    private String cusFollowUpStatusCode;
+    private CusFollowUpStatusCodeEnum cusFollowUpStatusCode;
 
     @Schema(description = "是否成交")
-    private String cusDealtStatusCode;
+    private CusDealtStatusCodeEnum cusDealtStatusCode;
     @Schema(description = "是否完单")
-    private String cusDealtCompleteStatusCode;
+    private CusDealtCompleteStatusCodeEnum cusDealtCompleteStatusCode;
 
     @TableField(exist = false)
     @Schema(description = "创建日期检索")
     private String[] createDateRangeArray;
     @Schema(description = "是否意向")
-    private String cusIntentionStatusCode;
+    private CusIntentionStatusCodeEnum cusIntentionStatusCode;
 
     @Schema(description = "意向等级")
-    private String cusIntentionLevelCode;
+    private CusIntentionLevelCodeEnum cusIntentionLevelCode;
 
 }

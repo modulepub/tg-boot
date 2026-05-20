@@ -9,15 +9,13 @@ import pub.module.dating.api.service.ApiDtIntentionService;
 import pub.module.dating.api.service.dto.DtIntentionDTO;
 import pub.module.dating.curd.entity.DtIntention;
 import pub.module.dating.curd.service.DtIntentionService;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 /**
  * 用户端推荐意向（交友意向）查询与默认初始化
  */
 @Service
 public class ApiDtIntentionServiceImpl implements ApiDtIntentionService {
-
-    /** 与前端约定：女 */
-    private static final String DEFAULT_SEX_FEMALE = "2";
 
     @Resource
     private DtIntentionService dtIntentionService;
@@ -49,7 +47,7 @@ public class ApiDtIntentionServiceImpl implements ApiDtIntentionService {
         e.setIntentionMinAge(18);
         e.setIntentionMaxAge(60);
         e.setIntentionCityCode(null);
-        e.setIntentionSexCode(DEFAULT_SEX_FEMALE);
+        e.setIntentionSexCode(UserSexCodeEnum.WOMAN);
         e.setIntentionHaveHouseCode(null);
         e.setIntentionHaveCarCode(null);
         e.setIntentionDisabledStatusCode(null);

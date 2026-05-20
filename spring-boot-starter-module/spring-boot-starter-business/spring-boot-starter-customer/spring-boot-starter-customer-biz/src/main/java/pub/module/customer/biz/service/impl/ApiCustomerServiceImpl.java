@@ -9,21 +9,25 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pub.module.customer.api.constants.CusSourceEnum;
+import pub.module.customer.api.constants.CusSourceCodeEnum;
 import pub.module.customer.api.service.ApiCustomerService;
 import pub.module.customer.api.service.dto.CustomerDTO;
 import pub.module.customer.curd.entity.Customer;
 import pub.module.customer.curd.entity.CustomerMemberBenefitRechargeRecord;
 import pub.module.customer.curd.service.CustomerMemberBenefitRechargeRecordService;
 import pub.module.customer.curd.service.CustomerService;
+import pub.module.system.api.constants.UserSexCodeEnum;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,7 +62,7 @@ public class ApiCustomerServiceImpl implements ApiCustomerService {
     @Override
     public void importData(Map<String, Object> data) {
         Customer customer = BeanUtil.copyProperties(data, Customer.class);
-        customer.setCusSourceCode(CusSourceEnum.EXCEL.getCode());
+        customer.setCusSourceCode(CusSourceCodeEnum.IMPORT);
         log.info("导入客户数据数据{}", customer);
         QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(Customer::getCusPhone, customer.getCusPhone()).or().eq(Customer::getCusIdNo, customer.getCusIdNo());
@@ -89,6 +93,31 @@ public class ApiCustomerServiceImpl implements ApiCustomerService {
     }
 
     @Override
+    public void syncCusNickNameFromUser(UserDTO user) {
+        Assert.notNull(user, "user 不能为空");
+        String userCode = StrUtil.trim(user.getUserCode());
+        Assert.notBlank(userCode, "user.userCode 不能为空");
+        String nickName = StrUtil.trim(user.getUserNickName());
+        if (StrUtil.isBlank(nickName)) {
+            return;
+        }
+        initCustomerByUser(new UserDTO().setUserCode(userCode));
+        QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Customer::getCusUserCode, userCode);
+        Customer customer = customerService.getOne(queryWrapper, false);
+        if (customer == null) {
+            return;
+        }
+        if (nickName.equals(StrUtil.trim(customer.getCusNickName()))) {
+            return;
+        }
+        LambdaUpdateWrapper<Customer> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Customer::getCusUserCode, userCode).set(Customer::getCusNickName, nickName);
+        customerService.update(updateWrapper);
+        log.info("已同步客户昵称 userCode={} cusNickName={}", userCode, nickName);
+    }
+
+    @Override
     public CustomerDTO getCusByUserCode(String userCode) {
         Assert.notBlank(userCode, "userCode 不能为空");
         initCustomerByUser(new UserDTO().setUserCode(userCode));
@@ -112,6 +141,34 @@ public class ApiCustomerServiceImpl implements ApiCustomerService {
         queryWrapper.lambda().eq(Customer::getCusCode, cusCode);
         Customer customer = customerService.getOne(queryWrapper, false);
         return BeanUtil.copyProperties(customer,CustomerDTO.class);
+    }
+
+    @Override
+    public List<CustomerDTO> findCustomer(List<String> notIn, CustomerDTO customerDTO) {
+        QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
+        if(notIn!=null&&!notIn.isEmpty()){
+            queryWrapper.lambda().notIn(Customer::getCusCode, notIn);
+        }
+        if(customerDTO.getCusSexCode()!=null){
+            queryWrapper.lambda().eq(Customer::getCusSexCode,customerDTO.getCusSexCode().getCode());
+        }
+        List<Customer> customerList = customerService.list(queryWrapper);
+        return BeanUtil.copyToList(customerList,CustomerDTO.class);
+    }
+
+    @Override
+    public CustomerDTO getCusByNickNameExact(String cusNickName) {
+        String nick = StrUtil.trim(cusNickName);
+        if (StrUtil.isBlank(nick)) {
+            return null;
+        }
+        QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Customer::getCusNickName, nick).last("LIMIT 1");
+        Customer customer = customerService.getOne(queryWrapper, false);
+        if (customer == null) {
+            return null;
+        }
+        return BeanUtil.copyProperties(customer, CustomerDTO.class);
     }
 
     @Override
@@ -169,6 +226,13 @@ public class ApiCustomerServiceImpl implements ApiCustomerService {
         for (String k : CUS_IMMUTABLE_FIELDS) {
             patch.remove(k);
         }
+        normalizeCustomerPatchDates(patch);
+        Object ageRaw = patch.get("cusAge");
+        if (ageRaw instanceof Number && !(ageRaw instanceof Long)) {
+            patch.put("cusAge", ((Number) ageRaw).longValue());
+        }
+        normalizeCustomerPatchStringFields(patch);
+        normalizeCustomerPatchSexCode(patch);
         BeanWrapperImpl bw = new BeanWrapperImpl(entity);
         for (Map.Entry<String, Object> e : patch.entrySet()) {
             String key = e.getKey();
@@ -188,6 +252,76 @@ public class ApiCustomerServiceImpl implements ApiCustomerService {
             apiSysUserService.updateAvatarByUserCode(userCode,entity.getCusAvatar());
         }
         return BeanUtil.copyProperties(entity, CustomerDTO.class);
+    }
+
+    /**
+     * 用户端 patch 中 cusBirthday 常为 JSON 字符串（yyyy-MM-dd / yyyy-MM），BeanWrapper 无法直接写入 Date，此处先规范化。
+     */
+    private static void normalizeCustomerPatchDates(Map<String, Object> patch) {
+        Object v = patch.get("cusBirthday");
+        if (v == null) {
+            return;
+        }
+        if (v instanceof Date) {
+            return;
+        }
+        String s = StrUtil.toStringOrNull(v);
+        if (StrUtil.isBlank(s)) {
+            patch.remove("cusBirthday");
+            return;
+        }
+        s = s.trim();
+        try {
+            LocalDate ld;
+            if (s.length() >= 10 && s.charAt(4) == '-' && s.charAt(7) == '-') {
+                ld = LocalDate.parse(s.substring(0, 10));
+            }
+            else if (s.matches("\\d{4}-\\d{1,2}")) {
+                String[] p = s.split("-");
+                ld = LocalDate.of(Integer.parseInt(p[0]), Integer.parseInt(p[1]), 1);
+            }
+            else {
+                log.warn("skip cusBirthday parse, unsupported format: {}", s);
+                patch.remove("cusBirthday");
+                return;
+            }
+            Date d = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            patch.put("cusBirthday", d);
+        }
+        catch (Exception ex) {
+            log.warn("skip cusBirthday parse: {} -> {}", s, ex.getMessage());
+            patch.remove("cusBirthday");
+        }
+    }
+
+    /** 用户端 patch 中 cusSexCode 常为字符串 "1"/"2"，需转为 {@link UserSexCodeEnum} 再写入实体。 */
+    private static void normalizeCustomerPatchSexCode(Map<String, Object> patch) {
+        Object v = patch.get("cusSexCode");
+        if (v == null) {
+            return;
+        }
+        if (v instanceof UserSexCodeEnum) {
+            return;
+        }
+        UserSexCodeEnum parsed = UserSexCodeEnum.fromJson(v);
+        if (parsed != null) {
+            patch.put("cusSexCode", parsed);
+        } else {
+            patch.remove("cusSexCode");
+            log.warn("skip cusSexCode, unsupported value: {}", v);
+        }
+    }
+
+    /** 将 patch 中应为字符串的字段转为 String，避免 BeanWrapper 跳过写入（如整型/其他类型）。 */
+    private static void normalizeCustomerPatchStringFields(Map<String, Object> patch) {
+        Object eduCode = patch.get("cusEducationCode");
+        if (eduCode != null && !(eduCode instanceof String)) {
+            patch.put("cusEducationCode", StrUtil.toStringOrNull(eduCode));
+        }
+        Object eduName = patch.get("cusEducationName");
+        if (eduName != null && !(eduName instanceof String)) {
+            patch.put("cusEducationName", StrUtil.toStringOrNull(eduName));
+        }
     }
 
     @Override
@@ -244,6 +378,39 @@ public class ApiCustomerServiceImpl implements ApiCustomerService {
         if (dirty) {
             customerService.updateById(entity);
         }
+    }
+
+    private static final String IDENTITY_AUTHENTICATED_YES = "1";
+
+    @Override
+    public boolean applyIdentityAfterPhoneTwoFactorVerify(String userCode, String phone, String realName) {
+        Assert.notBlank(userCode, "userCode 不能为空");
+        String reqPhone = StrUtil.trim(phone);
+        String reqName = StrUtil.trim(realName);
+        Assert.notBlank(reqPhone, "phone 不能为空");
+        Assert.notBlank(reqName, "realName 不能为空");
+
+        QueryWrapper<Customer> qw = new QueryWrapper<>();
+        qw.lambda().eq(Customer::getCusUserCode, userCode.trim());
+        Customer entity = customerService.getOne(qw, false);
+        if (entity == null) {
+            log.warn("applyIdentityAfterPhoneTwoFactorVerify: 未找到客户 userCode={}", userCode);
+            return false;
+        }
+        if (StrUtil.isNotBlank(entity.getCusPhone())) {
+            String cusPhone = StrUtil.trim(entity.getCusPhone());
+            if (!reqPhone.equals(cusPhone)) {
+                log.warn("applyIdentityAfterPhoneTwoFactorVerify: 客户手机号与核验手机号不一致 userCode={}", userCode);
+                return false;
+            }
+        }
+        entity.setCusIdentityAuthenticatedStatusCode(IDENTITY_AUTHENTICATED_YES);
+        entity.setCusName(reqName);
+        if (StrUtil.isBlank(entity.getCusPhone())) {
+            entity.setCusPhone(reqPhone);
+        }
+        customerService.updateById(entity);
+        return true;
     }
 
     private static boolean willApplyMemberBenefitDeltas(Long addFriendRightDelta, Long recommendRightDelta, Long matchRightDelta) {

@@ -10,7 +10,7 @@
 ## 扩展点（重要）
 
 - **`SpiNotifyThirdPaidResultService`**：实现类需注册为 Spring Bean，**Bean 名称**与订单商品上的 **品类编码**（如 `tdGdCgyCode`）一致；交易核心在支付完成后按名称 `getBean` 分发（见 `BizTradeOrderServiceImpl`）。
-- 婚恋场景下的示例实现位于 **`spring-boot-starter-dating-plugin`**（多个品类对应多个实现类）。
+- 婚恋场景下的示例实现位于 **`spring-boot-starter-dating-trade-plugin`**（多个品类对应多个实现类）。
 
 ## HTTP 概要
 

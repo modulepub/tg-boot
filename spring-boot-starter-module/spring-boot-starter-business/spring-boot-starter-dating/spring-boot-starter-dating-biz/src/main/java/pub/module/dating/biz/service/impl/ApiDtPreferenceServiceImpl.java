@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pub.module.customer.api.service.ApiCustomerService;
+import pub.module.customer.api.service.dto.CustomerDTO;
 import pub.module.dating.api.constants.DtLikeDegreeCodeEnum;
 import pub.module.dating.api.service.ApiDtPreferenceService;
+import pub.module.dating.biz.service.DtPreferenceDisplayService;
 import pub.module.dating.curd.entity.DtPreference;
 import pub.module.dating.curd.service.DtPreferenceService;
 
@@ -23,6 +26,8 @@ public class ApiDtPreferenceServiceImpl implements ApiDtPreferenceService {
 
     @Resource
     private DtPreferenceService dtPreferenceService;
+    @Resource
+    private ApiCustomerService apiCustomerService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -31,20 +36,23 @@ public class ApiDtPreferenceServiceImpl implements ApiDtPreferenceService {
                 .eq(DtPreference::getPreferenceTargetCusCode, preferenceTargetCusCode)
                 .eq(DtPreference::getPreferenceCusCode, preferenceCusCode), false);
 
+        CustomerDTO targetCus = apiCustomerService.getCusByCusCode(preferenceTargetCusCode);
         if (mine == null) {
             mine = new DtPreference();
             mine.setPreferenceCusCode(preferenceCusCode);
             mine.setPreferenceTargetCusCode(preferenceTargetCusCode);
             mine.setPreferenceLikeStatusCode(preferenceLikeStatusCode);
             mine.setPreferenceMutuaStatusCode(MUTUAL_NO);
+            DtPreferenceDisplayService.fillTargetFromCustomer(mine, targetCus);
             dtPreferenceService.save(mine);
         }
         else {
             mine.setPreferenceLikeStatusCode(preferenceLikeStatusCode);
+            DtPreferenceDisplayService.fillTargetFromCustomer(mine, targetCus);
             dtPreferenceService.updateById(mine);
         }
 
-        if (!DtLikeDegreeCodeEnum.like.getCode().equals(preferenceLikeStatusCode)) {
+        if (!DtLikeDegreeCodeEnum.LIKE.getCode().equals(preferenceLikeStatusCode)) {
             clearMutualForPair(preferenceCusCode, preferenceTargetCusCode);
             return;
         }
@@ -52,7 +60,7 @@ public class ApiDtPreferenceServiceImpl implements ApiDtPreferenceService {
         DtPreference reverse = dtPreferenceService.getOne(new QueryWrapper<DtPreference>().lambda()
                 .eq(DtPreference::getPreferenceCusCode, preferenceTargetCusCode)
                 .eq(DtPreference::getPreferenceTargetCusCode, preferenceCusCode)
-                .eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.like.getCode()), false);
+                .eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.LIKE.getCode()), false);
 
         mine = dtPreferenceService.getById(mine.getId());
         if (mine == null) {
@@ -86,4 +94,5 @@ public class ApiDtPreferenceServiceImpl implements ApiDtPreferenceService {
             dtPreferenceService.updateById(rowBa);
         }
     }
+
 }

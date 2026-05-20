@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>spring-boot-starter-customer-verification-plugin</artifactId>
+
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>客户-核验联动插件：手机号二要素核验通过后回调更新客户实名状态</description>
+    <url>https://github.com/modulepub/tg-boot.git</url>
+
+    <parent>
+        <groupId>pub.module</groupId>
+        <artifactId>spring-boot-starter-customer</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-customer-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-verification-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-system-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

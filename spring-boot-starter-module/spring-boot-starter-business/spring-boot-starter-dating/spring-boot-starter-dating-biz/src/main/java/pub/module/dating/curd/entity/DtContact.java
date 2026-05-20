@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 /**
  * 联系人 对象
@@ -73,7 +74,7 @@ public class DtContact extends BaseEntity {
      * 客户性别
      */
     @Schema(description = "客户性别")
-    private String cusSexCode;
+    private UserSexCodeEnum cusSexCode;
 
     /**
      * 年龄
@@ -97,8 +98,8 @@ public class DtContact extends BaseEntity {
     @Schema(description = "客户身份编码：self 本人，parent 家长")
     private String cusKinshipCode;
 
-    /** 常驻城市名称（与客户表同名字段冗余） */
-    @Schema(description = "常驻城市名称")
+    /** 生活城市名称（与客户表同名字段冗余） */
+    @Schema(description = "生活城市名称")
     private String cusCityResidenceName;
 
     /** 说说（与客户表同名字段冗余） */
@@ -115,5 +116,6 @@ public class DtContact extends BaseEntity {
     @TableField("cus_user_code")
     @Schema(description = "对方客户绑定用户编码冗余（customer.cus_user_code）")
     private String cusUserCode;
+
 
 }

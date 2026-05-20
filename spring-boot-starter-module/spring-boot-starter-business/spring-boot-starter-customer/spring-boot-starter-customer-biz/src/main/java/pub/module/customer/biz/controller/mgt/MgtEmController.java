@@ -56,7 +56,7 @@ public class MgtEmController {
         IPage<StaffVO> resultPage = pageList.convert((item) -> {
             StaffVO staffVO = BeanUtil.copyProperties(item, StaffVO.class);
             long todayContactTaskNum = customerPromotionTaskService.count(new QueryWrapper<CustomerPromotionTask>().lambda()
-                    .eq(CustomerPromotionTask::getPromotionTaskTypeCode, PromotionTaskTypeCodeEnum.CONTACT.getCode())
+                    .eq(CustomerPromotionTask::getPromotionTaskTypeCode, PromotionTaskTypeCodeEnum.CONTACT)
                     .eq(CustomerPromotionTask::getUserCode, staffVO.getUserCode())
                     .ge(CustomerPromotionTask::getCreateTime, todayStart)
                     .le(CustomerPromotionTask::getCreateTime, todayEnd)

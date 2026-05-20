@@ -5,9 +5,10 @@ import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
 import org.springframework.transaction.annotation.Transactional;
-import pub.module.common.constants.BaseEntityFiled;
+import pub.module.common.enums.BaseEntityFiled;
 import pub.module.customer.api.service.ApiCustomerService;
 import pub.module.customer.api.service.dto.CustomerDTO;
+import pub.module.dating.api.constants.RelationPassedStatusCodeEnum;
 import pub.module.dating.api.service.dto.DtContactApplyDTO;
 import pub.module.dating.curd.entity.DtContact;
 import pub.module.dating.curd.entity.DtContactApply;
@@ -110,7 +111,7 @@ public class ApiDtContactApplyServiceImpl implements ApiDtContactApplyService {
         dtContactB.setContactApplyCode(apply.getContactApplyCode());
         dtContactService.save(dtContactB);
 
-        apply.setContactApplyPassedStatusCode("1");
+        apply.setContactApplyPassedStatusCode(RelationPassedStatusCodeEnum.YES);
         ImAddFriendDTO imAddFriendDTO = new ImAddFriendDTO();
         imAddFriendDTO.setFromUserCode(apply.getUserCode());
         imAddFriendDTO.setToUserCode(customerDTOA.getCusUserCode());
@@ -124,7 +125,7 @@ public class ApiDtContactApplyServiceImpl implements ApiDtContactApplyService {
         Assert.notNull(rejectDTO, "参数不能为空");
         DtContactApply entity = dtContactApplyService.getByCode(rejectDTO.getContactApplyCode());
         Assert.notNull(entity, "联系人不存在");
-        entity.setContactApplyPassedStatusCode("-1");
+        entity.setContactApplyPassedStatusCode(RelationPassedStatusCodeEnum.REJECTED);
         dtContactApplyService.updateById(entity);
     }
 

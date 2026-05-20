@@ -6,7 +6,7 @@
 
 - **`spring-boot-starter-dating-api`**：`pub.module.dating.api.service.*` 等接口与 DTO，供其他模块（含交易插件）依赖。
 - **`spring-boot-starter-dating-biz`**：业务实现、持久化、`BizDatingAutoConfiguration`、REST 控制器。
-- **`spring-boot-starter-dating-plugin`**（可选）：交易扩展插件；`TradeDatingPluginAutoConfiguration` + `TradeDatingTgPlugin`（`TgPlugin` 元数据）；内含多个 `SpiNotifyThirdPaidResultService` 实现类，对应不同虚拟商品/合约付费成功后的业务。
+- **`spring-boot-starter-dating-trade-plugin`**（可选）：交易扩展插件；`TradeDatingPluginAutoConfiguration` + `TradeDatingTgPlugin`（`TgPlugin` 元数据）；内含多个 `SpiNotifyThirdPaidResultService` 实现类，对应不同虚拟商品/合约付费成功后的业务。
 
 ## HTTP 能力（便于检索）
 
@@ -18,5 +18,5 @@
 
 ## 与交易模块的协作
 
-- 引入 **`spring-boot-starter-dating-plugin`** 后，交易订单支付完成时会按商品品类编码选取对应的 `SpiNotifyThirdPaidResultService` Bean，执行婚恋侧履约（权益、合约类等）。
+- 引入 **`spring-boot-starter-dating-trade-plugin`** 后，交易订单支付完成时会按商品品类编码选取对应的 `SpiNotifyThirdPaidResultService` Bean，执行婚恋侧履约（权益、合约类等）。
 - 插件同时可被 **common** 插件注册逻辑识别（classpath / 外置 JAR 场景参见 common 模块说明）。

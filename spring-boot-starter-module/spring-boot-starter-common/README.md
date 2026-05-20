@@ -15,4 +15,4 @@
 ## 使用建议
 
 - 业务 starter **仅依赖 common**，不要反向依赖某一 `-biz`。
-- 编写可与婚恋 `dating-plugin` 并列的外挂模块时：提供 `@AutoConfiguration`、`.imports` 清单，并实现 `TgPlugin` 以便运维侧可见。
+- 编写可与婚恋 `dating-trade-plugin` 并列的外挂模块时：提供 `@AutoConfiguration`、`.imports` 清单，并实现 `TgPlugin` 以便运维侧可见。

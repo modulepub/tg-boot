@@ -17,6 +17,7 @@ import pub.module.customer.curd.entity.CustomerContactRecord;
 import pub.module.customer.curd.service.CustomerContactRecordService;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.customer.curd.service.CustomerService;
+import pub.module.customer.api.constants.CusSourceCodeEnum;
 import pub.module.system.api.service.ApiSysUserService;
 import pub.module.system.api.service.dto.UserDTO;
 import pub.module.common.model.vo.Result;
@@ -24,6 +25,7 @@ import pub.module.common.model.vo.Result;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -81,7 +83,12 @@ public class MgtCustomerSourceDashboardController {
         QueryWrapper<Customer> customerQueryWrapper = new QueryWrapper<>();
         customerQueryWrapper.lambda().select(Customer::getCusSourceCode);
         customerQueryWrapper.lambda().groupBy(Customer::getCusSourceCode);
-        List<String> sourceCodeList = customerService.list(customerQueryWrapper).stream().map(Customer::getCusSourceCode).toList();
+        List<String> sourceCodeList = customerService.list(customerQueryWrapper).stream()
+                .map(Customer::getCusSourceCode)
+                .filter(Objects::nonNull)
+                .map(CusSourceCodeEnum::getCode)
+                .distinct()
+                .toList();
         List<SourcePerformanceResVO> records = new ArrayList<>();
         List<UserDTO> list = apiSysUserService.list(new UserDTO());
         for (String cusSourceCode : sourceCodeList) {

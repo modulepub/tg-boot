@@ -4,7 +4,7 @@ createTime: 2026/01/12 20:05:26
 permalink: /dev/tgBoot/
 ---
 
-# TG-boot | 模块化单体架构低代码开发平台
+# TG-boot | 模块化单体架构开发平台（AI 协作友好）
 
 本文档面向 **AI 助手与开发者**：说明仓库分层、`runner`、`*-biz`、`*-api`、`*-plugin` 的职责边界，以及命名与模块间通信约束。读完后应能正确新增业务模块、遵守「模块间仅通过 `*-api`」规则，并理解从模块化单体演进到多 `runner` 部署的路径。
 
@@ -23,8 +23,39 @@ permalink: /dev/tgBoot/
 - 后台框架：Spring Boot 3.5.5、Spring Security
 - 前台框架：Vue 3、Element Plus、Vite（配套管理端见独立工程 `tg-manage-vue`，可与本后端仓库协同迭代）
 - 多数据库支持：MySQL、PostgreSQL、Oracle、SQL Server、达梦、人大金仓等
-- 组件与业务（随仓库演进，以 `spring-boot-starter-module` 下各 `pom` 为准）：系统、客户、交友（dating）、交易、文件、IM、OCR、短信、微信、CMS、字典、Excel、代码生成、定时任务等
+- 组件与业务（随仓库演进，以 `spring-boot-starter-module` 下各 `pom` 为准）：系统、客户、交友（dating）、交易、文件、IM、OCR、短信、微信、CMS、Excel、定时任务、核验（verification）等
 - 特别鸣谢：Hutool 作者提供的工具类库；WxJava（weixin-java-tools）作者提供的微信开发工具类库。
+
+# 内置运行环境（`tg-boot/.tools`）
+
+本仓库 **`tg-boot` 目录下** 提供自带的 JDK 与 Maven（目录名为 **`.tools`**，注意是复数 **`s`**，不是 `.tool`），免去本机全局安装与 `PATH` 冲突：
+
+| 组件 | 典型路径 |
+|------|----------|
+| JDK 21 | `tg-boot/.tools/jdk-21` |
+| Apache Maven（版本以目录为准，如 `3.9.9`） | `tg-boot/.tools/apache-maven-*/bin` |
+
+**一键启动默认单体 runner**（先确保 MySQL / Redis 等已与 `application-dev.yml` 等配置一致）：
+
+- **PowerShell**（需在 `tg-boot` 根目录执行）：
+
+```powershell
+.\scripts\run-runner.ps1
+```
+
+- **CMD**：在 `tg-boot` 目录下双击或执行：
+
+```bat
+scripts\run-runner.bat
+```
+
+若已自行安装全局 JDK/Maven，也可在 **`tg-boot/spring-boot-starter-module`**（反应堆根）下执行：
+
+```bat
+mvn -pl spring-boot-starter-runner -am spring-boot:run -DskipTests
+```
+
+说明：**必须在** `spring-boot-starter-module` 目录执行且保留 **`-am`**，这样在本地反应堆中解析 `${revision}` 与各 sibling；若只在 `runner` 子目录跑或省略 `-am`，易误从中央仓库拉取未展开的 `pub.module` 占位符而失败。
 
 # 框架特点
 
@@ -36,56 +67,64 @@ permalink: /dev/tgBoot/
 - 支持分片上传与单文件上传；存储支持本地、MinIO、阿里云 OSS 等，并可通过 SPI 扩展更多实现。
 
 # 架构与代码约定
+以下先导图及约定，面向AI及人类开发者。
+## 模块结构先导图
+```text
+*-biz （业务子模块）
+├── biz
+│   ├── controller
+    │   ├── cus 用户端接口
+    │   ├── mgt 管理端接口
+    │   ├── pub 公开接口
+│   ├── service
+    │   ├── impl （对接 *-api 中 Spi* 契约）
+├── curd（目录名为 curd ，即持久层框架相关增删改查方法）
+    │   ├── mapper 
+    │   ├── entity 
+    │   ├── service（区别于biz的service，这里是mybatis-plus增删改查服务实现类）
+└── Biz*AutoConfiguration.java（本模块自动配置入口）
+
+*-api （接口子模块，可对外暴露业务接口及业务定义）
+└── api
+    ├── service
+        │   ├── Spi**Service （插件定义）
+        │   ├── Api**Service （业务接口定义）
+    ├── constants （枚举类，应用于字典及其他常量）
 
 下图自上而下依次为：**Maven 模块树**（仓库真实聚合关系）、**前端配套工程**、**单个 `*-biz` / `*-api` 源码包布局**（以 `system` 为例，其它域包名随模块前缀变化）。紧随图后的 **Runner** 小节说明默认可执行包如何选型。
-
+```
+## 系统现有功能模块先导图
 ```text
-Maven 模块（tg-boot → spring-boot-starter-module）
 tg-boot
 └── spring-boot-starter-module
     ├── spring-boot-starter-common（通用基础库，jar）
-    ├── spring-boot-starter-components（能力组件；常见形态 *-api + *-biz）
-    │   ├── spring-boot-starter-generator
-    │   ├── spring-boot-starter-file
-    │   ├── spring-boot-starter-cms
-    │   ├── spring-boot-starter-dict
-    │   ├── spring-boot-starter-im
-    │   ├── spring-boot-starter-ocr
-    │   ├── spring-boot-starter-trade
-    │   ├── spring-boot-starter-wechat
-    │   ├── spring-boot-starter-sms
-    │   ├── spring-boot-starter-excel
-    │   ├── spring-boot-starter-system
-    │   └── spring-boot-starter-job
-    ├── spring-boot-starter-business（垂直业务域；域内 *-api / *-biz / *-plugin）
-    │   ├── spring-boot-starter-dating（交友）
-    │   │   ├── spring-boot-starter-dating-api
-    │   │   ├── spring-boot-starter-dating-biz
-    │   │   └── spring-boot-starter-dating-plugin
-    │   └── spring-boot-starter-customer（客户）
-    │       ├── spring-boot-starter-customer-api
-    │       ├── spring-boot-starter-customer-biz
-    │       └── spring-boot-starter-customer-plugin
+    ├── spring-boot-starter-components（能力组件）
+    │   ├── spring-boot-starter-file（文件上传能力）
+    │   ├── spring-boot-starter-cms（CMS系统）
+    │   ├── spring-boot-starter-im（即时通讯能力）
+    │   ├── spring-boot-starter-ocr（OCR识别能力）
+    │   ├── spring-boot-starter-trade（交易系统）
+    │   ├── spring-boot-starter-wechat（微信公众平台能力）
+    │   ├── spring-boot-starter-sms（短信发送能力）
+    │   ├── spring-boot-starter-excel（EXCEL导入导出能力）
+    │   ├── spring-boot-starter-system（用户体系系统*核心）
+    │   ├── spring-boot-starter-job
+    │   └── spring-boot-starter-verification（实名等认证能力）
+    ├── spring-boot-starter-business（垂直业务域）
+    │   ├── spring-boot-starter-dating（交友系统）
+    │   │   ├── spring-boot-starter-dating-api（业务定义）
+    │   │   ├── spring-boot-starter-dating-biz（业务实现）
+    │   │   └── spring-boot-starter-dating-trade-plugin（支付模块接入插件）
+    │   └── spring-boot-starter-customer（客户系统）
+    │       ├── spring-boot-starter-customer-api（业务定义）
+    │       ├── spring-boot-starter-customer-biz（业务实现）
+    │       └── spring-boot-starter-customer-system-plugin（用户体系接入，用户客户初始化用户信息等）
     └── spring-boot-starter-runner（可执行单体：pom 中按需引入 *-biz / *-plugin）
 
 前端（示例）
 └── tg-vue（管理端：Vue 3 + Element Plus + Vite）
-└── tg-uniapp（小程序端，基于开源项目unibest，本项目仅作了接入后端适配，unibest官网地址：https://unibest.tech/）
+└── tg-matchmaker-h5（团队简称 **h5项目**：uni-app 多端壳，基于 unibest，已接后端；H5 为 history 路由非 hash；https://unibest.tech/）
 
-*-biz 包内布局（示例：spring-boot-starter-system-biz，Java 包根 pub.module.system）
-├── biz（手写：Controller、Api*Impl、配置等）
-│   ├── controller（下分 cus / mgt / pub 等包：客户端 / 管理端 / 公开接口）
-│   ├── service / impl（对接 *-api 中 Api* 契约）
-│   └── config（Web、Security、Swagger 等）
-├── curd（目录名为 curd；生成器产出的 Mapper、Entity、基础 Service）
-└── Biz*AutoConfiguration.java（本模块自动配置入口）
-
-*-api 包内布局（示例：spring-boot-starter-system-api，根 pub.module.system.api）
-└── api
-    ├── service（Api*Service）
-    ├── service/dto、vo
-    ├── constants、event 等
-    └── …（如 util，按模块约定）
 ```
 
 **Runner**：实际打进哪些 `*-biz` / `*-plugin` 以 [`spring-boot-starter-runner/pom.xml`](spring-boot-starter-module/spring-boot-starter-runner/pom.xml) 为准；增删能力一般只改此处，不必调整上层模块树。
@@ -96,7 +135,7 @@ tg-boot
 
 - **微服务化**：能力按边界独立部署、独立伸缩，协作依赖明确的远程契约（HTTP/RPC 等）。本框架通过「模块间只走 API 层」预先固化契约，拆分服务时主要是部署与调用方式变化，而不是重写业务粘连代码。
 - **模块化单体（本仓库默认形态）**：**将多个 `*-biz` 业务模块一并集成进同一个 `spring-boot-starter-runner` 启动器**，同进程启动，即为模块化单体——源码仍按 Maven 模块切分，运行时却是一个 JVM、一套部署单元，兼顾协作边界与运维简单性。演进为微服务时，既可把**负载高的模块单独打进各自的 runner** 独立扩容，也可继续**整包 runner 部署**；无论物理上是多套 runner 还是一包到底，**对外统一依赖网关/路由策略将流量分发到对应实例，实现分而治之**。
-- **微内核 + 插件**：内核（框架与通用组件）追求稳定；可变部分以 **plugin 模块** 形式外挂——例如仓库中的 `spring-boot-starter-dating-plugin`、`spring-boot-starter-customer-plugin` 通过依赖各 `*-api` 做跨模块编排，而不穿透对方 `*-biz` 内部实现。插件可单独打包（如放入 `./plugins`），在进程内仍保持「面向接口协作」的形态。
+- **微内核 + 插件**：内核（框架与通用组件）追求稳定；可变部分以 **plugin 模块** 形式外挂——例如仓库中的 `spring-boot-starter-dating-trade-plugin`、`spring-boot-starter-customer-system-plugin` 通过依赖各 `*-api` 做跨模块编排，而不穿透对方 `*-biz` 内部实现。插件可单独打包（如放入 `./plugins`），在进程内仍保持「面向接口协作」的形态。
 
 ### plugin 模块与微服务能力
 
@@ -144,7 +183,7 @@ tg-boot
 ### 字典类字段（`*Code`）
 
 - **命名**：凡表示「取自字典 / 枚举 / 固定码表」的字段，采用 `xxCode` 形式（以 `Code` 结尾），与展示用的名称、`label` 区分开。
-- **数据来源**：可以是平台**字典表**中的项，也可以是某业务表侧维护的**独立码表**；对调用方而言，消费方式一致——按编码取值、按编码提交。
+- **数据来源**：以各模块 `*-api` 中的**枚举 / 常量**、或业务侧**独立码表**为准；对调用方而言，消费方式一致——按编码取值、按编码提交。
 - **为何存 Code、不靠 name**：判断分支、持久化、接口传参均以 **编码** 为准，不以中文或其它展示文案为准。展示名可能重复、会改、会做多语言；编码稳定、唯一，可避免「改文案却改坏逻辑」的问题，在**国际化**场景下尤其明显。
 - **前端**：列表/表单中按规范拉取选项（编码 + 当前语言下的展示文案），提交回写编码即可。
 
@@ -161,6 +200,47 @@ tg-boot
 
 - **命名**：字段以 `StatusCode` 结尾，例如「是否通过」用 `passedStatusCode`，见名知义。
 - **收益**：减少状态组合爆炸与互相矛盾的流转；团队对取值含义有一致预期。因枚举简单，**多数情况可不再单独配置字典说明**，文档与代码即契约。
+
+### 关于舍弃字典模块的新约定
+
+为规范项目技术架构，规避长期运维风险，解决通用字典功能模块带来的开发低效、逻辑隐患、国际化适配不足等问题，保障系统业务稳定性、扩展性及数据安全性，经技术团队评估、项目负责人审批，本次版本变更决定\*\*全面舍弃通用字典功能模块\*\*，同步制定相关技术新约定，统一各类选项数据、常量的管理标准，支撑项目长期迭代优化。
+
+#### 二、舍弃通用字典功能模块的核心理由
+
+1\.  开发查阅不便，影响研发效率：各类常量、选项值分散存储于字典表，开发人员需频繁查询数据库核对编码与释义，打断开发节奏，增加前后端联调、问题排查的沟通成本与难度，不利于团队标准化协作。
+
+2\.  业务逻辑风险极高，易引发致命故障：系统核心常量均深度绑定业务逻辑，若存入字典表交由非技术人员维护，其不熟悉底层业务规则，随意修改字典编码、值或状态，极易导致流程中断、数据错乱、权限失效等严重线上故障，且溯源修复成本高。
+
+3\.  国际化场景适配性差：通用字典表仅支持单一文本存储，无法满足多语言切换需求，后期拓展海外业务时，字典数据改造工作量极大，不符合项目国际化布局规划。
+
+4\.  滥用字典表埋下运维灾难：为简化开发将商品分类等具备层级、业务关联的复杂选项存入字典表，会导致数据杂乱、冗余、联动失效，随着业务迭代逐步形成无法整改的运维隐患，制约功能优化。
+
+5\.  特殊标准化数据无法适配：行政区划等国标级标准化数据，具备固定层级与规范，字典表无法适配其层级结构与批量更新需求，无法保障数据准确性与调用效率。
+
+#### 三、变更决定
+
+1\.  本次版本变更后，正式舍弃项目中所有通用字典功能模块，删除相关字典表、字典管理接口及前端字典渲染相关代码，不再新增任何基于通用字典的开发需求。
+
+2\.  对现有基于字典表开发的功能模块，由对应研发负责人牵头，在规定期限内完成改造，迁移至新约定的管理方式，确保改造后业务逻辑不受影响、数据准确无误。
+
+3\.  禁止任何研发人员在后续开发中，擅自使用通用字典表或搭建类似字典的临时管理模块，违规者将按项目技术规范进行考核。
+
+#### 四、后续执行的技术新约定
+
+##### 4\.1 业务常量管理约定
+
+所有深度绑定核心业务逻辑的常量（状态值、流程控制值、业务判定值等），统一采用代码枚举方式定义，明确注释释义、使用场景及关联业务逻辑；常量修改需经过代码评审流程，严禁擅自修改，避免引发逻辑错误。
+
+##### 4\.2 复杂选择项管理约定
+
+商品分类、业务类型、层级类目等具备层级关系、业务联动关系的复杂选择项，由研发人员通过专属业务功能模块、独立业务数据表开发实现，明确层级关联与数据校验规则，杜绝用字典表替代简化开发。
+
+##### 4\.3 标准化公共数据管理约定
+
+行政区划、地域编码等固定标准化公共数据，采用以下两种方式管理（二选一）：
+
+（1）搭建独立专属数据表，规范层级结构，建立批量更新、数据校验机制，由专人负责维护；
+
 
 # 感谢 & 友情链接
 
@@ -220,4 +300,52 @@ tg-boot
 - **Gitee 仓库**：[https://gitee.com/pub_module/tg-boot.git](https://gitee.com/pub_module/tg-boot.git)
 - **文档站点**：[http://docs.module.pub](http://docs.module.pub)
 - **演示环境**：[http://tg.module.pub](http://tg.module.pub)
+
+# 版本变更历史
+
+## v3.6.0（2026-05-20）
+
+**次版本升级**（`3.5.2` → `3.6.0`）：Maven 统一版本号见根 `pom.xml` 的 `<revision>`。本版以架构收敛与 AI 协作友好为主，无 Spring Boot 大版本变更（仍为 3.5.x 系）。
+
+### 移除低代码 / 代码生成模块
+
+**变更**：下线平台内置的「低代码 / 可视化代码生成」能力（含基于生成器的 `curd` 批量产出链路），不再维护生成器模板与配套管理端入口。
+
+**原因与替代思路**：
+
+- 本仓库定位已明确为 **面向 AI 助手与开发者的模块化单体**：契约、命名、模块边界写在 README 与 `spring-boot-starter-module` 各子模块说明中，由 AI 按约定**从表结构设计 → API 契约 → `*-biz` 实现**一气呵成，比「先配元数据再点生成」更贴近真实迭代节奏。
+- 生成器产出往往带来大量同质代码，后续改字段、改边界时容易与手写 `biz` 层纠缠，长期维护成本高于「小步手写 + 评审」。
+- 在 Cursor、Copilot 等工具普及后，**自然语言 + 仓库约定**即可稳定产出符合 `*-api` / 目录式命名的代码，且便于随业务即时调整，无需再维护一套与框架版本绑定的模板 DSL。
+
+**对开发者的影响**：新功能请直接按本文「架构与代码约定」「开发风格」新增模块或扩展 `*-biz`；历史由生成器产生的 `curd` 目录可随业务改造逐步收敛为手写结构，不必依赖已移除的生成入口。
+
+### 移除通用字典模块，改为常量与专属数据管理
+
+**变更**：舍弃 `spring-boot-starter-dict` 及通用字典表、字典管理接口、前端统一字典渲染链路；选项类数据改按下文 **[关于舍弃字典模块的新约定](#关于舍弃字典模块的新约定)** 执行。
+
+**原因摘要**（完整论述见上文该节）：
+
+| 维度 | 说明 |
+|------|------|
+| 研发效率 | 编码分散在库表，开发需反复查库核对，打断实现与联调 |
+| 稳定性 | 与流程、权限绑定的核心码值若可被非研发在后台改动，易引发线上逻辑故障 |
+| 国际化 | 通用字典难以承载多语言展示与稳定编码分离 |
+| 模型适配 | 层级类目、国标区划等不适合塞进「扁平字典」 |
+| 演进成本 | 滥用字典表易形成难以治理的数据债 |
+
+**迁移方向**：
+
+- **业务常量 / 状态机**：在 `*-api` 用枚举或常量类定义，修改走代码评审；简单二值状态继续采用 `*StatusCode` 约定（见 [布尔式状态机](#布尔式状态机statuscode)）。
+- **复杂选项**：独立业务表或专属管理功能，保留层级与联动。
+- **标准化公共数据**：独立表或受控同步，禁止再用通用字典替代。
+
+**对开发者的影响**：字段仍遵循 `*Code` 存编码、前端按编码展示；仅**数据来源**从「平台字典服务」改为「模块内契约 + 业务数据」。升级时请清理对字典 Starter、字典 HTTP 接口的依赖，并核对存量数据是否已迁至枚举或业务表。
+
+*文档与仓库同步更新；若你发现 README 与 `pom` 不一致，以 `spring-boot-starter-module` 下实际模块为准，欢迎提 Issue。*
+
+## 历史版本
+
+| 版本 | 说明 |
+|------|------|
+| 3.5.2 | 上一稳定次版本；含描述式系统日志等能力（管理端见 `V3.5.2+` 说明） |
 

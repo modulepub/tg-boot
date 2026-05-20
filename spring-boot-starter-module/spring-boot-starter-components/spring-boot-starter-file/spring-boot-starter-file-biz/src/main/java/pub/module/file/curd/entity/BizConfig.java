@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.file.api.constants.ConfigEnableStatusCodeEnum;
+import pub.module.file.api.constants.ConfigTypeCodeEnum;
 
 /**
  * CMS-节点 对象
@@ -24,11 +26,11 @@ public class BizConfig extends BaseEntity {
 
                     /** 配置类型 */
                         @Schema(description = "配置类型")
-                private String configTypeCode;
+                private ConfigTypeCodeEnum configTypeCode;
 
                     /** 是否启用 */
                         @Schema(description = "是否启用")
-                private String configEnableStatusCode;
+                private ConfigEnableStatusCodeEnum configEnableStatusCode;
 
                     /** 配置内容 */
                         @Schema(description = "配置内容")

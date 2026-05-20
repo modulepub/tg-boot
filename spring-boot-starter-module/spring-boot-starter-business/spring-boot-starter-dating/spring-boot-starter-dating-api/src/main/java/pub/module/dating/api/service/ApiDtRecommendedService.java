@@ -1,6 +1,8 @@
 package pub.module.dating.api.service;
 
 
+import pub.module.dating.api.service.dto.DtIntentionDTO;
+
 /**
  * Api 对象推荐 Service
  *
@@ -9,6 +11,6 @@ package pub.module.dating.api.service;
  */
 public interface ApiDtRecommendedService {
 
-    void synFreeRecommend();
+    void synFreeRecommend(DtIntentionDTO dtIntentionDTO,String userCode);
 
 }

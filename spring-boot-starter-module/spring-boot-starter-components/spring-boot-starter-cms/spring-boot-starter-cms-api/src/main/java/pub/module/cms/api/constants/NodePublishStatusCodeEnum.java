@@ -1,17 +1,33 @@
 package pub.module.cms.api.constants;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
+import pub.module.common.enums.BaseEnum;
 
+/** dict_code = nodePublishStatusCode */
 @Getter
-public enum NodePublishStatusCodeEnum {
-    YES("1", "已发布"),
-    NO("0", "未发布"),
+public enum NodePublishStatusCodeEnum implements BaseEnum {
+    NO("0", "否"),
+    YES("1", "是"),
     ;
-    private final String code;
-    private final String message;
 
-    NodePublishStatusCodeEnum(String code, String message) {
+    @EnumValue
+    private final String code;
+    private final String desc;
+
+    NodePublishStatusCodeEnum(String code, String desc) {
         this.code = code;
-        this.message = message;
+        this.desc = desc;
+    }
+
+    @JsonCreator
+    public static NodePublishStatusCodeEnum fromJson(Object raw) {
+        return BaseEnum.parse(raw, NodePublishStatusCodeEnum.class);
+    }
+
+    @Deprecated
+    public static NodePublishStatusCodeEnum fromValue(String v) {
+        return BaseEnum.parse(v, NodePublishStatusCodeEnum.class);
     }
 }

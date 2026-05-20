@@ -4,9 +4,10 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pub.module.common.constants.BaseEntityFiled;
+import pub.module.common.enums.BaseEntityFiled;
 import pub.module.trade.api.dto.TdOrderGoodsDTO;
 import pub.module.trade.api.service.SpiNotifyThirdPaidResultService;
 import pub.module.trade.biz.service.BizTradeOrderService;
@@ -19,10 +20,12 @@ import pub.module.trade.curd.service.ITdOrderGoodsService;
 import pub.module.trade.curd.service.ITdOrderService;
 
 import jakarta.annotation.Resource;
+import pub.module.trade.api.service.SpiDistCommissionOnPaidService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,6 +38,7 @@ import java.util.concurrent.Executors;
  * @since 2026-01-02
  */
 @Service
+@Slf4j
 public class BizTradeOrderServiceImpl implements BizTradeOrderService {
     @Resource
     private ITdGoodsService tradeGoodsService;
@@ -113,7 +117,31 @@ public class BizTradeOrderServiceImpl implements BizTradeOrderService {
     }
 
     public void notifyBiz(TdOrderGoods tdOrderGoods) {
+        TdOrderGoodsDTO dto = BeanUtil.copyProperties(tdOrderGoods, TdOrderGoodsDTO.class);
         SpiNotifyThirdPaidResultService bizService = SpringUtil.getBean(tdOrderGoods.getTdGdCgyCode(), SpiNotifyThirdPaidResultService.class);
-        bizService.notify(BeanUtil.copyProperties(tdOrderGoods, TdOrderGoodsDTO.class));
+        bizService.notify(dto);
+        notifyDistCommissionOnPaid(dto, tdOrderGoods.getTdOdGdCode());
+    }
+
+    /**
+     * 可选插件：未引入 distribution-trade-plugin 时无 Bean，直接跳过。
+     */
+    private void notifyDistCommissionOnPaid(TdOrderGoodsDTO dto, String tdOdGdCode) {
+        Map<String, SpiDistCommissionOnPaidService> listeners;
+        try {
+            listeners = SpringUtil.getBeansOfType(SpiDistCommissionOnPaidService.class);
+        } catch (Exception ex) {
+            return;
+        }
+        if (listeners == null || listeners.isEmpty()) {
+            return;
+        }
+        for (SpiDistCommissionOnPaidService listener : listeners.values()) {
+            try {
+                listener.onOrderGoodsPaid(dto);
+            } catch (Exception ex) {
+                log.error("分销分佣处理失败 tdOdGdCode={}", tdOdGdCode, ex);
+            }
+        }
     }
 }

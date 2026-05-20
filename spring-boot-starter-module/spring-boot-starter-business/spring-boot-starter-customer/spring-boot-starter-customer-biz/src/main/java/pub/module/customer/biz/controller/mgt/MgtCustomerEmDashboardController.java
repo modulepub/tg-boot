@@ -119,7 +119,7 @@ public class MgtCustomerEmDashboardController {
             long cusIntentionTotal = customerContactRecordService.count(
                     new QueryWrapper<CustomerContactRecord>()
                             .eq("user_code", userDTO.getUserCode())
-                            .eq("cus_intention_status_code", CusIntentionStatusCodeEnum.YES.getCode())
+                            .eq("cus_intention_status_code", CusIntentionStatusCodeEnum.HAS.getCode())
                             .ge("DATE(create_time)", salesPerformanceReqVO.getCreateDateRangeArray()[0])
                             .le("DATE(create_time)", salesPerformanceReqVO.getCreateDateRangeArray()[1])
             );

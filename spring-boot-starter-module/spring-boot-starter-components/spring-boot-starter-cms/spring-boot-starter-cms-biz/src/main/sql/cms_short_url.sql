@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `cms_short_url` (
+  `id` varchar(36) NOT NULL COMMENT 'ID',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `org_code` varchar(60) DEFAULT '0' COMMENT '机构编码',
+  `deleted` varchar(10) DEFAULT '0' COMMENT '删除标记',
+  `seq_no` int DEFAULT 0 COMMENT '排序',
+  `version` varchar(10) DEFAULT NULL COMMENT '版本',
+  `short_url_code` varchar(36) DEFAULT NULL COMMENT '业务编码',
+  `short_url_key` varchar(32) NOT NULL COMMENT '短码（小程序 scene）',
+  `short_url_target` varchar(2048) NOT NULL COMMENT '目标小程序 path+query',
+  `short_url_title` varchar(255) DEFAULT NULL COMMENT '标题备注',
+  `short_url_expire_time` datetime DEFAULT NULL COMMENT '过期时间',
+  `short_url_status_code` varchar(32) DEFAULT '1' COMMENT '状态 1启用 0禁用',
+  `short_url_click_count` bigint DEFAULT 0 COMMENT '点击次数',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_cms_short_url_key` (`short_url_key`),
+  UNIQUE KEY `uk_cms_short_url_code` (`short_url_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='CMS-短链';

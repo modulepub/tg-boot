@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.dating.api.constants.RelationPassedStatusCodeEnum;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 /**
  * 联系人申请表 对象
@@ -29,7 +31,7 @@ public class DtContactApply extends BaseEntity {
 
                     /** 是否通过 */
                         @Schema(description = "是否通过")
-                private String contactApplyPassedStatusCode;
+                private RelationPassedStatusCodeEnum contactApplyPassedStatusCode;
 
                     /** 打招呼 */
                         @Schema(description = "打招呼")
@@ -57,7 +59,7 @@ public class DtContactApply extends BaseEntity {
 
                     /** 客户性别 */
                         @Schema(description = "客户性别")
-                private String cusSexCode;
+                private UserSexCodeEnum cusSexCode;
 
                     /** 年龄 */
                         @Schema(description = "年龄")
@@ -74,7 +76,7 @@ public class DtContactApply extends BaseEntity {
     @Schema(description = "客户身份编码：self 本人，parent 家长（与客户表同名字段冗余）")
     private String cusKinshipCode;
 
-    @Schema(description = "常驻城市名称（与客户表同名字段冗余）")
+    @Schema(description = "生活城市名称（与客户表同名字段冗余）")
     private String cusCityResidenceName;
 
     @Schema(description = "说说（与客户表同名字段冗余）")
@@ -98,7 +100,7 @@ public class DtContactApply extends BaseEntity {
     private String appCusName;
 
     @Schema(description = "申请人性别冗余")
-    private String appCusSexCode;
+    private UserSexCodeEnum appCusSexCode;
 
     @Schema(description = "申请人年龄冗余")
     private Long appCusAge;
@@ -106,7 +108,7 @@ public class DtContactApply extends BaseEntity {
     @Schema(description = "申请人身份编码：self 本人，parent 家长")
     private String appCusKinshipCode;
 
-    @Schema(description = "申请人常驻城市名称冗余")
+    @Schema(description = "申请人生活城市名称冗余")
     private String appCusCityResidenceName;
 
     @Schema(description = "申请人说说冗余")

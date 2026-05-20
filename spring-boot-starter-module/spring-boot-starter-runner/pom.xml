@@ -57,15 +57,16 @@
 
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-customer-plugin</artifactId>
+            <artifactId>spring-boot-starter-customer-system-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-dict-biz</artifactId>
+            <artifactId>spring-boot-starter-customer-verification-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-excel-biz</artifactId>
@@ -74,6 +75,11 @@
         <dependency>
             <groupId>pub.module</groupId>
             <artifactId>spring-boot-starter-ocr-biz</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-verification-biz</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -117,13 +123,25 @@
 
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-generator-biz</artifactId>
+            <artifactId>spring-boot-starter-dating-trade-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>
-            <artifactId>spring-boot-starter-dating-plugin</artifactId>
+            <artifactId>spring-boot-starter-distribution-biz</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-distribution-trade-plugin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-dating-distribution-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -135,6 +153,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.5.5</version>
+                <configuration>
+                    <skip>false</skip>
+                    <!-- 不使用 spring-boot-starter-parent 时需在 package 绑定 repackage，否则 target 仅为瘦 jar -->
+                    <mainClass>pub.module.StartApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

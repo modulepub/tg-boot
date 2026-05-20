@@ -91,7 +91,7 @@ public class MgtSysUserController {
                                                   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
 
         QueryWrapper<SysUser> queryWrapper = WebQueryUtil.buildQuery(sysUser);
-        queryWrapper.lambda().in(SysUser::getUserOlineStatusCode, UserOlineStatusCodeEnum.YES.getCode());
+        queryWrapper.lambda().eq(SysUser::getUserOlineStatusCode, UserOlineStatusCodeEnum.YES.getCode());
         IPage<SysUser> page = new Page<>(pageNo, pageSize);
         IPage<SysUser> pageList = sysUserService.page(page, queryWrapper);
         return Result.ok(pageList);

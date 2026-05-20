@@ -42,10 +42,8 @@
     </scm>
 
     <modules>
-        <module>spring-boot-starter-generator</module>
         <module>spring-boot-starter-file</module>
         <module>spring-boot-starter-cms</module>
-        <module>spring-boot-starter-dict</module>
         <module>spring-boot-starter-im</module>
         <module>spring-boot-starter-ocr</module>
         <module>spring-boot-starter-trade</module>
@@ -54,5 +52,7 @@
         <module>spring-boot-starter-excel</module>
         <module>spring-boot-starter-system</module>
         <module>spring-boot-starter-job</module>
+        <module>spring-boot-starter-verification</module>
+        <module>spring-boot-starter-distribution</module>
     </modules>
 </project>

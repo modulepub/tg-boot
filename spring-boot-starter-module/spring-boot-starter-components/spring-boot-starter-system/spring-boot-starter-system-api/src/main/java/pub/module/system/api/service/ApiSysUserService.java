@@ -33,7 +33,7 @@ public interface ApiSysUserService {
     void authSmsCode(String phone,String smsCode);
     void authUserNamePassword(String username, String password);
     void changePassword(String username, String oldPassword,String newPassword);
-    UserDTO registerByPhone(String phone);
+    UserDTO registerByPhone(String phone, String userReferenceUserCode);
 
     UserDTO registerByOpenId(String openId);
 

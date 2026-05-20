@@ -20,7 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfigurationSource;
 import pub.module.system.biz.config.security.filter.JwtAuthenticationFilter;
 
 import java.io.Serializable;
@@ -48,12 +47,6 @@ public class SecurityConfig {
         publicEndpoints = ArrayUtil.addAll(publicEndpoints,swaggerEndpoints,staticEndpoints,genEndpoints);
     }
     // 注入CORS配置源（关联你之前的全局CORS配置，或直接在此定义）
-    private final CorsConfigurationSource corsConfigurationSource;
-
-    // 构造函数注入 CorsConfigurationSource（Spring会自动扫描你配置的实例）
-    public SecurityConfig(CorsConfigurationSource corsConfigurationSource) {
-        this.corsConfigurationSource = corsConfigurationSource;
-    }
 
     @Bean
     public AuthenticationManager authenticationManager() {
@@ -68,7 +61,6 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // 1. 强制启用CORS，绑定全局CORS配置（关键！）
-                .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 // 2. 禁用CSRF（JWT模式不需要）
                 .csrf(AbstractHttpConfigurer::disable)
                 // 3. 无状态会话（JWT模式）

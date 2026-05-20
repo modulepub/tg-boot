@@ -73,7 +73,7 @@ public class DtContactApplyDTO extends BaseEntity {
     @Schema(description = "客户身份编码回填：self 本人，parent（界面展示家长）")
     private String cusKinshipCode;
 
-    @Schema(description = "常驻城市名称（回填）")
+    @Schema(description = "生活城市名称（回填）")
     private String cusCityResidenceName;
 
     @Schema(description = "说说（冗余）")
@@ -103,7 +103,7 @@ public class DtContactApplyDTO extends BaseEntity {
     @Schema(description = "申请人身份编码")
     private String appCusKinshipCode;
 
-    @Schema(description = "申请人常驻城市名称冗余")
+    @Schema(description = "申请人生活城市名称冗余")
     private String appCusCityResidenceName;
 
     @Schema(description = "申请人说说冗余")

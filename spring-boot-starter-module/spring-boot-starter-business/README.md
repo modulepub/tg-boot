@@ -7,13 +7,13 @@
 | 模块 | 业务摘要 | 文档 |
 |------|----------|------|
 | `spring-boot-starter-customer` | 客户与跟进、推广任务、员工看板、公开客户接口等 | [README.md](spring-boot-starter-customer/README.md) |
-| `spring-boot-starter-dating` | 婚恋/约会：匹配、意向、红娘与门店、统计；可选 **dating-plugin** 对接交易品类 SPI | [README.md](spring-boot-starter-dating/README.md) |
+| `spring-boot-starter-dating` | 婚恋/约会：匹配、意向、红娘与门店、统计；可选 **dating-trade-plugin** 对接交易品类 SPI | [README.md](spring-boot-starter-dating/README.md) |
 
 ## 对外能力形态
 
 - **HTTP**：由各 `-biz` 下 `controller` 暴露（常见前缀 `cus` / `mgt` / `pub` 区分客户端、管理端、匿名或公开接口）。
 - **模块间 API**：各 `-api` 中的 `pub.module.<domain>.api.service.*` 接口供其他 starter 依赖与注入实现。
-- **插件**：例如 `spring-boot-starter-dating-plugin` 实现交易模块 `SpiNotifyThirdPaidResultService`，用于「付费成功后」按商品品类执行婚恋侧权益逻辑。
+- **插件**：例如 `spring-boot-starter-dating-trade-plugin` 实现交易模块 `SpiNotifyThirdPaidResultService`，用于「付费成功后」按商品品类执行婚恋侧权益逻辑。
 
 ## 使用说明
 

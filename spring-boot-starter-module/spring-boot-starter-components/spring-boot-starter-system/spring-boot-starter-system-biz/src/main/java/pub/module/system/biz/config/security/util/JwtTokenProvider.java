@@ -73,20 +73,23 @@ public class JwtTokenProvider {
     @Getter
     public static class JwtProperties {
 
+        /** 半年（按 180 天计）毫秒数 */
+        public static final long HALF_YEAR_MILLIS = 180L * 24 * 60 * 60 * 1000;
+
         /**
          * JWT 密钥
          */
         private String secret = "default-secret-key-change-in-production";
 
         /**
-         * Token 过期时间（毫秒），默认 24 小时
+         * Token 过期时间（毫秒），默认半年
          */
-        private Long expiration = 86400000L;
+        private Long expiration = HALF_YEAR_MILLIS;
 
         /**
-         * Token 刷新时间（毫秒），默认 7 天
+         * 登录 Token / 会话有效期（毫秒），默认半年
          */
-        private Long refreshExpiration = 604800000L;
+        private Long refreshExpiration = HALF_YEAR_MILLIS;
 
         /**
          * 发行者

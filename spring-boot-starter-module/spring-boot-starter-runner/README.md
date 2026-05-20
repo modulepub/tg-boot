@@ -1,6 +1,6 @@
 # spring-boot-starter-runner
 
-**默认单体应用启动模块**：`StartApplication` 为 `@SpringBootApplication` 入口，聚合引入多个 `*-biz` 与示例 **`spring-boot-starter-dating-plugin`**，用于开箱演示完整链路。
+**默认单体应用启动模块**：`StartApplication` 为 `@SpringBootApplication` 入口，聚合引入多个 `*-biz` 与示例 **`spring-boot-starter-dating-trade-plugin`**，用于开箱演示完整链路。
 
 ## 职责
 

@@ -41,7 +41,13 @@ public class CusCustomerController {
         return Result.ok(customer);
     }
 
-    @Operation(summary = "用户端-客户-城市列表（按常驻城市编码分组，含名称）")
+    @Operation(summary = "用户端-客户-按昵称精确搜索嘉宾")
+    @GetMapping(value = "/searchByCusNickName")
+    public Result<CustomerDTO> searchByCusNickName(@RequestParam(name = "cusNickName") String cusNickName) {
+        return Result.ok(apiCustomerService.getCusByNickNameExact(cusNickName));
+    }
+
+    @Operation(summary = "用户端-客户-城市列表（按生活城市编码分组，含名称）")
     @GetMapping(value = "/getCitys")
     public Result<List<CusCityResidenceOptionDTO>> getCitys() {
         return Result.ok(customerService.listDistinctResidenceCities());

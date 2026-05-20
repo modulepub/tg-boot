@@ -72,13 +72,13 @@ public class CusMyStatisticController {
 		// 喜欢我：偏好表中「目标为我方客户编码」且标记为喜欢（他人对我点了喜欢）
 		long likeMe = dtPreferenceService.count(new QueryWrapper<DtPreference>().lambda()
 				.eq(DtPreference::getPreferenceTargetCusCode, myCusCode)
-				.eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.like.getCode()));
+				.eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.LIKE.getCode()));
 		stat.setLikeMeTotal(likeMe);
 
 		// 我喜欢：当前用户作为操作方，且为喜欢
 		long meLike = dtPreferenceService.count(new QueryWrapper<DtPreference>().lambda()
 				.eq(DtPreference::getPreferenceCusCode, myCusCode)
-				.eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.like.getCode()));
+				.eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.LIKE.getCode()));
 		stat.setMeLikeTotal(meLike);
 
 		// 好友：联系人表，归属当前登录用户

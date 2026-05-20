@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+import pub.module.system.api.constants.UserEnabledCodeEnum;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -36,6 +38,8 @@ public class UserDTO implements Serializable {
     private java.lang.String userPhone;
     @Schema(description= "推荐码")
     private java.lang.String userReferenceCode;
+    @Schema(description= "分享人用户编码")
+    private java.lang.String userReferenceUserCode;
     @Schema(description= "头像")
     private java.lang.String userAvatar;
     @Schema(description= "姓名")
@@ -49,11 +53,11 @@ public class UserDTO implements Serializable {
     @Schema(description = "支付密码")
     private String userPayPassword;
     @Schema(description = "性别")
-    private String userSexCode;
+    private UserSexCodeEnum userSexCode;
     @Schema(description = "是否锁定（1，0")
     private String userLockedCode;
     @Schema(description = "是否支持（1，0")
-    private String userEnabledCode;
+    private UserEnabledCodeEnum userEnabledCode;
     /** 用户所属机构 */
     @Schema(description = "用户所属机构")
     private String userOrgCode;

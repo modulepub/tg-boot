@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import pub.module.common.model.po.BaseEntity;
+import pub.module.customer.api.constants.*;
+import pub.module.system.api.constants.UserSexCodeEnum;
 
 /**
  * 对象推荐 对象
@@ -48,11 +50,14 @@ public class DtRecommended extends BaseEntity {
     @Schema(description = "客户姓名")
     private String cusName;
 
+    @Schema(description = "是否点亮爱与诚（冗余自客户表 cus_ls_status_code，1 点亮）")
+    private String cusLsStatusCode;
+
     /**
      * 客户性别
      */
     @Schema(description = "客户性别")
-    private String cusSexCode;
+    private UserSexCodeEnum cusSexCode;
 
     /**
      * 年龄
@@ -85,15 +90,15 @@ public class DtRecommended extends BaseEntity {
     private Long cusHandholdsNum;
 
     /**
-     * 常驻城市
+     * 生活城市
      */
-    @Schema(description = "常驻城市")
+    @Schema(description = "生活城市")
     private String cusCityResidenceCode;
 
     /**
-     * 常驻城市名称
+     * 生活城市名称
      */
-    @Schema(description = "常驻城市名称")
+    @Schema(description = "生活城市名称")
     private String cusCityResidenceName;
 
     @Schema(description = "经纬度")
@@ -103,7 +108,7 @@ public class DtRecommended extends BaseEntity {
      * 是否有车
      */
     @Schema(description = "是否有车")
-    private String cusHaveCarStatusCode;
+    private CusHaveCarStatusCodeEnum cusHaveCarStatusCode;
 
     /**
      * 行驶证
@@ -115,7 +120,7 @@ public class DtRecommended extends BaseEntity {
      * 是否有房
      */
     @Schema(description = "是否有房")
-    private String cusHaveHouseStatusCode;
+    private CusHaveHouseStatusCodeEnum cusHaveHouseStatusCode;
 
     /**
      * 房产证
@@ -151,19 +156,19 @@ public class DtRecommended extends BaseEntity {
      * 来源
      */
     @Schema(description = "来源")
-    private String cusSourceCode;
+    private CusSourceCodeEnum cusSourceCode;
 
     /**
      * 用户标签
      */
     @Schema(description = "用户标签")
-    private String cusTagCode;
+    private CusTagCodeEnum cusTagCode;
 
     /**
      * 是否有意向
      */
     @Schema(description = "是否有意向")
-    private String cusIntentionStatusCode;
+    private CusIntentionStatusCodeEnum cusIntentionStatusCode;
 
     /**
      * 用户描述
@@ -197,13 +202,13 @@ public class DtRecommended extends BaseEntity {
      * 是否有房
      */
     @Schema(description = "是否有房")
-    private String intentionHaveHouseCode;
+    private CusHaveHouseStatusCodeEnum intentionHaveHouseCode;
 
     /**
      * 是否有车
      */
     @Schema(description = "是否有车")
-    private String intentionHaveCarCode;
+    private CusHaveCarStatusCodeEnum intentionHaveCarCode;
 
 
 
@@ -219,7 +224,7 @@ public class DtRecommended extends BaseEntity {
      * 性别
      */
     @Schema(description = "性别")
-    private String intentionSexCode;
+    private UserSexCodeEnum intentionSexCode;
 
     /**
      * 是否接受残疾

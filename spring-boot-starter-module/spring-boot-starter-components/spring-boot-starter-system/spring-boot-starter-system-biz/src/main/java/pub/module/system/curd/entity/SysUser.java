@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pub.module.common.model.po.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
+import pub.module.system.api.constants.UserEnabledCodeEnum;
 
 /**
  * 用户表 对象
@@ -49,7 +50,7 @@ public class SysUser extends BaseEntity {
      * 是否有效
      */
     @Schema(description = "是否有效")
-    private String userEnabledCode;
+    private UserEnabledCodeEnum userEnabledCode;
 
     /**
      * OPEN_ID
@@ -74,6 +75,12 @@ public class SysUser extends BaseEntity {
      */
     @Schema(description = "推荐人")
     private String userReferenceCode;
+
+    /**
+     * 分享人用户编码（首次注册时记录）
+     */
+    @Schema(description = "分享人用户编码")
+    private String userReferenceUserCode;
 
     /**
      * 用户头像

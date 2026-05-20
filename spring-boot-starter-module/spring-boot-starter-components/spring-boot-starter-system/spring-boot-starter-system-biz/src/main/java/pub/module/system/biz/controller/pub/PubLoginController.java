@@ -79,6 +79,8 @@ public class PubLoginController {
         public String smsAuthCode;
         @Schema(description = "来源渠道")
         public String source;
+        @Schema(description = "分享人用户编码（首次登录注册时传入）")
+        public String userReferenceUserCode;
 
     }
 
@@ -86,7 +88,9 @@ public class PubLoginController {
     @PostMapping("/phoneLogin")
     public Result<SysUserTokenVO> phoneLogin(@RequestBody LoginByPhoneVO loginByPhone) {
             apiSysUserService.authSmsCode(loginByPhone.getPhone(), loginByPhone.getSmsAuthCode());
-            UserDTO result = apiSysUserService.registerByPhone(loginByPhone.getPhone());
+            UserDTO result = apiSysUserService.registerByPhone(
+                    loginByPhone.getPhone(),
+                    loginByPhone.getUserReferenceUserCode());
             ApiSysUserService.LoginDTO loginDTO = apiSysUserService.loginByCode(result.getUserCode());
             SysUserTokenVO token = new SysUserTokenVO(loginDTO.getAccessToken(),loginDTO.getAccessToken(), loginDTO.getExpireTime(), loginDTO.getExpireTime());
             return Result.ok(token);

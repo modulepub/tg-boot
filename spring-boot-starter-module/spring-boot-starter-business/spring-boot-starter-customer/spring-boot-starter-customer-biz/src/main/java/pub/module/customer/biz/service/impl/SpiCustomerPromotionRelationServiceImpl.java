@@ -11,7 +11,7 @@ import pub.module.customer.curd.entity.Customer;
 import pub.module.customer.curd.entity.CustomerPromotionTask;
 import pub.module.customer.curd.service.CustomerPromotionTaskService;
 import pub.module.customer.curd.service.CustomerService;
-import pub.module.common.constants.BaseEntityFiled;
+import pub.module.common.enums.BaseEntityFiled;
 import pub.module.customer.biz.service.*;
 
 import org.springframework.stereotype.Service;
@@ -42,25 +42,25 @@ public class SpiCustomerPromotionRelationServiceImpl implements SpiCustomerPromo
     @Override
     public void assign(String promotionTaskTypeCode, List<String> cusCodeList, List<String> userCodeList) {
         Assert.notEmpty(promotionTaskTypeCode,"promotionTaskTypeCode is not null");
+        PromotionTaskTypeCodeEnum taskType = PromotionTaskTypeCodeEnum.fromValue(promotionTaskTypeCode);
         for (String cusCode : cusCodeList) {
             for (String userCode : userCodeList) {
                 UserDTO userDTO = apiSysUserService.getUserByUserCode(userCode);
                 Assert.notNull(userDTO, "严重异常！");
                 Customer customer = customerService.getByCode(cusCode);
                 Assert.notNull(customer, "严重异常！");
-                if(PromotionTaskTypeCodeEnum.CONTACT.getCode().equals(promotionTaskTypeCode)){
-                    customer.setCusAssignSalesStatusCode(CusAssignSalesStatusCodeEnum.YES.getCode());
+                if (taskType == PromotionTaskTypeCodeEnum.CONTACT) {
+                    customer.setCusAssignSalesStatusCode(CusAssignSalesStatusCodeEnum.ASSIGNED);
                     customer.setCusAssignSalesTime(LocalDateTime.now());
                 }
-                if(PromotionTaskTypeCodeEnum.SERVICE.getCode().equals(promotionTaskTypeCode)){
-                    customer.setCusAssignServersStatusCode(CusAssignServersStatusCodeEnum.YES.getCode());
+                if (taskType == PromotionTaskTypeCodeEnum.SERVICE) {
+                    customer.setCusAssignServersStatusCode(CusAssignServersStatusCodeEnum.ASSIGNED);
                 }
                 this.customerService.updateById(customer);
                 CustomerPromotionTask customerPromotionTask = BeanUtil.copyProperties(customer, CustomerPromotionTask.class, BaseEntityFiled.NAMES);
                 BeanUtil.copyProperties(userDTO, customerPromotionTask, BaseEntityFiled.NAMES);
-                customerPromotionTask.setPromotionTaskTypeCode(promotionTaskTypeCode);
-                customerPromotionTask.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.NO.getCode());
-                customerPromotionTask.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.NO.getCode());
+                customerPromotionTask.setPromotionTaskTypeCode(taskType);
+                customerPromotionTask.setCusFollowUpStatusCode(CusFollowUpStatusCodeEnum.NO);
                 customerPromotionTaskService.save(customerPromotionTask);
             }
 
@@ -71,20 +71,20 @@ public class SpiCustomerPromotionRelationServiceImpl implements SpiCustomerPromo
     public void dealt(String promotionTaskCode) {
         Assert.notEmpty(promotionTaskCode,"promotionTaskCode not null");
         CustomerPromotionTask customerPromotionTask = customerPromotionTaskService.getByCode(promotionTaskCode);
-        customerPromotionTask.setCusDealtStatusCode(CusDealtStatusCodeEnum.YES.getCode());
+        customerPromotionTask.setCusDealtStatusCode(CusDealtStatusCodeEnum.YES);
         customerPromotionTaskService.updateById(customerPromotionTask);
         Customer customer = customerService.getByCode(customerPromotionTask.getCusCode());
-        customer.setCusDealtStatusCode(CusDealtStatusCodeEnum.YES.getCode());
+        customer.setCusDealtStatusCode(CusDealtStatusCodeEnum.YES);
         customerService.updateById(customer);
     }
 
     @Override
     public void complete(String promotionTaskCode) {
         CustomerPromotionTask customerPromotionTask = customerPromotionTaskService.getByCode(promotionTaskCode);
-        customerPromotionTask.setCusDealtCompleteStatusCode(CusDealtCompleteStatusCodeEnum.YES.getCode());
+        customerPromotionTask.setCusDealtCompleteStatusCode(CusDealtCompleteStatusCodeEnum.YES);
         customerPromotionTaskService.updateById(customerPromotionTask);
         Customer customer = customerService.getByCode(customerPromotionTask.getCusCode());
-        customer.setCusDealtCompleteStatusCode(CusDealtCompleteStatusCodeEnum.YES.getCode());
+        customer.setCusDealtCompleteStatusCode(CusDealtCompleteStatusCodeEnum.YES);
         customerService.updateById(customer);
     }
 }

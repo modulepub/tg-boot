@@ -45,6 +45,7 @@
     <modules>
         <module>spring-boot-starter-customer-biz</module>
         <module>spring-boot-starter-customer-api</module>
-        <module>spring-boot-starter-customer-plugin</module>
+        <module>spring-boot-starter-customer-system-plugin</module>
+        <module>spring-boot-starter-customer-verification-plugin</module>
     </modules>
 </project>

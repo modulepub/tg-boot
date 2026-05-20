@@ -13,6 +13,7 @@ import pub.module.customer.api.service.ApiCustomerService;
 import pub.module.customer.api.service.dto.CustomerDTO;
 import pub.module.dating.api.constants.DtLikeDegreeCodeEnum;
 import pub.module.dating.api.service.ApiDtPreferenceService;
+import pub.module.dating.biz.service.DtPreferenceDisplayService;
 import pub.module.dating.curd.entity.DtPreference;
 import pub.module.dating.curd.service.DtPreferenceService;
 import pub.module.system.api.service.dto.UserDTO;
@@ -37,6 +38,8 @@ public class CusDtPreferenceController {
     private DtPreferenceService dtPreferenceService;
     @Resource
     private ApiCustomerService apiCustomerService;
+    @Resource
+    private DtPreferenceDisplayService dtPreferenceDisplayService;
 
     @Operation(summary = "用户端-我喜欢的列表")
     @GetMapping(value = "/myLikeList")
@@ -48,9 +51,10 @@ public class CusDtPreferenceController {
         QueryWrapper<DtPreference> queryWrapper = WebQueryUtil.buildQuery(dtPreference);
         queryWrapper.lambda()
                 .eq(DtPreference::getPreferenceCusCode, customerDTO.getCusCode())
-                .eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.like.getCode());
+                .eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.LIKE.getCode());
         Page<DtPreference> page = new Page<>(pageNo, pageSize);
         IPage<DtPreference> pageList = dtPreferenceService.page(page, queryWrapper);
+        dtPreferenceDisplayService.enrichPeerDisplay(pageList, true);
         return Result.ok(pageList);
     }
 
@@ -64,9 +68,10 @@ public class CusDtPreferenceController {
         QueryWrapper<DtPreference> queryWrapper = WebQueryUtil.buildQuery(dtPreference);
         queryWrapper.lambda()
                 .eq(DtPreference::getPreferenceTargetCusCode, customerDTO.getCusCode())
-                .eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.like.getCode());
+                .eq(DtPreference::getPreferenceLikeStatusCode, DtLikeDegreeCodeEnum.LIKE.getCode());
         Page<DtPreference> page = new Page<>(pageNo, pageSize);
         IPage<DtPreference> pageList = dtPreferenceService.page(page, queryWrapper);
+        dtPreferenceDisplayService.enrichPeerDisplay(pageList, false);
         return Result.ok(pageList);
     }
 

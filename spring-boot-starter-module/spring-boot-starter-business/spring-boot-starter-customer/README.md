@@ -6,6 +6,8 @@
 
 - **`spring-boot-starter-customer-api`**：`ApiCustomerService`、`ApiCustomerContactRecordService` 等，供其他 starter 调用客户领域能力。
 - **`spring-boot-starter-customer-biz`**：`BizCustomerAutoConfiguration`、控制器与服务实现。
+- **`spring-boot-starter-customer-system-plugin`**：登录后初始化客户档案（监听 `SysUserLoginEvent`）。
+- **`spring-boot-starter-customer-verification-plugin`**：手机号二要素核验通过后更新客户实名（实现 `SpiPhoneTwoFactorVerifyNotify`）。
 
 ## HTTP 能力概要
 

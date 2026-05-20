@@ -53,8 +53,11 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
-
-
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-customer-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>pub.module</groupId>

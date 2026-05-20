@@ -29,9 +29,9 @@ public class DtPreference extends BaseEntity {
     private Integer preferenceCusAge;
     @Schema(description = "客户头像")
     private String preferenceCusAvatar;
-    @Schema(description = "客户常驻城市")
+    @Schema(description = "客户生活城市")
     private String preferenceCusCityResidenceCode;
-    @Schema(description = "客户常驻城市名称")
+    @Schema(description = "客户生活城市名称")
     private String preferenceCusCityResidenceName;
 
     @Schema(description = "目标对象客户编码")
@@ -42,9 +42,9 @@ public class DtPreference extends BaseEntity {
     private Integer preferenceTargetCusAge;
     @Schema(description = "目标对象头像")
     private String preferenceTargetCusAvatar;
-    @Schema(description = "目标对象常驻城市")
+    @Schema(description = "目标对象生活城市")
     private String preferenceTargetCusCityResidenceCode;
-    @Schema(description = "目标对象常驻城市名称")
+    @Schema(description = "目标对象生活城市名称")
     private String preferenceTargetCusCityResidenceName;
     @Schema(description = "是否喜欢")
     private String preferenceLikeStatusCode;
