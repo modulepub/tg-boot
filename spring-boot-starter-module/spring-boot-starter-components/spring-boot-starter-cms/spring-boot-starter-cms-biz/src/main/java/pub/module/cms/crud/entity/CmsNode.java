@@ -1,0 +1,64 @@
+package pub.module.cms.crud.entity;
+
+import pub.module.common.enums.StatusCodeEnum;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import io.swagger.v3.oas.annotations.media.Schema;
+import pub.module.common.model.po.BaseEntity;
+import pub.module.cms.api.constants.NodeContentTypeCodeEnum;
+import pub.module.cms.api.constants.NodeTypeCodeEnum;
+
+/**
+ * CMS-节点 对象
+ *
+ * @author tg
+ * 2026-03-08 16:04:07
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Schema(description = "CMS-节点")
+public class CmsNode extends BaseEntity {
+    @Schema(description = "父级编码")
+    private String nodeParentCode;
+
+    @Schema(description = "内容编码")
+    private String nodeCode;
+
+    @Schema(description = "名称")
+    private String nodeName;
+
+    @Schema(description = "头图")
+    private String nodeHeadImg;
+
+    @Schema(description = "摘要")
+    private String nodeSummary;
+
+        @JsonFormat(pattern = "yyyy-MM-dd")
+@Schema(description = "发布时间")
+    private Date nodePublishTime;
+
+    @Schema(description = "发布状态")
+    private StatusCodeEnum nodePublishStatusCode;
+
+    @Schema(description = "节点类型")
+    private NodeTypeCodeEnum nodeTypeCode;
+
+    @Schema(description = "内容类型")
+    private NodeContentTypeCodeEnum nodeContentTypeCode;
+
+    @Schema(description = "链接")
+    private String nodeLink;
+
+    @Schema(description = "文件")
+    private String nodeFile;
+
+    @Schema(description = "正文")
+    private String nodeContent;
+
+    @Schema(description = "阅读数")
+    private Long nodeViewCount;
+
+}

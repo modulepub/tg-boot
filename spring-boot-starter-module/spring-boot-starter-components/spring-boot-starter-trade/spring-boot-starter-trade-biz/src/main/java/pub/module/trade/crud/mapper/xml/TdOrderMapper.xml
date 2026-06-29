@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pub.module.trade.crud.mapper.TdOrderMapper">
+
+    <select id="selectStatistics" resultType="pub.module.trade.api.dto.TdOrderStatisticsDTO">
+        SELECT
+            IFNULL(SUM(td_od_amount), 0) AS totalOrderAmount,
+            IFNULL(SUM(CASE WHEN td_od_paid_status_code = '1' THEN td_od_amount ELSE 0 END), 0) AS totalPaidAmount,
+            IFNULL(SUM(CASE WHEN DATE(create_time) = CURDATE() THEN td_od_amount ELSE 0 END), 0) AS todayOrderAmount,
+            IFNULL(SUM(CASE WHEN DATE(create_time) = CURDATE() AND td_od_paid_status_code = '1' THEN td_od_amount ELSE 0 END), 0) AS todayPaidAmount
+        FROM td_order
+        WHERE deleted = 0
+    </select>
+
+</mapper>

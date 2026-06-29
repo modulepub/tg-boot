@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS `cms_node_read_record` (
+  `id` varchar(64) NOT NULL COMMENT '主键ID',
+  `seq_no` int DEFAULT NULL COMMENT '序列编号',
+  `org_code` varchar(64) DEFAULT NULL COMMENT '机构编码',
+  `update_by` varchar(64) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_by` varchar(64) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `version` varchar(10) DEFAULT NULL COMMENT '乐观锁版本号',
+  `deleted` varchar(10) DEFAULT '0' COMMENT '逻辑删除 0-未删 1-已删',
+  `node_read_record_code` varchar(64) DEFAULT NULL COMMENT '阅读记录编码',
+  `node_code` varchar(64) DEFAULT NULL COMMENT '文章节点编码',
+  `node_read_record_session_code` varchar(64) NOT NULL COMMENT '单次阅读会话编码',
+  `node_read_record_user_code` varchar(64) DEFAULT NULL COMMENT '阅读用户编码（登录时）',
+  `node_read_record_client_ip` varchar(64) DEFAULT NULL COMMENT '客户端IP',
+  `node_read_record_ip_location` varchar(255) DEFAULT NULL COMMENT 'IP归属地',
+  `node_read_record_progress` int NOT NULL DEFAULT 0 COMMENT '阅读进度 0-100',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_cms_node_read_record_session` (`node_read_record_session_code`),
+  UNIQUE KEY `uk_cms_node_read_record_code` (`node_read_record_code`),
+  KEY `idx_cms_node_read_record_node_code` (`node_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='CMS-文章阅读记录';

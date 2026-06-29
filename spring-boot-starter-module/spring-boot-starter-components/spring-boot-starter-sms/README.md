@@ -1,0 +1,16 @@
+# spring-boot-starter-sms
+
+**短信发送组件**：对上游暴露统一 **`ApiSmsSendService`**（`spring-boot-starter-sms-api`），具体厂商（创蓝、玄武等）在 `-biz` 中通过 SPI/实现类切换，**换短信平台只需改配置，不必改业务代码**。
+
+> **AI / 开发者**：新增或修改本模块 `crud/entity` 前必读仓库根目录 [AGENTS.md](../../../AGENTS.md)（实体必须 `extends BaseEntity`，业务主键为 `smsXxxCode`，技术主键为 `id`）。
+
+## 对外 API
+
+- **`BizSmsService.sendSms(String mobile, String content)`** 等（以接口定义为准）。
+
+## Maven 结构
+
+- **`spring-boot-starter-sms-api`**：配置属性 `SmsProperties`、发送器工具类、常量枚举。
+- **`spring-boot-starter-sms-biz`**：`BizSmsAutoConfiguration`、默认业务实现与各厂商 `Spi*SmsServiceImpl`。
+
+引入 **`spring-boot-starter-sms-biz`** 即可获得自动配置与实现；仅契约依赖可单独引入 `-api`。

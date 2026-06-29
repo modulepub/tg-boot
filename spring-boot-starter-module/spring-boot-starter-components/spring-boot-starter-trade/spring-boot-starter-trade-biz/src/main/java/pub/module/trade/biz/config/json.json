@@ -1,0 +1,10 @@
+{
+  "appId": "wxxxxxxxxxxxxxxx",
+  "appSecret": "your-wx-app-secret-here",
+  "msgDataFormat": "JSON",
+  "mchId": "1234567890",
+  "mchKey": "your-wx-mch-key-here",
+  "privateKey": "REPLACE_WITH_YOUR_MERCHANT_PRIVATE_KEY_PEM",
+  "privateCert": "REPLACE_WITH_YOUR_MERCHANT_CERT_PEM",
+  "notifyUrl": "https://api.example.com/pub/wechat/parseOrderNotifyResult"
+}

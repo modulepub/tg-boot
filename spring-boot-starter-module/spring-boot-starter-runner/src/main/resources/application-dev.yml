@@ -1,0 +1,155 @@
+server:
+  undertow:
+    decode-url: true
+  error:
+    include-exception: true
+    include-stacktrace: ALWAYS
+    include-message: ALWAYS
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
+  port: 9999
+  servlet:
+    context-path:
+spring:
+  # 模板引擎
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  #json 时间戳统一转换
+  Jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  jpa:
+    open-in-view: false
+  aop:
+    proxy-target-class: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      # password:
+      timeout: 3000ms
+  cache:
+    type: redis
+    redis:
+      # 登录会话等缓存默认半年（180 天）
+      time-to-live: 180d
+      cache-null-values: false
+  #freemarker
+  freemarker:
+    # 设置模板后缀名
+    suffix: .ftl
+    # 设置文档类型
+    content-type: text/html
+    # 设置页面编码格式
+    charset: UTF-8
+    # 设置页面缓存
+    cache: false
+    prefer-file-system-access: false
+    # 设置ftl 文件路径
+    template-loader-path:
+      - classpath:/templates
+  # 设置静态文件路径，js,css等
+  mvc:
+    static-path-pattern: /**
+    #Spring Boot 2.6+后映射匹配的默认策略已从AntPathMatcher更改为PathPatternParser,需要手动指定为ant-path-matcher
+  resource:
+    static-locations: classpath:/static/,classpath:/public/
+  autoconfigure:
+    exclude:
+      # 若不需要 MongoDB，可取消注释下一行
+      # - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  datasource:
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: 123456
+        allow:
+      web-stat-filter:
+        enabled: true
+    url: jdbc:mysql://127.0.0.1:3306/tg-boot?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      # 关闭固定 SQL 文件初始化，改由实体类自动建表
+      mode: never
+  h2:
+    console:
+      enabled: false
+      path: /pub/h2-console
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+  config:
+    import:
+      - optional:classpath:application-messaging-baseline.yml
+  cloud:
+    stream:
+      default-binder: rabbit
+
+#mybatis plus 设置
+mybatis-plus:
+  mapper-locations: classpath*:pub/module/**/xml/*Mapper.xml
+  type-aliases-package: pub.module.**.entity
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      #主键类型  0:"数据库ID自增",1:"该类型为未设置主键类型", 2:"用户输入ID",3:"全局唯一ID (数字类型唯一ID)", 4:"全局唯一ID UUID",5:"字符串全局唯一ID (idWorker 的字符串表示)";
+      id-type: ASSIGN_ID
+      # 默认数据库表下划线命名
+      table-underline: true
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 返回类型为Map,显示null对应的字段
+    call-setters-on-nulls: true
+logging:
+  level:
+    pub.module.*: debug
+    org.springframework.boot.autoconfigure: INFO
+# 企业入驻：平台收款公户（可在后台维护平台企业档案后自动读取）
+dating:
+  platform:
+    company-name: 示例科技有限公司
+    bank-name: 示例银行
+    bank-location: 示例支行
+    public-account-no: 6222020000000000000
+
+# 嵌入式 Rabbit（开发环境）
+tg:
+  actuator:
+    password: tg-actuator-dev
+  messaging:
+    embedded-rabbit:
+      enabled: true
+  # 手机号+姓名二要素：管理端 vt_np_config 维护，运行时从 DB 加载
+
+# XXL-Job（common 模块 XxlJobConfig；本地无调度中心时保持 enabled: false）
+xxl:
+  job:
+    enabled: false
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    accessToken: ''
+    executor:
+      appname: tg-boot-dev
+      ip: ''
+      port: 9998
+      logpath: ./logs/xxl-job
+      logretentiondays: 30
+

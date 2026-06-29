@@ -1,0 +1,26 @@
+-- 结算批次（企业申请结算）
+CREATE TABLE IF NOT EXISTS `dist_settle_batch` (
+  `id` varchar(64) NOT NULL COMMENT '主键ID',
+  `seq_no` int NULL DEFAULT NULL COMMENT '序列编号',
+  `org_code` varchar(64) NULL DEFAULT NULL COMMENT '机构编码',
+  `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_by` varchar(64) NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `version` varchar(10) NULL DEFAULT NULL COMMENT '乐观锁版本号',
+  `deleted` varchar(10) NULL DEFAULT '0' COMMENT '逻辑删除 0-未删 1-已删',
+  `dist_settle_batch_code` varchar(60) NOT NULL COMMENT '结算批次流水编码',
+  `dist_biz_line_code` varchar(32) NOT NULL COMMENT '业务线编码',
+  `mk_company_code` varchar(64) NOT NULL COMMENT '红娘公司编码',
+  `mk_company_name` varchar(200) NULL DEFAULT NULL COMMENT '红娘公司名称（冗余）',
+  `mk_company_admin_user_code` varchar(64) NULL DEFAULT NULL COMMENT '申请管理员用户编码',
+  `dist_matchmaker_user_code` varchar(64) NULL DEFAULT NULL COMMENT '红娘用户编码（按红娘结算时填写）',
+  `dist_apply_at` datetime NOT NULL COMMENT '申请日期',
+  `dist_settled_status_code` varchar(32) NOT NULL DEFAULT 'NO' COMMENT '是否结算完成 YES-是 NO-否',
+  `dist_settle_total_amount` decimal(18, 2) NOT NULL DEFAULT 0.00 COMMENT '结算总金额',
+  `dist_settled_at` datetime NULL DEFAULT NULL COMMENT '结算完成时间',
+  PRIMARY KEY (`id`),
+  INDEX `idx_dist_settle_batch_company`(`mk_company_code`, `dist_settled_status_code`),
+  INDEX `idx_dist_settle_batch_matchmaker`(`mk_company_code`, `dist_matchmaker_user_code`, `dist_settled_status_code`),
+  INDEX `idx_dist_settle_batch_apply_at`(`dist_apply_at`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT = '结算批次';

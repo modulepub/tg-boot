@@ -1,0 +1,41 @@
+CREATE TABLE IF NOT EXISTS `im_notice` (
+  `id` varchar(36) NOT NULL COMMENT 'ID',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `org_code` varchar(60) DEFAULT '0' COMMENT '机构编码',
+  `deleted` int DEFAULT 0 COMMENT '删除标记',
+  `seq_no` bigint DEFAULT 0 COMMENT '排序',
+  `version` varchar(10) DEFAULT NULL COMMENT '版本',
+  `im_notice_code` varchar(36) DEFAULT NULL COMMENT '通知编码',
+  `im_notice_name` varchar(128) DEFAULT NULL COMMENT '通知标题',
+  `im_notice_text` text COMMENT '通知正文',
+  `im_notice_img` varchar(1000) DEFAULT NULL COMMENT '通知图片',
+  `im_notice_url` varchar(2048) DEFAULT NULL COMMENT '跳转链接',
+  `im_notice_sender_user_code` varchar(64) DEFAULT NULL COMMENT '发送人IM用户编码',
+  `im_notice_publish_state_code` varchar(32) DEFAULT '0' COMMENT '发布状态 0草稿 1已发送',
+  `im_notice_target_type_code` varchar(32) DEFAULT 'all' COMMENT '通知对象类型',
+  `im_notice_send_count` int DEFAULT 0 COMMENT '发送成功数',
+  `im_notice_fail_count` int DEFAULT 0 COMMENT '发送失败数',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_im_notice_code` (`im_notice_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='IM-全员通知';
+
+CREATE TABLE IF NOT EXISTS `im_notice_recipient` (
+  `id` varchar(36) NOT NULL COMMENT 'ID',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `org_code` varchar(60) DEFAULT '0' COMMENT '机构编码',
+  `deleted` int DEFAULT 0 COMMENT '删除标记',
+  `seq_no` bigint DEFAULT 0 COMMENT '排序',
+  `version` varchar(10) DEFAULT NULL COMMENT '版本',
+  `im_nc_rp_code` varchar(36) DEFAULT NULL COMMENT '业务编码',
+  `im_notice_code` varchar(36) DEFAULT NULL COMMENT '通知编码',
+  `im_nc_rp_user_code` varchar(64) DEFAULT NULL COMMENT '接收人IM用户编码',
+  `im_nc_np_status_code` varchar(32) DEFAULT NULL COMMENT '接收状态 1成功 0失败',
+  PRIMARY KEY (`id`),
+  KEY `idx_im_notice_recipient_notice` (`im_notice_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='IM-通知接收记录';

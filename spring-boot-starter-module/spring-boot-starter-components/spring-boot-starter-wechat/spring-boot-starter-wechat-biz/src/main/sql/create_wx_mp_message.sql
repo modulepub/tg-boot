@@ -1,0 +1,26 @@
+-- 微信公众号消息记录
+CREATE TABLE IF NOT EXISTS `wx_mp_message` (
+  `id` varchar(64) NOT NULL COMMENT '主键ID',
+  `wx_mp_message_code` varchar(64) NOT NULL COMMENT '消息业务编码',
+  `wx_mp_config_code` varchar(64) NOT NULL COMMENT '公众号配置编码',
+  `wx_mp_fan_open_id` varchar(128) NOT NULL COMMENT '粉丝 OpenId',
+  `wx_mp_message_direction_code` varchar(16) NOT NULL COMMENT '方向：in-用户发来 out-公众号发出',
+  `wx_mp_message_type_code` varchar(32) NOT NULL COMMENT '类型：text/image/voice/video/location/link/event 等',
+  `wx_mp_message_content` text COMMENT '文本内容或摘要',
+  `wx_mp_message_media_id` varchar(128) DEFAULT NULL COMMENT '媒体 ID',
+  `wx_mp_message_wx_msg_id` varchar(64) DEFAULT NULL COMMENT '微信消息 ID',
+  `wx_mp_message_reply_source_code` varchar(32) DEFAULT NULL COMMENT '出站来源：auto_ai/manual/system',
+  `ai_chat_session_code` varchar(64) DEFAULT NULL COMMENT '关联 AI 会话编码',
+  `create_by` varchar(64) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_by` varchar(64) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `org_code` varchar(64) DEFAULT NULL,
+  `version` varchar(32) DEFAULT NULL,
+  `seq_no` bigint DEFAULT NULL,
+  `deleted` tinyint DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_wx_mp_message_code` (`wx_mp_message_code`),
+  KEY `idx_wx_mp_message_fan_time` (`wx_mp_config_code`, `wx_mp_fan_open_id`, `create_time`),
+  KEY `idx_wx_mp_message_create_time` (`create_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信公众号消息';

@@ -1,0 +1,26 @@
+## secrets（本地密钥，勿提交）
+**/apiclient_key.pem
+**/apiclient_cert.pem
+.env.local
+.env.*.local
+
+## ide
+**/.idea
+*.iml
+rebel.xml
+## backend
+**/target
+**/logs
+**/logback
+
+## front
+**/*.lock
+os_del.cmd
+os_del_doc.cmd
+.svn
+derby.log
+.vscode/settings.json
+**/**/${project.build.directory}
+# monorepo：H5 误执行 pnpm 曾产生嵌套仓库；勿将 tg-matchmaker-h5 当作独立 Git 根
+tg-matchmaker-h5/.git
+/.vscode/

@@ -1,0 +1,28 @@
+# Actuator：开发/内网基线。生产禁止将 /actuator/** 暴露到公网，见仓库根 OPS.md
+# 运维账号（HTTP Basic，免业务 JWT）：tg.actuator.username / password
+tg:
+  cache:
+    ephemeral-cache-name: tgEphemeral
+  security:
+    jwt:
+      secret: ${TG_JWT_SECRET:default-secret-key-change-in-production}
+      refresh-expiration: 15552000000
+  actuator:
+    enabled: true
+    username: actuator
+    password: ${TG_ACTUATOR_PASSWORD:please-change-me}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized
+
+spring:
+  application:
+    name: tg-boot
+  profiles:
+    active: '@profile.name@'

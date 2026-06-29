@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `im_user` (
+  `id` varchar(36) NOT NULL COMMENT 'ID',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `org_code` varchar(60) DEFAULT '0' COMMENT '机构编码',
+  `deleted` int DEFAULT 0 COMMENT '删除标记',
+  `seq_no` bigint DEFAULT 0 COMMENT '排序',
+  `version` varchar(10) DEFAULT NULL COMMENT '版本',
+  `im_user_code` varchar(36) DEFAULT NULL COMMENT '业务编码',
+  `im_user_user_code` varchar(64) NOT NULL COMMENT 'IM用户编码（腾讯云 Identifier）',
+  `im_user_nick_name` varchar(128) DEFAULT NULL COMMENT '昵称',
+  `im_user_avatar` varchar(500) DEFAULT NULL COMMENT '头像',
+  `im_user_real_name` varchar(128) DEFAULT NULL COMMENT '真实姓名',
+  `im_user_sdk_app_id` varchar(32) DEFAULT NULL COMMENT 'SDK AppId',
+  `im_user_sig_value` varchar(2048) DEFAULT NULL COMMENT 'UserSig',
+  `im_user_sig_expire_time` datetime DEFAULT NULL COMMENT 'UserSig过期时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_im_user_user_code` (`im_user_user_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='IM-用户';

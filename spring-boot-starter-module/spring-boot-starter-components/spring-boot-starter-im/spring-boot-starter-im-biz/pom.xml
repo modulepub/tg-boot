@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>spring-boot-starter-im-biz</artifactId>
+
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>TG-boot IM 即时通讯 业务实现模块</description>
+    <url>https://github.com/modulepub/tg-boot.git</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+            <comments>Permissive open source license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>panzhen</id>
+            <name>panzhen</name>
+            <email>panzhen@mail.module.pub</email>
+            <url>https://github.com/modulepub/tg-boot.git</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git@github.com:modulepub/tg-boot.git</connection>
+        <developerConnection>scm:git@github.com:modulepub/tg-boot.git</developerConnection>
+        <url>https://github.com/modulepub/tg-boot.git</url>
+        <tag>${revision}</tag>
+    </scm>
+
+    <parent>
+        <groupId>pub.module</groupId>
+        <artifactId>spring-boot-starter-im</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+
+    <dependencies>
+        <!-- 基础模块 -->
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-im-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-system-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pub.module</groupId>
+            <artifactId>spring-boot-starter-dating-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

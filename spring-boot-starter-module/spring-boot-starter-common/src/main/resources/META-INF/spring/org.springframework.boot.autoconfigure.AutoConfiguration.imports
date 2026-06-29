@@ -1,0 +1,4 @@
+pub.module.common.messaging.EmbeddedRabbitAutoConfiguration
+pub.module.common.messaging.MqMessagingAutoConfiguration
+pub.module.common.cache.TgEphemeralCacheAutoConfiguration
+pub.module.common.security.TgSecurityAutoConfiguration
